@@ -4,7 +4,7 @@
 	%nohyp,		% Szavak sorvégi elválasztásának tiltása 	/ No hypenation of words
 	%twoside,	% Kétoldalas nyomtatás 						/ Double sided format
 	%final,		% Teendők elrejtése 						/ Set final to hide todos
-]{elteikthesis}[2019/09/28]
+]{elteikthesis}[2019/10/04]
 
 % Dolgozat metaadatai / Document's metadata
 \title{Háromdimenziós közlekedés szimuláció} 	% cím / title
@@ -66,12 +66,6 @@
 \input{chapters/sum.tex}
 \cleardoublepage
 
-% Függelékek (opcionális)	- hosszabb részletező táblázatok, sok és/vagy nagy kép esetén hasznos
-% Appendices (optional)		- useful for detailed information in long tables, many and/or large figures, etc.
-\appendix
-\input{appendices/sim.tex}
-\cleardoublepage
-
 % Irodalomjegyzék (kötelező) / Bibliography (mandatory)
 \addcontentsline{toc}{chapter}{\biblabel}
 \printbibliography[title=\biblabel]
@@ -91,9 +85,5 @@
 \addcontentsline{toc}{chapter}{\lstcodelabel}
 \lstlistoflistings
 \cleardoublepage
-
-% Jelölésjegyzék (opcionális)
-% List of symbols (optional)
-%\printnomenclature
 
 \end{document}

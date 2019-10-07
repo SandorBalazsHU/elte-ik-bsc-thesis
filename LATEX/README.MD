@@ -1,0 +1,1 @@
+# A szakdolgozat szövege LATEX-ben.

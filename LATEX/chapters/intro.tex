@@ -1,6 +1,13 @@
 \chapter{Bevezetés} % Introduction
 \label{ch:intro}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eu egestas mauris. Quisque nisl elit, varius in erat eu, dictum commodo lorem. Sed commodo libero et sem laoreet consectetur. Fusce ligula arcu, vestibulum et sodales vel, venenatis at velit \cite{dahl1972structured}. Aliquam erat volutpat. Proin condimentum accumsan velit id hendrerit. Cras egestas arcu quis felis placerat, ut sodales velit malesuada. Maecenas et turpis eu turpis placerat euismod.\footnote{Maecenas a urna viverra, scelerisque nibh ut, malesuada ex.}
+Egy szimulációs eszköz elkészítése, mellyel útszakaszok forgalomáteresztő képessége vizsgálható.
+A program beolvassa az útszakaszt és a forgalom paramétereit leíró fájlt, majd ezt háromdimenzióban megjeleníti.
+A szimuláció során a program a felhasználó által definiált paramétereknek megfelelő forgalmat enged át a modellezett útszakaszon.
 
-Aliquam suscipit dignissim tempor. Praesent tortor libero, feugiat et tellus porttitor, malesuada eleifend felis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus \cite{cormen2009algorithms,krasner1988mvc}. Nullam eleifend imperdiet lorem, sit amet imperdiet metus pellentesque vitae. Donec nec ligula urna. Aliquam bibendum tempor diam, sed lacinia eros dapibus id. Donec sed vehicula turpis. Aliquam hendrerit sed nulla vitae convallis. Etiam libero quam, pharetra ac est nec, sodales placerat augue. \citeauthor{dijkstra1979goto} praesent eu consequat purus \cite{dijkstra1979goto}. 
+A járművek megközelítőleg a közúti közlekedés szabályainak megfelelően haladnak a belépési pontjuktól az előre definiált célállomásuk felé a saját útkereső algoritmusuk által kijelölt útvonal alapján.
+
+Ha minden jármű célba ért, a szimuláció véget ér. Ekkor a program a megjeleníti a szimuláció során gyűjtött statisztikai adatokat. Így megállapíthatóvá válik, hogy a futtatott szimulációs és a megvalósított forgalmi szabályok milyen módon befolyásolják a forgalmat és a forgalmi fennakadásokat.
+
+A program C++ nyelven kerül megvalósításra. A háromdimenziós megjelenítés OpenGL-el történik, aminek implementálásához az  SDL-t (Simple DirectMedia Layer) hívom segítségül.
+A program fejlesztése és futtatása Windows platformon történik, de a fejlesztés során szemelőtt tartom, hogy a lehető leginkább platformfüggetlen megoldásokat alkalmazzak.
