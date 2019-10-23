@@ -1,3 +1,3 @@
-#define DEBUG    @DEBUG_FLAG@
-#define TEST     @TEST_FLAG@
-#define REALESE  @RELEASE_FLAG@
+#define DEBUG    1
+#define TEST     0
+#define REALESE  0

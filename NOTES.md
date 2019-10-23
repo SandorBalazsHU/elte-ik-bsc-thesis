@@ -18,3 +18,12 @@ https://www.kfki.hu/~berenyi/aap/01%20-%20C-Cpp%20fordítási%20modell%20-%20CMa
 
 Szakirodalom:
 Makefiles: https://www.tankonyvtar.hu/hu/tartalom/tamop412A/2011-0063_10_parhuzamos/ch01s02.html
+
+g++ .\code\TrafficModeller.cpp -I C:\DEV\ENV\LIB\SDL2\include\SDL2 -L C:\DEV\ENV\LIB\SDL2\lib -l mingw32 -l SDL2main -l SDL2 -o FUCK
+
+g++ .\code\TrafficModeller.cpp -I C:\DEV\ENV\LIB\SDL2-2.0.10\i686-w64-mingw32\include\SDL2 -L C:\DEV\ENV\LIB\SDL2-2.0.10\i686-w64-mingw32\lib -l mingw32 -l SDL2main -l SDL2 -o FUCK
+
+C:\DEV\ENV\LIB\SDL2-2.0.10\i686-w64-mingw32
+
+
+https://medium.com/swlh/detroit-become-human-and-philosophy-on-artificial-intelligence-9d8e354b3ddf
