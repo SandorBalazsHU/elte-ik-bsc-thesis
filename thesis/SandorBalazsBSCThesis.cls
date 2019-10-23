@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{elteikthesis}[2019/10/04]
+\ProvidesClass{SandorBalazsBSCThesis}[2019/10/04]
 
 % LaTeX programozói eszközök
 \RequirePackage{etoolbox}

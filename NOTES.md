@@ -8,3 +8,13 @@
 
 Links:
 https://lazyfoo.net
+https://www.youtube.com/watch?v=W2QrXv2yZhE
+https://infoc.eet.bme.hu/sdl/
+https://www.bfilipek.com/2012/06/select-mouse-opengl.html
+http://antongerdelan.net/opengl/raycasting.html
+http://schabby.de/picking-opengl-ray-tracing/
+https://github.com/ionutale/3dModelingTool
+
+
+Szakirodalom:
+Makefiles: https://www.tankonyvtar.hu/hu/tartalom/tamop412A/2011-0063_10_parhuzamos/ch01s02.html
