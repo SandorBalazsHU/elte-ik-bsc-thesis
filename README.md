@@ -26,9 +26,16 @@ A program fejlesztése és futtatása Windows platformon történik, de a fejles
 ## Felhasznált eszközök:
 ### Könyvtárak:
 - SDL2
+- SDL2_image
 - GLEW
 - MICROGUI for SDL
+- GOOGLE TEST
 ### IDE:
 - Eclipse
+### Felhasznált eszközök:
+- CMAKE
+- MAKE
+- MINGW
+- DOXYGEN
 ### LATEX:
 - A szakdolgozat szövege LATEX-ban készült mejet a következő sablonra alapoztam: https://github.com/mcserep/elteikthesis.git
