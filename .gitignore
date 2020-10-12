@@ -1,5 +1,12 @@
 ##Build
-./release/build/*.*
+./x64/*.*
+./x86/*.*
+
+##gtest
+./packages/*.*
+
+##tmp folders
+./.vs/*.*
 
 ## C++:
 
@@ -20,10 +27,6 @@
 *.so
 *.dylib
 #*.dll
-
-# Fortran module files
-*.mod
-*.smod
 
 # Compiled Static libraries
 *.lai
@@ -281,3 +284,7 @@ TSWLatexianTemp*
 
 # generated if using elsarticle.cls
 *.spl
+/.vs
+/TrafficSimulator/x64
+/TrafficSimulatorTest/x64
+/x64

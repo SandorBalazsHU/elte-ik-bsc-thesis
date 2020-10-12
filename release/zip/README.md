@@ -1,1 +1,0 @@
-# A tényleges futtatható állmomány.
