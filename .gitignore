@@ -4,6 +4,11 @@
 
 ##gtest
 ./packages/*.*
+packages/
+
+##Dependecies
+./dependencies/*.*
+dependencies/
 
 ##tmp folders
 ./.vs/*.*

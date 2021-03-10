@@ -72,15 +72,23 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>T:\OGLPack\include;T:\OCLPack\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>T:\OGLPack\lib\x86;T:\OCLPack\lib\x86;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>T:\OGLPack\include;T:\OCLPack\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>T:\OGLPack\lib\x86;T:\OCLPack\lib\x86;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>T:\OGLPack\include;T:\OCLPack\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>T:\OGLPack\lib\x64;T:\OCLPack\lib\x64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>T:\OGLPack\include;T:\OCLPack\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>T:\OGLPack\lib\x64;T:\OCLPack\lib\x64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -92,6 +100,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>OpenCL.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;glew32.lib;glu32.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -108,6 +117,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>OpenCL.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;glew32.lib;glu32.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -120,6 +130,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>OpenCL.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;glew32.lib;glu32.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -136,10 +147,52 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>OpenCL.lib;SDL2.lib;SDL2main.lib;SDL2_image.lib;glew32.lib;glu32.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Control\Logger.cpp" />
+    <ClCompile Include="T:\OGLPack\include\imgui\imgui.cpp" />
+    <ClCompile Include="T:\OGLPack\include\imgui\imgui_demo.cpp" />
+    <ClCompile Include="T:\OGLPack\include\imgui\imgui_draw.cpp" />
+    <ClCompile Include="T:\OGLPack\include\imgui\imgui_impl_sdl_gl3.cpp" />
     <ClCompile Include="TrafficSimulator.cpp" />
+    <ClCompile Include="View\Camera.cpp" />
+    <ClCompile Include="View\Utilities\GLconversions.cpp" />
+    <ClCompile Include="View\Utilities\Mesh_OGL3.cpp" />
+    <ClCompile Include="View\Utilities\ObjParser_OGL3.cpp" />
+    <ClCompile Include="View\Utilities\ProgramObject.cpp" />
+    <ClCompile Include="View\Utilities\ShaderObject.cpp" />
+    <ClCompile Include="View\Utilities\VertexArrayObject.cpp" />
+    <ClCompile Include="View\WorkWindow.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Control\Logger.h" />
+    <ClInclude Include="T:\OGLPack\include\imgui\imconfig.h" />
+    <ClInclude Include="T:\OGLPack\include\imgui\imgui.h" />
+    <ClInclude Include="T:\OGLPack\include\imgui\imgui_impl_sdl_gl3.h" />
+    <ClInclude Include="T:\OGLPack\include\imgui\imgui_internal.h" />
+    <ClInclude Include="T:\OGLPack\include\imgui\stb_rect_pack.h" />
+    <ClInclude Include="T:\OGLPack\include\imgui\stb_textedit.h" />
+    <ClInclude Include="T:\OGLPack\include\imgui\stb_truetype.h" />
+    <ClInclude Include="View\Camera.h" />
+    <ClInclude Include="View\Utilities\BufferObject.h" />
+    <ClInclude Include="View\Utilities\GLconversions.hpp" />
+    <ClInclude Include="View\Utilities\Mesh_OGL3.h" />
+    <ClInclude Include="View\Utilities\ObjParser_OGL3.h" />
+    <ClInclude Include="View\Utilities\ProgramObject.h" />
+    <ClInclude Include="View\Utilities\ShaderObject.h" />
+    <ClInclude Include="View\Utilities\TextureObject.h" />
+    <ClInclude Include="View\Utilities\VertexArrayObject.h" />
+    <ClInclude Include="View\WorkWindow.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="View\Shaders\fragmentShader.frag" />
+    <None Include="View\Shaders\vertexShader.vert" />
+    <None Include="View\Utilities\BufferObject.inl" />
+    <None Include="View\Utilities\ProgramObject.inl" />
+    <None Include="View\Utilities\TextureObject.inl" />
+    <None Include="View\Utilities\VertexArrayObject.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

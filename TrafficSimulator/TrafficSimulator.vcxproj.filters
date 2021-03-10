@@ -13,10 +13,140 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\View">
+      <UniqueIdentifier>{8d889964-e76a-49ec-9c86-a351c20a4e41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\View\Utilities">
+      <UniqueIdentifier>{0e3cd958-60ef-43f9-a8e8-33c6df264f5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\View\Imgui">
+      <UniqueIdentifier>{fefdb65d-01c0-4cea-82e4-2b9499b2f203}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\View\Shaders">
+      <UniqueIdentifier>{2883ce93-3ce1-4f72-a3e0-3f9ac14bdd28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Control">
+      <UniqueIdentifier>{c5e93524-0e5b-4005-9b0c-950377bab2a4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TrafficSimulator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="View\WorkWindow.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="View\Utilities\ObjParser_OGL3.cpp">
+      <Filter>Source Files\View\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="View\Utilities\ProgramObject.cpp">
+      <Filter>Source Files\View\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="View\Utilities\ShaderObject.cpp">
+      <Filter>Source Files\View\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="View\Utilities\VertexArrayObject.cpp">
+      <Filter>Source Files\View\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="View\Utilities\GLconversions.cpp">
+      <Filter>Source Files\View\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="View\Utilities\Mesh_OGL3.cpp">
+      <Filter>Source Files\View\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="T:\OGLPack\include\imgui\imgui_draw.cpp">
+      <Filter>Source Files\View\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="T:\OGLPack\include\imgui\imgui_impl_sdl_gl3.cpp">
+      <Filter>Source Files\View\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="T:\OGLPack\include\imgui\imgui.cpp">
+      <Filter>Source Files\View\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="T:\OGLPack\include\imgui\imgui_demo.cpp">
+      <Filter>Source Files\View\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="View\Camera.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="Control\Logger.cpp">
+      <Filter>Source Files\Control</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="View\WorkWindow.h">
+      <Filter>Source Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="View\Utilities\ObjParser_OGL3.h">
+      <Filter>Source Files\View\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="View\Utilities\ProgramObject.h">
+      <Filter>Source Files\View\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="View\Utilities\ShaderObject.h">
+      <Filter>Source Files\View\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="View\Utilities\TextureObject.h">
+      <Filter>Source Files\View\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="View\Utilities\VertexArrayObject.h">
+      <Filter>Source Files\View\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="View\Utilities\BufferObject.h">
+      <Filter>Source Files\View\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="View\Utilities\GLconversions.hpp">
+      <Filter>Source Files\View\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="View\Utilities\Mesh_OGL3.h">
+      <Filter>Source Files\View\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="T:\OGLPack\include\imgui\imgui_impl_sdl_gl3.h">
+      <Filter>Source Files\View\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="T:\OGLPack\include\imgui\imgui_internal.h">
+      <Filter>Source Files\View\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="T:\OGLPack\include\imgui\stb_rect_pack.h">
+      <Filter>Source Files\View\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="T:\OGLPack\include\imgui\stb_textedit.h">
+      <Filter>Source Files\View\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="T:\OGLPack\include\imgui\stb_truetype.h">
+      <Filter>Source Files\View\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="T:\OGLPack\include\imgui\imconfig.h">
+      <Filter>Source Files\View\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="T:\OGLPack\include\imgui\imgui.h">
+      <Filter>Source Files\View\Imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="View\Camera.h">
+      <Filter>Source Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="Control\Logger.h">
+      <Filter>Source Files\Control</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="View\Utilities\ProgramObject.inl">
+      <Filter>Source Files\View\Utilities</Filter>
+    </None>
+    <None Include="View\Utilities\TextureObject.inl">
+      <Filter>Source Files\View\Utilities</Filter>
+    </None>
+    <None Include="View\Utilities\VertexArrayObject.inl">
+      <Filter>Source Files\View\Utilities</Filter>
+    </None>
+    <None Include="View\Utilities\BufferObject.inl">
+      <Filter>Source Files\View\Utilities</Filter>
+    </None>
+    <None Include="View\Shaders\fragmentShader.frag">
+      <Filter>Source Files\View\Shaders</Filter>
+    </None>
+    <None Include="View\Shaders\vertexShader.vert">
+      <Filter>Source Files\View\Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>
