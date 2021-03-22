@@ -4,6 +4,11 @@
 
 ProgramObject::ProgramObject()
 {
+	//m_id = glCreateProgram();
+}
+
+void ProgramObject::createProgram()
+{
 	m_id = glCreateProgram();
 }
 

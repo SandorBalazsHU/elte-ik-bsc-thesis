@@ -4,9 +4,14 @@
 #include <string>
 #include "Logger.h"
 
-void Logger::start() {
+void Logger::startFileLogging() {
 	freopen("simulation.log", "w", stdout);
 	freopen("error.log", "w", stderr);
+}
+
+void Logger::stopFileLogging() {
+	fclose(stdout);
+	fclose(stderr);
 }
 
 std::string Logger::currentDateTime() {
@@ -20,4 +25,16 @@ std::string Logger::currentDateTime() {
 	std::to_string(local_time->tm_min) + ":" +
 	std::to_string(local_time->tm_sec) + ":";
 	return dateTime;
+}
+
+void Logger::log(std::string message) {
+	std::cout << currentDateTime() << " - " << message << std::endl;
+}
+
+void Logger::error(std::string message) {
+	std::cerr << currentDateTime() << " - " << message << std::endl;
+}
+
+void Logger::error(std::string message, int errorCode) {
+	std::cerr << currentDateTime() << " - " << message << " ERROR CODE:" <<  errorCode << std::endl;
 }

@@ -1,30 +1,33 @@
+#include "WorkWindow.h";
+
 #include <iostream>
 #include <sstream>
-
 #include <GL/glew.h>
 #include <SDL.h>
 #include <SDL_opengl.h>
-
-#include "WorkWindow.h";
 #include "../Control/Logger.h";
+#include "Utilities/ProgramObject.h"
 #include "Utilities/ObjParser_OGL3.h"
+#include "imgui/imgui.h"
+#include "imgui/imgui_impl_sdl_gl3.h"
 
-WorkWindow::WorkWindow(void) {
-	SDLInit();
-}
+WorkWindow::WorkWindow(void) {}
 
 int WorkWindow::open() {
-	SDLInit();
-	OpenGLpreConfig();
-	openSDLWindow();
-	CreateOpenGLContext();
-	OpenGLpostConfig();
-	GLEWstart();
-	ShaderConfig();
-	LoadingModels();
-	CameraConfig();
-	RenderStart();
-	return 0;
+	int status = 0;
+					 status = SDLInit();
+	if (status == 0) status = OpenGLpreConfig();
+	if (status == 0) status = openSDLWindow();
+	if (status == 0) status = ImGUIinit();
+	if (status == 0) status = CreateOpenGLContext();
+	if (status == 0) status = OpenGLpostConfig();
+	if (status == 0) status = GLEWstart();
+	if (status == 0) status = ShaderConfig();
+	if (status == 0) status = LoadingModels();
+	if (status == 0) status = CameraConfig();
+	if (status == 0) status = RenderStart();
+	if (status != 0) Logger::error("WINDOW OPEN ERROR", status);
+	return  status;
 }
 
 int WorkWindow::SDLInit() {
@@ -32,11 +35,12 @@ int WorkWindow::SDLInit() {
 	atexit(WorkWindow::exitWindow);
 
 	//SDL Init
-	if (SDL_Init(SDL_INIT_VIDEO) == -1) {
-		std::cerr << Logger::currentDateTime() << "- [SDL_Init ERROR]: " << SDL_GetError() << std::endl;
+	int SDLstatus = SDL_Init(SDL_INIT_VIDEO);
+	if (SDLstatus == -1) {
+		std::string SDLerror = SDL_GetError();
+		Logger::error("[SDL_Init ERROR]: " + SDLerror);
 		return 1;
 	}
-
 	return 0;
 }
 
@@ -51,28 +55,40 @@ int WorkWindow::OpenGLpreConfig() {
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);		//Depth Buffer on
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);			//Depth Buffer 24
 	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 4);  //Anti aliasing 4
-
 	return 0;
 }
 
 int WorkWindow::openSDLWindow() {
 	//Creating Window
 	window = 0;
-	window = SDL_CreateWindow("Rigid Body Simulation", 100, 100, 640, 480,
-		SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_MAXIMIZED);
+	window = SDL_CreateWindow(windowDefTitle, windowDefPosX, windowDefPosY, windowDefSizeX, windowDefSizeY,
+	SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_MAXIMIZED);
 	if (window == 0) {
-		std::cerr << Logger::currentDateTime() << "- [WINDOW CREATION ERROR]: " << SDL_GetError() << std::endl;
-		return 1;
+		std::string SDLerror = SDL_GetError();
+		Logger::error("[WINDOW CREATION ERROR]: " + SDLerror);
+		return 2;
 	}
 	return 0;
+}
+
+int WorkWindow::ImGUIinit() {
+	//imgui initialisation
+	bool status = ImGui_ImplSdlGL3_Init(window);
+	if (status) {
+		return 0;
+	}else{
+		Logger::error("[IMGUI START ERROR]");
+		return 3;
+	}
 }
 
 int WorkWindow::CreateOpenGLContext() {
 	//Create OpenGL context
 	context = SDL_GL_CreateContext(window);
 	if (context == 0) {
-		std::cerr << Logger::currentDateTime() << "- [OpenGL context creation ERROR]: " << SDL_GetError() << std::endl;
-		return 1;
+		std::string SDLerror = SDL_GetError();
+		Logger::error("[OpenGL context creation ERROR]: " + SDLerror);
+		return 4;
 	}
 	return 0;
 }
@@ -81,12 +97,11 @@ int WorkWindow::GLEWstart() {
 	//GLEW start
 	GLenum error = glewInit();
 	if (error != GLEW_OK) {
-		std::cerr << Logger::currentDateTime() << "- [GLEW start error]" << std::endl;
-		return 1;
+		Logger::error("[GLEW start error]");
+		return 5;
 	}
 	return 0;
 }
-
 
 int WorkWindow::OpenGLpostConfig() {
 	//VSINC ON
@@ -96,13 +111,13 @@ int WorkWindow::OpenGLpostConfig() {
 	int glVersion[2] = { -1, -1 };
 	glGetIntegerv(GL_MAJOR_VERSION, &glVersion[0]);
 	glGetIntegerv(GL_MINOR_VERSION, &glVersion[1]);
-	std::cout << Logger::currentDateTime() << "- Running OpenGL " << glVersion[0] << "." << glVersion[1] << std::endl;
+	Logger::log("[OpenGL running]" + std::to_string(glVersion[0]) + "." + std::to_string(glVersion[1]));
 
 	if (glVersion[0] == -1 && glVersion[1] == -1) {
 		SDL_GL_DeleteContext(context);
 		SDL_DestroyWindow(window);
-		std::cerr << Logger::currentDateTime() << "- [OGL context error]" << std::endl;
-		return 1;
+		Logger::error("[OpenGL starting ERROR]");
+		return 6;
 	}
 
 	glClearColor(0.0f, 0.47f, 0.87f, 1.0f);	//BG Color
@@ -115,18 +130,23 @@ int WorkWindow::OpenGLpostConfig() {
 }
 
 int WorkWindow::ShaderConfig() {
-	/*//Shader loading
-	std::cerr << "wut" << std::endl;
-	shader.Init({
-		{ GL_VERTEX_SHADER, "./View/Shaders/vertexShader.vert" },
-		{ GL_FRAGMENT_SHADER, "./View/Shaders/fragmentShader.frag" }
-		},
-	{
-		{ 0, "vs_in_pos" },		// VAO 0	 --> vs_in_pos
-		{ 1, "vs_in_normal" },	// VAO 1 chanel --> vs_in_normal
-		{ 2, "vs_out_tex0" },	// VAO 2 chanel --> vs_in_tex0
-	});
-	std::cerr << "wut2" << std::endl;*/
+	//Shader loading
+	try {
+		//ProgramObject	shader;
+		shader.createProgram();
+		shader.Init({
+			{ GL_VERTEX_SHADER, "View/Shaders/vertexShader.vert" },
+			{ GL_FRAGMENT_SHADER, "View/Shaders/fragmentShader.frag" }
+			},
+		{
+			{ 0, "vs_in_pos" },		// VAO 0	    --> vs_in_pos
+			{ 1, "vs_in_normal" },	// VAO 1 chanel --> vs_in_normal
+			{ 2, "vs_out_tex0" },	// VAO 2 chanel --> vs_in_tex0
+		});
+	} catch (...) {
+		Logger::error("[Shader config ERROR]");
+		return 7;
+	}
 	return 0;
 }
 
@@ -161,7 +181,7 @@ int WorkWindow::RenderStart() {
 		if (fpsPlotCounter == 100) fpsPlotCounter = 0;
 		const Uint32 time = SDL_GetTicks();
 
-		/*/Event processing loop
+		//Event processing loop
 		while (SDL_PollEvent(&event))
 		{
 			//ImGUI event handling
@@ -174,7 +194,7 @@ int WorkWindow::RenderStart() {
 			case SDL_QUIT:
 				quit = true;
 				break;
-			case SDL_KEYDOWN:
+			/*case SDL_KEYDOWN:
 				if (event.key.keysym.sym == SDLK_ESCAPE) quit = true;
 				if (!is_keyboard_captured) simulation.KeyboardDown(event.key);
 				break;
@@ -197,14 +217,18 @@ int WorkWindow::RenderStart() {
 				if (event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED) {
 					simulation.Resize(event.window.data1, event.window.data2);
 				}
-				break;
+				break;*/
 			}
-		}*/
+		}
 
-		//Rendering
+		//Renderinga
 		//ImGui_ImplSdlGL3_NewFrame(window);
 		//simulation.Update();
+		camera.Update();
 		//simulation.Render();
+		glEnable(GL_CULL_FACE); //Face test ON
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		shader.Use();
 		//ImGui::Render();
 		SDL_GL_SwapWindow(window);
 

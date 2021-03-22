@@ -31,11 +31,8 @@ A program fejlesztése és futtatása Windows platformon történik, de a fejles
 - MICROGUI for SDL
 - GOOGLE TEST
 ### IDE:
-- Eclipse
-### Felhasznált eszközök:
-- CMAKE
-- MAKE
-- MINGW
+- Visual Studio
+### Dokumentáció:
 - DOXYGEN
 ### LATEX:
 - A szakdolgozat szövege LATEX-ban készült mejet a következő sablonra alapoztam: https://github.com/mcserep/elteikthesis.git

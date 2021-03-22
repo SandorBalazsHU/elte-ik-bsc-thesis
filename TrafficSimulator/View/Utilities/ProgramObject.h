@@ -22,6 +22,8 @@ public:
 	ProgramObject();
 	~ProgramObject();
 
+	void createProgram();
+
 	ProgramObject(std::initializer_list<ShaderObject>, std::initializer_list< Binding > = {}, std::initializer_list< Binding > = {});
 
 	ProgramObject(const ProgramObject&)				= delete;

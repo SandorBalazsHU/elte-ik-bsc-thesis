@@ -1,0 +1,9 @@
+0 program terminated correctly
+1 SDL initialisation error
+2 SDL Windows creation error
+3 IMGUI start error
+4 OpenGL context creation error
+5 GLEW start error
+6 OpenGL starting error
+7 Shader config error
+8 

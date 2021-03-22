@@ -13,12 +13,18 @@ public:
 	~WorkWindow(void);
 	int open();
 private:
+	const char* windowDefTitle = "Traffic Simulator";
+	const int windowDefSizeX = 640;
+	const int windowDefSizeY = 480;
+	const int windowDefPosX = 100;
+	const int windowDefPosY = 100;
+
 	SDL_Window* window;
 
 	SDL_GLContext context;
 
 	//Shader Variables
-	//ProgramObject			shader;
+	ProgramObject			shader;
 	Texture2D				texture;
 	std::unique_ptr<Mesh>	ball;
 	Camera					camera;
@@ -26,6 +32,7 @@ private:
 	int SDLInit();
 	int OpenGLpreConfig();
 	int openSDLWindow();
+	int ImGUIinit();
 	int CreateOpenGLContext();
 	int OpenGLpostConfig();
 	int GLEWstart();
