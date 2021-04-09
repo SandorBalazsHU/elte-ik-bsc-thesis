@@ -111,7 +111,7 @@ int WorkWindow::OpenGLpostConfig() {
 	int glVersion[2] = { -1, -1 };
 	glGetIntegerv(GL_MAJOR_VERSION, &glVersion[0]);
 	glGetIntegerv(GL_MINOR_VERSION, &glVersion[1]);
-	Logger::log("[OpenGL running]" + std::to_string(glVersion[0]) + "." + std::to_string(glVersion[1]));
+	Logger::log("[OpenGL running] Version: " + std::to_string(glVersion[0]) + "." + std::to_string(glVersion[1]));
 
 	if (glVersion[0] == -1 && glVersion[1] == -1) {
 		SDL_GL_DeleteContext(context);
@@ -241,6 +241,7 @@ int WorkWindow::RenderStart() {
 		SDL_SetWindowTitle(window, window_title.str().c_str());
 	}
 
+	Logger::log("Render terminated correctly!");
 	return 0;
 }
 
@@ -252,5 +253,4 @@ WorkWindow::~WorkWindow(void) {
 
 void WorkWindow::exitWindow() {
 	SDL_Quit();
-	std::cout << Logger::currentDateTime() << "- Program terminated correctly" << std::endl;
 }

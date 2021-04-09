@@ -2,11 +2,13 @@
 
 #include <iostream>
 
+//OWN MODIFICATION
 ProgramObject::ProgramObject()
 {
 	//m_id = glCreateProgram();
 }
 
+//OWN MODIFICATION
 void ProgramObject::createProgram()
 {
 	m_id = glCreateProgram();

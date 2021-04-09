@@ -20,10 +20,11 @@ int main(int argc, char* args[])
 
     if (state != 0) {
         Logger::error("Application start error", state);
+        Logger::stopFileLogging();
         return state;
     }
 
     Logger::log("Program terminated correctly!");
     Logger::stopFileLogging();
-    return 0;
+    return state;
 }
