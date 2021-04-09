@@ -72,6 +72,12 @@
     <ClCompile Include="Control\Logger.cpp">
       <Filter>Source Files\Control</Filter>
     </ClCompile>
+    <ClCompile Include="View\EventListener.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="Control\ModelLoader.cpp">
+      <Filter>Source Files\Control</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="View\WorkWindow.h">
@@ -126,6 +132,12 @@
       <Filter>Source Files\View</Filter>
     </ClInclude>
     <ClInclude Include="Control\Logger.h">
+      <Filter>Source Files\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="View\EventListener.h">
+      <Filter>Source Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="Control\ModelLoader.h">
       <Filter>Source Files\Control</Filter>
     </ClInclude>
   </ItemGroup>

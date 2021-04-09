@@ -1,10 +1,33 @@
+See fo opengl options:
+https://wiki.libsdl.org/SDL_GLattr
+
+See for Raypicking:
+https://antongerdelan.net/opengl/raycasting.html
+https://www.scratchapixel.com/lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/ray-sphere-intersection
+https://www.lighthouse3d.com/tutorials/maths/ray-sphere-intersection/
+https://mathworld.wolfram.com/Point-LineDistance3-Dimensional.html
+https://stackoverflow.com/questions/2093096/implementing-ray-picking
+https://i.stack.imgur.com/YqV0O.png
+https://gist.github.com/wwwtyro/beecc31d65d1004f5a9d
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Old info:
+
 1.) Eclipse C++ MinGW run and debug
 	https://www.youtube.com/watch?v=AhCLgRVcKMg
 2.) Eclipse CMake
-
-
-
-
 
 Links:
 https://lazyfoo.net

@@ -152,12 +152,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Control\Logger.cpp" />
+    <ClCompile Include="Control\ModelLoader.cpp" />
     <ClCompile Include="T:\OGLPack\include\imgui\imgui.cpp" />
     <ClCompile Include="T:\OGLPack\include\imgui\imgui_demo.cpp" />
     <ClCompile Include="T:\OGLPack\include\imgui\imgui_draw.cpp" />
     <ClCompile Include="T:\OGLPack\include\imgui\imgui_impl_sdl_gl3.cpp" />
     <ClCompile Include="TrafficSimulator.cpp" />
     <ClCompile Include="View\Camera.cpp" />
+    <ClCompile Include="View\EventListener.cpp" />
     <ClCompile Include="View\Utilities\GLconversions.cpp" />
     <ClCompile Include="View\Utilities\Mesh_OGL3.cpp" />
     <ClCompile Include="View\Utilities\ObjParser_OGL3.cpp" />
@@ -168,6 +170,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Control\Logger.h" />
+    <ClInclude Include="Control\ModelLoader.h" />
     <ClInclude Include="T:\OGLPack\include\imgui\imconfig.h" />
     <ClInclude Include="T:\OGLPack\include\imgui\imgui.h" />
     <ClInclude Include="T:\OGLPack\include\imgui\imgui_impl_sdl_gl3.h" />
@@ -176,6 +179,7 @@
     <ClInclude Include="T:\OGLPack\include\imgui\stb_textedit.h" />
     <ClInclude Include="T:\OGLPack\include\imgui\stb_truetype.h" />
     <ClInclude Include="View\Camera.h" />
+    <ClInclude Include="View\EventListener.h" />
     <ClInclude Include="View\Utilities\BufferObject.h" />
     <ClInclude Include="View\Utilities\GLconversions.hpp" />
     <ClInclude Include="View\Utilities\Mesh_OGL3.h" />

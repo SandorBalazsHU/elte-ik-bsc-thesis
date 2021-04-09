@@ -14,8 +14,7 @@
 WorkWindow::WorkWindow(void) {}
 
 int WorkWindow::open() {
-	int status = 0;
-					 status = sdlInit();
+	int status				= sdlInit();
 	if (status == 0) status = openGLpreConfig();
 	if (status == 0) status = openSDLWindow();
 	if (status == 0) status = imGUIinit();
@@ -47,13 +46,14 @@ int WorkWindow::sdlInit() {
 int WorkWindow::openGLpreConfig() {
 	//OpenGL Configuration
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-	SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 32);		//Color buffer size
+	SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 32);		//Color buffer size 32
 	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);			//Red 8 bit
 	SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);			//Green 8 bit
 	SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);			//Blue 8 bit
 	SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);			//Alpha 8 bit
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);		//Depth Buffer on
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);			//Depth Buffer 24
+	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);  //Anti aliasing ON
 	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 4);  //Anti aliasing 4
 	return 0;
 }
@@ -236,7 +236,7 @@ int WorkWindow::renderStart() {
 		const Uint32 last_time = SDL_GetTicks();
 		std::stringstream window_title;
 		float fps = 1000.0f / (last_time - time);
-		window_title << "Rigid Body Simulation. FPS: " << fps;
+		window_title << "Traffic Simulation. FPS: " << fps;
 		//simulation.fps[fpsPlotCounter] = fps;
 		SDL_SetWindowTitle(window, window_title.str().c_str());
 	}
