@@ -25,21 +25,22 @@ private:
 
 	//Shader Variables
 	ProgramObject			shader;
-	Texture2D				texture;
-	std::unique_ptr<Mesh>	ball;
 	Camera					camera;
 
-	int SDLInit();
-	int OpenGLpreConfig();
+	Texture2D				texture;
+	std::unique_ptr<Mesh>	ball;
+
+	int sdlInit();
+	int openGLpreConfig();
 	int openSDLWindow();
-	int ImGUIinit();
-	int CreateOpenGLContext();
-	int OpenGLpostConfig();
-	int GLEWstart();
-	int ShaderConfig();
-	int LoadingModels();
-	int CameraConfig();
-	int RenderStart();
+	int imGUIinit();
+	int createOpenGLContext();
+	int openGLpostConfig();
+	int glewStart();
+	int shaderConfig();
+	int loadingModels();
+	int cameraConfig();
+	int renderStart();
 
 	static void exitWindow();
 };

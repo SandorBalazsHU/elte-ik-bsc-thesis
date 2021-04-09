@@ -15,22 +15,22 @@ WorkWindow::WorkWindow(void) {}
 
 int WorkWindow::open() {
 	int status = 0;
-					 status = SDLInit();
-	if (status == 0) status = OpenGLpreConfig();
+					 status = sdlInit();
+	if (status == 0) status = openGLpreConfig();
 	if (status == 0) status = openSDLWindow();
-	if (status == 0) status = ImGUIinit();
-	if (status == 0) status = CreateOpenGLContext();
-	if (status == 0) status = OpenGLpostConfig();
-	if (status == 0) status = GLEWstart();
-	if (status == 0) status = ShaderConfig();
-	if (status == 0) status = LoadingModels();
-	if (status == 0) status = CameraConfig();
-	if (status == 0) status = RenderStart();
+	if (status == 0) status = imGUIinit();
+	if (status == 0) status = createOpenGLContext();
+	if (status == 0) status = openGLpostConfig();
+	if (status == 0) status = glewStart();
+	if (status == 0) status = shaderConfig();
+	if (status == 0) status = loadingModels();
+	if (status == 0) status = cameraConfig();
+	if (status == 0) status = renderStart();
 	if (status != 0) Logger::error("WINDOW OPEN ERROR", status);
 	return  status;
 }
 
-int WorkWindow::SDLInit() {
+int WorkWindow::sdlInit() {
 	//Exit Callback
 	atexit(WorkWindow::exitWindow);
 
@@ -44,7 +44,7 @@ int WorkWindow::SDLInit() {
 	return 0;
 }
 
-int WorkWindow::OpenGLpreConfig() {
+int WorkWindow::openGLpreConfig() {
 	//OpenGL Configuration
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 	SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 32);		//Color buffer size
@@ -71,7 +71,7 @@ int WorkWindow::openSDLWindow() {
 	return 0;
 }
 
-int WorkWindow::ImGUIinit() {
+int WorkWindow::imGUIinit() {
 	//imgui initialisation
 	bool status = ImGui_ImplSdlGL3_Init(window);
 	if (status) {
@@ -82,7 +82,7 @@ int WorkWindow::ImGUIinit() {
 	}
 }
 
-int WorkWindow::CreateOpenGLContext() {
+int WorkWindow::createOpenGLContext() {
 	//Create OpenGL context
 	context = SDL_GL_CreateContext(window);
 	if (context == 0) {
@@ -93,7 +93,7 @@ int WorkWindow::CreateOpenGLContext() {
 	return 0;
 }
 
-int WorkWindow::GLEWstart() {
+int WorkWindow::glewStart() {
 	//GLEW start
 	GLenum error = glewInit();
 	if (error != GLEW_OK) {
@@ -103,7 +103,7 @@ int WorkWindow::GLEWstart() {
 	return 0;
 }
 
-int WorkWindow::OpenGLpostConfig() {
+int WorkWindow::openGLpostConfig() {
 	//VSINC ON
 	SDL_GL_SetSwapInterval(1);
 
@@ -129,7 +129,7 @@ int WorkWindow::OpenGLpostConfig() {
 	return 0;
 }
 
-int WorkWindow::ShaderConfig() {
+int WorkWindow::shaderConfig() {
 	//Shader loading
 	try {
 		//ProgramObject	shader;
@@ -150,7 +150,7 @@ int WorkWindow::ShaderConfig() {
 	return 0;
 }
 
-int WorkWindow::LoadingModels() {
+int WorkWindow::loadingModels() {
 
 	//Load Texture
 	//texture.FromFile("texture.png");
@@ -161,13 +161,13 @@ int WorkWindow::LoadingModels() {
 	return 0;
 }
 
-int WorkWindow::CameraConfig() {
+int WorkWindow::cameraConfig() {
 	//Set Camera
 	camera.SetProj(45.0f, 640.0f / 480.0f, 0.01f, 1000.0f);
 	return 0;
 }
 
-int WorkWindow::RenderStart() {
+int WorkWindow::renderStart() {
 	//Base variables for the rander loop
 	bool quit = false;
 	SDL_Event event;
