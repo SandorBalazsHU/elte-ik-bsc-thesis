@@ -2,6 +2,7 @@
 
 #include <SDL.h>
 #include "Camera.h"
+#include "EventListener.h"
 #include "Utilities/ProgramObject.h"
 #include "Utilities/TextureObject.h"
 #include "Utilities/Mesh_OGL3.h"
@@ -26,9 +27,10 @@ private:
 	//Shader Variables
 	ProgramObject			shader;
 	Camera					camera;
+	EventListener			eventListener;
 
-	Texture2D				texture;
-	std::unique_ptr<Mesh>	ball;
+	Texture2D				textures;
+	std::unique_ptr<Mesh>	modells;
 
 	int sdlInit();
 	int openGLpreConfig();
@@ -40,6 +42,7 @@ private:
 	int shaderConfig();
 	int loadingModels();
 	int cameraConfig();
+	int eventListenerConfig();
 	int renderStart();
 
 	static void exitWindow();

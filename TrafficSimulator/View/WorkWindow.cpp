@@ -11,7 +11,8 @@
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_sdl_gl3.h"
 
-WorkWindow::WorkWindow(void) {}
+WorkWindow::WorkWindow(void) {
+}
 
 int WorkWindow::open() {
 	int status				= sdlInit();
@@ -24,6 +25,7 @@ int WorkWindow::open() {
 	if (status == 0) status = shaderConfig();
 	if (status == 0) status = loadingModels();
 	if (status == 0) status = cameraConfig();
+	if (status == 0) status = eventListenerConfig();
 	if (status == 0) status = renderStart();
 	if (status != 0) Logger::error("WINDOW OPEN ERROR", status);
 	return  status;
@@ -167,6 +169,11 @@ int WorkWindow::cameraConfig() {
 	return 0;
 }
 
+int WorkWindow::eventListenerConfig() {
+	eventListener.init(camera);
+	return 0;
+}
+
 int WorkWindow::renderStart() {
 	//Base variables for the rander loop
 	bool quit = false;
@@ -182,43 +189,13 @@ int WorkWindow::renderStart() {
 		const Uint32 time = SDL_GetTicks();
 
 		//Event processing loop
-		while (SDL_PollEvent(&event))
-		{
+		while (SDL_PollEvent(&event)) {
 			//ImGUI event handling
 			ImGui_ImplSdlGL3_ProcessEvent(&event);
-			bool is_mouse_captured = ImGui::GetIO().WantCaptureMouse;
-			bool is_keyboard_captured = ImGui::GetIO().WantCaptureKeyboard;
-
-			switch (event.type)
-			{
-			case SDL_QUIT:
-				quit = true;
-				break;
-			/*case SDL_KEYDOWN:
-				if (event.key.keysym.sym == SDLK_ESCAPE) quit = true;
-				if (!is_keyboard_captured) simulation.KeyboardDown(event.key);
-				break;
-			case SDL_KEYUP:
-				if (!is_keyboard_captured) simulation.KeyboardUp(event.key);
-				break;
-			case SDL_MOUSEBUTTONDOWN:
-				if (!is_mouse_captured) simulation.MouseDown(event.button);
-				break;
-			case SDL_MOUSEBUTTONUP:
-				if (!is_mouse_captured) simulation.MouseUp(event.button);
-				break;
-			case SDL_MOUSEWHEEL:
-				if (!is_mouse_captured) simulation.MouseWheel(event.wheel);
-				break;
-			case SDL_MOUSEMOTION:
-				if (!is_mouse_captured) simulation.MouseMove(event.motion);
-				break;
-			case SDL_WINDOWEVENT:
-				if (event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED) {
-					simulation.Resize(event.window.data1, event.window.data2);
-				}
-				break;*/
-			}
+			bool isMouseEventCaptured = ImGui::GetIO().WantCaptureMouse;
+			bool isKeyEventCaptured = ImGui::GetIO().WantCaptureKeyboard;
+			//Program eventlistener
+			if (!isMouseEventCaptured && !isKeyEventCaptured) quit = eventListener.event(event);
 		}
 
 		//Renderinga
@@ -246,7 +223,6 @@ int WorkWindow::renderStart() {
 }
 
 WorkWindow::~WorkWindow(void) {
-	//Cleanup
 	SDL_GL_DeleteContext(context);
 	SDL_DestroyWindow(window);
 }
