@@ -161,6 +161,7 @@
     <ClCompile Include="View\object3D.cpp" />
     <ClCompile Include="View\Camera.cpp" />
     <ClCompile Include="View\EventListener.cpp" />
+    <ClCompile Include="View\object3Dvehicle.cpp" />
     <ClCompile Include="View\Utilities\GLconversions.cpp" />
     <ClCompile Include="View\Utilities\Mesh_OGL3.cpp" />
     <ClCompile Include="View\Utilities\ObjParser_OGL3.cpp" />
@@ -182,6 +183,7 @@
     <ClInclude Include="View\object3D.h" />
     <ClInclude Include="View\Camera.h" />
     <ClInclude Include="View\EventListener.h" />
+    <ClInclude Include="View\object3Dvehicle.h" />
     <ClInclude Include="View\Utilities\BufferObject.h" />
     <ClInclude Include="View\Utilities\GLconversions.hpp" />
     <ClInclude Include="View\Utilities\Mesh_OGL3.h" />

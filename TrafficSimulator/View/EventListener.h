@@ -10,7 +10,7 @@ public:
 	bool event(SDL_Event event);
 
 private:
-	Camera	camera;
+	Camera camera;
 	void keyboardDown(SDL_KeyboardEvent&);
 	void keyboardUp(SDL_KeyboardEvent&);
 	void mouseMove(SDL_MouseMotionEvent&);

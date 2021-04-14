@@ -81,6 +81,9 @@
     <ClCompile Include="View\object3D.cpp">
       <Filter>Source Files\View</Filter>
     </ClCompile>
+    <ClCompile Include="View\object3Dvehicle.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="View\WorkWindow.h">
@@ -144,6 +147,9 @@
       <Filter>Source Files\Control</Filter>
     </ClInclude>
     <ClInclude Include="View\object3D.h">
+      <Filter>Source Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="View\object3Dvehicle.h">
       <Filter>Source Files\View</Filter>
     </ClInclude>
   </ItemGroup>
