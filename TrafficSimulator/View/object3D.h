@@ -9,4 +9,6 @@ public:
 private:
 	Texture2D				texture;
 	std::unique_ptr<Mesh>	modell;
+	glm::vec3				position;
+	glm::vec3				initScale;
 };
