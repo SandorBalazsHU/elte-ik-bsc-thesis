@@ -11,6 +11,7 @@
 #include "Camera.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include <set>
+#include <iostream>
 
 /**
  * @brief The Camera class constructor.
@@ -139,22 +140,28 @@ void Camera::resize(int width, int height) {
 */
 void Camera::keyboardDown(SDL_KeyboardEvent& key) {
 	float s = 0.5f;
-	if (key.keysym.sym == SDLK_w) {
-		lookedPoint.x += s;
-		cameraPosition.x += s;
+	pressedKeys.insert(key.keysym.sym);
+	for (int keyCode : pressedKeys)
+	{
+		if (keyCode == SDLK_w) {
+			lookedPoint.x += s;
+			cameraPosition.x += s;
+		}
+		if (keyCode == SDLK_s) {
+			lookedPoint.x -= s;
+			cameraPosition.x -= s;
+		}
+		if (keyCode == SDLK_a) {
+			lookedPoint.z += s;
+			cameraPosition.z += s;
+		}
+		if (keyCode == SDLK_d) {
+			lookedPoint.z -= s;
+			cameraPosition.z -= s;
+		}
+		std::cout << keyCode << " ";
 	}
-	if (key.keysym.sym == SDLK_s) {
-		lookedPoint.x -= s;
-		cameraPosition.x -= s;
-	}
-	if (key.keysym.sym == SDLK_a) {
-		lookedPoint.z += s;
-		cameraPosition.z += s;
-	}
-	if (key.keysym.sym == SDLK_d) {
-		lookedPoint.z -= s;
-		cameraPosition.z -= s;
-	}
+	std::cout << std::endl;
 	sphericalCoordinateUpdate();
 	cameraCoordinateUpdate();
 }
@@ -164,6 +171,7 @@ void Camera::keyboardDown(SDL_KeyboardEvent& key) {
  * @param key keyboard up event.
 */
 void Camera::keyboardUp(SDL_KeyboardEvent& key) {
+	pressedKeys.erase(key.keysym.sym);
 }
 
 /**

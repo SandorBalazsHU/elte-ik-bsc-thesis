@@ -11,6 +11,7 @@
 #pragma once
 #include <SDL.h>
 #include <glm/glm.hpp>
+#include <set>
 
 /**
  * @brief The own OpenGL camera class.
@@ -207,4 +208,9 @@ private:
 	* The projection matrix
 	*/
 	glm::mat4	projectionMatrix;
+
+	/**
+	 * @brief This set store the pressed keys
+	*/
+	std::set<int> pressedKeys;
 };
