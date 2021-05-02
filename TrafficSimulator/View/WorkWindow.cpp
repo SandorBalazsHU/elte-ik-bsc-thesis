@@ -27,8 +27,6 @@ int WorkWindow::open() {
 	if (status == 0) status = glewStart();
 	if (status == 0) status = shaderConfig();
 	if (status == 0) status = loadingModels();
-	if (status == 0) status = cameraConfig();
-	if (status == 0) status = eventListenerConfig();
 	if (status == 0) status = renderStart();
 	if (status != 0) Logger::error("WINDOW OPEN ERROR", status);
 	return  status;
@@ -119,8 +117,7 @@ int WorkWindow::openGLpostConfig() {
 	Logger::log("[OpenGL running] Version: " + std::to_string(glVersion[0]) + "." + std::to_string(glVersion[1]));
 
 	if (glVersion[0] == -1 && glVersion[1] == -1) {
-		SDL_GL_DeleteContext(context);
-		SDL_DestroyWindow(window);
+		cleanup();
 		Logger::error("[OpenGL starting ERROR]");
 		return 6;
 	}
@@ -166,68 +163,30 @@ int WorkWindow::loadingModels() {
 	return 0;
 }
 
-int WorkWindow::cameraConfig() {
-	//Set Camera
-	camera.SetProj(45.0f, 640.0f / 480.0f, 0.01f, 1000.0f);
-	return 0;
-}
-
-int WorkWindow::eventListenerConfig() {
-	eventListener.init(camera);
-	return 0;
-}
-
 int WorkWindow::renderStart() {
+	eventListener = EventListener(this);
+	render = Render(this);
 	//Base variables for the rander loop
-	bool quit = false;
-	SDL_Event event;
-	int fpsPlotCounter = 0;
+	int fpsCounter = 0;
 
 	//The render loop
-	while (!quit)
-	{
-		//The FPS Counter
-		fpsPlotCounter++;
-		if (fpsPlotCounter == 100) fpsPlotCounter = 0;
-		const Uint32 time = SDL_GetTicks();
-
-		//Event processing loop
-		while (SDL_PollEvent(&event)) {
-			//ImGUI event handling
-			ImGui_ImplSdlGL3_ProcessEvent(&event);
-			bool isMouseEventCaptured = ImGui::GetIO().WantCaptureMouse;
-			bool isKeyEventCaptured = ImGui::GetIO().WantCaptureKeyboard;
-			//Program eventlistener
-			if (!isMouseEventCaptured && !isKeyEventCaptured) quit = eventListener.event(event);
-		}
-
-		//Renderinga
-		//ImGui_ImplSdlGL3_NewFrame(window);
-		//simulation.Update();
-		camera.Update();
-		//simulation.Render();
-		glEnable(GL_CULL_FACE); //Face test ON
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		shader.Use();
-		//ImGui::Render();
-		SDL_GL_SwapWindow(window);
-
-		//FPS Counter
-		const Uint32 last_time = SDL_GetTicks();
-		std::stringstream window_title;
-		float fps = 1000.0f / (last_time - time);
-		window_title << "Traffic Simulation. FPS: " << fps;
-		//simulation.fps[fpsPlotCounter] = fps;
-		SDL_SetWindowTitle(window, window_title.str().c_str());
+	while (!exit) {
+		render.render();
 	}
 
 	Logger::log("Render terminated correctly!");
+	cleanup();
 	return 0;
 }
 
-WorkWindow::~WorkWindow(void) {
+void WorkWindow::cleanup() {
+	ImGui_ImplSdlGL3_Shutdown();
 	SDL_GL_DeleteContext(context);
 	SDL_DestroyWindow(window);
+}
+
+WorkWindow::~WorkWindow(void) {
+	cleanup();
 }
 
 void WorkWindow::exitWindow() {

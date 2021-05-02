@@ -1,21 +1,21 @@
 #pragma once
-#include "object3D.h"
+#include "Object3D.h"
 
-class object3Dvehicle: public object3D {
+class object3Dvehicle: public Object3D {
 public:
-	void setLightTexture(Texture2D);
-	void setBreakTexture(Texture2D);
-	void setRightTexture(Texture2D);
-	void setLeftTexture (Texture2D);
+	void setLightTexture(int);
+	void setBreakTexture(int);
+	void setRightTexture(int);
+	void setLeftTexture (int);
 
 	Texture2D getLightTexture();
 	Texture2D getBreakTexture();
 	Texture2D getRightTexture();
 	Texture2D getLeftTexture ();
 protected:
-	Texture2D	baseTexture;
-	Texture2D	lightTexture;
-	Texture2D	breakTexture;
-	Texture2D	rightTexture;
-	Texture2D	leftTexture;
+	int	baseTexture;
+	int lightTexture;
+	int breakTexture;
+	int rightTexture;
+	int leftTexture;
 };

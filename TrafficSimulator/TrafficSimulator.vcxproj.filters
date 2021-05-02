@@ -78,10 +78,13 @@
     <ClCompile Include="Control\object3DLoader.cpp">
       <Filter>Source Files\Control</Filter>
     </ClCompile>
-    <ClCompile Include="View\object3D.cpp">
+    <ClCompile Include="View\Object3D.cpp">
       <Filter>Source Files\View</Filter>
     </ClCompile>
-    <ClCompile Include="View\object3Dvehicle.cpp">
+    <ClCompile Include="View\Object3Dvehicle.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="View\Render.cpp">
       <Filter>Source Files\View</Filter>
     </ClCompile>
   </ItemGroup>
@@ -146,10 +149,13 @@
     <ClInclude Include="Control\object3DLoader.h">
       <Filter>Source Files\Control</Filter>
     </ClInclude>
-    <ClInclude Include="View\object3D.h">
+    <ClInclude Include="View\Object3D.h">
       <Filter>Source Files\View</Filter>
     </ClInclude>
-    <ClInclude Include="View\object3Dvehicle.h">
+    <ClInclude Include="View\Object3Dvehicle.h">
+      <Filter>Source Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="View\Render.h">
       <Filter>Source Files\View</Filter>
     </ClInclude>
   </ItemGroup>
