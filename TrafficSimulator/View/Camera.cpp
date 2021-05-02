@@ -136,38 +136,39 @@ void Camera::resize(int width, int height) {
 
 /**
  * @brief Event handler function for the key down event.
+ * Store the pressed keys in the pressedKeys set.
  * @param key keyboard down event.
 */
 void Camera::keyboardDown(SDL_KeyboardEvent& key) {
 	float s = 0.5f;
 	pressedKeys.insert(key.keysym.sym);
-	for (int keyCode : pressedKeys)
-	{
-		if (keyCode == SDLK_w) {
+	for (int keyCode : pressedKeys) {
+		switch (keyCode) {
+		case SDLK_w:
 			lookedPoint.x += s;
 			cameraPosition.x += s;
-		}
-		if (keyCode == SDLK_s) {
+			break;
+		case SDLK_s:
 			lookedPoint.x -= s;
 			cameraPosition.x -= s;
-		}
-		if (keyCode == SDLK_a) {
+			break;
+		case SDLK_a:
 			lookedPoint.z += s;
 			cameraPosition.z += s;
-		}
-		if (keyCode == SDLK_d) {
+			break;
+		case SDLK_d:
 			lookedPoint.z -= s;
 			cameraPosition.z -= s;
+			break;
 		}
-		std::cout << keyCode << " ";
 	}
-	std::cout << std::endl;
 	sphericalCoordinateUpdate();
 	cameraCoordinateUpdate();
 }
 
 /**
  * @brief Event handler function for the key up event.
+ * Erase the key from the pressedKeys set.
  * @param key keyboard up event.
 */
 void Camera::keyboardUp(SDL_KeyboardEvent& key) {

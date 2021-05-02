@@ -108,12 +108,14 @@ public:
 
 	/**
 	 * @brief Event handler function for the key down event.
+	 * Store the pressed keys in the pressedKeys set.
 	 * @param key keyboard down event.
 	*/
 	void keyboardDown(SDL_KeyboardEvent& key);
 
 	/**
 	 * @brief Event handler function for the key up event.
+	 * Erase the key from the pressedKeys set.
 	 * @param key keyboard up event.
 	*/
 	void keyboardUp(SDL_KeyboardEvent& key);
@@ -195,7 +197,7 @@ private:
 	glm::vec3	sphericalCameraPosition;
 
 	/**
-	* The vector pointing upwards
+	* The vector pointing upwards.
 	*/
 	glm::vec3	upwardDirection;
 
@@ -205,12 +207,12 @@ private:
 	glm::vec3	lookedPoint;
 
 	/**
-	* The projection matrix
+	* The projection matrix.
 	*/
 	glm::mat4	projectionMatrix;
 
 	/**
-	 * @brief This set store the pressed keys
+	 * @brief This set store the current pressed keys.
 	*/
 	std::set<int> pressedKeys;
 };
