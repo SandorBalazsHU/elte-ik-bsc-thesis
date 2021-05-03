@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 #include <SDL.h>
 #include "WorkWindow.h"
 
@@ -19,4 +19,4 @@ private:
 	void mouseWheel(SDL_MouseWheelEvent&);
 	void resize(SDL_WindowEvent& window);
 	void exit();
-};
+};*/

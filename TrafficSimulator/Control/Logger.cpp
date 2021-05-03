@@ -5,8 +5,8 @@
 #include "Logger.h"
 
 void Logger::startFileLogging() {
-	freopen("simulation.log", "w", stdout);
-	freopen("error.log", "w", stderr);
+	//freopen("simulation.log", "w", stdout);
+	//freopen("error.log", "w", stderr);
 }
 
 void Logger::stopFileLogging() {

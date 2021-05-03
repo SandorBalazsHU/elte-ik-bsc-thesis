@@ -1,4 +1,4 @@
-#include "EventListener.h"
+/*#include "EventListener.h"
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_sdl_gl3.h"
 
@@ -73,4 +73,4 @@ void EventListener::event(SDL_Event event) {
 			break;
 		}
 	}
-}
+}*/

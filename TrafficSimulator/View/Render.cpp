@@ -1,4 +1,4 @@
-#include "Render.h"
+/*#include "Render.h"
 
 Render::Render(WorkWindow* window) : window(window) {
 }
@@ -33,4 +33,4 @@ int Render::render() {
 	window_title << "Traffic Simulation. FPS: " << fps;
 	//simulation.fps[fpsPlotCounter] = fps;
 	SDL_SetWindowTitle(window, window_title.str().c_str());
-}
+}*/

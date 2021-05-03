@@ -34,8 +34,8 @@ private:
 	SDL_GLContext	context;
 	ProgramObject	shader;
 	Camera			camera;
-	EventListener	eventListener;
-	Render			render;
+	//EventListener	eventListener;
+	//Render			render;
 
 	bool exit = false;
 

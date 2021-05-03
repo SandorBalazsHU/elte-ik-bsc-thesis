@@ -164,14 +164,14 @@ int WorkWindow::loadingModels() {
 }
 
 int WorkWindow::renderStart() {
-	eventListener = EventListener(this);
-	render = Render(this);
+	//eventListener = EventListener(this);
+	//render = Render();
 	//Base variables for the rander loop
 	int fpsCounter = 0;
 
 	//The render loop
 	while (!exit) {
-		render.render();
+		//render.render();
 	}
 
 	Logger::log("Render terminated correctly!");
