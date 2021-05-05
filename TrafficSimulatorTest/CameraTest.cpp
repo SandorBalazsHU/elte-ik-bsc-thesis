@@ -107,21 +107,19 @@ namespace TrafficSimulatorTest {
 	 * @param constructorTest the test name
 	*/
 	TEST_F(CameraTest, constructorTest) {
+		//\test TESTCASE 1: Camera position is updated to default Camera position?
 		EXPECT_FLOAT_EQ(camera.cameraPositionTEST().x, camera.defaultCameraPositionTEST().x);
 		EXPECT_FLOAT_EQ(camera.cameraPositionTEST().y, camera.defaultCameraPositionTEST().y);
 		EXPECT_FLOAT_EQ(camera.cameraPositionTEST().z, camera.defaultCameraPositionTEST().z);
 
-		EXPECT_FLOAT_EQ(camera.lookedPointTEST().x, 0.0f);
-		EXPECT_FLOAT_EQ(camera.lookedPointTEST().y, 0.0f);
-		EXPECT_FLOAT_EQ(camera.lookedPointTEST().z, 0.0f);
+		//\test TESTCASE 2: Looked point is defined to zero?
+		EXPECT_TRUE(camera.lookedPointTEST() == glm::vec3(0.0f));
 
-		EXPECT_FLOAT_EQ(camera.upwardDirectionTEST().x, camera.defaultUpwardVectorTEST().x);
-		EXPECT_FLOAT_EQ(camera.upwardDirectionTEST().y, camera.defaultUpwardVectorTEST().y);
-		EXPECT_FLOAT_EQ(camera.upwardDirectionTEST().z, camera.defaultUpwardVectorTEST().z);
+		//\test TESTCASE 3: Upward vector is updated to the default?
+		EXPECT_TRUE(camera.upwardDirectionTEST() == camera.defaultUpwardVectorTEST());
 
-		EXPECT_NE(camera.sphericalCameraPositionTEST().x, 0.0f);
-		EXPECT_NE(camera.sphericalCameraPositionTEST().y, 0.0f);
-		EXPECT_NE(camera.sphericalCameraPositionTEST().z, 0.0f);
+		//\test TESTCASE 4: Spherical coordinates are updated to zero?
+		EXPECT_FALSE(camera.sphericalCameraPositionTEST() == glm::vec3(0.0f));
 		
 		//std::cout << "cameraPos: " << camera.cameraPositionTEST().x << "," << camera.cameraPositionTEST().y << "," << camera.cameraPositionTEST().z << std::endl;
 		//std::cout << "cameradEFPos: " << camera.defaultCameraPositionTEST().x << "," << camera.defaultCameraPositionTEST().y << "," << camera.defaultCameraPositionTEST().z << std::endl;
@@ -145,13 +143,14 @@ namespace TrafficSimulatorTest {
 
 		camera.setView(glm::vec3(45.0f, 77.0f, 36.0f), newLookedPoint);
 
-		EXPECT_NE(camera.cameraPositionTEST().x, previousCameraPosition.x);
-		EXPECT_NE(camera.cameraPositionTEST().y, previousCameraPosition.y);
-		EXPECT_NE(camera.cameraPositionTEST().z, previousCameraPosition.z);
+		//\test TESTCASE 1: The Camera position was recalculated?
+		EXPECT_FALSE(camera.cameraPositionTEST() == previousCameraPosition);
 
-		EXPECT_NE(camera.sphericalCameraPositionTEST().x, previousSphericalPosition.x);
-		EXPECT_NE(camera.sphericalCameraPositionTEST().y, previousSphericalPosition.y);
-		EXPECT_NE(camera.sphericalCameraPositionTEST().z, previousSphericalPosition.z);
+		//\test TESTCASE 2: The spherical coordinates recalculated ?
+		EXPECT_FALSE(camera.sphericalCameraPositionTEST() == previousSphericalPosition);
+
+		//\test TESTCASE 3: The looked point is updated ?
+		EXPECT_TRUE(camera.lookedPointTEST() == newLookedPoint);
 
 		EXPECT_FLOAT_EQ(camera.lookedPointTEST().x, newLookedPoint.x);
 		EXPECT_FLOAT_EQ(camera.lookedPointTEST().y, newLookedPoint.y);
@@ -175,17 +174,14 @@ namespace TrafficSimulatorTest {
 
 		camera.setCameraPosition(glm::vec3(12.0f, 1.0f, 48.0f));
 
-		EXPECT_NE(camera.cameraPositionTEST().x, previousCameraPosition.x);
-		EXPECT_NE(camera.cameraPositionTEST().y, previousCameraPosition.y);
-		EXPECT_NE(camera.cameraPositionTEST().z, previousCameraPosition.z);
+		//\test TESTCASE 1: The Camera position was recalculated ?
+		EXPECT_FALSE(camera.cameraPositionTEST() == previousCameraPosition);
 
-		EXPECT_NE(camera.sphericalCameraPositionTEST().x, previousSphericalPosition.x);
-		EXPECT_NE(camera.sphericalCameraPositionTEST().y, previousSphericalPosition.y);
-		EXPECT_NE(camera.sphericalCameraPositionTEST().z, previousSphericalPosition.z);
+		//\test TESTCASE 2: The spherical coordinates recalculated ?
+		EXPECT_FALSE(camera.sphericalCameraPositionTEST() == previousSphericalPosition);
 
-		EXPECT_FLOAT_EQ(camera.lookedPointTEST().x, previousLookedPoint.x);
-		EXPECT_FLOAT_EQ(camera.lookedPointTEST().y, previousLookedPoint.y);
-		EXPECT_FLOAT_EQ(camera.lookedPointTEST().z, previousLookedPoint.z);
+		//\test TESTCASE 3: The looked point is updated ?
+		EXPECT_TRUE(camera.lookedPointTEST() == previousLookedPoint);
 	}
 
 	/**
@@ -193,6 +189,7 @@ namespace TrafficSimulatorTest {
 	 * \test TESTCASE 1: The Camera position was recalculated?
 	 * \test TESTCASE 2: The spherical coordinates recalculated?
 	 * \test TESTCASE 3: The looked point is updated?
+	 * \test TESTCASE 4: The looked point update is correct?
 	 * The calculations correctness is not important in this test, just the calculations fact.
 	 * The calculations correctness is tested in the calculator functions test.
 	 * @param CameraTest The test class
@@ -203,20 +200,87 @@ namespace TrafficSimulatorTest {
 		glm::vec3 previousLookedPoint = camera.lookedPointTEST();
 		glm::vec3 previousSphericalPosition = camera.sphericalCameraPositionTEST();
 
-		camera.setLookedPoint(glm::vec3(2.0f, 31.0f, 12.0f));
+		glm::vec3 newLookedPoint = glm::vec3(2.0f, 31.0f, 12.0f);
+		camera.setLookedPoint(newLookedPoint);
 
-		EXPECT_NE(camera.cameraPositionTEST().x, previousCameraPosition.x);
-		EXPECT_NE(camera.cameraPositionTEST().y, previousCameraPosition.y);
-		EXPECT_NE(camera.cameraPositionTEST().z, previousCameraPosition.z);
-
-		EXPECT_NE(camera.sphericalCameraPositionTEST().x, previousSphericalPosition.x);
-		EXPECT_NE(camera.sphericalCameraPositionTEST().y, previousSphericalPosition.y);
-		EXPECT_NE(camera.sphericalCameraPositionTEST().z, previousSphericalPosition.z);
-
-		EXPECT_NE(camera.lookedPointTEST().x, previousLookedPoint.x);
-		EXPECT_NE(camera.lookedPointTEST().y, previousLookedPoint.y);
-		EXPECT_NE(camera.lookedPointTEST().z, previousLookedPoint.z);
+		//\test TESTCASE 1: The Camera position was recalculated?
+		EXPECT_FALSE(camera.cameraPositionTEST() == previousCameraPosition);
+		//\test TESTCASE 2: The spherical coordinates recalculated?
+		EXPECT_FALSE(camera.sphericalCameraPositionTEST() == previousSphericalPosition);
+		//\test TESTCASE 3: The looked point is updated?
+		EXPECT_FALSE(camera.lookedPointTEST() == previousLookedPoint);
+		//\test TESTCASE 4: The looked point update is correct?
+		EXPECT_TRUE(camera.lookedPointTEST() == newLookedPoint);
 	}
+
+	/**
+	 * @brief Testing getCameraPosition.
+	 * \test TESTCASE 1: The method get the camera position?
+	 * @param CameraTest The test class.
+	 * @param getCameraPositionTest the test name.
+	*/
+	TEST_F(CameraTest, getCameraPositionTest) {
+		//\test TESTCASE 1: The method get the camera position?
+		EXPECT_TRUE(camera.getCameraPosition() == camera.cameraPositionTEST());
+	}
+
+	/**
+	 * @brief Testing getLookedPoint.
+	 * \test TESTCASE 1: The method get the looked point?
+	 * @param CameraTest The test class.
+	 * @param getLookedPointTest the test name.
+	*/
+	TEST_F(CameraTest, getLookedPointTest) {
+		//\test TESTCASE 1: The method get the looked point?
+		EXPECT_TRUE(camera.getLookedPoint() == camera.lookedPointTEST());
+	}
+
+	/**
+	 * @brief Testing getUpwardVector.
+	 * \test TESTCASE 1: The method get the upward vector?
+	 * @param CameraTest The test class.
+	 * @param getUpwardVectorTest the test name.
+	*/
+	TEST_F(CameraTest, getUpwardVectorTest) {
+		//\test TESTCASE 1: The method get the upward vector?
+		EXPECT_TRUE(camera.getUpwardVector() == camera.upwardDirectionTEST());
+	}
+
+	/**
+	 * @brief Testing getViewMatrix.
+	 * \test TESTCASE 1: The method get the view matrix?
+	 * @param CameraTest The test class.
+	 * @param getViewMatrixTest The test name.
+	*/
+	TEST_F(CameraTest, getViewMatrixTest) {
+		//\test TESTCASE 1: The method get the view matrix?
+		EXPECT_TRUE(camera.getViewMatrix() == camera.viewMatrixTEST());
+	}
+
+	/**
+	 * @brief Testing getViewMatrix.
+	 * \test TESTCASE 1: The method get the projection matrix?
+	 * @param CameraTest The test class.
+	 * @param getProjectionMatrixTest The test name.
+	*/
+	TEST_F(CameraTest, getProjectionMatrixTest) {
+		//\test TESTCASE 1: The method get the projection matrix?
+		EXPECT_TRUE(camera.getProjectionMatrix() == camera.projectionMatrixTEST());
+	}
+
+	/**
+	 * @brief Testing getProjectionViewMatrix.
+	 * \test TESTCASE 1: The method get the projection matrix ant the view matrix product?
+	 * @param CameraTest The test class.
+	 * @param getProjectionViewMatrixTest The test name.
+	*/
+	TEST_F(CameraTest, getProjectionViewMatrixTest) {
+		//\test TESTCASE 1: The method get the projection matrix ant the view matrix product?
+		EXPECT_TRUE(camera.getProjectionViewMatrix() == camera.projectionMatrixTEST()*camera.viewMatrixTEST());
+	}
+
+
+
 
 	/**
 	 * @brief Testing setLookedPoint.
@@ -227,8 +291,10 @@ namespace TrafficSimulatorTest {
 	TEST_F(CameraTest, updateTest) {
 		camera.setView(glm::vec3(39.0f, 12.0f, 23.0f), glm::vec3(21.0f, 42.0f, 2.0f));
 		camera.updateTEST();
-		glm::mat4 calculatedViewMatrix = glm::lookAt(
-		camera.cameraPositionTEST(), camera.lookedPointTEST(), camera.upwardDirectionTEST());
-		ASSERT_TRUE(calculatedViewMatrix == camera.viewMatrixTEST());
+		glm::mat4 calculatedViewMatrix = glm::lookAt(camera.cameraPositionTEST(), camera.lookedPointTEST(), camera.upwardDirectionTEST());
+		//\test TESTCASE 1: The Camera position was recalculated ?
+		EXPECT_TRUE(calculatedViewMatrix == camera.viewMatrixTEST());
 	}
+
+
 }

@@ -95,7 +95,7 @@ public:
 	 * @brief The View * Projection matrix used for the camera transformation in the render.
 	 * @return The product of the view and the projection matrix.
 	*/
-	glm::mat4 getViewProjectionMatrix() {
+	glm::mat4 getProjectionViewMatrix() {
 		return projectionMatrix * viewMatrix;
 	}
 
