@@ -17,9 +17,9 @@
  * @brief The Camera class constructor.
  * Initialize the variables, set the view and the projection matrix.
 */
-Camera::Camera(void) : cameraPosition(0.0f), lookedPoint(0.0f), upwardDirection(0.0f, 10.0f, 0.0f), sphericalCameraPosition(0.0f) {
-	setView(glm::vec3(45, 45, 45), glm::vec3(0.0f));
-	setProjection(45.0f, 640 / 480.0f, 0.001f, 1000.0f);
+Camera::Camera(void) : cameraPosition(0.0f), lookedPoint(0.0f), upwardDirection(defaultUpwardVector), sphericalCameraPosition(0.0f) {
+	setView(defaultCameraPosition, defaultLookedPoint);
+	setProjection(angle, aspect, zNear, zFar);
 }
 
 /**
@@ -84,6 +84,7 @@ void Camera::cameraCoordinateUpdate() {
 /**
  * \attention The camera z axis show upward! \n
  * In this point we use the origo shifted camera coordinates \f$ origoCameraPosition = cameraPosition - lookedPoint \f$ \n
+ * Built in zero division prevention. \n
  * @brief Calculate spherical coordinates from current camera coordinates. \n
  * \f$ sphericalCameraPosition.x = radius = r = \sqrt{x^{2}+y^{2}+z^{2}} \f$ \n
  * \f$ sphericalCameraPosition.y = inclination = \theta = \arccos{\frac{y}{r}} \f$ \n
@@ -91,7 +92,9 @@ void Camera::cameraCoordinateUpdate() {
 */
 void Camera::sphericalCoordinateUpdate() {
 	glm::vec3 origoCameraPosition = cameraPosition - lookedPoint;
+	origoCameraPosition.x = (origoCameraPosition.x == 0.0f) ? 0.0001f : origoCameraPosition.x;
 	sphericalCameraPosition.x = sqrt((origoCameraPosition.x * origoCameraPosition.x) + (origoCameraPosition.y * origoCameraPosition.y) + (origoCameraPosition.z * origoCameraPosition.z));
+	sphericalCameraPosition.x = (sphericalCameraPosition.x == 0.0f) ? 0.0001f : sphericalCameraPosition.x;
 	sphericalCameraPosition.y = acosf(origoCameraPosition.y / sphericalCameraPosition.x);
 	sphericalCameraPosition.z = atanf(origoCameraPosition.z / origoCameraPosition.x);
 }

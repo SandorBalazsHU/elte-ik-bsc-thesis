@@ -132,7 +132,41 @@ public:
 	*/
 	void mouseWheel(SDL_MouseWheelEvent& wheel);
 
-private:
+protected:
+	/**
+	 * @brief The start camera position.
+	*/
+	const glm::vec3 defaultCameraPosition = glm::vec3(45.0f, 45.0f, 45.0f);
+
+	/**
+	 * @brief The start looked point.
+	*/
+	const glm::vec3 defaultLookedPoint = glm::vec3(0.0f);
+
+	/**
+	 * @brief The default upward vector.
+	*/
+	const glm::vec3 defaultUpwardVector = glm::vec3(0.0f, 10.0f, 0.0f);
+
+	/**
+	 * @brief The default angle.
+	*/
+	const float angle = 45.0f;
+
+	/**
+	* @brief The default angle.
+	*/
+	const float aspect = 640 / 480.0f;
+
+	/**
+	* @brief The default angle.
+	*/
+	const float zNear = 0.001f;
+
+	/**
+	* @brief The default angle.
+	*/
+	const float zFar = 1000.0f;
 
 	/**
 	 * @brief Update viewMatrix from cameraPosition, lookedPoint and upwardDirection for apply changes.
@@ -154,6 +188,7 @@ private:
 	/**
 	 * \attention The camera z axis show upward! \n
 	 * In this point we use the origo shifted camera coordinates \f$ origoCameraPosition = cameraPosition - lookedPoint \f$ \n
+	 * Built in zero division prevention. \n
 	 * @brief Calculate spherical coordinates from current camera coordinates. \n
 	 * \f$ sphericalCameraPosition.x = radius = r = \sqrt{x^{2}+y^{2}+z^{2}} \f$ \n
 	 * \f$ sphericalCameraPosition.y = inclination = \theta = \arccos{\frac{y}{r}} \f$ \n
@@ -179,6 +214,14 @@ private:
 	void setProjection(float angle, float aspect, float zNear, float zFar);
 
 	/**
+	* @brief The camera position in spherical coordinate.
+	* \f$ sphericalCameraPosition.x = radius = r=\sqrt{x^{2}+y^{2}+z^{2}} \f$
+	* \f$ sphericalCameraPosition.y = inclination = \theta=\arccos{\frac{z}{r}} \f$
+	* \f$ sphericalCameraPosition.z = azimuth = \varphi=\arctan{\frac{y}{x}} \f$
+	*/
+	glm::vec3	sphericalCameraPosition;
+
+	/**
 	* @brief The view matrix of the camera.
 	*/
 	glm::mat4	viewMatrix;
@@ -188,13 +231,6 @@ private:
 	*/
 	glm::vec3	cameraPosition;
 
-	/**
-	* @brief The camera position in spherical coordinate.
-	* \f$ sphericalCameraPosition.x = radius = r=\sqrt{x^{2}+y^{2}+z^{2}} \f$
-	* \f$ sphericalCameraPosition.y = inclination = \theta=\arccos{\frac{z}{r}} \f$
-	* \f$ sphericalCameraPosition.z = azimuth = \varphi=\arctan{\frac{y}{x}} \f$
-	*/
-	glm::vec3	sphericalCameraPosition;
 
 	/**
 	* The vector pointing upwards.
