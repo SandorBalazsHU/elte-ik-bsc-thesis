@@ -279,7 +279,33 @@ namespace TrafficSimulatorTest {
 		EXPECT_TRUE(camera.getProjectionViewMatrix() == camera.projectionMatrixTEST()*camera.viewMatrixTEST());
 	}
 
+	/**
+	 * @brief Testing getProjectionViewMatrix.
+	 * \test TESTCASE 1: The resizing change the aspect?
+	 * \test TESTCASE 2: The new aspect is correct?
+	 * \test TESTCASE 3: The resizing change the projection matrix?
+	 * \test TESTCASE 4: The new projection matrix is correct?
+	 * \test TESTCASE 5: The new projection matrix is correct?
+	 * @param CameraTest The test class.
+	 * @param resizeTest The test name.
+	*/
+	TEST_F(CameraTest, resizeTest) {
+		float previousAspect = camera.aspectTEST();
+		glm::mat4 previousProjectionMatrix = camera.projectionMatrixTEST();
+		float width = 500.0f;
+		float height = 500.0f;
+		float newAspect = (width / height);
+		camera.resize(width, height);
 
+		//\test TESTCASE 1: The resizing change the aspect?
+		EXPECT_FALSE(camera.aspectTEST() == previousAspect);
+		//\test TESTCASE 2: The new aspect is correct?
+		EXPECT_TRUE(camera.aspectTEST() == newAspect);
+		//\test TESTCASE 3: The resizing change the projection matrix?
+		EXPECT_FALSE(camera.projectionMatrixTEST() == previousProjectionMatrix);
+		//\test TESTCASE 4: The new projection matrix is correct?
+		EXPECT_TRUE(camera.projectionMatrixTEST() == glm::perspective(angle, newAspect, zNear, zFar));
+	}
 
 
 	/**

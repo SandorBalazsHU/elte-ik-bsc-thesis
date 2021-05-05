@@ -133,8 +133,8 @@ void Camera::setProjection(float angle, float aspect, float zNear, float zFar) {
  * @param height The OpenGL screen height.
 */
 void Camera::resize(int width, int height) {
-	projectionMatrix = glm::perspective(45.0f, ((float)width) / ((float)height), 0.01f, 1000.0f);
-	update();
+	aspect = ((float)width) / ((float)height);
+	setProjection(angle, aspect, zNear, zFar);
 }
 
 /**

@@ -156,7 +156,7 @@ protected:
 	/**
 	* @brief The default angle.
 	*/
-	const float aspect = 640 / 480.0f;
+	float aspect = 640 / 480.0f;
 
 	/**
 	* @brief The default angle.
