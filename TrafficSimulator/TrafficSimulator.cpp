@@ -1,14 +1,8 @@
 #include <iostream>
 
-#include "View/WorkWindow.h";
-#include "Control/Logger.h";
+#include "View/WorkWindow.h"
+#include "Control/Logger.h"
 
-/**
- * @brief 
- * @param argc 
- * @param args 
- * @return 
-*/
 int main(int argc, char* args[])
 {
     Logger::startFileLogging();

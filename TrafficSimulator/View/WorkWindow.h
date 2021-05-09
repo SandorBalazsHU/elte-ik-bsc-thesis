@@ -2,13 +2,9 @@
 
 #include <SDL.h>
 #include "Camera.h"
-#include "EventListener.h"
-#include "Render.h"
 #include "Utilities/ProgramObject.h"
 #include "Utilities/TextureObject.h"
 #include "Utilities/Mesh_OGL3.h"
-
-
 
 class WorkWindow {
 public:
@@ -18,11 +14,16 @@ public:
 
 	int close() {
 		exit = true;
-	}
+	};
 
 	Camera* getCamera() {
 		return &camera;
+	};
+
+	ProgramObject* getShader() {
+		return &shader;
 	}
+
 private:
 	const char* windowDefTitle = "Traffic Simulator";
 	const int windowDefSizeX = 640;
@@ -34,8 +35,6 @@ private:
 	SDL_GLContext	context;
 	ProgramObject	shader;
 	Camera			camera;
-	//EventListener	eventListener;
-	//Render			render;
 
 	bool exit = false;
 
@@ -49,6 +48,8 @@ private:
 	int shaderConfig();
 	int loadingModels();
 	int renderStart();
+
+	void clearScreen();
 
 	void cleanup();
 	static void exitWindow();

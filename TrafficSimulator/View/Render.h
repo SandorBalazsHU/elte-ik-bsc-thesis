@@ -1,11 +1,20 @@
-/*#pragma once
+#pragma once
 #include "WorkWindow.h"
+#include "Camera.h"
+#include "Utilities/ProgramObject.h"
 
 class Render {
 public:
-	Render();
+	Render(void);
 	~Render(void);
-	int render();
+	void render();
+	void bind(WorkWindow* window);
+	void faceTestOn();
+	void faceTestOff();
+	void shaderUpdate();
+
 private:
-	//WorkWindow* window;
-};*/
+	WorkWindow* window;
+	Camera* camera;
+	ProgramObject* shader;
+};

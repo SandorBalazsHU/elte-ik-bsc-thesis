@@ -149,6 +149,11 @@ protected:
 	const glm::vec3 defaultUpwardVector = glm::vec3(0.0f, 10.0f, 0.0f);
 
 	/**
+	 * @brief The looked point movement speed.
+	*/
+	float lookedPointMovementSpeed = 0.5f;
+
+	/**
 	 * @brief The default angle.
 	*/
 	const float angle = 45.0f;
@@ -159,12 +164,12 @@ protected:
 	float aspect = 640 / 480.0f;
 
 	/**
-	* @brief The default angle.
+	* @brief The default near cutting line.
 	*/
 	const float zNear = 0.001f;
 
 	/**
-	* @brief The default angle.
+	* @brief The default far cutting line.
 	*/
 	const float zFar = 1000.0f;
 
@@ -230,7 +235,6 @@ protected:
 	* @brief The camera position.
 	*/
 	glm::vec3	cameraPosition;
-
 
 	/**
 	* The vector pointing upwards.

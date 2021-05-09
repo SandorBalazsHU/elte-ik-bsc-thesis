@@ -1,13 +1,17 @@
-/*#pragma once
-#include <SDL.h>
+#pragma once
+
+#include<SDL.h>
+#include"Camera.h"
 #include "WorkWindow.h"
+
+class WorkWindow;
 
 class EventListener {
 public:
-	EventListener(WorkWindow*);
+	EventListener();
 	~EventListener(void);
-	void event(SDL_Event);
-
+	void bind(WorkWindow* currentWindow);
+	void eventProcessor();
 private:
 	WorkWindow* window;
 	Camera* camera;
@@ -19,4 +23,4 @@ private:
 	void mouseWheel(SDL_MouseWheelEvent&);
 	void resize(SDL_WindowEvent& window);
 	void exit();
-};*/
+};

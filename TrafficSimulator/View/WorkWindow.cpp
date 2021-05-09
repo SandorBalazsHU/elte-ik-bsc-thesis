@@ -1,4 +1,6 @@
 #include "WorkWindow.h";
+#include "Render.h"
+#include "EventListener.h"
 
 #include <iostream>
 #include <sstream>
@@ -15,7 +17,7 @@
 #include "imgui/imgui_impl_sdl_gl3.h"
 
 WorkWindow::WorkWindow(void) {
-}
+};
 
 int WorkWindow::open() {
 	int status				= sdlInit();
@@ -163,15 +165,21 @@ int WorkWindow::loadingModels() {
 	return 0;
 }
 
+void WorkWindow::clearScreen() {
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
 int WorkWindow::renderStart() {
-	//eventListener = EventListener(this);
-	//render = Render();
-	//Base variables for the rander loop
-	int fpsCounter = 0;
+	EventListener	eventListener;
+	Render			render;
+	eventListener.bind(this);
+	render.bind(this);
 
 	//The render loop
 	while (!exit) {
-		//render.render();
+		clearScreen();
+		eventListener.eventProcessor();
+		render.render();
 	}
 
 	Logger::log("Render terminated correctly!");

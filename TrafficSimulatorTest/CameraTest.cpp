@@ -33,6 +33,9 @@ namespace TrafficSimulatorTest {
 		glm::vec3 defaultUpwardVectorTEST() {
 			return  defaultUpwardVector;
 		}
+		float lookedPointMovementSpeedTEST() {
+			return  lookedPointMovementSpeed;
+		}
 		float angleTEST() {
 			return  angle;
 		}
@@ -86,7 +89,7 @@ namespace TrafficSimulatorTest {
 	/**
 	 * @brief The test control class for the Camera testing.
 	*/
-	class CameraTest : public ::testing::Test, public Camera {
+	class CameraTest : public ::testing::Test {
 	protected:
 		CameraTester camera;
 		CameraTest() {}
@@ -295,7 +298,7 @@ namespace TrafficSimulatorTest {
 		float width = 500.0f;
 		float height = 500.0f;
 		float newAspect = (width / height);
-		camera.resize(width, height);
+		camera.resize((int)width, (int)height);
 
 		//\test TESTCASE 1: The resizing change the aspect?
 		EXPECT_FALSE(camera.aspectTEST() == previousAspect);
@@ -304,8 +307,108 @@ namespace TrafficSimulatorTest {
 		//\test TESTCASE 3: The resizing change the projection matrix?
 		EXPECT_FALSE(camera.projectionMatrixTEST() == previousProjectionMatrix);
 		//\test TESTCASE 4: The new projection matrix is correct?
-		EXPECT_TRUE(camera.projectionMatrixTEST() == glm::perspective(angle, newAspect, zNear, zFar));
+		EXPECT_TRUE(camera.projectionMatrixTEST() == glm::perspective(camera.angleTEST(), newAspect, camera.zNearTEST(), camera.zFarTEST()));
 	}
+
+	/**
+	 * @brief Testing keyboardDown.
+	 * \test TESTCASE 1:
+	 * @param CameraTest The test class.
+	 * @param keyboardDownTest the test name.
+	*/
+	TEST_F(CameraTest, keyboardDownTest) {
+		int key = SDLK_w;
+		SDL_KeyboardEvent testKey;
+		testKey.keysym.sym = key;
+
+		float s = camera.lookedPointMovementSpeedTEST();
+		float previouseLookedPoint = camera.lookedPointTEST().x;
+		float previousecameraPosition = camera.cameraPositionTEST().x;
+
+		camera.keyboardDown(testKey);
+
+		EXPECT_TRUE(*camera.pressedKeysTEST().find(key) == key);
+
+		EXPECT_FALSE(previouseLookedPoint == camera.lookedPointTEST().x);
+		EXPECT_FALSE(previousecameraPosition == camera.cameraPositionTEST().x);
+
+		EXPECT_TRUE(previouseLookedPoint + s == camera.lookedPointTEST().x);
+		EXPECT_TRUE(previousecameraPosition + s == camera.cameraPositionTEST().x);
+
+		camera.keyboardUp(testKey);
+
+
+
+		key = SDLK_s;
+		testKey.keysym.sym = key;
+
+		s = camera.lookedPointMovementSpeedTEST();
+		previouseLookedPoint = camera.lookedPointTEST().x;
+		previousecameraPosition = camera.cameraPositionTEST().x;
+
+		camera.keyboardDown(testKey);
+
+		EXPECT_TRUE(*camera.pressedKeysTEST().find(key) == key);
+
+		EXPECT_FALSE(previouseLookedPoint == camera.lookedPointTEST().x);
+		EXPECT_FALSE(previousecameraPosition == camera.cameraPositionTEST().x);
+
+		EXPECT_TRUE(previouseLookedPoint - s == camera.lookedPointTEST().x);
+		EXPECT_TRUE(previousecameraPosition - s == camera.cameraPositionTEST().x);
+
+		camera.keyboardUp(testKey);
+
+
+
+
+		key = SDLK_a;
+		testKey.keysym.sym = key;
+
+		s = camera.lookedPointMovementSpeedTEST();
+		previouseLookedPoint = camera.lookedPointTEST().z;
+		previousecameraPosition = camera.cameraPositionTEST().z;
+
+		camera.keyboardDown(testKey);
+
+		EXPECT_TRUE(*camera.pressedKeysTEST().find(key) == key);
+
+		EXPECT_FALSE(previouseLookedPoint == camera.lookedPointTEST().z);
+		EXPECT_FALSE(previousecameraPosition == camera.cameraPositionTEST().z);
+
+		EXPECT_TRUE(previouseLookedPoint + s == camera.lookedPointTEST().z);
+		EXPECT_TRUE(previousecameraPosition + s == camera.cameraPositionTEST().z);
+
+		camera.keyboardUp(testKey);
+
+
+
+
+
+
+
+		key = SDLK_d;
+		testKey.keysym.sym = key;
+
+		s = camera.lookedPointMovementSpeedTEST();
+		previouseLookedPoint = camera.lookedPointTEST().z;
+		previousecameraPosition = camera.cameraPositionTEST().z;
+
+		camera.keyboardDown(testKey);
+
+		EXPECT_TRUE(*camera.pressedKeysTEST().find(key) == key);
+
+		EXPECT_FALSE(previouseLookedPoint == camera.lookedPointTEST().z);
+		EXPECT_FALSE(previousecameraPosition == camera.cameraPositionTEST().z);
+
+		EXPECT_TRUE(previouseLookedPoint - s == camera.lookedPointTEST().z);
+		EXPECT_TRUE(previousecameraPosition - s == camera.cameraPositionTEST().z);
+
+		camera.keyboardUp(testKey);
+	}
+
+
+
+
 
 
 	/**
@@ -321,6 +424,4 @@ namespace TrafficSimulatorTest {
 		//\test TESTCASE 1: The Camera position was recalculated ?
 		EXPECT_TRUE(calculatedViewMatrix == camera.viewMatrixTEST());
 	}
-
-
 }

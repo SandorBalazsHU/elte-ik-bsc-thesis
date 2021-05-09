@@ -143,7 +143,7 @@ void Camera::resize(int width, int height) {
  * @param key keyboard down event.
 */
 void Camera::keyboardDown(SDL_KeyboardEvent& key) {
-	float s = 0.5f;
+	float s = lookedPointMovementSpeed;
 	pressedKeys.insert(key.keysym.sym);
 	for (int keyCode : pressedKeys) {
 		switch (keyCode) {
