@@ -12,6 +12,8 @@ public:
 	void faceTestOn();
 	void faceTestOff();
 	void shaderUpdate();
+	void clearScrean();
+	void setTexture(Texture2D texture);
 
 private:
 	WorkWindow* window;

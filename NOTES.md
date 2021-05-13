@@ -11,7 +11,7 @@ https://i.stack.imgur.com/YqV0O.png
 https://gist.github.com/wwwtyro/beecc31d65d1004f5a9d
 
 
-
+https://learnopengl.com/Lighting/Basic-Lighting
 
 
 
