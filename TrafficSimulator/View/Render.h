@@ -8,10 +8,11 @@ public:
 	Render(void);
 	~Render(void);
 	void render();
+	void setShader(glm::mat4 worldMatrix, glm::mat4 color);
 	void bind(WorkWindow* window);
 	void faceTestOn();
 	void faceTestOff();
-	void shaderUpdate();
+	void shaderCameraUpdate();
 	void clearScrean();
 	void setTexture(Texture2D texture);
 

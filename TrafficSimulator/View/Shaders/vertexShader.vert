@@ -12,10 +12,10 @@ out vec2 vertexOutTexture;
 //shader külsõ paraméterei
 uniform mat4 worldMatrix;
 uniform mat4 worldInverseTransposeMatrix;
-uniform mat4 projectionViewMatrix;
+uniform mat4 projectionViewWorldMatrix;
 
 void main() {
-	gl_Position = projectionViewMatrix * vec4(vertexInPosition, 1);
+	gl_Position = projectionViewWorldMatrix * vec4(vertexInPosition, 1);
 
 	vertexOutPosition = (worldMatrix * vec4(vertexInPosition, 1)).xyz;
 	vertexOutNormal  = (worldInverseTransposeMatrix * vec4(vertexInNormal, 0)).xyz;

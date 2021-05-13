@@ -143,9 +143,9 @@ int WorkWindow::shaderConfig() {
 			{ GL_FRAGMENT_SHADER, "View/Shaders/fragmentShader.frag" }
 			},
 		{
-			{ 0, "vs_in_pos" },		// VAO 0	    --> vs_in_pos
-			{ 1, "vs_in_normal" },	// VAO 1 chanel --> vs_in_normal
-			{ 2, "vs_out_tex0" },	// VAO 2 chanel --> vs_in_tex0
+			{ 0, "vertexInPosition" },	// VAO 0	    --> vs_in_pos
+			{ 1, "vertexInNormal" },	// VAO 1 chanel --> vs_in_normal
+			{ 2, "vertexInTexture" },	// VAO 2 chanel --> vs_in_tex0
 		});
 	} catch (...) {
 		Logger::error("[Shader config ERROR]");
