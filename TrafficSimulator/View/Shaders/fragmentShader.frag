@@ -1,6 +1,3 @@
-/*
-*/
-
 in vec3 fragmentPosition;
 in vec3 fragmentNormal;
 in vec2 fragmentTexture;
@@ -20,8 +17,7 @@ uniform vec4 specularMaterial = vec4(1, 1, 1, 0);
 uniform float specularPower = 32;
 uniform sampler2D currentTexture;
 
-void main()
-{
+void main() {
 	// ambiens szín számítása
 	vec4 ambientColor = ambientLight * ambientMaterial;
 
@@ -29,16 +25,16 @@ void main()
 	vec3 fragmentNormalVector = normalize(fragmentNormal);
 	vec3 lightDirection = normalize(lightPosition - fragmentPosition);
 	float diffuseDirection = clamp(dot(lightDirection, fragmentNormalVector), 0.0f, 1.0f);
-	vec4 diffuseColor = vec4(diffuseLight.rgb*diffuseMaterial.rgb*diffuseDirection, diffuseMaterial.a);
+	vec4 diffuseColor = vec4(diffuseLight.rgb * diffuseMaterial.rgb * diffuseDirection, diffuseMaterial.a);
 
 	// fényfoltképzõ szín
-	vec4 specular = vec4(0);
+	vec4 specularColor = vec4(0);
 	if ( diffuseDirection > 0 ) {
-		vec3 viewDirection = normalize( cameraPosition - fragmentPosition );
-		vec3 reflectDirection = reflect( -lightDirection, fragmentNormalVector );
-		float specularComponent = pow( clamp( dot(viewDirection, reflectDirection), 0.0f, 1.0f ), specularPower );
-		specular = specularLight*specularMaterial*specularComponent;
+		vec3 viewDirection = normalize(cameraPosition - fragmentPosition);
+		vec3 reflectDirection = reflect(-lightDirection, fragmentNormalVector);
+		float specularComponent = pow(clamp(dot(viewDirection, reflectDirection), 0.0f, 1.0f ), specularPower);
+		specularColor = specularLight * specularMaterial * specularComponent;
 	}
 
-	fragmentColor = (ambientColor + diffuseColor + specular ) * texture(currentTexture, fragmentTexture.st);
+	fragmentColor = (ambientColor + diffuseColor + specularColor ) * texture(currentTexture, fragmentTexture.st);
 }
