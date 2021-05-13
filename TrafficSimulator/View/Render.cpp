@@ -25,11 +25,11 @@ void Render::clearScrean() {
 }
 
 void Render::setTexture(Texture2D texture) {
-	shader->SetTexture("texImage", 0, texture);
+	shader->SetTexture("currentTexture", 0, texture);
 }
 
 void Render::shaderUpdate() {
-	shader->SetUniform("eye_pos", camera->getCameraPosition());
+	shader->SetUniform("cameraPosition", camera->getCameraPosition());
 }
 
 void Render::render() {
