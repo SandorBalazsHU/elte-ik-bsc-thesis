@@ -32,11 +32,21 @@ void Render::shaderCameraUpdate() {
 	shader->SetUniform("cameraPosition", camera->getCameraPosition());
 }
 
-void Render::setShader(glm::mat4 worldMatrix, glm::mat4 color) {
+void Render::shaderPreDrawingUpdate(glm::mat4 worldMatrix, glm::mat4 color) {
 	shader->SetUniform("worldMatrix", worldMatrix);
 	shader->SetUniform("worldInverseTransposeMatrix", glm::transpose(glm::inverse(worldMatrix)));
 	shader->SetUniform("projectionViewWorldMatrix", camera->getProjectionViewMatrix() * worldMatrix);
 	shader->SetUniform("diffuseMaterial", color);
+}
+
+void Render::drawMesh(std::unique_ptr<Mesh> mesh) {
+	mesh->draw();
+}
+
+void Render::drawVao(VertexArrayObject& vao, int trianglesNumber) {
+	vao.Bind();
+	glDrawElements(GL_TRIANGLES, trianglesNumber, GL_UNSIGNED_INT, 0);
+	vao.Unbind();
 }
 
 void Render::render() {
