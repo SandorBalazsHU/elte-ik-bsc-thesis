@@ -87,6 +87,9 @@
     <ClCompile Include="View\Render.cpp">
       <Filter>Source Files\View</Filter>
     </ClCompile>
+    <ClCompile Include="View\GUI.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="View\WorkWindow.h">
@@ -156,6 +159,9 @@
       <Filter>Source Files\View</Filter>
     </ClInclude>
     <ClInclude Include="View\Render.h">
+      <Filter>Source Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="View\GUI.h">
       <Filter>Source Files\View</Filter>
     </ClInclude>
   </ItemGroup>
