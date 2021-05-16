@@ -14,7 +14,7 @@ https://gist.github.com/wwwtyro/beecc31d65d1004f5a9d
 https://learnopengl.com/Lighting/Basic-Lighting
 
 
-
+https://pvigier.github.io/2018/02/09/dependency-graph.html
 
 
 
