@@ -1,8 +1,11 @@
 #pragma once
-#include "WorkWindow.h"
-#include "Utilities/VertexArrayObject.h"
+class WorkWindow;
+
 #include "Camera.h"
 #include "Utilities/ProgramObject.h"
+#include "Utilities/TextureObject.h"
+#include "Utilities/Mesh_OGL3.h"
+#include "Utilities/VertexArrayObject.h"
 
 class Render {
 public:

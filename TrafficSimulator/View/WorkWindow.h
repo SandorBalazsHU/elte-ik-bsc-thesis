@@ -1,11 +1,10 @@
 #pragma once
 
-class EventListener;
-class Render;
-class GUI;
-
 #include <SDL.h>
 #include "Camera.h"
+#include "Render.h"
+#include "EventListener.h"
+#include "GUI.h"
 #include "Utilities/ProgramObject.h"
 #include "Utilities/TextureObject.h"
 #include "Utilities/Mesh_OGL3.h"
@@ -43,9 +42,9 @@ private:
 	SDL_GLContext	context;
 	ProgramObject	shader;
 	Camera			camera;
-	EventListener*	eventListener;
-	Render*			render;
-	GUI*			gui;
+	EventListener	eventListener;
+	Render			render;
+	GUI			gui;
 
 	bool exit = false;
 

@@ -1,7 +1,4 @@
 #include "WorkWindow.h"
-#include "Render.h"
-#include "EventListener.h"
-#include "GUI.h"
 
 #include <iostream>
 #include <sstream>
@@ -169,15 +166,15 @@ void WorkWindow::clearScreen() {
 }
 
 int WorkWindow::renderStart() {
-	eventListener->bind(this);
-	render->bind(this);
-	gui->bind(this);
+	eventListener.bind(this);
+	render.bind(this);
+	gui.bind(this);
 
 	//The render loop
 	while (!exit) {
 		clearScreen();
-		eventListener->eventProcessor();
-		render->render();
+		eventListener.eventProcessor();
+		render.render();
 	}
 
 	Logger::log("Render terminated correctly!");

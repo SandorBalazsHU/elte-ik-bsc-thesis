@@ -1,8 +1,10 @@
 #pragma once
 
+class WorkWindow;
+
 #include<SDL.h>
 #include"Camera.h"
-#include "WorkWindow.h"
+
 
 class WorkWindow;
 

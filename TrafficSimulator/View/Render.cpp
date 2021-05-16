@@ -1,4 +1,6 @@
 #include "Render.h"
+#include "WorkWindow.h"
+#include <SDL.h>
 
 Render::Render(void) {
 }

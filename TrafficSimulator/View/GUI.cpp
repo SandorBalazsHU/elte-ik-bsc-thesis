@@ -1,4 +1,5 @@
 #include "GUI.h"
+#include "WorkWindow.h"
 
 GUI::GUI(void) {
 
