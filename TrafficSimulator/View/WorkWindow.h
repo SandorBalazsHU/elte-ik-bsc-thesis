@@ -1,5 +1,9 @@
 #pragma once
 
+class EventListener;
+class Render;
+class GUI;
+
 #include <SDL.h>
 #include "Camera.h"
 #include "Utilities/ProgramObject.h"
@@ -12,7 +16,7 @@ public:
 	~WorkWindow(void);
 	int open();
 
-	int close() {
+	void close() {
 		exit = true;
 	};
 
@@ -22,6 +26,10 @@ public:
 
 	ProgramObject* getShader() {
 		return &shader;
+	}
+
+	SDL_Window* getWindow() {
+		return window;
 	}
 
 private:
@@ -35,6 +43,9 @@ private:
 	SDL_GLContext	context;
 	ProgramObject	shader;
 	Camera			camera;
+	EventListener*	eventListener;
+	Render*			render;
+	GUI*			gui;
 
 	bool exit = false;
 

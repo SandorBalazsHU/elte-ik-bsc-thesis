@@ -1,6 +1,7 @@
-#include "WorkWindow.h";
+#include "WorkWindow.h"
 #include "Render.h"
 #include "EventListener.h"
+#include "GUI.h"
 
 #include <iostream>
 #include <sstream>
@@ -10,11 +11,9 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/transform2.hpp>
-#include "../Control/Logger.h";
+#include "../Control/Logger.h"
 #include "Utilities/ProgramObject.h"
 #include "Utilities/ObjParser_OGL3.h"
-#include "imgui/imgui.h"
-#include "imgui/imgui_impl_sdl_gl3.h"
 
 WorkWindow::WorkWindow(void) {
 };
@@ -78,7 +77,7 @@ int WorkWindow::openSDLWindow() {
 
 int WorkWindow::imGUIinit() {
 	//imgui initialisation
-	bool status = ImGui_ImplSdlGL3_Init(window);
+	bool status = GUI::init(window);
 	if (status) {
 		return 0;
 	}else{
@@ -170,16 +169,15 @@ void WorkWindow::clearScreen() {
 }
 
 int WorkWindow::renderStart() {
-	EventListener	eventListener;
-	Render			render;
-	eventListener.bind(this);
-	render.bind(this);
+	eventListener->bind(this);
+	render->bind(this);
+	gui->bind(this);
 
 	//The render loop
 	while (!exit) {
 		clearScreen();
-		eventListener.eventProcessor();
-		render.render();
+		eventListener->eventProcessor();
+		render->render();
 	}
 
 	Logger::log("Render terminated correctly!");
@@ -188,7 +186,7 @@ int WorkWindow::renderStart() {
 }
 
 void WorkWindow::cleanup() {
-	ImGui_ImplSdlGL3_Shutdown();
+	GUI::clean();
 	SDL_GL_DeleteContext(context);
 	SDL_DestroyWindow(window);
 }

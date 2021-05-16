@@ -18,6 +18,7 @@ void GUI::clean() {
 
 void GUI::bind(WorkWindow* currentWindow) {
 	workingWindow = currentWindow;
+	window = currentWindow->getWindow();
 }
 
 void GUI::eventHandler(SDL_Event& event) {
