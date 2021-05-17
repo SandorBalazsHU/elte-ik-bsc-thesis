@@ -16,11 +16,18 @@ public:
 	void faceTestOff();
 	void shaderCameraUpdate();
 	void clearScrean();
-	void setTexture(Texture2D texture);
+	void setTexture(Texture2D& texture);
 	void render();
-	void shaderPreDrawingUpdate(glm::mat4 worldMatrix, glm::mat4 color);
-	void drawMesh(std::unique_ptr<Mesh> mesh);
+	void shaderPreDrawingUpdate(glm::mat4 worldMatrix, glm::vec4 color);
+	void drawMesh(std::unique_ptr<Mesh>& mesh);
 	void drawVao(VertexArrayObject& vao, int trianglesNumber);
+	void rendering();
+	void setWindowTitle(std::string title);
+
+	//test
+	Texture2D				texture;
+	std::unique_ptr<Mesh>	ball;
+	void test();
 
 private:
 	WorkWindow* workingWindow;

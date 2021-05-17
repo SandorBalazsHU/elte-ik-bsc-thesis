@@ -31,6 +31,10 @@ public:
 		return window;
 	}
 
+	std::string getWindowTitle() {
+		return windowTitle;
+	}
+
 private:
 	const char* windowDefTitle = "Traffic Simulator";
 	const int windowDefSizeX = 640;
@@ -38,13 +42,15 @@ private:
 	const int windowDefPosX = 100;
 	const int windowDefPosY = 100;
 
+	std::string windowTitle = "Traffic simulator v1.0";
+
 	SDL_Window*		window;
 	SDL_GLContext	context;
 	ProgramObject	shader;
 	Camera			camera;
 	EventListener	eventListener;
 	Render			render;
-	GUI			gui;
+	GUI				gui;
 
 	bool exit = false;
 
