@@ -23,7 +23,8 @@ public:
 	void drawVao(VertexArrayObject& vao, int trianglesNumber);
 
 private:
-	WorkWindow* window;
+	WorkWindow* workingWindow;
+	SDL_Window* window;
 	Camera* camera;
 	ProgramObject* shader;
 };

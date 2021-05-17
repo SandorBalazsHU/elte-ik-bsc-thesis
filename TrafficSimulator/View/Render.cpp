@@ -1,6 +1,8 @@
 #include "Render.h"
 #include "WorkWindow.h"
 #include <SDL.h>
+#include <iostream>
+#include <sstream>
 
 Render::Render(void) {
 }
@@ -9,9 +11,10 @@ Render::~Render(void) {
 }
 
 void Render::bind(WorkWindow* currentWindow) {
-	window = currentWindow;
-	camera = window->getCamera();
-	shader = window->getShader();
+	workingWindow = currentWindow;
+	camera = workingWindow->getCamera();
+	shader = workingWindow->getShader();
+	window = workingWindow->getWindow();
 }
 
 void Render::faceTestOn() {
@@ -60,4 +63,8 @@ void Render::render() {
 	//ObjectRendering
 
 	shader->Unuse();
+	SDL_GL_SwapWindow(window);
+	std::stringstream window_title;
+	window_title << "TEST";
+	SDL_SetWindowTitle(window, window_title.str().c_str());
 }
