@@ -37,6 +37,7 @@ void EventListener::mouseWheel(SDL_MouseWheelEvent& wheel) {
 void EventListener::resize(SDL_WindowEvent& window) {
 	int with = window.data1;
 	int height = window.data2;
+	glViewport(0, 0, with, height);
 	camera->resize(with, height);
 }
 

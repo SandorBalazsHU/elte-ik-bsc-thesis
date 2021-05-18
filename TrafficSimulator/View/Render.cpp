@@ -78,6 +78,10 @@ void Render::test() {
 
 	// mesh betöltése
 	ball = ObjParser::parse("3Dobjects/models/little_car.obj");
+
+	SDL_Surface* icon = IMG_Load("3Dobjects/textures/littleIcon.png");
+	SDL_SetWindowIcon(window, icon);
+
 }
 
 void Render::render() {
