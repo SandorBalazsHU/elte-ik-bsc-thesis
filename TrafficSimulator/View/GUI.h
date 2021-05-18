@@ -12,9 +12,9 @@ public:
 	static bool init(SDL_Window* window);
 	static void clean();
 	void bind(WorkWindow* currentWindow);
-	void guiDraw();
-	void render(SDL_Window* window);
-	void eventHandler(SDL_Event& event);
+	void draw();
+	void render();
+	void eventHandler(SDL_Event* event);
 	bool isKeyboardCaptured();
 	bool isMouseCaptured();
 

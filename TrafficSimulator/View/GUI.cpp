@@ -22,8 +22,8 @@ void GUI::bind(WorkWindow* currentWindow) {
 	window = currentWindow->getWindow();
 }
 
-void GUI::eventHandler(SDL_Event& event) {
-	ImGui_ImplSdlGL3_ProcessEvent(&event);
+void GUI::eventHandler(SDL_Event* event) {
+	ImGui_ImplSdlGL3_ProcessEvent(event);
 }
 
 bool GUI::isKeyboardCaptured() {
@@ -34,7 +34,7 @@ bool GUI::isMouseCaptured() {
 	return ImGui::GetIO().WantCaptureKeyboard;
 }
 
-void GUI::guiDraw() {
+void GUI::draw() {
 	ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiSetCond_FirstUseEver);
 	ImGui::SetNextWindowSize(ImVec2(500, 240), ImGuiCond_FirstUseEver);
 	if (ImGui::Begin("Rigid Body Simulation")) {
@@ -44,8 +44,8 @@ void GUI::guiDraw() {
 	ImGui::End();
 }
 
-void GUI::render(SDL_Window* window) {
-	guiDraw();
+void GUI::render() {
 	ImGui_ImplSdlGL3_NewFrame(window);
+	draw();
 	ImGui::Render();
 }

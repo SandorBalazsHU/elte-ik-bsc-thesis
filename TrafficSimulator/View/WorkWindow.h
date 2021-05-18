@@ -35,6 +35,10 @@ public:
 		return windowTitle;
 	}
 
+	GUI* getGUI() {
+		return &gui;
+	}
+
 private:
 	const char* windowDefTitle = "Traffic Simulator";
 	const int windowDefSizeX = 640;

@@ -1,5 +1,6 @@
 #pragma once
 class WorkWindow;
+class GUI;
 
 #include "Camera.h"
 #include "Utilities/ProgramObject.h"
@@ -34,4 +35,5 @@ private:
 	SDL_Window* window;
 	Camera* camera;
 	ProgramObject* shader;
+	GUI* gui;
 };

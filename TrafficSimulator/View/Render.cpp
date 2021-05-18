@@ -1,5 +1,6 @@
 #include "Render.h"
 #include "WorkWindow.h"
+#include "GUI.h"
 //test
 #include "Utilities/ObjParser_OGL3.h"
 #include <glm/gtx/transform2.hpp>
@@ -19,6 +20,7 @@ void Render::bind(WorkWindow* currentWindow) {
 	camera = workingWindow->getCamera();
 	shader = workingWindow->getShader();
 	window = workingWindow->getWindow();
+	gui = workingWindow->getGUI();
 	test();
 }
 
@@ -90,6 +92,7 @@ void Render::render() {
 	drawMesh(ball);
 
 	shader->Unuse();
+	gui->render();
 	rendering();
 	setWindowTitle(workingWindow->getWindowTitle());
 }

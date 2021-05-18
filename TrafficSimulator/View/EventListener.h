@@ -1,6 +1,7 @@
 #pragma once
 
 class WorkWindow;
+class GUI;
 
 #include<SDL.h>
 #include"Camera.h"
@@ -15,8 +16,9 @@ public:
 	void bind(WorkWindow* currentWindow);
 	void eventProcessor();
 private:
-	WorkWindow* window;
+	WorkWindow* workingWindow;
 	Camera* camera;
+	GUI* gui;
 	void keyboardDown(SDL_KeyboardEvent&);
 	void keyboardUp(SDL_KeyboardEvent&);
 	void mouseMove(SDL_MouseMotionEvent&);

@@ -1,8 +1,6 @@
 #include "EventListener.h"
 #include "WorkWindow.h"
-
-#include "imgui/imgui.h"
-#include "imgui/imgui_impl_sdl_gl3.h"
+#include "GUI.h"
 
 EventListener::EventListener(void) {
 }
@@ -11,8 +9,9 @@ EventListener::~EventListener(void) {
 }
 
 void EventListener::bind(WorkWindow* currentWindow) {
-	window = currentWindow;
-	camera = window->getCamera();
+	workingWindow = currentWindow;
+	camera = workingWindow->getCamera();
+	gui = workingWindow->getGUI();
 }
 
 void EventListener::keyboardDown(SDL_KeyboardEvent& key) {
@@ -43,18 +42,16 @@ void EventListener::resize(SDL_WindowEvent& window) {
 
 
 void EventListener::exit() {
-	window->close();
+	workingWindow->close();
 }
 
 void EventListener::eventProcessor() {
 	SDL_Event event;
 	while (SDL_PollEvent(&event)) {
 
-		ImGui_ImplSdlGL3_ProcessEvent(&event);
-		bool isMouseEventCaptured = ImGui::GetIO().WantCaptureMouse;
-		bool isKeyEventCaptured = ImGui::GetIO().WantCaptureKeyboard;
+		gui->eventHandler(&event);
 
-		if (!isMouseEventCaptured && !isKeyEventCaptured) {
+		if (!gui->isMouseCaptured() && !gui->isKeyboardCaptured()) {
 			switch (event.type) {
 			case SDL_QUIT:
 				exit();
