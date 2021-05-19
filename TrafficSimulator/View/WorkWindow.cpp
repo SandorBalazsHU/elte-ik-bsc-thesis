@@ -153,7 +153,7 @@ int WorkWindow::shaderConfig() {
 
 int WorkWindow::loadingModels() {
 	//object3Dloader loader;
-	//loader.readCSV();
+	//loader.load();
 	//Load Texture
 	//texture.FromFile("texture.png");
 

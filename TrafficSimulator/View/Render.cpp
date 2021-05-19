@@ -74,12 +74,13 @@ void Render::rendering() {
 void Render::test() {
 
 	//Load Texture
-	texture.FromFile("3Dobjects/textures/little_car_red_base.png");
+	//texture.FromFile("3Dobjects/textures/little_car_red_base.png");
+	loader.load();
 
 	// mesh betöltése
 	ball = ObjParser::parse("3Dobjects/models/little_car.obj");
 
-	SDL_Surface* icon = IMG_Load("3Dobjects/textures/littleIcon.png");
+	SDL_Surface* icon = IMG_Load("3Dobjects/textures/app_icon.png");
 	SDL_SetWindowIcon(window, icon);
 
 }
@@ -91,7 +92,7 @@ void Render::render() {
 	shaderCameraUpdate();
 
 	//ObjectRendering
-	setTexture(texture);
+	setTexture(loader.textures["little_car_blue_light.png"]);
 	shaderPreDrawingUpdate(glm::translate(glm::vec3(0, 0, 0)), glm::vec4(1, 1, 1, 1));
 	drawMesh(ball);
 

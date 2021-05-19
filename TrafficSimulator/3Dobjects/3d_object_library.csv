@@ -1,1 +1,8 @@
-vehicle;obj;little_car.obj;texture;little_car_red_base.png;light;little_car_red_light.png;break;little_car_red_break.png;right;little_car_red_right.png;left;little_car_red_left.png;initPosition;0;0;0;initScale;1;1;1;initRotation;0;0;0;hitSpherePosition;0;0;0;hitSphereSize;1
+Name;Type;Main object;base texture;light texture;break texture;right texture;left texture;initPosition;;;initScale;;;initRotation;;;hitSpherePosition;;;hitSphereSize
+Default texture;texture;default.png;;;;;;;;;;;;;;;;;;
+Road texture;texture;road.png;;;;;;;;;;;;;;;;;;
+Logo;texture;app_logo.png;;;;;;;;;;;;;;;;;;
+Icon;icon;app_icon.png;;;;;;;;;;;;;;;;;;
+Little red car;vehicle;little_car.obj;little_car_red_base.png;little_car_red_light.png;little_car_red_break.png;little_car_red_right.png;little_car_red_left.png;0;0;0;1;1;1;0;0;0;0;0;0;1
+Little green car;vehicle;little_car.obj;little_car_blue_base.png;little_car_blue_light.png;little_car_blue_break.png;little_car_blue_right.png;little_car_blue_left.png;0;0;0;1;1;1;0;0;0;0;0;0;1
+Little green car;vehicle;little_car.obj;little_car_green_base.png;little_car_green_light.png;little_car_green_break.png;little_car_green_right.png;little_car_green_left.png;0;0;0;1;1;1;0;0;0;0;0;0;1

@@ -7,6 +7,7 @@ class GUI;
 #include "Utilities/TextureObject.h"
 #include "Utilities/Mesh_OGL3.h"
 #include "Utilities/VertexArrayObject.h"
+#include "../Control/object3DLoader.h"
 
 class Render {
 public:
@@ -26,7 +27,8 @@ public:
 	void setWindowTitle(std::string title);
 
 	//test
-	Texture2D				texture;
+	//Texture2D				texture;
+	object3Dloader			loader;
 	std::unique_ptr<Mesh>	ball;
 	void test();
 
