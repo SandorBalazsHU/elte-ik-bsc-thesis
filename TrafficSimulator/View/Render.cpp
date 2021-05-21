@@ -8,6 +8,7 @@
 #include <SDL.h>
 #include <iostream>
 #include <sstream>
+#include "../Control/Logger.h"
 
 Render::Render(void) {
 }
@@ -72,7 +73,6 @@ void Render::rendering() {
 }
 
 void Render::test() {
-
 	//Load Texture
 	//texture.FromFile("3Dobjects/textures/little_car_red_base.png");
 	loader.load();

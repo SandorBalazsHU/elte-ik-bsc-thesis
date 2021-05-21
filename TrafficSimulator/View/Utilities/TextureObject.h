@@ -2,7 +2,8 @@
 
 #include <GL\glew.h>
 #include <GL\GL.h>
-
+#include <SDL.h>
+#include <SDL_image.h>
 #include <string>
 
 enum class TextureType
@@ -36,7 +37,9 @@ public:
 	TextureObject& operator=(const std::string& s);
 
 	void AttachFromFile(const std::string&, bool generateMipMap = true, GLuint role = static_cast<GLuint>(type));
+	void FromFileParallel(const std::string&);
 	void FromFile(const std::string&);
+	void bindTexture();
 
 	operator unsigned int() const { return m_id; }
 
@@ -44,6 +47,8 @@ public:
 
 private:
 	GLuint m_id{};
+	SDL_Surface* loaded_img;
+	SDL_Surface* formattedSurf;
 };
 
 #include "TextureObject.inl"

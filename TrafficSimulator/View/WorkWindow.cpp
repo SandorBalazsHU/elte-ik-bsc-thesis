@@ -9,7 +9,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/transform2.hpp>
 #include "../Control/Logger.h"
-#include "../Control/object3DLoader.h"
+#include "../Control/objectStorage.h"
 #include "Utilities/ProgramObject.h"
 #include "Utilities/ObjParser_OGL3.h"
 

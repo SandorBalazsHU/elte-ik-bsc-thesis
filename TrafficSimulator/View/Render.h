@@ -7,7 +7,7 @@ class GUI;
 #include "Utilities/TextureObject.h"
 #include "Utilities/Mesh_OGL3.h"
 #include "Utilities/VertexArrayObject.h"
-#include "../Control/object3DLoader.h"
+#include "../Control/objectStorage.h"
 
 class Render {
 public:
@@ -28,7 +28,7 @@ public:
 
 	//test
 	//Texture2D				texture;
-	object3Dloader			loader;
+	objectStorage			loader;
 	std::unique_ptr<Mesh>	ball;
 	void test();
 
