@@ -17,13 +17,20 @@ void objectStorage::load() {
 
         std::string currentType = parsedCSV[i][1];
 
+        if (currentType == "icon") {
+            std::string fileName = parsedCSV[i][2];
+            windowIcon = IMG_Load((textureFolder + fileName).c_str());
+        }
+
         if (currentType == "texture") {
             std::string fileName = parsedCSV[i][2];
+            if (!isThisTextureLoaded(fileName))
             threads.push_back(loadTextureParallel(fileName));
         }
         if (currentType == "vehicle") {
             for (size_t j = 3; j <= 7; j++) {
                 std::string fileName = parsedCSV[i][j];
+                if(!isThisTextureLoaded(fileName))
                 threads.push_back(loadTextureParallel(fileName));
             }
         }
@@ -68,4 +75,8 @@ void objectStorage::readCSV() {
         }
     }
 	file.close();
+}
+
+bool objectStorage::isThisTextureLoaded(std::string textureName) {
+    return(textures.find(textureName) != textures.end());
 }

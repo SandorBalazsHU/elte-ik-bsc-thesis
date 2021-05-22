@@ -29,6 +29,7 @@ public:
 	void vsyncOff();
 	void multisamplingOn();
 	void multisamplingOff();
+	void setWindowIcon(SDL_Surface* windowIcon);
 
 	//test
 	//Texture2D				texture;

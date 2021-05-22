@@ -110,7 +110,6 @@ int WorkWindow::glewStart() {
 int WorkWindow::openGLpostConfig() {
 	//VSINC ON
 	SDL_GL_SetSwapInterval(1);
-	//glEnable(GL_MULTISAMPLE);
 
 	//Check OpenGL version
 	int glVersion[2] = { -1, -1 };

@@ -87,6 +87,10 @@ void Render::drawVao(VertexArrayObject& vao, int trianglesNumber) {
 	vao.Unbind();
 }
 
+void Render::setWindowIcon(SDL_Surface* windowIcon) {
+	SDL_SetWindowIcon(window, windowIcon);
+}
+
 void Render::rendering() {
 	SDL_GL_SwapWindow(window);
 }
@@ -99,9 +103,7 @@ void Render::test() {
 	// mesh betöltése
 	ball = ObjParser::parse("3Dobjects/models/little_car.obj");
 
-	SDL_Surface* icon = IMG_Load("3Dobjects/textures/app_icon.png");
-	SDL_SetWindowIcon(window, icon);
-
+	setWindowIcon(loader.getWindowIcon());
 }
 
 void Render::render() {
@@ -112,7 +114,7 @@ void Render::render() {
 	shaderCameraUpdate();
 
 	//ObjectRendering
-	setTexture(loader.textures["little_car_blue_light.png"]);
+	setTexture(loader.textures["little_car_red_light.png"]);
 	shaderPreDrawingUpdate(glm::translate(glm::vec3(0, 0, 0)), glm::vec4(1, 1, 1, 1));
 	drawMesh(ball);
 
