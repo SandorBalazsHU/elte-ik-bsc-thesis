@@ -3,6 +3,7 @@
 #include <map>
 #include <mutex>
 #include <thread>
+#include "../View/Utilities/ObjParser_OGL3.h"
 #include "../View/Utilities/ProgramObject.h"
 #include "../View/Utilities/TextureObject.h"
 #include "../View/Utilities/Mesh_OGL3.h"
@@ -15,6 +16,11 @@ public:
 	void load();
 	void loadTexture(std::string fileName);
 	std::thread loadTextureParallel(std::string fileName);
+	void bindTextures();
+
+	void loadObject(std::string fileName);
+	std::thread loadObjectParallel(std::string fileName);
+	void bindObjects();
 
 
 	std::mutex texturesMutex;
@@ -30,7 +36,9 @@ private:
 	SDL_Surface* windowIcon;
 	const std::string configFile = "3Dobjects/3d_object_library.csv";
 	const std::string textureFolder = "3Dobjects/textures/";
+	const std::string modelFolder = "3Dobjects/models/";
 	bool isThisTextureLoaded(std::string textureName);
+	bool isThisObjectLoaded(std::string objectName);
 	std::vector<std::vector<std::string>> parsedCSV;
 	void readCSV();
 };

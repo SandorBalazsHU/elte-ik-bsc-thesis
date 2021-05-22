@@ -32,9 +32,7 @@ public:
 	void setWindowIcon(SDL_Surface* windowIcon);
 
 	//test
-	//Texture2D				texture;
 	objectStorage			loader;
-	std::unique_ptr<Mesh>	ball;
 	void test();
 
 private:

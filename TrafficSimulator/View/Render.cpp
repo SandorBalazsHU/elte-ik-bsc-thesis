@@ -66,7 +66,7 @@ void Render::shaderCameraUpdate() {
 
 void Render::setWindowTitle(std::string title) {
 	std::stringstream window_title;
-	window_title << title << " - " << fpsCounter::getCurrentFPS() << " - " << fpsCounter::getAverageFPS();
+	window_title << title << " - " << fpsCounter::getAverageFPS();
 	SDL_SetWindowTitle(window, window_title.str().c_str());
 }
 
@@ -96,13 +96,7 @@ void Render::rendering() {
 }
 
 void Render::test() {
-	//Load Texture
-	//texture.FromFile("3Dobjects/textures/little_car_red_base.png");
 	loader.load();
-
-	// mesh betöltése
-	ball = ObjParser::parse("3Dobjects/models/little_car.obj");
-
 	setWindowIcon(loader.getWindowIcon());
 }
 
@@ -116,7 +110,7 @@ void Render::render() {
 	//ObjectRendering
 	setTexture(loader.textures["little_car_red_light.png"]);
 	shaderPreDrawingUpdate(glm::translate(glm::vec3(0, 0, 0)), glm::vec4(1, 1, 1, 1));
-	drawMesh(ball);
+	drawMesh(loader.objects["little_car.obj"]);
 
 	shader->Unuse();
 	gui->render();

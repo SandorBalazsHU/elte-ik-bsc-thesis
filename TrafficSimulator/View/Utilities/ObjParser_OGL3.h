@@ -15,18 +15,18 @@
 class ObjParser
 {
 public:
-	static std::unique_ptr<Mesh> parse(const char* fileName);
+	static std::unique_ptr<Mesh> parse(const char* fileName, bool parallel = false);
 
 	enum Exception { EXC_FILENOTFOUND };
 private:
 	struct IndexedVert {
 		int v, vt, vn;
 		IndexedVert(int _v, int _vt, int _vn) : v(_v), vt(_vt), vn(_vn) {};
-		bool operator<(const IndexedVert& rhs) const { 
-			return v<rhs.v || (v == rhs.v && (vt<rhs.vt || (vt == rhs.vt && vn<rhs.vn)));
+		bool operator<(const IndexedVert& rhs) const {
+			return v < rhs.v || (v == rhs.v && (vt < rhs.vt || (vt == rhs.vt && vn < rhs.vn)));
 		}
 	};
-		
+
 	ObjParser(void) : mesh(0), nIndexedVerts(0) {}
 
 	bool processLine();

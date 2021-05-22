@@ -1,4 +1,5 @@
 #include "objectStorage.h"
+
 //#include <iostream>
 #include <sstream>
 #include <fstream>
@@ -24,10 +25,14 @@ void objectStorage::load() {
 
         if (currentType == "texture") {
             std::string fileName = parsedCSV[i][2];
-            if (!isThisTextureLoaded(fileName))
-            threads.push_back(loadTextureParallel(fileName));
+            if (!isThisTextureLoaded(fileName)) threads.push_back(loadTextureParallel(fileName));
         }
+
         if (currentType == "vehicle") {
+
+            std::string fileName = parsedCSV[i][2];
+            if (!isThisObjectLoaded(fileName)) threads.push_back(loadObjectParallel(fileName));
+
             for (size_t j = 3; j <= 7; j++) {
                 std::string fileName = parsedCSV[i][j];
                 if(!isThisTextureLoaded(fileName))
@@ -39,11 +44,8 @@ void objectStorage::load() {
     for (size_t i = 0; i < threads.size(); i++) {
         threads[i].join();
     }
-
-    std::map<std::string, Texture2D>::iterator it;
-    for (it = textures.begin(); it != textures.end(); it++) {
-        it->second.bindTexture();
-    }
+    bindTextures();
+    bindObjects();
 }
 
 void objectStorage::loadTexture(std::string fileName) {
@@ -55,6 +57,31 @@ void objectStorage::loadTexture(std::string fileName) {
 
 std::thread objectStorage::loadTextureParallel(std::string fileName) {
     return std::thread([=]{loadTexture(fileName);});
+}
+
+void objectStorage::bindTextures() {
+    std::map<std::string, Texture2D>::iterator it;
+    for (it = textures.begin(); it != textures.end(); it++) {
+        it->second.bindTexture();
+    }
+}
+
+void objectStorage::loadObject(std::string fileName) {
+    objectsMutex.lock();
+    std::unique_ptr<Mesh>& object = objects[fileName];
+    objectsMutex.unlock();
+    object = ObjParser::parse((modelFolder + fileName).c_str(), true);
+}
+
+std::thread objectStorage::loadObjectParallel(std::string fileName) {
+    return std::thread([=] {loadObject(fileName); });
+}
+
+void objectStorage::bindObjects() {
+    std::map<std::string, std::unique_ptr<Mesh>>::iterator it;
+    for (it = objects.begin(); it != objects.end(); it++) {
+        it->second->initBuffers();
+    };
 }
 
 void objectStorage::readCSV() {
@@ -79,4 +106,8 @@ void objectStorage::readCSV() {
 
 bool objectStorage::isThisTextureLoaded(std::string textureName) {
     return(textures.find(textureName) != textures.end());
+}
+
+bool objectStorage::isThisObjectLoaded(std::string objectName) {
+    return(objects.find(objectName) != objects.end());
 }

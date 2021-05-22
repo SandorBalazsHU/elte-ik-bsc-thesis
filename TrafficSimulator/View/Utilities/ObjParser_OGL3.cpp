@@ -4,17 +4,18 @@
 
 using namespace std;
 
-std::unique_ptr<Mesh> ObjParser::parse(const char* fileName)
+//MODIFYED
+std::unique_ptr<Mesh> ObjParser::parse(const char* fileName, bool parallel)
 {
 	ObjParser theParser;
 
-	theParser.ifs.open(fileName, ios::in|ios::binary);
+	theParser.ifs.open(fileName, ios::in | ios::binary);
 	if (!theParser.ifs)
 		throw(EXC_FILENOTFOUND);
 
 	theParser.mesh = new Mesh();
 
-	while(theParser.skipCommentLine()) 
+	while (theParser.skipCommentLine())
 	{
 		if (false == theParser.processLine())
 			break;
@@ -22,7 +23,7 @@ std::unique_ptr<Mesh> ObjParser::parse(const char* fileName)
 
 	theParser.ifs.close();
 
-	theParser.mesh->initBuffers();
+	if(!parallel) theParser.mesh->initBuffers();
 
 	return std::make_unique<Mesh>(*theParser.mesh);
 }
@@ -30,7 +31,7 @@ std::unique_ptr<Mesh> ObjParser::parse(const char* fileName)
 bool ObjParser::processLine()
 {
 	string line_id;
-	float x, y, z;    
+	float x, y, z;
 
 	if (!(ifs >> line_id))
 		return false;
@@ -45,29 +46,29 @@ bool ObjParser::processLine()
 	}
 	else if ("vn" == line_id) {	// normal data
 		ifs >> x >> y >> z;
-		if(!ifs.good()) {                     // in case it is -1#IND00
+		if (!ifs.good()) {                     // in case it is -1#IND00
 			x = y = z = 0.0;
 			ifs.clear();
 			skipLine();
 		}
 		normals.push_back(glm::vec3(x, y, z));
 	}
-	else if("f" == line_id)	{
+	else if ("f" == line_id) {
 		unsigned int iPosition = 0, iTexCoord = 0, iNormal = 0;
 
-		for( unsigned int iFace = 0; iFace < 3; iFace++ )
+		for (unsigned int iFace = 0; iFace < 3; iFace++)
 		{
 			ifs >> iPosition;
-			if( '/' == ifs.peek() )
+			if ('/' == ifs.peek())
 			{
 				ifs.ignore();
 
-				if( '/' != ifs.peek() )
+				if ('/' != ifs.peek())
 				{
 					ifs >> iTexCoord;
 				}
 
-				if( '/' == ifs.peek() )
+				if ('/' == ifs.peek())
 				{
 					ifs.ignore();
 
@@ -76,7 +77,7 @@ bool ObjParser::processLine()
 				}
 			}
 
-			addIndexedVertex(IndexedVert(iPosition-1, iTexCoord-1, iNormal-1));
+			addIndexedVertex(IndexedVert(iPosition - 1, iTexCoord - 1, iNormal - 1));
 		}
 	}
 	else
@@ -94,19 +95,20 @@ void ObjParser::addIndexedVertex(const IndexedVert& vertex)
 			v.texcoord = texcoords[vertex.vt];
 		if (vertex.vn != -1)
 			v.normal = normals[vertex.vn];
-		
+
 		mesh->addVertex(v);
 		mesh->addIndex(nIndexedVerts++);		// 0 based indices
 		vertexIndices[vertex] = nIndexedVerts;	// but here 1 based, 0 signals "new one"
-	} else {
-		mesh->addIndex(vertexIndices[vertex]-1);
+	}
+	else {
+		mesh->addIndex(vertexIndices[vertex] - 1);
 	}
 }
 
 bool ObjParser::skipCommentLine()
 {
 	char next;
-	while( ifs >> std::skipws >> next ) 
+	while (ifs >> std::skipws >> next)
 	{
 		ifs.putback(next);
 		if ('#' == next)
@@ -121,5 +123,5 @@ void ObjParser::skipLine()
 {
 	char next;
 	ifs >> std::noskipws;
-	while( (ifs >> next) && ('\n' != next) );
+	while ((ifs >> next) && ('\n' != next));
 }
