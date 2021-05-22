@@ -12,8 +12,15 @@ float fpsCounter::fpsLimit = 60.0f;
 
 bool fpsCounter::isLimiterOn = false;
 
+float fpsCounter::currentFPS;
+float fpsCounter::averageFPS;
+Uint32 fpsCounter::limiterCurrentTime;
+Uint32 fpsCounter::currentTime;
+Uint32 fpsCounter::previousTime;
+SDL_atomic_t fpsCounter::atomicFrameCounter;
+
 void fpsCounter::bind() {
-	SDL_AddTimer(1000, &fpsCounter::fpsTimerCallback, NULL);
+	SDL_AddTimer(averageFPSupdateTime, &fpsCounter::fpsTimerCallback, NULL);
 }
 
 void fpsCounter::start() {

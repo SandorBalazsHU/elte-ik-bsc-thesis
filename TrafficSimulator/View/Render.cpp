@@ -1,6 +1,8 @@
 #include "Render.h"
 #include "WorkWindow.h"
 #include "GUI.h"
+#include "fpsCounter.h"
+
 //test
 #include "Utilities/ObjParser_OGL3.h"
 #include <glm/gtx/transform2.hpp>
@@ -23,6 +25,23 @@ void Render::bind(WorkWindow* currentWindow) {
 	window = workingWindow->getWindow();
 	gui = workingWindow->getGUI();
 	test();
+	fpsCounter::bind();
+}
+
+void Render::multisamplingOn() {
+	glEnable(GL_MULTISAMPLE);
+}
+
+void Render::multisamplingOff() {
+	glDisable(GL_MULTISAMPLE);
+}
+
+void Render::vsyncOn() {
+	SDL_GL_SetSwapInterval(1);
+}
+
+void Render::vsyncOff() {
+	SDL_GL_SetSwapInterval(0);
 }
 
 void Render::faceTestOn() {
@@ -47,7 +66,7 @@ void Render::shaderCameraUpdate() {
 
 void Render::setWindowTitle(std::string title) {
 	std::stringstream window_title;
-	window_title << title;
+	window_title << title << " - " << fpsCounter::getCurrentFPS() << " - " << fpsCounter::getAverageFPS();
 	SDL_SetWindowTitle(window, window_title.str().c_str());
 }
 
@@ -86,6 +105,7 @@ void Render::test() {
 }
 
 void Render::render() {
+	fpsCounter::start();
 	faceTestOn();
 	clearScrean();
 	shader->Use();
@@ -100,4 +120,5 @@ void Render::render() {
 	gui->render();
 	rendering();
 	setWindowTitle(workingWindow->getWindowTitle());
+	fpsCounter::stop();
 }

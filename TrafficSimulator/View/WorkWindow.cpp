@@ -56,7 +56,9 @@ int WorkWindow::openGLpreConfig() {
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);		//Depth Buffer on
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);			//Depth Buffer 24
 	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);  //Anti aliasing ON
-	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 4);  //Anti aliasing 4
+	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 16); //Anti aliasing 4
+	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);	//Hardware accelerated
+
 	return 0;
 }
 
@@ -108,6 +110,7 @@ int WorkWindow::glewStart() {
 int WorkWindow::openGLpostConfig() {
 	//VSINC ON
 	SDL_GL_SetSwapInterval(1);
+	//glEnable(GL_MULTISAMPLE);
 
 	//Check OpenGL version
 	int glVersion[2] = { -1, -1 };

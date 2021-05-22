@@ -25,6 +25,10 @@ public:
 	void drawVao(VertexArrayObject& vao, int trianglesNumber);
 	void rendering();
 	void setWindowTitle(std::string title);
+	void vsyncOn();
+	void vsyncOff();
+	void multisamplingOn();
+	void multisamplingOff();
 
 	//test
 	//Texture2D				texture;
