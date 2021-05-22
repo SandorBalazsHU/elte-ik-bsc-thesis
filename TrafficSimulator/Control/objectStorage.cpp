@@ -35,9 +35,16 @@ void objectStorage::load() {
 
             for (size_t j = 3; j <= 7; j++) {
                 std::string fileName = parsedCSV[i][j];
-                if(!isThisTextureLoaded(fileName))
-                threads.push_back(loadTextureParallel(fileName));
+                if(!isThisTextureLoaded(fileName)) threads.push_back(loadTextureParallel(fileName));
             }
+        }
+
+        if (currentType == "object") {
+            std::string fileName = parsedCSV[i][2];
+            if (!isThisObjectLoaded(fileName)) threads.push_back(loadObjectParallel(fileName));
+
+            fileName = parsedCSV[i][3];
+            if (!isThisTextureLoaded(fileName)) threads.push_back(loadTextureParallel(fileName));
         }
     }
 

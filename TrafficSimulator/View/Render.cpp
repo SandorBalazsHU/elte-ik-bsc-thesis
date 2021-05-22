@@ -5,6 +5,8 @@
 
 //test
 #include "Utilities/ObjParser_OGL3.h"
+//#include <glm/glm.hpp>
+//#include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/transform2.hpp>
 
 #include <SDL.h>
@@ -26,6 +28,9 @@ void Render::bind(WorkWindow* currentWindow) {
 	gui = workingWindow->getGUI();
 	test();
 	fpsCounter::bind();
+	void vsyncOff();
+	fpsCounter::fpsLimiterOn();
+	fpsCounter::setFpsLimit(60);
 }
 
 void Render::multisamplingOn() {
@@ -111,6 +116,14 @@ void Render::render() {
 	setTexture(loader.textures["little_car_red_light.png"]);
 	shaderPreDrawingUpdate(glm::translate(glm::vec3(0, 0, 0)), glm::vec4(1, 1, 1, 1));
 	drawMesh(loader.objects["little_car.obj"]);
+
+	setTexture(loader.textures["big_tree.png"]);
+	shaderPreDrawingUpdate(glm::translate(glm::vec3(1.5f, 0, 0)) * glm::scale(glm::vec3(0.1f, 0.1f, 0.1f)), glm::vec4(1, 1, 1, 1));
+	drawMesh(loader.objects["big_tree.obj"]);
+
+	setTexture(loader.textures["desk_square.png"]);
+	shaderPreDrawingUpdate(glm::translate(glm::vec3(0, -0.1f, 0)), glm::vec4(1, 1, 1, 1));
+	drawMesh(loader.objects["desk_square.obj"]);
 
 	shader->Unuse();
 	gui->render();
