@@ -158,6 +158,7 @@
     <ClCompile Include="T:\OGLPack\include\imgui\imgui_draw.cpp" />
     <ClCompile Include="T:\OGLPack\include\imgui\imgui_impl_sdl_gl3.cpp" />
     <ClCompile Include="TrafficSimulator.cpp" />
+    <ClCompile Include="View\fpsCounter.cpp" />
     <ClCompile Include="View\GUI.cpp" />
     <ClCompile Include="View\Object3D.cpp" />
     <ClCompile Include="View\Camera.cpp" />
@@ -182,6 +183,7 @@
     <ClInclude Include="T:\OGLPack\include\imgui\stb_rect_pack.h" />
     <ClInclude Include="T:\OGLPack\include\imgui\stb_textedit.h" />
     <ClInclude Include="T:\OGLPack\include\imgui\stb_truetype.h" />
+    <ClInclude Include="View\fpsCounter.h" />
     <ClInclude Include="View\GUI.h" />
     <ClInclude Include="View\Object3D.h" />
     <ClInclude Include="View\Camera.h" />
