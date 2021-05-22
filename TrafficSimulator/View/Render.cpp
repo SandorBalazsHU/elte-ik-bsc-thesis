@@ -141,6 +141,22 @@ void Render::render() {
 	shaderPreDrawingUpdate(glm::translate(glm::vec3(10, 0, 0)) * glm::scale(glm::vec3(0.4f, 0.4f, 0.4f)), glm::vec4(1, 1, 1, 1));
 	drawMesh(loader.objects["double_family_house.obj"]);
 
+	setTexture(loader.textures["flat_family_house.png"]);
+	shaderPreDrawingUpdate(glm::translate(glm::vec3(10, 0, 5)) * glm::scale(glm::vec3(0.4f, 0.4f, 0.4f)), glm::vec4(1, 1, 1, 1));
+	drawMesh(loader.objects["flat_family_house.obj"]);
+
+	setTexture(loader.textures["high_family_house.png"]);
+	shaderPreDrawingUpdate(glm::translate(glm::vec3(10, 0, 12)) * glm::scale(glm::vec3(0.4f, 0.4f, 0.4f)), glm::vec4(1, 1, 1, 1));
+	drawMesh(loader.objects["high_family_house.obj"]);
+
+	setTexture(loader.textures["high_family_house_02.png"]);
+	shaderPreDrawingUpdate(glm::translate(glm::vec3(5, 0, 12)) * glm::scale(glm::vec3(0.4f, 0.4f, 0.4f)), glm::vec4(1, 1, 1, 1));
+	drawMesh(loader.objects["high_family_house_02.obj"]);
+
+	setTexture(loader.textures["simple_family_house.png"]);
+	shaderPreDrawingUpdate(glm::translate(glm::vec3(0, 0, 12)) * glm::scale(glm::vec3(0.4f, 0.4f, 0.4f)), glm::vec4(1, 1, 1, 1));
+	drawMesh(loader.objects["simple_family_house.obj"]);
+
 	setTexture(loader.textures["desk_square.png"]);
 	shaderPreDrawingUpdate(glm::translate(glm::vec3(0, -0.1f, 0)) * glm::scale(glm::vec3(3.0f, 3.0f, 3.0f)), glm::vec4(1, 1, 1, 1));
 	drawMesh(loader.objects["desk_square.obj"]);

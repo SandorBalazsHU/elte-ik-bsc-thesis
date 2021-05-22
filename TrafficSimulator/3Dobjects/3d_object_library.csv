@@ -9,10 +9,10 @@ Big tree 02;object;big_tree_02.obj;big_tree_02.png;*;*;*;*;0.0f;0.0f;0.0f;0.1f;0
 Round desk;object;desk_round.obj;desk_round.png;*;*;*;*;0.0f;0.0f;0.0f;1.0f;1.0f;1.0f;0.0f;0.0f;0.0f;0.0f;0.0f;0.0f;1.0f
 Square desk;object;desk_square.obj;desk_square.png;*;*;*;*;0.0f;0.0f;0.0f;1.0f;1.0f;1.0f;0.0f;0.0f;0.0f;0.0f;0.0f;0.0f;1.0f
 Double family house;object;double_family_house.obj;double_family_house.png;*;*;*;*;0.0f;0.0f;0.0f;1.0f;1.0f;1.0f;0.0f;0.0f;0.0f;0.0f;0.0f;0.0f;1.0f
-;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;
+Flat family house;object;flat_family_house.obj;flat_family_house.png;*;*;*;*;0.0f;0.0f;0.0f;1.0f;1.0f;1.0f;0.0f;0.0f;0.0f;0.0f;0.0f;0.0f;1.0f
+High family house;object;high_family_house.obj;high_family_house.png;*;*;*;*;0.0f;0.0f;0.0f;1.0f;1.0f;1.0f;0.0f;0.0f;0.0f;0.0f;0.0f;0.0f;1.0f
+High family house 02;object;high_family_house_02.obj;high_family_house_02.png;*;*;*;*;0.0f;0.0f;0.0f;1.0f;1.0f;1.0f;0.0f;0.0f;0.0f;0.0f;0.0f;0.0f;1.0f
+Simple family house;object;simple_family_house.obj;simple_family_house.png;*;*;*;*;0.0f;0.0f;0.0f;1.0f;1.0f;1.0f;0.0f;0.0f;0.0f;0.0f;0.0f;0.0f;1.0f
 ;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;
