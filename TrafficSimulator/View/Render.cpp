@@ -28,9 +28,9 @@ void Render::bind(WorkWindow* currentWindow) {
 	gui = workingWindow->getGUI();
 	test();
 	fpsCounter::bind();
-	void vsyncOff();
+	/*void vsyncOff();
 	fpsCounter::fpsLimiterOn();
-	fpsCounter::setFpsLimit(60);
+	fpsCounter::setFpsLimit(60);*/
 }
 
 void Render::multisamplingOn() {
@@ -117,12 +117,32 @@ void Render::render() {
 	shaderPreDrawingUpdate(glm::translate(glm::vec3(0, 0, 0)), glm::vec4(1, 1, 1, 1));
 	drawMesh(loader.objects["little_car.obj"]);
 
-	setTexture(loader.textures["big_tree.png"]);
-	shaderPreDrawingUpdate(glm::translate(glm::vec3(1.5f, 0, 0)) * glm::scale(glm::vec3(0.1f, 0.1f, 0.1f)), glm::vec4(1, 1, 1, 1));
-	drawMesh(loader.objects["big_tree.obj"]);
+	setTexture(loader.textures["medium_car_yellow_base.png"]);
+	shaderPreDrawingUpdate(glm::translate(glm::vec3(0, 0, 2)), glm::vec4(1, 1, 1, 1));
+	drawMesh(loader.objects["medium_car.obj"]);
+
+	setTexture(loader.textures["large_car_blue_base.png"]);
+	shaderPreDrawingUpdate(glm::translate(glm::vec3(0.3f, 0, 4)), glm::vec4(1, 1, 1, 1));
+	drawMesh(loader.objects["large_car.obj"]);
+
+	setTexture(loader.textures["bus_yellow_base.png"]);
+	shaderPreDrawingUpdate(glm::translate(glm::vec3(0.2f, 0, 6)), glm::vec4(1, 1, 1, 1));
+	drawMesh(loader.objects["bus.obj"]);
+
+	setTexture(loader.textures["big_tree_01.png"]);
+	shaderPreDrawingUpdate(glm::translate(glm::vec3(2, 0, 0)) * glm::scale(glm::vec3(0.1f, 0.1f, 0.1f)), glm::vec4(1, 1, 1, 1));
+	drawMesh(loader.objects["big_tree_01.obj"]);
+
+	setTexture(loader.textures["big_tree_02.png"]);
+	shaderPreDrawingUpdate(glm::translate(glm::vec3(-2, 0, 0)) * glm::scale(glm::vec3(0.1f, 0.1f, 0.1f)), glm::vec4(1, 1, 1, 1));
+	drawMesh(loader.objects["big_tree_02.obj"]);
+
+	setTexture(loader.textures["double_family_house.png"]);
+	shaderPreDrawingUpdate(glm::translate(glm::vec3(10, 0, 0)) * glm::scale(glm::vec3(0.4f, 0.4f, 0.4f)), glm::vec4(1, 1, 1, 1));
+	drawMesh(loader.objects["double_family_house.obj"]);
 
 	setTexture(loader.textures["desk_square.png"]);
-	shaderPreDrawingUpdate(glm::translate(glm::vec3(0, -0.1f, 0)), glm::vec4(1, 1, 1, 1));
+	shaderPreDrawingUpdate(glm::translate(glm::vec3(0, -0.1f, 0)) * glm::scale(glm::vec3(3.0f, 3.0f, 3.0f)), glm::vec4(1, 1, 1, 1));
 	drawMesh(loader.objects["desk_square.obj"]);
 
 	shader->Unuse();
