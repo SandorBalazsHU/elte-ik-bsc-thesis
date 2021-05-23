@@ -1,16 +1,16 @@
-#include "objectStorage.h"
+#include "ObjectStorage.h"
 
 //#include <iostream>
 #include <sstream>
 #include <fstream>
 
-objectStorage::objectStorage(void) {
+ObjectStorage::ObjectStorage(void) {
 }
 
-objectStorage::~objectStorage(void) {
+ObjectStorage::~ObjectStorage(void) {
 }
 
-void objectStorage::load() {
+void ObjectStorage::load() {
     readCSV();
     std::vector<std::thread> threads;
 
@@ -28,6 +28,14 @@ void objectStorage::load() {
             if (!isThisTextureLoaded(fileName)) threads.push_back(loadTextureParallel(fileName));
         }
 
+        if (currentType == "object") {
+            std::string fileName = parsedCSV[i][2];
+            if (!isThisObjectLoaded(fileName)) threads.push_back(loadObjectParallel(fileName));
+
+            fileName = parsedCSV[i][3];
+            if (!isThisTextureLoaded(fileName)) threads.push_back(loadTextureParallel(fileName));
+        }
+
         if (currentType == "vehicle") {
 
             std::string fileName = parsedCSV[i][2];
@@ -35,16 +43,8 @@ void objectStorage::load() {
 
             for (size_t j = 3; j <= 7; j++) {
                 std::string fileName = parsedCSV[i][j];
-                if(!isThisTextureLoaded(fileName)) threads.push_back(loadTextureParallel(fileName));
+                if (!isThisTextureLoaded(fileName)) threads.push_back(loadTextureParallel(fileName));
             }
-        }
-
-        if (currentType == "object") {
-            std::string fileName = parsedCSV[i][2];
-            if (!isThisObjectLoaded(fileName)) threads.push_back(loadObjectParallel(fileName));
-
-            fileName = parsedCSV[i][3];
-            if (!isThisTextureLoaded(fileName)) threads.push_back(loadTextureParallel(fileName));
         }
     }
 
@@ -55,43 +55,43 @@ void objectStorage::load() {
     bindObjects();
 }
 
-void objectStorage::loadTexture(std::string fileName) {
+void ObjectStorage::loadTexture(std::string fileName) {
     texturesMutex.lock();
     Texture2D& texture = textures[fileName];
     texturesMutex.unlock();
     texture.FromFileParallel(textureFolder + fileName);
 }
 
-std::thread objectStorage::loadTextureParallel(std::string fileName) {
+std::thread ObjectStorage::loadTextureParallel(std::string fileName) {
     return std::thread([=]{loadTexture(fileName);});
 }
 
-void objectStorage::bindTextures() {
+void ObjectStorage::bindTextures() {
     std::map<std::string, Texture2D>::iterator it;
     for (it = textures.begin(); it != textures.end(); it++) {
         it->second.bindTexture();
     }
 }
 
-void objectStorage::loadObject(std::string fileName) {
+void ObjectStorage::loadObject(std::string fileName) {
     objectsMutex.lock();
     std::unique_ptr<Mesh>& object = objects[fileName];
     objectsMutex.unlock();
     object = ObjParser::parse((modelFolder + fileName).c_str(), true);
 }
 
-std::thread objectStorage::loadObjectParallel(std::string fileName) {
+std::thread ObjectStorage::loadObjectParallel(std::string fileName) {
     return std::thread([=] {loadObject(fileName); });
 }
 
-void objectStorage::bindObjects() {
+void ObjectStorage::bindObjects() {
     std::map<std::string, std::unique_ptr<Mesh>>::iterator it;
     for (it = objects.begin(); it != objects.end(); it++) {
         it->second->initBuffers();
     };
 }
 
-void objectStorage::readCSV() {
+void ObjectStorage::readCSV() {
     std::ifstream file(configFile);
     std::string line;
     bool firstLineSkip = true;
@@ -111,10 +111,10 @@ void objectStorage::readCSV() {
 	file.close();
 }
 
-bool objectStorage::isThisTextureLoaded(std::string textureName) {
+bool ObjectStorage::isThisTextureLoaded(std::string textureName) {
     return(textures.find(textureName) != textures.end());
 }
 
-bool objectStorage::isThisObjectLoaded(std::string objectName) {
+bool ObjectStorage::isThisObjectLoaded(std::string objectName) {
     return(objects.find(objectName) != objects.end());
 }

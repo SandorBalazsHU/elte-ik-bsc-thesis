@@ -152,7 +152,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Control\Logger.cpp" />
-    <ClCompile Include="Control\objectStorage.cpp" />
     <ClCompile Include="T:\OGLPack\include\imgui\imgui.cpp" />
     <ClCompile Include="T:\OGLPack\include\imgui\imgui_demo.cpp" />
     <ClCompile Include="T:\OGLPack\include\imgui\imgui_draw.cpp" />
@@ -160,10 +159,11 @@
     <ClCompile Include="TrafficSimulator.cpp" />
     <ClCompile Include="View\fpsCounter.cpp" />
     <ClCompile Include="View\GUI.cpp" />
-    <ClCompile Include="View\Object3D.cpp" />
     <ClCompile Include="View\Camera.cpp" />
     <ClCompile Include="View\EventListener.cpp" />
-    <ClCompile Include="View\Object3Dvehicle.cpp" />
+    <ClCompile Include="View\Objects\Object3D.cpp" />
+    <ClCompile Include="View\Objects\Object3Dvehicle.cpp" />
+    <ClCompile Include="View\Objects\ObjectStorage.cpp" />
     <ClCompile Include="View\Render.cpp" />
     <ClCompile Include="View\Utilities\GLconversions.cpp" />
     <ClCompile Include="View\Utilities\Mesh_OGL3.cpp" />
@@ -175,7 +175,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Control\Logger.h" />
-    <ClInclude Include="Control\objectStorage.h" />
     <ClInclude Include="T:\OGLPack\include\imgui\imconfig.h" />
     <ClInclude Include="T:\OGLPack\include\imgui\imgui.h" />
     <ClInclude Include="T:\OGLPack\include\imgui\imgui_impl_sdl_gl3.h" />
@@ -185,10 +184,11 @@
     <ClInclude Include="T:\OGLPack\include\imgui\stb_truetype.h" />
     <ClInclude Include="View\fpsCounter.h" />
     <ClInclude Include="View\GUI.h" />
-    <ClInclude Include="View\Object3D.h" />
     <ClInclude Include="View\Camera.h" />
     <ClInclude Include="View\EventListener.h" />
-    <ClInclude Include="View\Object3Dvehicle.h" />
+    <ClInclude Include="View\Objects\Object3D.h" />
+    <ClInclude Include="View\Objects\Object3Dvehicle.h" />
+    <ClInclude Include="View\Objects\ObjectStorage.h" />
     <ClInclude Include="View\Render.h" />
     <ClInclude Include="View\Utilities\BufferObject.h" />
     <ClInclude Include="View\Utilities\GLconversions.hpp" />

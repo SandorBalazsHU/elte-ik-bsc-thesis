@@ -28,6 +28,9 @@
     <Filter Include="Source Files\Control">
       <UniqueIdentifier>{c5e93524-0e5b-4005-9b0c-950377bab2a4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\View\Objects">
+      <UniqueIdentifier>{c064b6c1-4119-4ff8-b0fe-10d2dc44f53e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TrafficSimulator.cpp">
@@ -75,15 +78,6 @@
     <ClCompile Include="View\EventListener.cpp">
       <Filter>Source Files\View</Filter>
     </ClCompile>
-    <ClCompile Include="Control\objectStorage.cpp">
-      <Filter>Source Files\Control</Filter>
-    </ClCompile>
-    <ClCompile Include="View\Object3D.cpp">
-      <Filter>Source Files\View</Filter>
-    </ClCompile>
-    <ClCompile Include="View\Object3Dvehicle.cpp">
-      <Filter>Source Files\View</Filter>
-    </ClCompile>
     <ClCompile Include="View\Render.cpp">
       <Filter>Source Files\View</Filter>
     </ClCompile>
@@ -92,6 +86,15 @@
     </ClCompile>
     <ClCompile Include="View\fpsCounter.cpp">
       <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="View\Objects\ObjectStorage.cpp">
+      <Filter>Source Files\View\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="View\Objects\Object3D.cpp">
+      <Filter>Source Files\View\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="View\Objects\Object3Dvehicle.cpp">
+      <Filter>Source Files\View\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -152,15 +155,6 @@
     <ClInclude Include="View\EventListener.h">
       <Filter>Source Files\View</Filter>
     </ClInclude>
-    <ClInclude Include="Control\objectStorage.h">
-      <Filter>Source Files\Control</Filter>
-    </ClInclude>
-    <ClInclude Include="View\Object3D.h">
-      <Filter>Source Files\View</Filter>
-    </ClInclude>
-    <ClInclude Include="View\Object3Dvehicle.h">
-      <Filter>Source Files\View</Filter>
-    </ClInclude>
     <ClInclude Include="View\Render.h">
       <Filter>Source Files\View</Filter>
     </ClInclude>
@@ -169,6 +163,15 @@
     </ClInclude>
     <ClInclude Include="View\fpsCounter.h">
       <Filter>Source Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="View\Objects\Object3Dvehicle.h">
+      <Filter>Source Files\View\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="View\Objects\ObjectStorage.h">
+      <Filter>Source Files\View\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="View\Objects\Object3D.h">
+      <Filter>Source Files\View\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

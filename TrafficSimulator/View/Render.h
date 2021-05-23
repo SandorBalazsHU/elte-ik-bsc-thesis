@@ -7,7 +7,7 @@ class GUI;
 #include "Utilities/TextureObject.h"
 #include "Utilities/Mesh_OGL3.h"
 #include "Utilities/VertexArrayObject.h"
-#include "../Control/objectStorage.h"
+#include "Objects/ObjectStorage.h"
 
 class Render {
 public:
@@ -32,7 +32,7 @@ public:
 	void setWindowIcon(SDL_Surface* windowIcon);
 
 	//test
-	objectStorage			loader;
+	ObjectStorage			loader;
 	void test();
 
 private:
