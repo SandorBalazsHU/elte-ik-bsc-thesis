@@ -49,6 +49,14 @@ void Render::vsyncOff() {
 	SDL_GL_SetSwapInterval(0);
 }
 
+void  Render::wireframeOn() {
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+}
+
+void  Render::wireframeOff() {
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+}
+
 void Render::faceTestOn() {
 	glEnable(GL_CULL_FACE);
 }
@@ -105,6 +113,7 @@ void Render::test() {
 	setWindowIcon(loader.getWindowIcon());
 	/*glm::vec4 vector(1,2,3,4);
 	std::cout << vector.x << vector.y << vector.z << vector.w << std::endl;*/
+	wireframeOn();
 }
 
 void Render::render() {
@@ -155,12 +164,16 @@ void Render::render() {
 	shaderPreDrawingUpdate(glm::translate(glm::vec3(5, 0, 12)) * glm::scale(glm::vec3(0.4f, 0.4f, 0.4f)), glm::vec4(1, 1, 1, 1));
 	drawMesh(loader.getObject("high_family_house_02.obj"));
 
-	setTexture(loader.getTexture("simple_family__house.png"));
+	setTexture(loader.getTexture("simple_family_house.png"));
 	shaderPreDrawingUpdate(glm::translate(glm::vec3(0, 0, 12)) * glm::scale(glm::vec3(0.4f, 0.4f, 0.4f)), glm::vec4(1, 1, 1, 1));
-	drawMesh(loader.getObject("simple_family__house.obj"));
+	drawMesh(loader.getObject("simple_family_house.obj"));
+
+	setTexture(loader.getTexture("***"));
+	shaderPreDrawingUpdate(glm::translate(glm::vec3(0, 0, 8)) * glm::scale(glm::vec3(0.4f, 0.4f, 0.4f)), glm::vec4(1, 1, 1, 1));
+	drawMesh(loader.getObject("***"));
 
 	setTexture(loader.getTexture("desk_square.png"));
-	shaderPreDrawingUpdate(glm::translate(glm::vec3(0, -0.1f, 0)) * glm::scale(glm::vec3(3.0f, 3.0f, 3.0f)), glm::vec4(1, 1, 1, 1));
+	shaderPreDrawingUpdate(glm::translate(glm::vec3(0, -0.1f, 0)) * glm::scale(glm::vec3(4.0f, 4.0f, 4.0f)), glm::vec4(1, 1, 1, 1));
 	drawMesh(loader.getObject("desk_square.obj"));
 
 	shader->Unuse();

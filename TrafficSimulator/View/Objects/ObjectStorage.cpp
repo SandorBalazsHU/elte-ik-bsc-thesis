@@ -32,8 +32,15 @@ void ObjectStorage::load() {
             std::string fileName = parsedCSV[i][2];
             if (!isThisObjectLoaded(fileName)) threads.push_back(loadObjectParallel(fileName));
 
-            fileName = parsedCSV[i][3];
+           /* fileName = parsedCSV[i][3];
+            if (!isThisTextureLoaded(fileName)) threads.push_back(loadTextureParallel(fileName));*/
+
+            fileName = parsedCSV[i][4];
             if (!isThisTextureLoaded(fileName)) threads.push_back(loadTextureParallel(fileName));
+
+            /*Object3D(parsedCSV[i][0], parsedCSV[i][1], parsedCSV[i][2], parsedCSV[i][3], std::string iconID,
+                glm::vec3 initPosition, glm::vec3 initScale, glm::vec4 initRotation,
+                glm::vec4 color, glm::vec4	hitSphere, ObjectStorage * objectStorage);*/
         }
 
         if (currentType == "vehicle") {
@@ -41,7 +48,7 @@ void ObjectStorage::load() {
             std::string fileName = parsedCSV[i][2];
             if (!isThisObjectLoaded(fileName)) threads.push_back(loadObjectParallel(fileName));
 
-            for (size_t j = 3; j <= 7; j++) {
+            for (size_t j = 4; j <= 8; j++) {
                 std::string fileName = parsedCSV[i][j];
                 if (!isThisTextureLoaded(fileName)) threads.push_back(loadTextureParallel(fileName));
             }

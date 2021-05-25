@@ -31,6 +31,9 @@
     <Filter Include="Source Files\View\Objects">
       <UniqueIdentifier>{c064b6c1-4119-4ff8-b0fe-10d2dc44f53e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Model">
+      <UniqueIdentifier>{dcd220b4-f2e4-44a1-adda-45d258c5e90d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TrafficSimulator.cpp">
@@ -95,6 +98,12 @@
     </ClCompile>
     <ClCompile Include="View\Objects\Object3Dvehicle.cpp">
       <Filter>Source Files\View\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\Dijkstra.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\reverseMap.cpp">
+      <Filter>Source Files\Model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -172,6 +181,12 @@
     </ClInclude>
     <ClInclude Include="View\Objects\Object3D.h">
       <Filter>Source Files\View\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\Dijkstra.h">
+      <Filter>Source Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\reverseMap.h">
+      <Filter>Source Files\Model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

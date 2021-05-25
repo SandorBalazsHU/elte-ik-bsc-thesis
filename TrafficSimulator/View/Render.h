@@ -29,6 +29,8 @@ public:
 	void vsyncOff();
 	void multisamplingOn();
 	void multisamplingOff();
+	void wireframeOn();
+	void wireframeOff();
 	void setWindowIcon(SDL_Surface* windowIcon);
 
 	//test
