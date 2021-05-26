@@ -118,6 +118,16 @@ void Render::test() {
 
 	Object3D asztal = objectStorage->getObject3D(5);
 	renderableObjects.push_back(asztal);
+
+	/*std::map<std::string, Texture2D>::iterator it = objectStorage->textures.begin();
+	while (it != objectStorage->textures.end()) {
+		std::cout << it->first << std::endl;
+		it++;
+	}*/
+}
+
+void Render::addObject(int id) {
+	renderableObjects.push_back(objectStorage->getObject3D(id));
 }
 
 void Render::renderScrean() {

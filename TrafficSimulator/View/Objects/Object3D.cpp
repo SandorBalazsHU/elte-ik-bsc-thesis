@@ -3,9 +3,10 @@
 #include <glm/gtx/transform2.hpp>
 #include <iostream>
 
-Object3D::Object3D(std::string name, std::string type, std::string meshID, std::string textureID, std::string iconID,
+Object3D::Object3D(int id, std::string name, std::string type, std::string meshID, std::string textureID, std::string iconID,
 	glm::vec3 initPosition, glm::vec3 initScale, glm::vec4 initRotation,
 	glm::vec4 color, glm::vec4 hitSphere, glm::vec4 moveSphere, ObjectStorage* objectStorage) {
+	this->id = id;
 	this->name = name;
 	this->type = type;
 	this->meshID = meshID;
@@ -138,7 +139,7 @@ glm::vec4 Object3D::getHitSphere() {
 }
 
 Object3D Object3D::copy() {
-	return Object3D(this->name, this->type, this->meshID, this->textureID, this->iconID,
+	return Object3D(this->id, this->name, this->type, this->meshID, this->textureID, this->iconID,
 		this->position, this->scale, this->rotation,
 		this->color, this->hitSphere, this->moveSphere, this->objectStorage);
 }

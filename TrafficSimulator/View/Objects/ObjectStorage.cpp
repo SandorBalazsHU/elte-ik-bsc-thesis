@@ -64,7 +64,7 @@ void ObjectStorage::addToObjects(int csvID) {
     std::string type             = parsedCSV[csvID][2];
     std::string meshID           = parsedCSV[csvID][3];
     std::string textureID        = parsedCSV[csvID][5];
-    std::string iconID           = parsedCSV[csvID][4];
+    std::string iconID           = miniatureFolder + parsedCSV[csvID][4];
     std::string lightTexture     = parsedCSV[csvID][6];
     std::string breakTexture     = parsedCSV[csvID][7];
     std::string rightTexture     = parsedCSV[csvID][8];
@@ -77,7 +77,7 @@ void ObjectStorage::addToObjects(int csvID) {
     glm::vec4 moveSphere         = glm::vec4(std::stof(parsedCSV[csvID][24]), std::stof(parsedCSV[csvID][25]), std::stof(parsedCSV[csvID][26]), std::stof(parsedCSV[csvID][27]));
     ObjectStorage* objectStorage = this;
     if (type == "object") {
-        Object3D newObject3D(name, type, meshID, textureID, iconID, initPosition, initScale, initRotation, color, hitSphere, moveSphere, objectStorage);
+        Object3D newObject3D(id, name, type, meshID, textureID, iconID, initPosition, initScale, initRotation, color, hitSphere, moveSphere, objectStorage);
         object3Ds.insert(std::pair<int, Object3D>(id, newObject3D));
     }
 }

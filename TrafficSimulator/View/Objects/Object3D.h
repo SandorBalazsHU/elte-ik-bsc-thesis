@@ -9,7 +9,7 @@ class ObjectStorage;
 class Object3D {
 	public:
 		Object3D() {}
-		Object3D(std::string name, std::string type, std::string meshID, std::string textureID, std::string iconID,
+		Object3D(int id, std::string name, std::string type, std::string meshID, std::string textureID, std::string iconID,
 			glm::vec3 initPosition, glm::vec3 initScale, glm::vec4 initRotation,
 			glm::vec4 color, glm::vec4	hitSphere, glm::vec4 moveSphere, ObjectStorage* objectStorage);
 		~Object3D(void) {}
@@ -46,6 +46,7 @@ class Object3D {
 
 	protected:
 		ObjectStorage*			objectStorage;
+		int 					id;
 		std::string				name;
 		std::string				type;
 		std::string				meshID;

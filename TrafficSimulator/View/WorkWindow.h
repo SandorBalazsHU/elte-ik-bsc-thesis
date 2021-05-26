@@ -44,6 +44,10 @@ public:
 		return &objectStorage;
 	}
 
+	Render* getRender() {
+		return &render;
+	}
+
 private:
 	const char* windowDefTitle = "Traffic Simulator";
 	const int windowDefSizeX = 640;

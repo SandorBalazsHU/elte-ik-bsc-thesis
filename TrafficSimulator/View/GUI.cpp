@@ -1,5 +1,6 @@
 #include "GUI.h"
 #include "WorkWindow.h"
+#include "Render.h"
 #include "fpsCounter.h"
 #include <sstream>
 
@@ -28,6 +29,7 @@ void GUI::bind(WorkWindow* currentWindow) {
 	workingWindow = currentWindow;
 	window = currentWindow->getWindow();
 	objectStorage = workingWindow->getObjectStorage();
+	windowRender = currentWindow->getRender();
 }
 
 void GUI::eventHandler(SDL_Event* event) {
@@ -100,12 +102,62 @@ void GUI::loadingBar() {
 ;
 	float percent = ((float) objectStorage->getLoadingState()) / ((float)objectStorage->getLoadingStateMax());
 
-	std::ostringstream ss;
+	/*std::ostringstream ss;
 	ss << "Loading: " << objectStorage->getLoadingState() << "/" << objectStorage->getLoadingStateMax() << " " << percent;
-	ImGui::Text(ss.str().c_str());
+	ImGui::Text(ss.str().c_str());*/
 
 	ImGui::ProgressBar(percent, ImVec2(0.0f, 0.0f));
 }
+
+
+static void addNewItemWindow(bool* p_open) {
+	/*ImGui::SetNextWindowSize(ImVec2(500, 440), ImGuiCond_FirstUseEver);
+	if (ImGui::Begin("Example: Layout", p_open, ImGuiWindowFlags_MenuBar)) {
+		if (ImGui::BeginMenuBar()) {
+			if (ImGui::BeginMenu("File")) {
+				if (ImGui::MenuItem("Close")) *p_open = false;
+				ImGui::EndMenu();
+			}
+			ImGui::EndMenuBar();
+		}
+
+		// left
+		static int selected = 0;
+		ImGui::BeginChild("left pane", ImVec2(150, 0), true);
+		for (int i = 0; i < 100; i++) {
+			char label[128];
+			sprintf(label, "MyObject %d", i);
+			if (ImGui::Selectable(label, selected == i))
+				selected = i;
+		}
+		ImGui::EndChild();
+		ImGui::SameLine();
+
+		// right
+		ImGui::BeginGroup();
+		ImGui::BeginChild("item view", ImVec2(0, -ImGui::GetItemsLineHeightWithSpacing())); // Leave room for 1 line below us
+		ImGui::Text("MyObject: %d", selected);
+		ImGui::Separator();
+		ImGui::TextWrapped("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ");
+		ImGui::EndChild();
+		ImGui::BeginChild("buttons");
+		if (ImGui::Button("Revert")) {}
+		ImGui::SameLine();
+		if (ImGui::Button("Save")) {}
+		ImGui::EndChild();
+		ImGui::EndGroup();
+	}
+	ImGui::End();*/
+}
+
+void GUI::itemList() {
+	std::map<int, Object3D>::iterator it = objectStorage->object3Ds.begin();
+	while (it != objectStorage->object3Ds.end()) {
+		if (ImGui::ImageButton((void*)(intptr_t)it->second.getIcon(), ImVec2(100, 100))) windowRender->addObject(it->first);
+		it++;
+	}
+}
+
 
 void GUI::draw() {
 	mainMenuBar();
@@ -114,9 +166,10 @@ void GUI::draw() {
 	if (ImGui::Begin("Traffic Simulation")) {
 		//ImGui::Text("Traffic Simulation");
 		ImGui::Text("By: Sandor Balazs - AZA6NL");
-		loadingBar();
-		fpsGraph();
-		styleTab();
+		//loadingBar();
+		//fpsGraph();
+		//styleTab();
+		itemList();
 	}
 	ImGui::End();
 }

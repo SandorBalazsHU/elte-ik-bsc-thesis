@@ -32,6 +32,7 @@ public:
 	void wireframeOn();
 	void wireframeOff();
 	void setWindowIcon(SDL_Surface* windowIcon);
+	void addObject(int id);
 
 private:
 	WorkWindow* workingWindow;

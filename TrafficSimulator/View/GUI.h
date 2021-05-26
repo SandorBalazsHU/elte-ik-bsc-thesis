@@ -1,5 +1,6 @@
 #pragma once
 class WorkWindow;
+class Render;
 
 #include <SDL.h>
 #include "imgui\imgui.h"
@@ -22,10 +23,13 @@ public:
 private:
 	WorkWindow* workingWindow;
 	SDL_Window* window;
+	Render* windowRender;
 	ObjectStorage* objectStorage;
 
 	void styleTab();
 	void mainMenuBar();
 	void fpsGraph();
 	void loadingBar();
+	static void addNewItemWindow(bool* p_open);
+	void itemList();
 };
