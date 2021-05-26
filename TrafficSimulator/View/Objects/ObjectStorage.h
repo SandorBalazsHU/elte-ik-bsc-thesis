@@ -26,9 +26,9 @@ public:
 		}
 	}
 
-	std::unique_ptr<Mesh>& getObject(std::string textureName) {
-		if (isThisObjectLoaded(textureName)) {
-			return objects[textureName];
+	std::unique_ptr<Mesh>& getMesh(std::string meshName) {
+		if (isThisObjectLoaded(meshName)) {
+			return objects[meshName];
 		}
 		else {
 			return objects[defaultObject];
@@ -51,11 +51,22 @@ public:
 		return loadingStateMax;
 	}
 
+	Object3D getObject3D(int object3Did) {
+		auto object3D = object3Ds.find(object3Did);
+		if (object3D == object3Ds.end()) {
+			std::cout << "AJJJAJJJ!" << std::endl;
+		} else {
+
+		}
+		return object3D->second.copy();
+	}
+
 private:
 	const std::string defaultTexture = "default.png";
 	const std::string defaultObject = "sphere_mark.obj";
 	const std::string configFile = "3Dobjects/3d_object_library.csv";
 	const std::string textureFolder = "3Dobjects/textures/";
+	const std::string miniatureFolder = "miniatures/";
 	const std::string modelFolder = "3Dobjects/models/";
 
 	bool loaded = false;
@@ -88,6 +99,7 @@ private:
 
 	std::map<std::string, VertexArrayObject> generatedObjects;
 
-	std::map<std::string, Object3D> Object3Ds;
+	std::map<int, Object3D> object3Ds;
+	void addToObjects(int csvID);
 
 };

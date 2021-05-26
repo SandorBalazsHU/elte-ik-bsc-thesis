@@ -33,9 +33,6 @@ public:
 	void wireframeOff();
 	void setWindowIcon(SDL_Surface* windowIcon);
 
-	//test
-	void test();
-
 private:
 	WorkWindow* workingWindow;
 	SDL_Window* window;
@@ -43,6 +40,11 @@ private:
 	ProgramObject* shader;
 	GUI* gui;
 	ObjectStorage* objectStorage;
+	std::vector<Object3D> renderableObjects;
+
+	//test
+	void test();
+	bool onece = true;
 
 	void renderScrean();
 };

@@ -1,20 +1,22 @@
 #include "Object3D.h"
 #include "ObjectStorage.h"
 #include <glm/gtx/transform2.hpp>
+#include <iostream>
 
 Object3D::Object3D(std::string name, std::string type, std::string meshID, std::string textureID, std::string iconID,
 	glm::vec3 initPosition, glm::vec3 initScale, glm::vec4 initRotation,
-	glm::vec4 color, glm::vec4	hitSphere, ObjectStorage* objectStorage) {
+	glm::vec4 color, glm::vec4 hitSphere, glm::vec4 moveSphere, ObjectStorage* objectStorage) {
 	this->name = name;
 	this->type = type;
 	this->meshID = meshID;
 	this->textureID = textureID;
 	this->iconID = iconID;
-	this->initPosition = initPosition;
-	this->initScale = initScale;
-	this->initRotation = initRotation;
+	this->position = initPosition;
+	this->scale = initScale;
+	this->rotation = initRotation;
 	this->color = color;
 	this->hitSphere = hitSphere;
+	this->moveSphere = moveSphere;
 	this->objectStorage = objectStorage;
 }
 
@@ -30,43 +32,43 @@ void Object3D::setIconID(std::string iconID) {
 	this->iconID = iconID;
 }
 
-void Object3D::setPosition(glm::vec3& position) {
+void Object3D::setPosition(glm::vec3 position) {
 	this->position = position;
 }
-void Object3D::setRotation(glm::vec4& rotation) {
+void Object3D::setRotation(glm::vec4 rotation) {
 	this->rotation = rotation;
 }
 
-void Object3D::setScale(glm::vec3& scale) {
+void Object3D::setScale(glm::vec3 scale) {
 	this->scale = scale;
 }
 
-void Object3D::move(glm::vec3& move) {
+void Object3D::move(glm::vec3 move) {
 	this->position += move;
 }
-void Object3D::rotateLeft(float& rotateLeft) {
+void Object3D::rotateLeft(float rotateLeft) {
 	this->rotation += glm::vec4(rotateLeft, 0, 0, 0);
 }
 
-void Object3D::rotateRight(float& rotateRight) {
+void Object3D::rotateRight(float rotateRight) {
 	this->rotation += glm::vec4(-rotateRight, 0, 0, 0);
 }
-void Object3D::setRGBAcolor(glm::vec4& RGBAcolor) {
+void Object3D::setRGBAcolor(glm::vec4 RGBAcolor) {
 	this->color = RGBAcolor;
 }
 
-void Object3D::setRGBcolor(glm::vec3& RGBcolor) {
+void Object3D::setRGBcolor(glm::vec3 RGBcolor) {
 	this->color.x = RGBcolor.x;
 	this->color.y = RGBcolor.y;
 	this->color.z = RGBcolor.z;
 }
 
-void Object3D::setOpacity(float& opacity) {
+void Object3D::setOpacity(float opacity) {
 	this->color.w = opacity;
 }
 
 std::unique_ptr<Mesh>& Object3D::getMesh() {
-	return objectStorage->getObject(this->meshID);
+	return objectStorage->getMesh(this->meshID);
 }
 
 Texture2D& Object3D::getTexture() {
@@ -122,11 +124,22 @@ float Object3D::getOpacity() {
 }
 
 glm::mat4 Object3D::getWorldMatrix() {
+	//std::cout << this->scale.x << " " << this->scale.y << " " << this->scale.z << std::endl;
 	return glm::translate(this->position)
-	* glm::rotate(this->getRotationInRadian(), this->getRotationVector())
+	//* glm::rotate(this->getRotationInRadian(), this->getRotationVector())
 	* glm::scale(this->scale);
 }
 
 glm::vec4 Object3D::getHitSphere() {
-	return this->hitSphere;
+	glm::vec4 sphere = this->hitSphere;
+	sphere.x += this->position.x;
+	sphere.y += this->position.y;
+	sphere.z += this->position.z;
+	return sphere;
+}
+
+Object3D Object3D::copy() {
+	return Object3D(this->name, this->type, this->meshID, this->textureID, this->iconID,
+		this->position, this->scale, this->rotation,
+		this->color, this->hitSphere, this->moveSphere, this->objectStorage);
 }

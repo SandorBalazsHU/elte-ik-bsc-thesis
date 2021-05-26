@@ -1,27 +1,28 @@
-Name;Type;Main object;Icon;Base texture;light texture;break texture;right texture;left texture;initPosition;;;initScale;;;initRotation;;;hitSpherePosition;;;hitSphereSize;moveSpherePosition;;;moveSphereSize
-Icon;icon;app_icon.png;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*
-Default texture;texture;default.png;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*
-Road texture;texture;road.png;road_mini.png;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*
-Logo;texture;app_logo.png;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*
-Mark sphere;object;sphere_mark.obj;sphere_mark_mini.png;white.png;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*
-Big tree 01;object;big_tree_01.obj;big_tree_01_mini.png;big_tree_01.png;*;*;*;*;0.0;0.0;0.0;0.1;0.1;0.1;0.0;0.0;0.0;0.0;0.0;0.0;1.0;0.0;0.0;0.0;1.0
-Big tree 02;object;big_tree_02.obj;big_tree_02_mini.png;big_tree_02.png;*;*;*;*;0.0;0.0;0.0;0.1;0.1;0.1;0.0;0.0;0.0;0.0;0.0;0.0;1.0;0.0;0.0;0.0;1.0
-Round desk;object;desk_round.obj;desk_round_mini.png;desk_round.png;*;*;*;*;0.0;-0.1;0.0;3.0;3.0;3.0;0.0;0.0;0.0;0.0;0.0;0.0;1.0;0.0;0.0;0.0;1.0
-Square desk;object;desk_square.obj;desk_square_mini.png;desk_square.png;*;*;*;*;0.0;-0.1;0.0;5.0;5.0;5.0;5.0;0.0;0.0;0.0;0.0;0.0;1.0;0.0;0.0;0.0;1.0
-Double family house;object;double_family_house.obj;double_family_house_mini.png;double_family_house.png;*;*;*;*;0.0;0.0;0.0;0.4;0.5;0.6;0.0;0.0;0.0;0.0;0.0;0.0;1.0;0.0;0.0;0.0;1.0
-Flat family house;object;flat_family_house.obj;flat_family_house_mini.png;flat_family_house.png;*;*;*;*;0.0;0.0;0.0;0.4;0.5;0.6;0.0;0.0;0.0;0.0;0.0;0.0;1.0;0.0;0.0;0.0;1.0
-High family house;object;high_family_house.obj;high_family_house_mini.png;high_family_house.png;*;*;*;*;0.0;0.0;0.0;0.4;0.5;0.6;0.0;0.0;0.0;0.0;0.0;0.0;1.0;0.0;0.0;0.0;1.0
-High family house 02;object;high_family_house_02.obj;high_family_house_02_mini.png;high_family_house_02.png;*;*;*;*;0.0;0.0;0.0;0.4;0.5;0.6;0.0;0.0;0.0;0.0;0.0;0.0;1.0;0.0;0.0;0.0;1.0
-Simple family house;object;simple_family_house.obj;simple_family_house_mini.png;simple_family_house.png;*;*;*;*;0.0;0.0;0.0;0.4;0.5;0.6;0.0;0.0;0.0;0.0;0.0;0.0;1.0;0.0;0.0;0.0;1.0
-Little red car;vehicle;little_car.obj;little_car_mini.png;little_car_red_base.png;little_car_red_light.png;little_car_red_break.png;little_car_red_right.png;little_car_red_left.png;0.0;0.0;0.0;1.0;1.0;1.0;0.0;0.0;0.0;0.0;0.0;0.0;0.8;-0.3;0.6;0.0;0.35
-Little blue car;vehicle;little_car.obj;little_car_mini.png;little_car_blue_base.png;little_car_blue_light.png;little_car_blue_break.png;little_car_blue_right.png;little_car_blue_left.png;0.0;0.0;0.0;1.0;1.0;1.0;0.0;0.0;0.0;0.0;0.0;0.0;0.8;-0.3;0.6;0.0;0.35
-Little green car;vehicle;little_car.obj;little_car_mini.png;little_car_green_base.png;little_car_green_light.png;little_car_green_break.png;little_car_green_right.png;little_car_green_left.png;0.0;0.0;0.0;1.0;1.0;1.0;0.0;0.0;0.0;0.0;0.0;0.0;0.8;-0.3;0.6;0.0;0.35
-Medium red car;vehicle;medium_car.obj;medium_car_mini.png;medium_car_yellow_base.png;medium_car_yellow_base.png;medium_car_yellow_base.png;medium_car_yellow_base.png;medium_car_yellow_base.png;0.0;0.0;0.0;1.0;1.0;1.0;0.0;0.0;0.0;0.0;0.0;0.0;0.8;0.0;0.6;0.0;0.35
-Medium purple car;vehicle;medium_car.obj;medium_car_mini.png;medium_car_purple_base.png;medium_car_purple_base.png;medium_car_purple_base.png;medium_car_purple_base.png;medium_car_purple_base.png;0.0;0.0;0.0;1.0;1.0;1.0;0.0;0.0;0.0;0.0;0.0;0.0;0.8;0.0;0.6;0.0;0.35
-Medium green car;vehicle;medium_car.obj;medium_car_mini.png;medium_car_green_base.png;medium_car_green_base.png;medium_car_green_base.png;medium_car_green_base.png;medium_car_green_base.png;0.0;0.0;0.0;1.0;1.0;1.0;0.0;0.0;0.0;0.0;0.0;0.0;0.8;0.0;0.6;0.0;0.35
-Large yellow car;vehicle;large_car.obj;large_car_mini.png;large_car_yellow_base.png;large_car_yellow_base.png;large_car_yellow_base.png;large_car_yellow_base.png;large_car_yellow_base.png;0.0;0.0;0.0;1.0;1.0;1.0;0.0;0.0;0.0;0.0;-0.9;0.0;1.4;-1.0;1.2;0.0;0.5
-Large blue car;vehicle;large_car.obj;large_car_mini.png;large_car_blue_base.png;large_car_blue_base.png;large_car_blue_base.png;large_car_blue_base.png;large_car_blue_base.png;0.0;0.0;0.0;1.0;1.0;1.0;0.0;0.0;0.0;0.0;-0.9;0.0;1.4;-1.0;1.2;0.0;0.5
-Large green car;vehicle;large_car.obj;large_car_mini.png;large_car_green_base.png;large_car_green_base.png;large_car_green_base.png;large_car_green_base.png;large_car_green_base.png;0.0;0.0;0.0;1.0;1.0;1.0;0.0;0.0;0.0;0.0;-0.9;0.0;1.4;-1.0;1.2;0.0;0.5
-Bus yellow;vehicle;bus.obj;bus_mini.png;bus_yellow_base.png;bus_yellow_base.png;bus_yellow_base.png;bus_yellow_base.png;bus_yellow_base.png;0.0;0.0;0.0;1.0;1.0;1.0;0.0;0.0;0.0;0.0;0.0;0.0;1.0;0.0;1.0;0.0;0.5
-Bus blue;vehicle;bus.obj;bus_mini.png;bus_blue_base.png;bus_blue_base.png;bus_blue_base.png;bus_blue_base.png;bus_blue_base.png;0.0;0.0;0.0;1.0;1.0;1.0;0.0;0.0;0.0;0.0;0.0;0.0;1.0;0.0;1.0;0.0;0.5
-bus gray;vehicle;bus.obj;bus_mini.png;bus_gray_base.png;bus_gray_base.png;bus_gray_base.png;bus_gray_base.png;bus_gray_base.png;0.0;0.0;0.0;1.0;1.0;1.0;0.0;0.0;0.0;0.0;0.0;0.0;1.0;0.0;1.0;0.0;0.5
+0;1;2;3;4;5;6;7;8;9;10;11;12;13;14;15;16;17;18;19;20;21;22;23;24;25;26;27;28;29;30;31
+Id;Name;Type;Main object;Icon;Base texture;light texture;break texture;right texture;left texture;initPosition;;;initScale;;;initRotation;;;;hitSpherePosition;;;hitSphereSize;moveSpherePosition;;;moveSphereSize;color R;color G;Color B;Color A
+-1;Icon;icon;app_icon.png;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*
+-1;Default texture;texture;default.png;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*
+-1;Road texture;texture;road.png;road_mini.png;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*
+-1;Logo;texture;app_logo.png;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*
+1;Mark sphere;object;sphere_mark.obj;sphere_mark_mini.png;white.png;*;*;*;*;0.0;0.0;0.0;0.1;0.1;0.1;0.0;0.0;0.0;0.0;0.0;0.0;0.0;1.1;0.0;0.0;0.0;1.1;1.0;1.0;1.0;1.0
+2;Big tree 01;object;big_tree_01.obj;big_tree_01_mini.png;big_tree_01.png;*;*;*;*;0.0;0.0;0.0;0.1;0.1;0.1;0.0;0.0;0.0;0.0;0.0;0.0;0.0;1.0;0.0;0.0;0.0;1.0;1.0;1.0;1.0;1.0
+3;Big tree 02;object;big_tree_02.obj;big_tree_02_mini.png;big_tree_02.png;*;*;*;*;0.0;0.0;0.0;0.1;0.1;0.1;0.0;0.0;0.0;0.0;0.0;0.0;0.0;1.0;0.0;0.0;0.0;1.0;1.0;1.0;1.0;1.0
+4;Round desk;object;desk_round.obj;desk_round_mini.png;desk_round.png;*;*;*;*;0.0;-0.1;0.0;3.0;3.0;3.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;1.0;0.0;0.0;0.0;1.0;1.0;0.0;0.0;0.8
+5;Square desk;object;desk_square.obj;desk_square_mini.png;desk_square.png;*;*;*;*;0.0;-0.1;0.0;5.0;5.0;5.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;1.0;0.0;0.0;0.0;1.0;1.0;1.0;1.0;1.0
+6;Double family house;object;double_family_house.obj;double_family_house_mini.png;double_family_house.png;*;*;*;*;0.0;0.0;0.0;0.4;0.5;0.6;0.0;0.0;0.0;0.0;0.0;0.0;0.0;1.0;0.0;0.0;0.0;1.0;1.0;1.0;1.0;1.0
+7;Flat family house;object;flat_family_house.obj;flat_family_house_mini.png;flat_family_house.png;*;*;*;*;0.0;0.0;0.0;0.4;0.5;0.6;0.0;0.0;0.0;0.0;0.0;0.0;0.0;1.0;0.0;0.0;0.0;1.0;1.0;1.0;1.0;1.0
+8;High family house;object;high_family_house.obj;high_family_house_mini.png;high_family_house.png;*;*;*;*;0.0;0.0;0.0;0.4;0.5;0.6;0.0;0.0;0.0;0.0;0.0;0.0;0.0;1.0;0.0;0.0;0.0;1.0;1.0;1.0;1.0;1.0
+9;High family house 02;object;high_family_house_02.obj;high_family_house_02_mini.png;high_family_house_02.png;*;*;*;*;0.0;0.0;0.0;0.4;0.5;0.6;0.0;0.0;0.0;0.0;0.0;0.0;0.0;1.0;0.0;0.0;0.0;1.0;1.0;1.0;1.0;1.0
+10;Simple family house;object;simple_family_house.obj;simple_family_house_mini.png;simple_family_house.png;*;*;*;*;0.0;0.0;0.0;0.4;0.5;0.6;0.0;0.0;0.0;0.0;0.0;0.0;0.0;1.0;0.0;0.0;0.0;1.0;1.0;1.0;1.0;1.0
+11;Little red car;vehicle;little_car.obj;little_car_red_mini.png;little_car_red_base.png;little_car_red_light.png;little_car_red_break.png;little_car_red_right.png;little_car_red_left.png;0.0;0.0;0.0;1.0;1.0;1.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.8;-0.3;0.6;0.0;0.35;1.0;1.0;1.0;1.0
+12;Little blue car;vehicle;little_car.obj;little_car_blue_mini.png;little_car_blue_base.png;little_car_blue_light.png;little_car_blue_break.png;little_car_blue_right.png;little_car_blue_left.png;0.0;0.0;0.0;1.0;1.0;1.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.8;-0.3;0.6;0.0;0.35;1.0;1.0;1.0;1.0
+13;Little green car;vehicle;little_car.obj;little_car_green_mini.png;little_car_green_base.png;little_car_green_light.png;little_car_green_break.png;little_car_green_right.png;little_car_green_left.png;0.0;0.0;0.0;1.0;1.0;1.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.8;-0.3;0.6;0.0;0.35;1.0;1.0;1.0;1.0
+14;Medium red car;vehicle;medium_car.obj;medium_car_yellow_mini.png;medium_car_yellow_base.png;medium_car_yellow_base.png;medium_car_yellow_base.png;medium_car_yellow_base.png;medium_car_yellow_base.png;0.0;0.0;0.0;1.0;1.0;1.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.8;0.0;0.6;0.0;0.35;1.0;1.0;1.0;1.0
+15;Medium purple car;vehicle;medium_car.obj;medium_car_purple_mini.png;medium_car_purple_base.png;medium_car_purple_base.png;medium_car_purple_base.png;medium_car_purple_base.png;medium_car_purple_base.png;0.0;0.0;0.0;1.0;1.0;1.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.8;0.0;0.6;0.0;0.35;1.0;1.0;1.0;1.0
+16;Medium green car;vehicle;medium_car.obj;medium_car_green_mini.png;medium_car_green_base.png;medium_car_green_base.png;medium_car_green_base.png;medium_car_green_base.png;medium_car_green_base.png;0.0;0.0;0.0;1.0;1.0;1.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;0.8;0.0;0.6;0.0;0.35;1.0;1.0;1.0;1.0
+17;Large yellow car;vehicle;large_car.obj;large_car_yellow_mini.png;large_car_yellow_base.png;large_car_yellow_base.png;large_car_yellow_base.png;large_car_yellow_base.png;large_car_yellow_base.png;0.0;0.0;0.0;1.0;1.0;1.0;0.0;0.0;0.0;0.0;0.0;-0.9;0.0;1.4;-1.0;1.2;0.0;0.5;1.0;1.0;1.0;1.0
+18;Large blue car;vehicle;large_car.obj;large_car_blue_mini.png;large_car_blue_base.png;large_car_blue_base.png;large_car_blue_base.png;large_car_blue_base.png;large_car_blue_base.png;0.0;0.0;0.0;1.0;1.0;1.0;0.0;0.0;0.0;0.0;0.0;-0.9;0.0;1.4;-1.0;1.2;0.0;0.5;1.0;1.0;1.0;1.0
+19;Large green car;vehicle;large_car.obj;large_car_green_mini.png;large_car_green_base.png;large_car_green_base.png;large_car_green_base.png;large_car_green_base.png;large_car_green_base.png;0.0;0.0;0.0;1.0;1.0;1.0;0.0;0.0;0.0;0.0;0.0;-0.9;0.0;1.4;-1.0;1.2;0.0;0.5;1.0;1.0;1.0;1.0
+20;Bus yellow;vehicle;bus.obj;bus_yellow_mini.png;bus_yellow_base.png;bus_yellow_base.png;bus_yellow_base.png;bus_yellow_base.png;bus_yellow_base.png;0.0;0.0;0.0;1.0;1.0;1.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;1.0;0.0;1.0;0.0;0.5;1.0;1.0;1.0;1.0
+21;Bus blue;vehicle;bus.obj;bus_blue_mini.png;bus_blue_base.png;bus_blue_base.png;bus_blue_base.png;bus_blue_base.png;bus_blue_base.png;0.0;0.0;0.0;1.0;1.0;1.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;1.0;0.0;1.0;0.0;0.5;1.0;1.0;1.0;1.0
+22;Bus gray;vehicle;bus.obj;bus_gray_mini.png;bus_gray_base.png;bus_gray_base.png;bus_gray_base.png;bus_gray_base.png;bus_gray_base.png;0.0;0.0;0.0;1.0;1.0;1.0;0.0;0.0;0.0;0.0;0.0;0.0;0.0;1.0;0.0;1.0;0.0;0.5;1.0;1.0;1.0;1.0

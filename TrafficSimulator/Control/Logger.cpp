@@ -18,12 +18,12 @@ std::string Logger::currentDateTime() {
 	time_t now = time(0);
     tm* local_time = localtime(&now);
 	std::string dateTime = "" + 
-	std::to_string(local_time->tm_year) + ". " +
-	std::to_string(local_time->tm_mon) + ". " +
+	std::to_string(1900 + local_time->tm_year) + "." +
+	std::to_string(local_time->tm_mon) + "." +
 	std::to_string(local_time->tm_mday) + ". " +
 	std::to_string(local_time->tm_hour) + ":" +
 	std::to_string(local_time->tm_min) + ":" +
-	std::to_string(local_time->tm_sec) + ":";
+	std::to_string(local_time->tm_sec);
 	return dateTime;
 }
 

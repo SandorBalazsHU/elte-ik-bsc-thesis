@@ -27,7 +27,7 @@ void Render::bind(WorkWindow* currentWindow) {
 	window = workingWindow->getWindow();
 	gui = workingWindow->getGUI();
 	objectStorage = workingWindow->getObjectStorage();
-	test();
+	setWindowIcon(objectStorage->getWindowIcon());
 	fpsCounter::bind();
 	/*void vsyncOff();
 	fpsCounter::fpsLimiterOn();
@@ -110,75 +110,38 @@ void Render::rendering() {
 }
 
 void Render::test() {
-	setWindowIcon(objectStorage->getWindowIcon());
-	/*glm::vec4 vector(1,2,3,4);
-	std::cout << vector.x << vector.y << vector.z << vector.w << std::endl;*/
+	renderableObjects.push_back(objectStorage->getObject3D(2));
+
+	Object3D fa2 = objectStorage->getObject3D(3);
+	fa2.setPosition(glm::vec3(5.0f, 0.0f, 0.0f));
+	renderableObjects.push_back(fa2);
+
+	Object3D asztal = objectStorage->getObject3D(5);
+	renderableObjects.push_back(asztal);
 }
 
 void Render::renderScrean() {
-	/*//ObjectRendering
-	setTexture(objectStorage->getTexture("bus_yellow_base.png"));
-	shaderPreDrawingUpdate(glm::translate(glm::vec3(0, 0, 0)), glm::vec4(1, 1, 1, 1));
-	drawMesh(objectStorage->getObject("bus.obj"));
-
-	setTexture(objectStorage->getTexture("white.png"));
-	shaderPreDrawingUpdate(glm::translate(glm::vec3(0.0f, 0.0f, 0.0f)) * glm::scale(glm::vec3(2.2f, 2.2f, 2.2f)), glm::vec4(1, 1, 1, 0.5f));
-	drawMesh(objectStorage->getObject("sphere_mark.obj"));*/
-
-
-	setTexture(objectStorage->getTexture("little_car_red_light.png"));
-	shaderPreDrawingUpdate(glm::translate(glm::vec3(0, 0, 0)), glm::vec4(1, 1, 1, 1));
-	drawMesh(objectStorage->getObject("little_car.obj"));
-
-	setTexture(objectStorage->getTexture("medium_car_yellow_base.png"));
-	shaderPreDrawingUpdate(glm::translate(glm::vec3(0, 0, 2)), glm::vec4(1, 1, 1, 1));
-	drawMesh(objectStorage->getObject("medium_car.obj"));
-
-	setTexture(objectStorage->getTexture("large_car_blue_base.png"));
-	shaderPreDrawingUpdate(glm::translate(glm::vec3(0.3f, 0, 4)), glm::vec4(1, 1, 1, 1));
-	drawMesh(objectStorage->getObject("large_car.obj"));
-
-	setTexture(objectStorage->getTexture("bus_yellow_base.png"));
-	shaderPreDrawingUpdate(glm::translate(glm::vec3(0.2f, 0, 6)) * glm::rotate(glm::radians(10.0f), glm::vec3(0, 1, 0)), glm::vec4(1, 1, 1, 1));
-	drawMesh(objectStorage->getObject("bus.obj"));
-
-	wireframeOn();
+	//TEST
+	if (onece) {
+		test();
+		onece = false;
+	}
+	for (size_t i = 0; i < renderableObjects.size(); i++) {
+		setTexture(renderableObjects[i].getTexture());
+		shaderPreDrawingUpdate(renderableObjects[i].getWorldMatrix(), renderableObjects[i].getRGBAcolor());
+		drawMesh(renderableObjects[i].getMesh());
+	}
+	/*
+	
+	renderableObjects[i].getWorldMatrix(), renderableObjects[i].getRGBAcolor()
+	
 	setTexture(objectStorage->getTexture("big_tree_01.png"));
-	shaderPreDrawingUpdate(glm::translate(glm::vec3(2, 0, 0)) * glm::scale(glm::vec3(0.1f, 0.1f, 0.1f)), glm::vec4(1, 1, 1, 1));
-	drawMesh(objectStorage->getObject("big_tree_01.obj"));
-	wireframeOff();
-
-	setTexture(objectStorage->getTexture("big_tree_02.png"));
-	shaderPreDrawingUpdate(glm::translate(glm::vec3(-2, 0, 0)) * glm::scale(glm::vec3(0.1f, 0.1f, 0.1f)), glm::vec4(1, 1, 1, 1));
-	drawMesh(objectStorage->getObject("big_tree_02.obj"));
-
-	setTexture(objectStorage->getTexture("double_family_house.png"));
-	shaderPreDrawingUpdate(glm::translate(glm::vec3(10, 0, 0)) * glm::scale(glm::vec3(0.4f, 0.4f, 0.4f)), glm::vec4(1, 1, 1, 1));
-	drawMesh(objectStorage->getObject("double_family_house.obj"));
-
-	setTexture(objectStorage->getTexture("flat_family_house.png"));
-	shaderPreDrawingUpdate(glm::translate(glm::vec3(10, 0, 5)) * glm::scale(glm::vec3(0.4f, 0.4f, 0.4f)), glm::vec4(1, 1, 1, 1));
-	drawMesh(objectStorage->getObject("flat_family_house.obj"));
-
-	setTexture(objectStorage->getTexture("high_family_house.png"));
-	shaderPreDrawingUpdate(glm::translate(glm::vec3(10, 0, 12)) * glm::scale(glm::vec3(0.4f, 0.4f, 0.4f)), glm::vec4(1, 1, 1, 1));
-	drawMesh(objectStorage->getObject("high_family_house.obj"));
-
-	setTexture(objectStorage->getTexture("high_family_house_02.png"));
-	shaderPreDrawingUpdate(glm::translate(glm::vec3(5, 0, 12)) * glm::scale(glm::vec3(0.4f, 0.4f, 0.4f)), glm::vec4(1, 1, 1, 1));
-	drawMesh(objectStorage->getObject("high_family_house_02.obj"));
-
-	setTexture(objectStorage->getTexture("simple_family_house.png"));
-	shaderPreDrawingUpdate(glm::translate(glm::vec3(0, 0, 12)) * glm::scale(glm::vec3(0.4f, 0.4f, 0.4f)), glm::vec4(1, 1, 1, 1));
-	drawMesh(objectStorage->getObject("simple_family_house.obj"));
-
-	setTexture(objectStorage->getTexture("***"));
-	shaderPreDrawingUpdate(glm::translate(glm::vec3(0, 0, 8)) * glm::scale(glm::vec3(0.4f, 0.4f, 0.4f)), glm::vec4(1, 1, 1, 1));
-	drawMesh(objectStorage->getObject("***"));
-
-	setTexture(objectStorage->getTexture("desk_square.png"));
-	shaderPreDrawingUpdate(glm::translate(glm::vec3(0, -0.1f, 0)) * glm::scale(glm::vec3(3.0f, 3.0f, 3.0f)), glm::vec4(1, 1, 1, 1));
-	drawMesh(objectStorage->getObject("desk_square.obj"));
+	shaderPreDrawingUpdate(glm::translate(glm::vec3(0,0,0)), glm::vec4(1,1,1,1));
+	drawMesh(objectStorage->getMesh("big_tree_01.obj"));
+	Object3D fa1 = objectStorage->getObject3D(2);
+	setTexture(objectStorage->getTexture(fa1.getTextureID()));
+	shaderPreDrawingUpdate(glm::translate(glm::vec3(0, 0, 0)), glm::vec4(1, 1, 1, 1));
+	drawMesh(fa1.getMesh());*/
 }
 
 void Render::render() {
