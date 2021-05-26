@@ -124,9 +124,8 @@ float Object3D::getOpacity() {
 }
 
 glm::mat4 Object3D::getWorldMatrix() {
-	//std::cout << this->scale.x << " " << this->scale.y << " " << this->scale.z << std::endl;
 	return glm::translate(this->position)
-	//* glm::rotate(this->getRotationInRadian(), this->getRotationVector())
+	* glm::rotate(this->getRotationInRadian(), this->getRotationVector())
 	* glm::scale(this->scale);
 }
 
