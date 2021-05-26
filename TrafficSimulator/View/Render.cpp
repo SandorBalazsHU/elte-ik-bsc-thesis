@@ -123,10 +123,19 @@ void Render::render() {
 	shaderCameraUpdate();
 
 	//ObjectRendering
+	setTexture(loader.getTexture("bus_yellow_base.png"));
+	shaderPreDrawingUpdate(glm::translate(glm::vec3(0, 0, 0)), glm::vec4(1, 1, 1, 1));
+	drawMesh(loader.getObject("bus.obj"));
+
+	setTexture(loader.getTexture("white.png"));
+	shaderPreDrawingUpdate(glm::translate(glm::vec3(-1.0f, 1.2f, 0.0f)) * glm::scale(glm::vec3(0.5f, 0.5f, 0.5f)), glm::vec4(1, 1, 1, 0.5f));
+	drawMesh(loader.getObject("sphere_mark.obj"));
+
+	/*
 	setTexture(loader.getTexture("little_car_red_light.png"));
 	shaderPreDrawingUpdate(glm::translate(glm::vec3(0, 0, 0)), glm::vec4(1, 1, 1, 1));
 	drawMesh(loader.getObject("little_car.obj"));
-
+	
 	setTexture(loader.getTexture("medium_car_yellow_base.png"));
 	shaderPreDrawingUpdate(glm::translate(glm::vec3(0, 0, 2)), glm::vec4(1, 1, 1, 1));
 	drawMesh(loader.getObject("medium_car.obj"));
@@ -171,11 +180,11 @@ void Render::render() {
 
 	setTexture(loader.getTexture("***"));
 	shaderPreDrawingUpdate(glm::translate(glm::vec3(0, 0, 8)) * glm::scale(glm::vec3(0.4f, 0.4f, 0.4f)), glm::vec4(1, 1, 1, 1));
-	drawMesh(loader.getObject("***"));
+	drawMesh(loader.getObject("***"));*/
 
-	setTexture(loader.getTexture("desk_round.png"));
+	setTexture(loader.getTexture("desk_square.png"));
 	shaderPreDrawingUpdate(glm::translate(glm::vec3(0, -0.1f, 0)) * glm::scale(glm::vec3(3.0f, 3.0f, 3.0f)), glm::vec4(1, 1, 1, 1));
-	drawMesh(loader.getObject("desk_round.obj"));
+	drawMesh(loader.getObject("desk_square.obj"));
 
 	shader->Unuse();
 	gui->render();
