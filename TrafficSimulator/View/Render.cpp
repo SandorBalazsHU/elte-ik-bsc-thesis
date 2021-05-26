@@ -113,7 +113,6 @@ void Render::test() {
 	setWindowIcon(loader.getWindowIcon());
 	/*glm::vec4 vector(1,2,3,4);
 	std::cout << vector.x << vector.y << vector.z << vector.w << std::endl;*/
-	wireframeOn();
 }
 
 void Render::render() {
@@ -140,9 +139,11 @@ void Render::render() {
 	shaderPreDrawingUpdate(glm::translate(glm::vec3(0.2f, 0, 6)) * glm::rotate(glm::radians(10.0f), glm::vec3(0, 1, 0)), glm::vec4(1, 1, 1, 1));
 	drawMesh(loader.getObject("bus.obj"));
 
+	wireframeOn();
 	setTexture(loader.getTexture("big_tree_01.png"));
 	shaderPreDrawingUpdate(glm::translate(glm::vec3(2, 0, 0)) * glm::scale(glm::vec3(0.1f, 0.1f, 0.1f)), glm::vec4(1, 1, 1, 1));
 	drawMesh(loader.getObject("big_tree_01.obj"));
+	wireframeOff();
 
 	setTexture(loader.getTexture("big_tree_02.png"));
 	shaderPreDrawingUpdate(glm::translate(glm::vec3(-2, 0, 0)) * glm::scale(glm::vec3(0.1f, 0.1f, 0.1f)), glm::vec4(1, 1, 1, 1));
@@ -172,9 +173,9 @@ void Render::render() {
 	shaderPreDrawingUpdate(glm::translate(glm::vec3(0, 0, 8)) * glm::scale(glm::vec3(0.4f, 0.4f, 0.4f)), glm::vec4(1, 1, 1, 1));
 	drawMesh(loader.getObject("***"));
 
-	setTexture(loader.getTexture("desk_square.png"));
-	shaderPreDrawingUpdate(glm::translate(glm::vec3(0, -0.1f, 0)) * glm::scale(glm::vec3(4.0f, 4.0f, 4.0f)), glm::vec4(1, 1, 1, 1));
-	drawMesh(loader.getObject("desk_square.obj"));
+	setTexture(loader.getTexture("desk_round.png"));
+	shaderPreDrawingUpdate(glm::translate(glm::vec3(0, -0.1f, 0)) * glm::scale(glm::vec3(3.0f, 3.0f, 3.0f)), glm::vec4(1, 1, 1, 1));
+	drawMesh(loader.getObject("desk_round.obj"));
 
 	shader->Unuse();
 	gui->render();

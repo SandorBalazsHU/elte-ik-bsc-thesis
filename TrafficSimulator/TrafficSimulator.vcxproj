@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClCompile Include="Control\Logger.cpp" />
     <ClCompile Include="Model\Dijkstra.cpp" />
+    <ClCompile Include="Model\RayPicking.cpp" />
     <ClCompile Include="Model\reverseMap.cpp" />
     <ClCompile Include="T:\OGLPack\include\imgui\imgui.cpp" />
     <ClCompile Include="T:\OGLPack\include\imgui\imgui_demo.cpp" />
@@ -178,6 +179,7 @@
   <ItemGroup>
     <ClInclude Include="Control\Logger.h" />
     <ClInclude Include="Model\Dijkstra.h" />
+    <ClInclude Include="Model\RayPicking.h" />
     <ClInclude Include="Model\reverseMap.h" />
     <ClInclude Include="T:\OGLPack\include\imgui\imconfig.h" />
     <ClInclude Include="T:\OGLPack\include\imgui\imgui.h" />
