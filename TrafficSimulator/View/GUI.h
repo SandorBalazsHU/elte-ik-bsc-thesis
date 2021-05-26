@@ -4,6 +4,7 @@ class WorkWindow;
 #include <SDL.h>
 #include "imgui\imgui.h"
 #include "imgui\imgui_impl_sdl_gl3.h"
+#include "Objects/ObjectStorage.h"
 
 class GUI {
 public:
@@ -21,4 +22,10 @@ public:
 private:
 	WorkWindow* workingWindow;
 	SDL_Window* window;
+	ObjectStorage* objectStorage;
+
+	void styleTab();
+	void mainMenuBar();
+	void fpsGraph();
+	void loadingBar();
 };

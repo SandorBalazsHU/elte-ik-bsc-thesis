@@ -12,10 +12,7 @@ ObjectStorage::~ObjectStorage(void) {
 
 void ObjectStorage::load() {
     readCSV();
-    std::vector<std::thread> threads;
-
     for (size_t i = 0; i < parsedCSV.size(); i++) {
-
         std::string currentType = parsedCSV[i][1];
 
         if (currentType == "icon") {
@@ -54,14 +51,25 @@ void ObjectStorage::load() {
             }
         }
     }
+    loadingStateMax = threads.size();
+}
 
+bool ObjectStorage::loadingCheck() {
+    loadingState = SDL_AtomicGet(&atomicThreadCounter);
+    std::cout << SDL_AtomicGet(&atomicThreadCounter) << " " << threads.size() << std::endl;
+    return SDL_AtomicGet(&atomicThreadCounter) == threads.size();
+}
+
+void ObjectStorage::finaliseLoading() {
     for (size_t i = 0; i < threads.size(); i++) {
         threads[i].join();
     }
     SDL_Delay(100);
-    bindTextures();
     bindObjects();
+    bindTextures();
+    loaded = true;
 }
+
 
 void ObjectStorage::loadTexture(std::string fileName) {
     texturesMutex.lock();
@@ -71,7 +79,10 @@ void ObjectStorage::loadTexture(std::string fileName) {
 }
 
 std::thread ObjectStorage::loadTextureParallel(std::string fileName) {
-    return std::thread([=]{loadTexture(fileName);});
+    return std::thread([=]{
+        loadTexture(fileName);
+        SDL_AtomicAdd(&atomicThreadCounter, 1);
+        });
 }
 
 void ObjectStorage::bindTextures() {
@@ -89,7 +100,10 @@ void ObjectStorage::loadObject(std::string fileName) {
 }
 
 std::thread ObjectStorage::loadObjectParallel(std::string fileName) {
-    return std::thread([=] {loadObject(fileName); });
+    return std::thread([=] {
+        loadObject(fileName);
+        SDL_AtomicAdd(&atomicThreadCounter, 1);
+        });
 }
 
 void ObjectStorage::bindObjects() {

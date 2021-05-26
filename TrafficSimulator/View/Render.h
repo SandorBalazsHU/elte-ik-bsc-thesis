@@ -34,7 +34,6 @@ public:
 	void setWindowIcon(SDL_Surface* windowIcon);
 
 	//test
-	ObjectStorage			loader;
 	void test();
 
 private:
@@ -43,4 +42,7 @@ private:
 	Camera* camera;
 	ProgramObject* shader;
 	GUI* gui;
+	ObjectStorage* objectStorage;
+
+	void renderScrean();
 };

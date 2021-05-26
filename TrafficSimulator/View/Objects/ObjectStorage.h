@@ -8,6 +8,7 @@
 #include "../Utilities/Mesh_OGL3.h"
 #include "../Utilities/VertexArrayObject.h"
 #include "Object3D.h"
+#include <SDL.h>
 
 class ObjectStorage {
 public:
@@ -34,12 +35,33 @@ public:
 		}
 	}
 
+	bool isLoaded() {
+		return loaded;
+	}
+
+	bool loadingCheck();
+
+	void finaliseLoading();
+
+	int getLoadingState() {
+		return loadingState;
+	}
+
+	int getLoadingStateMax() {
+		return loadingStateMax;
+	}
+
 private:
 	const std::string defaultTexture = "default.png";
 	const std::string defaultObject = "sphere_mark.obj";
 	const std::string configFile = "3Dobjects/3d_object_library.csv";
 	const std::string textureFolder = "3Dobjects/textures/";
 	const std::string modelFolder = "3Dobjects/models/";
+
+	bool loaded = false;
+	int loadingState = 0;
+	int loadingStateMax = 0;
+
 
 	SDL_Surface* windowIcon;
 
@@ -61,6 +83,8 @@ private:
 	std::thread loadObjectParallel(std::string fileName);
 	void bindObjects();
 
+	std::vector<std::thread> threads;
+	SDL_atomic_t atomicThreadCounter;
 
 	std::map<std::string, VertexArrayObject> generatedObjects;
 

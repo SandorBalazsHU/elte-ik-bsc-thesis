@@ -21,11 +21,12 @@ public:
 	static float getAverageFPS() {
 		return averageFPS;
 	}
+	static float fpsLog[100];
 private:
 	fpsCounter();
 	~fpsCounter();
 	static const int averageFPSupdateTime = 500;
-	static float fpsLog[100];
+	//static float fpsLog[100];
 	static int fpsLogCounter;
 	static float currentFPS;
 	static float averageFPS;

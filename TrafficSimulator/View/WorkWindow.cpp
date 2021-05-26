@@ -173,9 +173,13 @@ int WorkWindow::renderStart() {
 	eventListener.bind(this);
 	render.bind(this);
 	gui.bind(this);
+	objectStorage.load();
 
 	//The render loop
 	while (!exit) {
+		if (!objectStorage.isLoaded()) {
+			if (objectStorage.loadingCheck()) objectStorage.finaliseLoading();
+		}
 		clearScreen();
 		eventListener.eventProcessor();
 		render.render();

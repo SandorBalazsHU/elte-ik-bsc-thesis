@@ -8,6 +8,7 @@
 #include "Utilities/ProgramObject.h"
 #include "Utilities/TextureObject.h"
 #include "Utilities/Mesh_OGL3.h"
+#include "Objects/ObjectStorage.h"
 
 class WorkWindow {
 public:
@@ -39,6 +40,10 @@ public:
 		return &gui;
 	}
 
+	ObjectStorage* getObjectStorage() {
+		return &objectStorage;
+	}
+
 private:
 	const char* windowDefTitle = "Traffic Simulator";
 	const int windowDefSizeX = 640;
@@ -55,6 +60,7 @@ private:
 	EventListener	eventListener;
 	Render			render;
 	GUI				gui;
+	ObjectStorage	objectStorage;
 
 	bool exit = false;
 
