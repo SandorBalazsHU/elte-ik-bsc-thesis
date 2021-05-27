@@ -28,7 +28,7 @@ void ObjectStorage::load() {
             if (!isThisTextureLoaded(fileName) && fileName != "*") threads.push_back(loadTextureParallel(miniatureFolder + fileName));
         }
 
-        if (currentType == "object") {
+        if ((currentType == "object") || (currentType == "desk") || (currentType == "mark")) {
             std::string fileName = parsedCSV[i][3];
             if (!isThisObjectLoaded(fileName)) threads.push_back(loadObjectParallel(fileName));
 
@@ -39,6 +39,9 @@ void ObjectStorage::load() {
             if (!isThisTextureLoaded(fileName)) threads.push_back(loadTextureParallel(fileName));
 
             addToObjects(i);
+            
+            std::string isInTheFirstScene = parsedCSV[i][32];
+            if (isInTheFirstScene == "1") firstSceneElements.push_back(std::stof(parsedCSV[i][0]));
         }
 
         if (currentType == "vehicle") {
@@ -76,7 +79,7 @@ void ObjectStorage::addToObjects(int csvID) {
     glm::vec4 hitSphere          = glm::vec4(std::stof(parsedCSV[csvID][20]), std::stof(parsedCSV[csvID][21]), std::stof(parsedCSV[csvID][22]), std::stof(parsedCSV[csvID][23]));
     glm::vec4 moveSphere         = glm::vec4(std::stof(parsedCSV[csvID][24]), std::stof(parsedCSV[csvID][25]), std::stof(parsedCSV[csvID][26]), std::stof(parsedCSV[csvID][27]));
     ObjectStorage* objectStorage = this;
-    if (type == "object") {
+    if ((type == "object") || (type == "desk") || (type == "mark")) {
         Object3D newObject3D(id, name, type, meshID, textureID, iconID, initPosition, initScale, initRotation, color, hitSphere, moveSphere, objectStorage);
         object3Ds.insert(std::pair<int, Object3D>(id, newObject3D));
     }

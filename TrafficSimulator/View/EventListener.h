@@ -2,9 +2,12 @@
 
 class WorkWindow;
 class GUI;
+class Render;
 
 #include<SDL.h>
+#include<vector>
 #include"Camera.h"
+#include"Objects/Object3D.h"
 
 
 class WorkWindow;
@@ -15,10 +18,16 @@ public:
 	~EventListener(void);
 	void bind(WorkWindow* currentWindow);
 	void eventProcessor();
+	void select(int objectID);
+	void deSelect();
 private:
 	WorkWindow* workingWindow;
 	Camera* camera;
 	GUI* gui;
+	Render* render;
+
+	std::vector<Object3D*> selectedItems;
+
 	void keyboardDown(SDL_KeyboardEvent&);
 	void keyboardUp(SDL_KeyboardEvent&);
 	void mouseMove(SDL_MouseMotionEvent&);

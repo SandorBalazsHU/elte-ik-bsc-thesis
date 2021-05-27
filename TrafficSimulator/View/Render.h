@@ -32,7 +32,8 @@ public:
 	void wireframeOn();
 	void wireframeOff();
 	void setWindowIcon(SDL_Surface* windowIcon);
-	void addObject(int id);
+	int addObject(int id);
+	Object3D* getObject(int id);
 
 private:
 	WorkWindow* workingWindow;
@@ -44,8 +45,8 @@ private:
 	std::vector<Object3D> renderableObjects;
 
 	//test
-	void test();
-	bool onece = true;
+	void sceneInit();
+	bool firstScreen = true;
 
 	void renderScrean();
 };

@@ -48,6 +48,10 @@ public:
 		return &render;
 	}
 
+	EventListener* getEventListener() {
+		return &eventListener;
+	}
+
 private:
 	const char* windowDefTitle = "Traffic Simulator";
 	const int windowDefSizeX = 640;

@@ -1,6 +1,7 @@
 #include "GUI.h"
 #include "WorkWindow.h"
 #include "Render.h"
+#include "EventListener.h"
 #include "fpsCounter.h"
 #include <sstream>
 
@@ -30,6 +31,7 @@ void GUI::bind(WorkWindow* currentWindow) {
 	window = currentWindow->getWindow();
 	objectStorage = workingWindow->getObjectStorage();
 	windowRender = currentWindow->getRender();
+	eventListener = currentWindow->getEventListener();
 }
 
 void GUI::eventHandler(SDL_Event* event) {
@@ -151,9 +153,16 @@ static void addNewItemWindow(bool* p_open) {
 }
 
 void GUI::itemList() {
+	int i = 0;
 	std::map<int, Object3D>::iterator it = objectStorage->object3Ds.begin();
 	while (it != objectStorage->object3Ds.end()) {
-		if (ImGui::ImageButton((void*)(intptr_t)it->second.getIcon(), ImVec2(100, 100))) windowRender->addObject(it->first);
+		if (it->second.getType() == "object") {
+			if (ImGui::ImageButton((void*)(intptr_t)it->second.getIcon(), ImVec2(100, 100))) {
+				int renderableObjectID = windowRender->addObject(it->first);
+				eventListener->select(renderableObjectID);
+			}
+			if (i++ % 2 == 0) ImGui::SameLine();
+		}
 		it++;
 	}
 }

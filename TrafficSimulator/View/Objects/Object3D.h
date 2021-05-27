@@ -25,6 +25,9 @@ class Object3D {
 		void					setRGBAcolor(glm::vec4 RGBAcolor);
 		void					setRGBcolor(glm::vec3 RGBcolor);
 		void					setOpacity(float opacity);
+		int 					getId();
+		std::string				getName();
+		std::string				getType();
 		std::unique_ptr<Mesh>&	getMesh();
 		Texture2D&				getTexture();
 		std::string				getTextureID();

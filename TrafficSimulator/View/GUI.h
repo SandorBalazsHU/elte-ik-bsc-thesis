@@ -1,6 +1,7 @@
 #pragma once
 class WorkWindow;
 class Render;
+class EventListener;
 
 #include <SDL.h>
 #include "imgui\imgui.h"
@@ -25,6 +26,7 @@ private:
 	SDL_Window* window;
 	Render* windowRender;
 	ObjectStorage* objectStorage;
+	EventListener* eventListener;
 
 	void styleTab();
 	void mainMenuBar();

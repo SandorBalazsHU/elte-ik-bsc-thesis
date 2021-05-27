@@ -1,5 +1,6 @@
 #include "EventListener.h"
 #include "WorkWindow.h"
+#include "Render.h"
 #include "GUI.h"
 
 EventListener::EventListener(void) {
@@ -12,6 +13,20 @@ void EventListener::bind(WorkWindow* currentWindow) {
 	workingWindow = currentWindow;
 	camera = workingWindow->getCamera();
 	gui = workingWindow->getGUI();
+	render = workingWindow->getRender();
+}
+
+void EventListener::select(int objectID) {
+	Object3D* selectedObject = render->getObject(objectID);
+	selectedItems.push_back(selectedObject);
+	selectedObject->setOpacity(0.5);
+}
+
+void EventListener::deSelect() {
+	for (size_t i = 0; i < selectedItems.size(); i++) {
+		selectedItems[i]->setOpacity(1.0);
+	}
+	selectedItems.clear();
 }
 
 void EventListener::keyboardDown(SDL_KeyboardEvent& key) {
@@ -24,11 +39,24 @@ void EventListener::keyboardUp(SDL_KeyboardEvent& key) {
 
 void EventListener::mouseMove(SDL_MouseMotionEvent& mouse) {
 	camera->mouseMove(mouse);
+	if (mouse.state & SDL_BUTTON_RMASK) {
+		glm::vec3 shift = glm::vec3(mouse.xrel / 4.0f, 0, mouse.yrel / 4.0f);
+		for (size_t i = 0; i < selectedItems.size(); i++) {
+			selectedItems[i]->move(shift);
+		}
+	}
 }
 
-void EventListener::mouseDown(SDL_MouseButtonEvent& mouse) {}
+void EventListener::mouseDown(SDL_MouseButtonEvent& mouse) {
 
-void EventListener::mouseUp(SDL_MouseButtonEvent& mouse) {}
+}
+
+void EventListener::mouseUp(SDL_MouseButtonEvent& mouse) {
+	if (mouse.button == SDL_BUTTON_RIGHT) {
+		std::cout << "Naaaaa????" << std::endl;
+		deSelect();
+	}
+}
 
 void EventListener::mouseWheel(SDL_MouseWheelEvent& wheel) {
 	camera->mouseWheel(wheel);

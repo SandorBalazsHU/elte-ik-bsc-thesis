@@ -68,6 +68,18 @@ void Object3D::setOpacity(float opacity) {
 	this->color.w = opacity;
 }
 
+int 					Object3D::getId() {
+	return this->id;
+}
+
+std::string				Object3D::getName() {
+	return this->name;
+}
+
+std::string				Object3D::getType() {
+	return this->type;
+}
+
 std::unique_ptr<Mesh>& Object3D::getMesh() {
 	return objectStorage->getMesh(this->meshID);
 }

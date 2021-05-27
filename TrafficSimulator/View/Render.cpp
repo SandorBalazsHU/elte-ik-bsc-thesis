@@ -3,10 +3,7 @@
 #include "GUI.h"
 #include "fpsCounter.h"
 
-//test
 #include "Utilities/ObjParser_OGL3.h"
-//#include <glm/glm.hpp>
-//#include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/transform2.hpp>
 
 #include <SDL.h>
@@ -109,49 +106,32 @@ void Render::rendering() {
 	SDL_GL_SwapWindow(window);
 }
 
-void Render::test() {
-	renderableObjects.push_back(objectStorage->getObject3D(2));
-
-	Object3D fa2 = objectStorage->getObject3D(3);
-	fa2.setPosition(glm::vec3(5.0f, 0.0f, 0.0f));
-	renderableObjects.push_back(fa2);
-
-	Object3D asztal = objectStorage->getObject3D(5);
-	renderableObjects.push_back(asztal);
-
-	/*std::map<std::string, Texture2D>::iterator it = objectStorage->textures.begin();
-	while (it != objectStorage->textures.end()) {
-		std::cout << it->first << std::endl;
-		it++;
-	}*/
+void Render::sceneInit() {
+	std::vector<int>& firstSceneElements = objectStorage->getFirstSceneElements();
+	for (size_t i = 0; i < firstSceneElements.size(); i++) {
+		addObject(firstSceneElements[i]);
+	}
 }
 
-void Render::addObject(int id) {
+int Render::addObject(int id) {
 	renderableObjects.push_back(objectStorage->getObject3D(id));
+	return renderableObjects.size()-1;
+}
+
+Object3D* Render::getObject(int id) {
+	return &renderableObjects[id];
 }
 
 void Render::renderScrean() {
-	//TEST
-	if (onece) {
-		test();
-		onece = false;
+	if (firstScreen) {
+		sceneInit();
+		firstScreen = false;
 	}
 	for (size_t i = 0; i < renderableObjects.size(); i++) {
 		setTexture(renderableObjects[i].getTexture());
 		shaderPreDrawingUpdate(renderableObjects[i].getWorldMatrix(), renderableObjects[i].getRGBAcolor());
 		drawMesh(renderableObjects[i].getMesh());
 	}
-	/*
-	
-	renderableObjects[i].getWorldMatrix(), renderableObjects[i].getRGBAcolor()
-	
-	setTexture(objectStorage->getTexture("big_tree_01.png"));
-	shaderPreDrawingUpdate(glm::translate(glm::vec3(0,0,0)), glm::vec4(1,1,1,1));
-	drawMesh(objectStorage->getMesh("big_tree_01.obj"));
-	Object3D fa1 = objectStorage->getObject3D(2);
-	setTexture(objectStorage->getTexture(fa1.getTextureID()));
-	shaderPreDrawingUpdate(glm::translate(glm::vec3(0, 0, 0)), glm::vec4(1, 1, 1, 1));
-	drawMesh(fa1.getMesh());*/
 }
 
 void Render::render() {

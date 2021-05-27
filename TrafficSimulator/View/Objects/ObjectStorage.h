@@ -61,9 +61,11 @@ public:
 		return object3D->second.copy();
 	}
 
-	std::map<int, Object3D> object3Ds;
+	std::vector<int>& getFirstSceneElements() {
+		return firstSceneElements;
+	}
 
-	std::map<std::string, Texture2D> textures;
+	std::map<int, Object3D> object3Ds;
 
 private:
 	const std::string defaultTexture = "default.png";
@@ -85,7 +87,7 @@ private:
 	void readCSV();
 
 	std::mutex texturesMutex;
-	//std::map<std::string, Texture2D> textures;
+	std::map<std::string, Texture2D> textures;
 	void loadTexture(std::string fileName);
 	bool isThisTextureLoaded(std::string textureName);
 	std::thread loadTextureParallel(std::string fileName);
@@ -100,6 +102,8 @@ private:
 
 	std::vector<std::thread> threads;
 	SDL_atomic_t atomicThreadCounter;
+
+	std::vector<int> firstSceneElements;
 
 	//std::map<int, Object3D> object3Ds;
 
