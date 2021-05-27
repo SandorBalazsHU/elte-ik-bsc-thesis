@@ -36,4 +36,5 @@ private:
 	void mouseWheel(SDL_MouseWheelEvent&);
 	void resize(SDL_WindowEvent& window);
 	void exit();
+	int getClickedObjectId(SDL_MouseButtonEvent& mouse);
 };

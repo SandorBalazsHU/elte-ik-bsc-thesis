@@ -35,18 +35,20 @@ public:
 	int addObject(int id);
 	Object3D* getObject(int id);
 
+	std::vector<Object3D> renderableObjects;
+
 private:
+	void renderScrean();
+	void sceneInit();
+	bool firstScreen = true;
+
 	WorkWindow* workingWindow;
 	SDL_Window* window;
 	Camera* camera;
 	ProgramObject* shader;
 	GUI* gui;
 	ObjectStorage* objectStorage;
-	std::vector<Object3D> renderableObjects;
+	
 
-	//test
-	void sceneInit();
-	bool firstScreen = true;
 
-	void renderScrean();
 };
