@@ -27,6 +27,7 @@ private:
 	Render* render;
 
 	std::vector<Object3D*> selectedItems;
+	bool keepSelect = false;
 
 	void keyboardDown(SDL_KeyboardEvent&);
 	void keyboardUp(SDL_KeyboardEvent&);

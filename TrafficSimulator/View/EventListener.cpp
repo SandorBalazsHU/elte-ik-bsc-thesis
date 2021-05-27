@@ -32,10 +32,15 @@ void EventListener::deSelect() {
 
 void EventListener::keyboardDown(SDL_KeyboardEvent& key) {
 	camera->keyboardDown(key);
+	if (key.keysym.sym == SDLK_ESCAPE) exit();
+	if (key.keysym.sym == SDLK_LCTRL) keepSelect = true;
+	if (key.keysym.sym == SDLK_RCTRL) keepSelect = true;
 }
 
 void EventListener::keyboardUp(SDL_KeyboardEvent& key) {
 	camera->keyboardUp(key);
+	if (key.keysym.sym == SDLK_LCTRL) keepSelect = false;
+	if (key.keysym.sym == SDLK_RCTRL) keepSelect = false;
 }
 
 void EventListener::mouseMove(SDL_MouseMotionEvent& mouse) {
@@ -61,7 +66,7 @@ void EventListener::mouseDown(SDL_MouseButtonEvent& mouse) {
 void EventListener::mouseUp(SDL_MouseButtonEvent& mouse) {
 	if (mouse.button == SDL_BUTTON_RIGHT) {
 		//std::cout << "deselect" << std::endl;
-		deSelect();
+		if(!keepSelect) deSelect();
 	}
 }
 
@@ -149,7 +154,6 @@ void EventListener::eventProcessor() {
 				exit();
 				break;
 			case SDL_KEYDOWN:
-				if (event.key.keysym.sym == SDLK_ESCAPE) exit();
 				keyboardDown(event.key);
 				break;
 			case SDL_KEYUP:
