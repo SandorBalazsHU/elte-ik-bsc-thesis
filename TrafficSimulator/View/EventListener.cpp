@@ -49,12 +49,18 @@ void EventListener::mouseMove(SDL_MouseMotionEvent& mouse) {
 }
 
 void EventListener::mouseDown(SDL_MouseButtonEvent& mouse) {
-
+	if (mouse.button == SDL_BUTTON_RIGHT) {
+		int selectedObjectId = getClickedObjectId(mouse);
+		if (selectedObjectId != -1) {
+			select(selectedObjectId);
+			//std::cout << "HIT" << std::endl;
+		}
+	}
 }
 
 void EventListener::mouseUp(SDL_MouseButtonEvent& mouse) {
 	if (mouse.button == SDL_BUTTON_RIGHT) {
-		std::cout << "Naaaaa????" << std::endl;
+		//std::cout << "deselect" << std::endl;
 		deSelect();
 	}
 }
@@ -101,14 +107,15 @@ int EventListener::getClickedObjectId(SDL_MouseButtonEvent& mouse) {
 	//Step 5: Normalize
 	ray_wor = glm::normalize(ray_wor);
 
-	std::cout << "ray_wor: " << ray_wor.x << "," << ray_wor.y << "," << ray_wor.z << std::endl;
+	//std::cout << "ray_wor: " << ray_wor.x << "," << ray_wor.y << "," << ray_wor.z << std::endl;
 
 	std::map<float, int> hits;
 	for (size_t i = 0; i < render->renderableObjects.size(); i++) {
+		glm::vec4 hitSphere = render->renderableObjects[i].getHitSphere();
 		glm::vec3 r0 = camera->getCameraPosition();
 		glm::vec3 rd = ray_wor;
-		glm::vec3 s0 = render->renderableObjects[i].getPosition();
-		float sr = 0.5f;
+		glm::vec3 s0 = glm::vec3(hitSphere.x, hitSphere.y, hitSphere.z);
+		float sr = hitSphere.w;
 
 		float a = glm::dot(rd, rd);
 		glm::vec3 s0_r0 = r0 - s0;
@@ -120,10 +127,14 @@ int EventListener::getClickedObjectId(SDL_MouseButtonEvent& mouse) {
 		}
 		else {
 			hits[glm::distance(s0, camera->getCameraPosition())] = i;
-			std::cout << i << std::endl;
+			//std::cout << i << std::endl;
 		}
 	}
-	if (!hits.empty()) return hits.begin()->second;
+	if (!hits.empty()) {
+		return hits.begin()->second;
+	} else {
+		return -1;
+	}
 }
 
 void EventListener::eventProcessor() {

@@ -131,6 +131,19 @@ void Render::renderScrean() {
 		setTexture(renderableObjects[i].getTexture());
 		shaderPreDrawingUpdate(renderableObjects[i].getWorldMatrix(), renderableObjects[i].getRGBAcolor());
 		drawMesh(renderableObjects[i].getMesh());
+		/*//debug
+		Object3D hitSphere = objectStorage->getObject3D(1);
+		hitSphere.setPosition(glm::vec3(renderableObjects[i].getHitSphere().x,
+			renderableObjects[i].getHitSphere().y, 
+			renderableObjects[i].getHitSphere().z));
+		hitSphere.setScale(glm::vec3(renderableObjects[i].getHitSphere().w,
+			renderableObjects[i].getHitSphere().w,
+			renderableObjects[i].getHitSphere().w));
+		hitSphere.setOpacity(0.5f);
+
+		setTexture(hitSphere.getTexture());
+		shaderPreDrawingUpdate(hitSphere.getWorldMatrix(), hitSphere.getRGBAcolor());
+		drawMesh(hitSphere.getMesh());*/
 	}
 }
 
