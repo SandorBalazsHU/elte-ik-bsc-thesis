@@ -108,6 +108,9 @@
     <ClCompile Include="Model\RayPicking.cpp">
       <Filter>Source Files\View</Filter>
     </ClCompile>
+    <ClCompile Include="View\Objects\Object3Droad.cpp">
+      <Filter>Source Files\View\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="View\WorkWindow.h">
@@ -193,6 +196,9 @@
     </ClInclude>
     <ClInclude Include="Model\RayPicking.h">
       <Filter>Source Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="View\Objects\Object3Droad.h">
+      <Filter>Source Files\View\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

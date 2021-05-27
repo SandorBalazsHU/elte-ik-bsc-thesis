@@ -123,14 +123,21 @@ Object3D* Render::getObject(int id) {
 }
 
 void Render::renderScrean() {
+	Object3Droad road;
 	if (firstScreen) {
 		sceneInit();
 		firstScreen = false;
 	}
+	road.generate();
+	setTexture(objectStorage->getTexture("road.png"));
+	shaderPreDrawingUpdate(glm::translate(glm::vec3(0, 0, 0)), glm::vec4(1, 1, 1, 1));
+	drawVao(road.getVAO(), 1000);
+
 	for (size_t i = 0; i < renderableObjects.size(); i++) {
 		setTexture(renderableObjects[i].getTexture());
 		shaderPreDrawingUpdate(renderableObjects[i].getWorldMatrix(), renderableObjects[i].getRGBAcolor());
 		drawMesh(renderableObjects[i].getMesh());
+
 		/*//debug
 		Object3D hitSphere = objectStorage->getObject3D(1);
 		hitSphere.setPosition(glm::vec3(renderableObjects[i].getHitSphere().x,

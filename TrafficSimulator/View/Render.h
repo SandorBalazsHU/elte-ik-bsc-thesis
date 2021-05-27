@@ -8,6 +8,7 @@ class GUI;
 #include "Utilities/Mesh_OGL3.h"
 #include "Utilities/VertexArrayObject.h"
 #include "Objects/ObjectStorage.h"
+#include "Objects/Object3Droad.h"
 
 class Render {
 public:
@@ -48,7 +49,4 @@ private:
 	ProgramObject* shader;
 	GUI* gui;
 	ObjectStorage* objectStorage;
-	
-
-
 };
