@@ -80,7 +80,7 @@ private:
 	int openGLpostConfig();
 	int glewStart();
 	int shaderConfig();
-	int loadingModels();
+	int renderPreconfig();
 	int renderStart();
 
 	void clearScreen();

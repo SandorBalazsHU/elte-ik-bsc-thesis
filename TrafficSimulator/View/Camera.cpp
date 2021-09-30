@@ -193,10 +193,12 @@ void Camera::mouseMove(SDL_MouseMotionEvent& mouse) {
 * @param key mouse wheel event.
 */
 void Camera::mouseWheel(SDL_MouseWheelEvent& wheel) {
-	if (wheel.y > 0) {
+	//float zoom = 2.0f / (1 / (sphericalCameraPosition.x * sphericalCameraPosition.x));
+	sphericalCoordinateShift(-wheel.y * 2.0f, 0, 0); 
+	/*if (wheel.y > 0) {
 		sphericalCoordinateShift(wheel.y * 1.5f, 0, 0);
 	}
 	else if (wheel.y < 0) {
 		sphericalCoordinateShift(wheel.y * 1.5f, 0, 0);
-	}
+	}*/
 }

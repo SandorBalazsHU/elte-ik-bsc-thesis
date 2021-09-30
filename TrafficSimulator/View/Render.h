@@ -38,6 +38,10 @@ public:
 
 	std::vector<Object3D> renderableObjects;
 
+	int addRoad();
+
+	std::vector<Object3Droad> renderableRoads;
+
 private:
 	void renderScrean();
 	void sceneInit();

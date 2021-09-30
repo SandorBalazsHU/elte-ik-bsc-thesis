@@ -179,6 +179,10 @@ void GUI::draw() {
 		//fpsGraph();
 		//styleTab();
 		itemList();
+
+		if (ImGui::ImageButton((void*)(intptr_t)objectStorage->getTexture("miniatures/road_mini.png"), ImVec2(100, 100))) {
+			int newRoadID = windowRender->addRoad();
+		}
 	}
 	ImGui::End();
 }

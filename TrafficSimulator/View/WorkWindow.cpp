@@ -25,7 +25,7 @@ int WorkWindow::open() {
 	if (status == 0) status = openGLpostConfig();
 	if (status == 0) status = glewStart();
 	if (status == 0) status = shaderConfig();
-	if (status == 0) status = loadingModels();
+	if (status == 0) status = renderPreconfig();
 	if (status == 0) status = renderStart();
 	if (status != 0) Logger::error("WINDOW OPEN ERROR", status);
 	return  status;
@@ -153,28 +153,19 @@ int WorkWindow::shaderConfig() {
 	return 0;
 }
 
-int WorkWindow::loadingModels() {
-	//object3Dloader loader;
-	//loader.load();
-	//Load Texture
-	//texture.FromFile("texture.png");
-
-	// mesh betöltése
-	//ball = ObjParser::parse("sphere.obj");
-
-	return 0;
-}
-
 void WorkWindow::clearScreen() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-int WorkWindow::renderStart() {
+int WorkWindow::renderPreconfig() {
 	eventListener.bind(this);
 	render.bind(this);
 	gui.bind(this);
 	objectStorage.load();
+	return 0;
+}
 
+int WorkWindow::renderStart() {
 	//The render loop
 	while (!exit) {
 		if (!objectStorage.isLoaded()) {

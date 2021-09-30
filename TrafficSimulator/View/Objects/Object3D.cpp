@@ -3,6 +3,22 @@
 #include <glm/gtx/transform2.hpp>
 #include <iostream>
 
+Object3D::Object3D(ObjectStorage* objectStorage) {
+	this->id = -1;
+	this->name = "";
+	this->type = "";
+	this->meshID = "";
+	this->textureID = "white.png";
+	this->iconID = "sphere_mark_mini.png";
+	this->position = glm::vec3(0.0f, 0.0f, 0.0f);
+	this->scale = glm::vec3(1.0f, 1.0f, 1.0f);
+	this->rotation = glm::vec4(0.0f, 0.0f,	1.0f, 0.0f);
+	this->color = glm::vec4(1.0f, 0.0f, 0.0f, 0.0f);
+	this->hitSphere = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f);
+	this->moveSphere = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+	this->objectStorage = objectStorage;
+}
+
 Object3D::Object3D(int id, std::string name, std::string type, std::string meshID, std::string textureID, std::string iconID,
 	glm::vec3 initPosition, glm::vec3 initScale, glm::vec4 initRotation,
 	glm::vec4 color, glm::vec4 hitSphere, glm::vec4 moveSphere, ObjectStorage* objectStorage) {
@@ -154,4 +170,16 @@ Object3D Object3D::copy() {
 	return Object3D(this->id, this->name, this->type, this->meshID, this->textureID, this->iconID,
 		this->position, this->scale, this->rotation,
 		this->color, this->hitSphere, this->moveSphere, this->objectStorage);
+}
+
+bool Object3D::isHidden() {
+	return hidden;
+}
+
+void Object3D::hide() {
+	hidden = true;
+}
+
+void Object3D::show() {
+	hidden = false;
 }

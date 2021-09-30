@@ -118,25 +118,29 @@ int Render::addObject(int id) {
 	return renderableObjects.size()-1;
 }
 
+int Render::addRoad() {
+	Object3Droad road;
+	//road.bind(getObject(addObject(1)), getObject(addObject(1)), getObject(addObject(1)), getObject(addObject(1)));
+	renderableRoads.push_back(road);
+	return renderableObjects.size() - 1;
+}
+
 Object3D* Render::getObject(int id) {
 	return &renderableObjects[id];
 }
 
 void Render::renderScrean() {
-	Object3Droad road;
 	if (firstScreen) {
 		sceneInit();
 		firstScreen = false;
 	}
-	road.generate();
-	setTexture(objectStorage->getTexture("road.png"));
-	shaderPreDrawingUpdate(glm::translate(glm::vec3(0, 0, 0)), glm::vec4(1, 1, 1, 1));
-	drawVao(road.getVAO(), 1000);
 
 	for (size_t i = 0; i < renderableObjects.size(); i++) {
-		setTexture(renderableObjects[i].getTexture());
-		shaderPreDrawingUpdate(renderableObjects[i].getWorldMatrix(), renderableObjects[i].getRGBAcolor());
-		drawMesh(renderableObjects[i].getMesh());
+		if (!renderableObjects[i].isHidden()) {
+			setTexture(renderableObjects[i].getTexture());
+			shaderPreDrawingUpdate(renderableObjects[i].getWorldMatrix(), renderableObjects[i].getRGBAcolor());
+			drawMesh(renderableObjects[i].getMesh());
+		}
 
 		/*//debug
 		Object3D hitSphere = objectStorage->getObject3D(1);
@@ -152,6 +156,12 @@ void Render::renderScrean() {
 		shaderPreDrawingUpdate(hitSphere.getWorldMatrix(), hitSphere.getRGBAcolor());
 		drawMesh(hitSphere.getMesh());*/
 	}
+	for (size_t i = 0; i < renderableRoads.size(); i++) {
+		setTexture(objectStorage->getTexture("road.png"));
+		shaderPreDrawingUpdate(renderableRoads[i].getWorldMatrix(), renderableRoads[i].getRGBAcolor());
+		drawVao(renderableRoads[i].getVAO(), 1000);
+	}
+
 }
 
 void Render::render() {

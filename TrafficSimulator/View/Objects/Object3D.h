@@ -8,7 +8,8 @@ class ObjectStorage;
 
 class Object3D {
 	public:
-		Object3D() {}
+		Object3D() {};
+		Object3D(ObjectStorage* objectStorage);
 		Object3D(int id, std::string name, std::string type, std::string meshID, std::string textureID, std::string iconID,
 			glm::vec3 initPosition, glm::vec3 initScale, glm::vec4 initRotation,
 			glm::vec4 color, glm::vec4	hitSphere, glm::vec4 moveSphere, ObjectStorage* objectStorage);
@@ -46,6 +47,10 @@ class Object3D {
 		glm::vec4				getHitSphere();
 		glm::vec4				getMoveSphere();
 		Object3D				copy();
+		bool					isHidden();
+		void					hide();
+		void					show();
+
 
 	protected:
 		ObjectStorage*			objectStorage;
@@ -62,4 +67,5 @@ class Object3D {
 		glm::vec4				worldMatrix;
 		glm::vec4				hitSphere;
 		glm::vec4				moveSphere;
+		bool					hidden = false;
 	};

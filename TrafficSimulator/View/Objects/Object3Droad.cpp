@@ -1,4 +1,70 @@
 #include "Object3Droad.h"
+#include <glm/gtx/transform2.hpp>
+
+Object3Droad::Object3Droad() {
+	this->roadYposition = 0.0f;
+	this->color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+};
+
+Object3Droad::Object3Droad(const Object3Droad&) {}
+
+void Object3Droad::bind(Object3D* trackBall_0, Object3D* trackBall_1, Object3D* trackBall_2, Object3D* trackBall_3) {
+	this->trackBalls[0] = trackBall_0;
+	this->trackBalls[1] = trackBall_1;
+	this->trackBalls[2] = trackBall_2;
+	this->trackBalls[3] = trackBall_3;
+	this->trackBalls[0]->setPosition(glm::vec3(-5.0f, roadYposition, -0.0f));
+	this->trackBalls[1]->setPosition(glm::vec3(-2.0f, roadYposition, 5.1f));
+	this->trackBalls[2]->setPosition(glm::vec3(2.0f, roadYposition, 5.1f));
+	this->trackBalls[3]->setPosition(glm::vec3(5.0f, roadYposition, -0.0f));
+	this->updateBasePoints();
+}
+
+void Object3Droad::updateBasePoints() {
+	for (size_t i = 0; i < 4; i++) {
+		basePoints[i] = trackBalls[i]->getPosition();
+	}
+}
+
+void Object3Droad::setRGBAcolor(glm::vec4 RGBAcolor) {
+	this->color = RGBAcolor;
+}
+void Object3Droad::setRGBcolor(glm::vec3 RGBcolor) {
+	this->color.x = RGBcolor.x;
+	this->color.y = RGBcolor.y;
+	this->color.z = RGBcolor.z;
+}
+void Object3Droad::setOpacity(float opacity) {
+	this->color.w = opacity;
+}
+
+glm::mat4 Object3Droad::getWorldMatrix() {
+	return glm::translate(glm::vec3(0, 0, 0));
+}
+
+glm::vec4 Object3Droad::getRGBAcolor() {
+	return color;
+}
+
+glm::vec3 Object3Droad::getRGBcolor() {
+	return glm::vec3(color.y, color.z, color.w);
+}
+
+float Object3Droad::getOpacity() {
+	return this->color.w;
+}
+
+bool Object3Droad::isSelected() {
+	return selected;
+}
+
+void Object3Droad::select() {
+	selected = true;
+}
+
+void Object3Droad::deselect() {
+	selected = false;
+}
 
 void Object3Droad::generateRoadPoints() {
 	for (double u = 0.0; u <= 1.0; u += 0.01) {
