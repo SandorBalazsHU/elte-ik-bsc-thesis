@@ -9,9 +9,15 @@
 */
 
 #include "Camera.h"
+#include "../Control/Logger.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include <set>
 #include <iostream>
+
+#include <iostream>
+#include <string>
+
+#include <math.h>
 
 /**
  * @brief The Camera class constructor.
@@ -110,7 +116,8 @@ void Camera::sphericalCoordinateShift(float radius, float azimuth, float inclina
 	sphericalCameraPosition.y += inclination;
 	sphericalCameraPosition.z += azimuth;
 	//Limiters
-	if (sphericalCameraPosition.x < 1.0f) sphericalCameraPosition.x = 1.2f;
+	if (sphericalCameraPosition.x < 1.1f) sphericalCameraPosition.x = 1.1f;
+	if (sphericalCameraPosition.x > 250.0f) sphericalCameraPosition.x = 250.0f;
 	if (sphericalCameraPosition.y > 1.5f) sphericalCameraPosition.y = 1.499f;
 	if (sphericalCameraPosition.y < 0.02f) sphericalCameraPosition.y = 0.0211f;
 	cameraCoordinateUpdate();
@@ -193,8 +200,13 @@ void Camera::mouseMove(SDL_MouseMotionEvent& mouse) {
 * @param key mouse wheel event.
 */
 void Camera::mouseWheel(SDL_MouseWheelEvent& wheel) {
-	//float zoom = 2.0f / (1 / (sphericalCameraPosition.x * sphericalCameraPosition.x));
-	sphericalCoordinateShift(-wheel.y * 2.0f, 0, 0); 
+	//float zoom = (6.0f - (6.0f / sphericalCameraPosition.x))-1.0f;
+	float zoom = log10((sphericalCameraPosition.x * sphericalCameraPosition.x));
+	Logger::log("X:" + std::to_string(sphericalCameraPosition.x));
+	Logger::log("ZOOM:" + std::to_string(zoom));
+	Logger::log("WHEEL:" + std::to_string(-wheel.y));
+	Logger::log("ZOOM FACTOR:" + std::to_string(-wheel.y * zoom));
+	sphericalCoordinateShift(-wheel.y * (zoom + 0.0001f), 0, 0);
 	/*if (wheel.y > 0) {
 		sphericalCoordinateShift(wheel.y * 1.5f, 0, 0);
 	}
