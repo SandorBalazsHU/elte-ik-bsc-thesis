@@ -48,7 +48,6 @@ void EventListener::keyboardUp(SDL_KeyboardEvent& key) {
 void EventListener::mouseMove(SDL_MouseMotionEvent& mouse) {
 	camera->mouseMove(mouse);
 	if (mouse.state & SDL_BUTTON_RMASK) {
-		//glm::vec3 shift = glm::vec3(mouse.xrel / 4.0f, 0, mouse.yrel / 4.0f);
 
 		glm::vec2 shift2D = glm::vec2(mouse.xrel / 4.0f, mouse.yrel / 4.0f);
 		float azimuth = camera->getAzimuth();
@@ -58,26 +57,7 @@ void EventListener::mouseMove(SDL_MouseMotionEvent& mouse) {
 		glm::mat3 rotateMatrix2 = glm::rotate(glm::pi<float>()/2.0f, glm::vec3(0, 1, 0));
 		glm::vec3 rotatedShift = rotateMatrix2 * originalShift;
 
-
-		/*glm::mat3 flipMatrix3D(glm::vec3(glm::cos(glm::pi<float>()), glm::sin(glm::pi<float>()), 0), glm::vec3(-glm::sin(glm::pi<float>()), glm::cos(glm::pi<float>()), 0), glm::vec3(0, 0, 1));
-		glm::vec3 shift = flipMatrix3D * glm::vec3(rotatedShift2D.x, 0, rotatedShift2D.y);*/
-
-		/*float azimuth = camera->getAzimuth();
-		glm::vec3 originalShift = glm::vec3(mouse.xrel / 4.0f, 0, mouse.yrel / 4.0f);
-		glm::mat3 rotateMatrix(glm::vec3(glm::cos(azimuth), glm::sin(azimuth),0), glm::vec3(-glm::sin(azimuth), glm::cos(azimuth),0), glm::vec3(0,0,1));
-		glm::vec3 rotatedShift = rotateMatrix * originalShift;*/
-
-		/*float azimuth = camera->getAzimuth();
-		glm::vec3 originalShift = glm::vec3(mouse.xrel / 4.0f, 0, mouse.yrel / 4.0f);
-		glm::mat3 rotateMatrix(glm::vec3(glm::cos(azimuth), glm::sin(azimuth),0), glm::vec3(-glm::sin(azimuth), glm::cos(azimuth),0), glm::vec3(0,0,1));
-		glm::vec3 rotatedShift = rotateMatrix * originalShift;*/
-
-		/*float azimuth = camera->getAzimuth();
-		std::cout << azimuth << std::endl;
-		glm::mat3 rotateMatrix = glm::rotate(azimuth, glm::vec3(1,0,0));
-		glm::vec3 originalShift = glm::vec3(mouse.xrel / 4.0f, 0, mouse.yrel / 4.0f);
-		glm::vec3 rotatedShift = rotateMatrix * originalShift;*/
-
+		//glm::normalize(
 		for (size_t i = 0; i < selectedItems.size(); i++) {
 			selectedItems[i]->move(rotatedShift);
 		}
@@ -146,7 +126,7 @@ int EventListener::getClickedObjectId(SDL_MouseButtonEvent& mouse) {
 	//std::cout << "ray_wor: " << ray_wor.x << "," << ray_wor.y << "," << ray_wor.z << std::endl;
 
 	std::map<float, int> hits;
-	for (size_t i = 0; i < render->renderableObjects.size(); i++) {
+	for (size_t i = 1; i < render->renderableObjects.size(); i++) {
 		glm::vec4 hitSphere = render->renderableObjects[i].getHitSphere();
 		glm::vec3 r0 = camera->getCameraPosition();
 		glm::vec3 rd = ray_wor;

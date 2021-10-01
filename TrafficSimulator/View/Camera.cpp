@@ -11,6 +11,7 @@
 #include "Camera.h"
 #include "../Control/Logger.h"
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/transform2.hpp>
 #include <set>
 #include <math.h>
 #include <iostream>
@@ -147,28 +148,36 @@ void Camera::resize(int width, int height) {
  * @param key keyboard down event.
 */
 void Camera::keyboardDown(SDL_KeyboardEvent& key) {
-	float s = lookedPointMovementSpeed;
+	glm::vec2 shift2D(0, 0);
 	pressedKeys.insert(key.keysym.sym);
+
 	for (int keyCode : pressedKeys) {
 		switch (keyCode) {
 		case SDLK_w:
-			lookedPoint.x += s;
-			cameraPosition.x += s;
+			shift2D.y -= lookedPointMovementSpeed;
 			break;
 		case SDLK_s:
-			lookedPoint.x -= s;
-			cameraPosition.x -= s;
+			shift2D.y += lookedPointMovementSpeed;
 			break;
 		case SDLK_a:
-			lookedPoint.z += s;
-			cameraPosition.z += s;
+			shift2D.x -= lookedPointMovementSpeed;
 			break;
 		case SDLK_d:
-			lookedPoint.z -= s;
-			cameraPosition.z -= s;
+			shift2D.x += lookedPointMovementSpeed;
 			break;
 		}
 	}
+
+	float azimuth = getAzimuth();
+	glm::mat2 rotateMatrix(glm::cos(azimuth), glm::sin(azimuth), -glm::sin(azimuth), glm::cos(azimuth));
+	glm::vec2 rotatedShift2D = rotateMatrix * shift2D;
+	glm::vec3 originalShift = glm::vec3(rotatedShift2D.x, 0, rotatedShift2D.y);
+	glm::mat3 rotateMatrix2 = glm::rotate(glm::pi<float>() / 2.0f, glm::vec3(0, 1, 0));
+	glm::vec3 rotatedShift = rotateMatrix2 * originalShift;
+
+	lookedPoint += rotatedShift;
+	cameraPosition += rotatedShift;
+
 	sphericalCoordinateUpdate();
 	cameraCoordinateUpdate();
 }
