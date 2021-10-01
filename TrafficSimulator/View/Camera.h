@@ -76,6 +76,22 @@ public:
 	}
 
 	/**
+	 * @brief Getter for the forward vector. (Camera from looked point)
+	 * @return The forward vector.
+	
+	glm::vec3 getForwardVector() {
+		return lookedPoint-cameraPosition;
+	}*/
+
+	/**
+	 * @brief 
+	 * @return 
+	*/
+	float getAzimuth() {
+		return sphericalCameraPosition.z;
+	}
+
+	/**
 	 * @brief Getter for the view matrix.
 	 * @return The current view matrix.
 	*/

@@ -12,12 +12,9 @@
 #include "../Control/Logger.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include <set>
-#include <iostream>
-
+#include <math.h>
 #include <iostream>
 #include <string>
-
-#include <math.h>
 
 /**
  * @brief The Camera class constructor.
@@ -192,6 +189,7 @@ void Camera::keyboardUp(SDL_KeyboardEvent& key) {
 void Camera::mouseMove(SDL_MouseMotionEvent& mouse) {
 	if (mouse.state & SDL_BUTTON_LMASK) {
 		sphericalCoordinateShift(0, mouse.xrel / 200.0f, (mouse.yrel / 200.0f) * -1.0f);
+		//Logger::log(std::to_string(sphericalCameraPosition.z));
 	}
 }
 
@@ -200,17 +198,6 @@ void Camera::mouseMove(SDL_MouseMotionEvent& mouse) {
 * @param key mouse wheel event.
 */
 void Camera::mouseWheel(SDL_MouseWheelEvent& wheel) {
-	//float zoom = (6.0f - (6.0f / sphericalCameraPosition.x))-1.0f;
 	float zoom = log10((sphericalCameraPosition.x * sphericalCameraPosition.x));
-	Logger::log("X:" + std::to_string(sphericalCameraPosition.x));
-	Logger::log("ZOOM:" + std::to_string(zoom));
-	Logger::log("WHEEL:" + std::to_string(-wheel.y));
-	Logger::log("ZOOM FACTOR:" + std::to_string(-wheel.y * zoom));
 	sphericalCoordinateShift(-wheel.y * (zoom + 0.0001f), 0, 0);
-	/*if (wheel.y > 0) {
-		sphericalCoordinateShift(wheel.y * 1.5f, 0, 0);
-	}
-	else if (wheel.y < 0) {
-		sphericalCoordinateShift(wheel.y * 1.5f, 0, 0);
-	}*/
 }
