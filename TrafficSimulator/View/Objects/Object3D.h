@@ -14,6 +14,7 @@ class Object3D {
 			glm::vec3 initPosition, glm::vec3 initScale, glm::vec4 initRotation,
 			glm::vec4 color, glm::vec4	hitSphere, glm::vec4 moveSphere, ObjectStorage* objectStorage);
 		~Object3D(void) {}
+		void					setDependencyID(int dependencyID);
 		void					setMeshID(std::string meshID);
 		void					setTextureID(std::string textureID);
 		void					setIconID(std::string iconID);
@@ -26,7 +27,10 @@ class Object3D {
 		void					setRGBAcolor(glm::vec4 RGBAcolor);
 		void					setRGBcolor(glm::vec3 RGBcolor);
 		void					setOpacity(float opacity);
+		void 					setRenderID(int newRenderID);
 		int 					getId();
+		int 					getRenderID();
+		int						getDependencyID();
 		std::string				getName();
 		std::string				getType();
 		std::unique_ptr<Mesh>&	getMesh();
@@ -47,6 +51,7 @@ class Object3D {
 		glm::vec4				getHitSphere();
 		glm::vec4				getMoveSphere();
 		Object3D				copy();
+		Object3D				copy(int renderID);
 		bool					isHidden();
 		void					hide();
 		void					show();
@@ -55,6 +60,8 @@ class Object3D {
 	protected:
 		ObjectStorage*			objectStorage;
 		int 					id;
+		int 					renderID;
+		int						dependencyID;
 		std::string				name;
 		std::string				type;
 		std::string				meshID;

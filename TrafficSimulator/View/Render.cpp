@@ -113,20 +113,43 @@ void Render::sceneInit() {
 	}
 }
 
+//TODO render id is correct?
 int Render::addObject(int id) {
-	renderableObjects.push_back(objectStorage->getObject3D(id));
+	renderableObjects.push_back(objectStorage->getObject3D(id, renderableObjects.size()));
 	return renderableObjects.size()-1;
 }
 
+void Render::deleteObject(int renderID) {
+		renderableObjects.erase(renderableObjects.begin() + renderID);
+}
+
 int Render::addRoad() {
-	Object3Droad road;
-	//road.bind(getObject(addObject(1)), getObject(addObject(1)), getObject(addObject(1)), getObject(addObject(1)));
+	Object3Droad* road = new Object3Droad();
+	addObject(1);
+	addObject(1);
+	addObject(1);
+	addObject(1);
+	Object3D* trackBall_0 = getObject(renderableObjects.size() - 4);
+	Object3D* trackBall_1 = getObject(renderableObjects.size() - 3);
+	Object3D* trackBall_2 = getObject(renderableObjects.size() - 2);
+	Object3D* trackBall_3 = getObject(renderableObjects.size() - 1);
+
+	trackBall_0->setDependencyID(renderableRoads.size());
+	trackBall_1->setDependencyID(renderableRoads.size());
+	trackBall_2->setDependencyID(renderableRoads.size());
+	trackBall_3->setDependencyID(renderableRoads.size());
+
+	road->bind(trackBall_0, trackBall_1, trackBall_2, trackBall_3);
 	renderableRoads.push_back(road);
-	return renderableObjects.size() - 1;
+	return renderableRoads.size() - 1;
 }
 
 Object3D* Render::getObject(int id) {
 	return &renderableObjects[id];
+}
+
+void Render::updateDynamicObject(int id) {
+	renderableRoads[id]->update();
 }
 
 void Render::renderScrean() {
@@ -158,8 +181,8 @@ void Render::renderScrean() {
 	}
 	for (size_t i = 0; i < renderableRoads.size(); i++) {
 		setTexture(objectStorage->getTexture("road.png"));
-		shaderPreDrawingUpdate(renderableRoads[i].getWorldMatrix(), renderableRoads[i].getRGBAcolor());
-		drawVao(renderableRoads[i].getVAO(), 1000);
+		shaderPreDrawingUpdate(renderableRoads[i]->getWorldMatrix(), renderableRoads[i]->getRGBAcolor());
+		drawVao(renderableRoads[i]->getVAO(), 596);
 	}
 
 }

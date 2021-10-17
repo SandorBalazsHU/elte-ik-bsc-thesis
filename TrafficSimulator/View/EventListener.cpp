@@ -38,10 +38,19 @@ void EventListener::keyboardDown(SDL_KeyboardEvent& key) {
 	if (key.keysym.sym == SDLK_RCTRL) keepSelect = true;
 }
 
+void EventListener::deleteSelectedItems() {
+	if (selectedItems.size() >= 1) {
+		for (size_t i = 0; i < selectedItems.size(); i++) {
+			render->deleteObject(selectedItems[i]->getRenderID());
+		}
+	}
+}
+
 void EventListener::keyboardUp(SDL_KeyboardEvent& key) {
 	camera->keyboardUp(key);
 	if (key.keysym.sym == SDLK_LCTRL) keepSelect = false;
 	if (key.keysym.sym == SDLK_RCTRL) keepSelect = false;
+	if (key.keysym.sym == SDLK_DELETE) deleteSelectedItems();
 }
 
 //https://en.wikipedia.org/wiki/Rotation_of_axes
@@ -57,9 +66,11 @@ void EventListener::mouseMove(SDL_MouseMotionEvent& mouse) {
 		glm::mat3 rotateMatrix2 = glm::rotate(glm::pi<float>()/2.0f, glm::vec3(0, 1, 0));
 		glm::vec3 rotatedShift = rotateMatrix2 * originalShift;
 
-		//glm::normalize(
 		for (size_t i = 0; i < selectedItems.size(); i++) {
 			selectedItems[i]->move(rotatedShift);
+			if (selectedItems[i]->getDependencyID() != -1) {
+				render->updateDynamicObject(selectedItems[i]->getDependencyID());
+			}
 		}
 	}
 }

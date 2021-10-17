@@ -29,6 +29,8 @@ private:
 	std::vector<Object3D*> selectedItems;
 	bool keepSelect = false;
 
+	void deleteSelectedItems();
+
 	void keyboardDown(SDL_KeyboardEvent&);
 	void keyboardUp(SDL_KeyboardEvent&);
 	void mouseMove(SDL_MouseMotionEvent&);

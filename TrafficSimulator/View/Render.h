@@ -34,13 +34,15 @@ public:
 	void wireframeOff();
 	void setWindowIcon(SDL_Surface* windowIcon);
 	int addObject(int id);
+	void deleteObject(int id);
 	Object3D* getObject(int id);
+	void updateDynamicObject(int id);
 
 	std::vector<Object3D> renderableObjects;
 
 	int addRoad();
 
-	std::vector<Object3Droad> renderableRoads;
+	std::vector<Object3Droad*> renderableRoads;
 
 private:
 	void renderScrean();

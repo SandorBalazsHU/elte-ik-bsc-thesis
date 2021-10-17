@@ -1,0 +1,16 @@
+Törlés gomb hozzáadása
+Tereptárgy törlés
+Több út beszúrása
+Út kiválasztás (Minden x-edig pontra z átmérõjû metszõ gömb)
+Út törlés
+Út színezés
+Útvég + Út eleje clipping, fitting
+Úthossz számítás
+Út jobbgombos menü
+Kezdõpont hozzáadás
+Végpont hozzáadás
+Gráf generálás
+Útvonal generálás
+Útvonal jelölés
+Útvonal kiemelés
+Autó végighaladás.

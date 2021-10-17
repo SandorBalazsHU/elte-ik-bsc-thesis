@@ -159,7 +159,7 @@ void GUI::itemList() {
 		if (it->second.getType() == "object") {
 			if (ImGui::ImageButton((void*)(intptr_t)it->second.getIcon(), ImVec2(100, 100))) {
 				int renderableObjectID = windowRender->addObject(it->first);
-				eventListener->select(renderableObjectID);
+				//eventListener->select(renderableObjectID);
 			}
 			if (i++ % 2 == 0) ImGui::SameLine();
 		}

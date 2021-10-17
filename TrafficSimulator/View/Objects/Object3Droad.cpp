@@ -8,16 +8,23 @@ Object3Droad::Object3Droad() {
 
 Object3Droad::Object3Droad(const Object3Droad&) {}
 
+//Object3Droad::~Object3Droad(void) {}
+
 void Object3Droad::bind(Object3D* trackBall_0, Object3D* trackBall_1, Object3D* trackBall_2, Object3D* trackBall_3) {
+	//trackBall_0->setRGBcolor(glm::vec3(1, 0, 0));
+	trackBall_0->setPosition(glm::vec3(-5.0f, roadYposition, 0.0f));
+	//trackBall_1->setRGBcolor(glm::vec3(0, 1, 0));
+	trackBall_1->setPosition(glm::vec3(-2.0f, roadYposition, 5.1f));
+	//trackBall_2->setRGBcolor(glm::vec3(0, 0, 1));
+	trackBall_2->setPosition(glm::vec3(2.0f, roadYposition, 5.1f));
+	//trackBall_3->setRGBcolor(glm::vec3(1, 1, 0));
+	trackBall_3->setPosition(glm::vec3(5.0f, roadYposition, 0.0f));
 	this->trackBalls[0] = trackBall_0;
 	this->trackBalls[1] = trackBall_1;
 	this->trackBalls[2] = trackBall_2;
 	this->trackBalls[3] = trackBall_3;
-	this->trackBalls[0]->setPosition(glm::vec3(-5.0f, roadYposition, -0.0f));
-	this->trackBalls[1]->setPosition(glm::vec3(-2.0f, roadYposition, 5.1f));
-	this->trackBalls[2]->setPosition(glm::vec3(2.0f, roadYposition, 5.1f));
-	this->trackBalls[3]->setPosition(glm::vec3(5.0f, roadYposition, -0.0f));
 	this->updateBasePoints();
+	generate();
 }
 
 void Object3Droad::updateBasePoints() {
@@ -173,4 +180,9 @@ void Object3Droad::generate() {
 		{ CreateAttribute<1, glm::vec3, 0, sizeof(glm::vec3)>, modelNormals },
 		{ CreateAttribute<2, glm::vec2, 0, sizeof(glm::vec2)>, modelTextures }
 	}, modelIndices);
+}
+
+void Object3Droad::update() {
+	this->updateBasePoints();
+	generate();
 }

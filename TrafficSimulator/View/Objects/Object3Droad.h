@@ -13,14 +13,15 @@ public:
 	void bind(Object3D* trackBall_0, Object3D* trackBall_1, Object3D* trackBall_2, Object3D* trackBall_3);
 
 	void generate();
+	void update();
 	VertexArrayObject& getVAO() {
 		//updateBasePoints();
 		return model;
 	};
 
-	/*Object3D* getTrackBalls() {
+	Object3D** getTrackBalls() {
 		return trackBalls;
-	}*/
+	}
 
 	void					setRGBAcolor(glm::vec4 RGBAcolor);
 	void					setRGBcolor(glm::vec3 RGBcolor);

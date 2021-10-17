@@ -51,6 +51,7 @@ public:
 		return loadingStateMax;
 	}
 
+	//TODO error handling
 	Object3D getObject3D(int object3Did) {
 		auto object3D = object3Ds.find(object3Did);
 		if (object3D == object3Ds.end()) {
@@ -59,6 +60,18 @@ public:
 
 		}
 		return object3D->second.copy();
+	}
+
+	//TODO error handling
+	Object3D getObject3D(int object3Did, int renderID) {
+		auto object3D = object3Ds.find(object3Did);
+		if (object3D == object3Ds.end()) {
+			std::cout << "AJJJAJJJ!" << std::endl;
+		}
+		else {
+
+		}
+		return object3D->second.copy(renderID);
 	}
 
 	std::vector<int>& getFirstSceneElements() {

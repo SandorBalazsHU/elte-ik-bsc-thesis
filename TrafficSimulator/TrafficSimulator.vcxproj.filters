@@ -34,6 +34,9 @@
     <Filter Include="Source Files\Model">
       <UniqueIdentifier>{dcd220b4-f2e4-44a1-adda-45d258c5e90d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Documentation">
+      <UniqueIdentifier>{942e0321-0162-4e2d-b3fd-a210ca9a679c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TrafficSimulator.cpp">
@@ -220,5 +223,10 @@
     <None Include="View\Shaders\vertexShader.vert">
       <Filter>Source Files\View\Shaders</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="TODO.txt">
+      <Filter>Documentation</Filter>
+    </Text>
   </ItemGroup>
 </Project>

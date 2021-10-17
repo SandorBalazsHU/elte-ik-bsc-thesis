@@ -5,6 +5,8 @@
 
 Object3D::Object3D(ObjectStorage* objectStorage) {
 	this->id = -1;
+	this->renderID = -1;
+	this->dependencyID = -1;
 	this->name = "";
 	this->type = "";
 	this->meshID = "";
@@ -23,6 +25,7 @@ Object3D::Object3D(int id, std::string name, std::string type, std::string meshI
 	glm::vec3 initPosition, glm::vec3 initScale, glm::vec4 initRotation,
 	glm::vec4 color, glm::vec4 hitSphere, glm::vec4 moveSphere, ObjectStorage* objectStorage) {
 	this->id = id;
+	this->renderID = -1;
 	this->name = name;
 	this->type = type;
 	this->meshID = meshID;
@@ -35,6 +38,14 @@ Object3D::Object3D(int id, std::string name, std::string type, std::string meshI
 	this->hitSphere = hitSphere;
 	this->moveSphere = moveSphere;
 	this->objectStorage = objectStorage;
+}
+
+void Object3D::setRenderID(int newRenderID) {
+	this->renderID = newRenderID;
+}
+
+void Object3D::setDependencyID(int dependencyID) {
+	this->dependencyID = dependencyID;
 }
 
 void Object3D::setMeshID(std::string meshID) {
@@ -84,15 +95,23 @@ void Object3D::setOpacity(float opacity) {
 	this->color.w = opacity;
 }
 
-int 					Object3D::getId() {
+int	Object3D::getId() {
 	return this->id;
 }
 
-std::string				Object3D::getName() {
+int	Object3D::getRenderID() {
+	return this->renderID;
+}
+
+int	Object3D::getDependencyID() {
+	return this->dependencyID;
+}
+
+std::string	Object3D::getName() {
 	return this->name;
 }
 
-std::string				Object3D::getType() {
+std::string	Object3D::getType() {
 	return this->type;
 }
 
@@ -170,6 +189,12 @@ Object3D Object3D::copy() {
 	return Object3D(this->id, this->name, this->type, this->meshID, this->textureID, this->iconID,
 		this->position, this->scale, this->rotation,
 		this->color, this->hitSphere, this->moveSphere, this->objectStorage);
+}
+
+Object3D Object3D::copy(int renderID) {
+	Object3D newObject = this->copy();
+	newObject.setRenderID(renderID);
+	return newObject;
 }
 
 bool Object3D::isHidden() {
