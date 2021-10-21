@@ -18,6 +18,7 @@ public:
 	SDL_Surface* getWindowIcon() {
 		return windowIcon;
 	}
+
 	Texture2D& getTexture(std::string textureName) {
 		if (isThisTextureLoaded(textureName)) {
 			return textures[textureName];

@@ -34,6 +34,11 @@ public:
 	void					select();
 	void					deselect();
 
+	//std::vector<glm::vec3> points;
+	//std::vector<glm::vec3> shiftedPoints;
+	std::vector<glm::vec3> trackOne;
+	//std::vector<glm::vec3> trackTwo;
+
 protected:
 	void generateRoadPoints();
 	glm::vec3 bezierPoint(float u);
@@ -55,7 +60,7 @@ protected:
 	float roadYposition;
 	std::vector<glm::vec3> points;
 	std::vector<glm::vec3> shiftedPoints;
-	std::vector<glm::vec3> trackOne;
+	//std::vector<glm::vec3> trackOne;
 	std::vector<glm::vec3> trackTwo;
 
 	size_t	modelPointCount;

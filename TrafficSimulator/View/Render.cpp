@@ -26,6 +26,9 @@ void Render::bind(WorkWindow* currentWindow) {
 	objectStorage = workingWindow->getObjectStorage();
 	setWindowIcon(objectStorage->getWindowIcon());
 	fpsCounter::bind();
+	/*multisamplingOn();
+	vsyncOn();
+	wireframeOn();*/
 	/*void vsyncOff();
 	fpsCounter::fpsLimiterOn();
 	fpsCounter::setFpsLimit(60);*/
@@ -113,7 +116,6 @@ void Render::sceneInit() {
 	}
 }
 
-//TODO render id is correct?
 int Render::addObject(int id) {
 	renderableObjects.push_back(objectStorage->getObject3D(id, renderableObjects.size()));
 	return renderableObjects.size()-1;
@@ -165,6 +167,18 @@ void Render::renderScrean() {
 			drawMesh(renderableObjects[i].getMesh());
 		}
 
+		/*if (renderableRoads.size() >= 1) {
+			for (size_t i = 0; i < renderableRoads[0]->trackOne.size(); i += 1) {
+				Object3D hitSphere = objectStorage->getObject3D(1);
+				hitSphere.setPosition(renderableRoads[0]->trackOne[i]);
+				hitSphere.setScale(glm::vec3(1,1,1));
+				hitSphere.setRGBcolor(glm::vec3(1, 0, 0));
+				hitSphere.setOpacity(0.5f);
+				setTexture(hitSphere.getTexture());
+				shaderPreDrawingUpdate(hitSphere.getWorldMatrix(), hitSphere.getRGBAcolor());
+				drawMesh(hitSphere.getMesh());
+			}
+		}*/
 		/*//debug
 		Object3D hitSphere = objectStorage->getObject3D(1);
 		hitSphere.setPosition(glm::vec3(renderableObjects[i].getHitSphere().x,
@@ -202,5 +216,7 @@ void Render::render() {
 	gui->render();
 	rendering();
 	setWindowTitle(workingWindow->getWindowTitle());
+	//TODO: NOT A GOD SOLUTION
+	setWindowIcon(objectStorage->getWindowIcon());
 	fpsCounter::stop();
 }

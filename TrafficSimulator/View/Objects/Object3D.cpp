@@ -26,6 +26,7 @@ Object3D::Object3D(int id, std::string name, std::string type, std::string meshI
 	glm::vec4 color, glm::vec4 hitSphere, glm::vec4 moveSphere, ObjectStorage* objectStorage) {
 	this->id = id;
 	this->renderID = -1;
+	this->dependencyID = -1;
 	this->name = name;
 	this->type = type;
 	this->meshID = meshID;
