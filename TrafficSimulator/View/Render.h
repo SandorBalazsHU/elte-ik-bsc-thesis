@@ -47,6 +47,7 @@ public:
 private:
 	void renderScrean();
 	void sceneInit();
+	void updateRenderIDs();
 	bool firstScreen = true;
 
 	WorkWindow* workingWindow;

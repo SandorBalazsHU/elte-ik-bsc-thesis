@@ -123,6 +123,13 @@ int Render::addObject(int id) {
 
 void Render::deleteObject(int renderID) {
 		renderableObjects.erase(renderableObjects.begin() + renderID);
+		updateRenderIDs();
+}
+
+void Render::updateRenderIDs() {
+	for (size_t i = 0; i < renderableObjects.size(); i++) {
+		renderableObjects[i].setDependencyID(i);
+	}
 }
 
 int Render::addRoad() {
