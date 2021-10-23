@@ -48,6 +48,7 @@ private:
 	void renderScrean();
 	void sceneInit();
 	void updateRenderIDs();
+	void rebindRoads();
 	bool firstScreen = true;
 
 	WorkWindow* workingWindow;

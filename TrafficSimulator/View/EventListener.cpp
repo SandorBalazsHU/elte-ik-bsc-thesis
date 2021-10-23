@@ -69,6 +69,7 @@ void EventListener::mouseMove(SDL_MouseMotionEvent& mouse) {
 		for (size_t i = 0; i < selectedItems.size(); i++) {
 			selectedItems[i]->move(rotatedShift);
 			if (selectedItems[i]->getDependencyID() > -1) {
+				//TODO DELETED OBJECTS ERROR
 				render->updateDynamicObject(selectedItems[i]->getDependencyID());
 			}
 		}

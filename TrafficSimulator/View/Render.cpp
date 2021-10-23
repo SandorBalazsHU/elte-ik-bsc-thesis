@@ -122,13 +122,36 @@ int Render::addObject(int id) {
 }
 
 void Render::deleteObject(int renderID) {
+	if (!renderableObjects[renderID].isProtected()) {
 		renderableObjects.erase(renderableObjects.begin() + renderID);
 		updateRenderIDs();
+		rebindRoads();
+	}
 }
 
 void Render::updateRenderIDs() {
 	for (size_t i = 0; i < renderableObjects.size(); i++) {
-		renderableObjects[i].setDependencyID(i);
+		renderableObjects[i].setRenderID(i);
+	}
+}
+
+//Végignézzük az összes dependenciával rendelkezõ objektumot és újrakötjük.
+//Repair pointers corrupted by deleting  .
+//TODO Mi van ha nem négy van?
+void Render::rebindRoads() {
+	if (renderableRoads.size() > 0) {
+		std::vector<Object3D*> rebindableObjects;
+		for (size_t i = 0; i < renderableObjects.size(); i++) {
+			if (renderableObjects[i].getDependencyID() > -1) {
+				rebindableObjects.push_back(&renderableObjects[i]);
+				std::cout << renderableObjects[i].getDependencyID() << std::endl;
+			}
+		}
+		std::cout << std::endl << std::endl << rebindableObjects.size() << std::endl << std::endl;
+		for (size_t i = 0; i < rebindableObjects.size(); i += 4) {
+			std::cout << i << std::endl;
+			renderableRoads[rebindableObjects[i]->getDependencyID()]->reBind(rebindableObjects[i], rebindableObjects[i + 1], rebindableObjects[i + 2], rebindableObjects[i + 3]);
+		}
 	}
 }
 

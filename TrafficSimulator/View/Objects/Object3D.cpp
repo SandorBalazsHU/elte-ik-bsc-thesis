@@ -96,6 +96,10 @@ void Object3D::setOpacity(float opacity) {
 	this->color.w = opacity;
 }
 
+void Object3D::setProtection(bool isProtected) {
+	this->protection = isProtected;
+}
+
 int	Object3D::getId() {
 	return this->id;
 }
@@ -172,6 +176,10 @@ float Object3D::getOpacity() {
 	return this->color.w;
 }
 
+bool Object3D::isProtected() {
+	return protection;
+}
+
 glm::mat4 Object3D::getWorldMatrix() {
 	return glm::translate(this->position)
 	* glm::rotate(this->getRotationInRadian(), this->getRotationVector())
@@ -180,6 +188,14 @@ glm::mat4 Object3D::getWorldMatrix() {
 
 glm::vec4 Object3D::getHitSphere() {
 	glm::vec4 sphere = this->hitSphere;
+	sphere.x += this->position.x;
+	sphere.y += this->position.y;
+	sphere.z += this->position.z;
+	return sphere;
+}
+
+glm::vec4 Object3D::getMoveSphere() {
+	glm::vec4 sphere = this->moveSphere;
 	sphere.x += this->position.x;
 	sphere.y += this->position.y;
 	sphere.z += this->position.z;

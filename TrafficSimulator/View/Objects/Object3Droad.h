@@ -11,6 +11,7 @@ public:
 	~Object3Droad(void) {}
 
 	void bind(Object3D* trackBall_0, Object3D* trackBall_1, Object3D* trackBall_2, Object3D* trackBall_3);
+	void reBind(Object3D* trackBall_0, Object3D* trackBall_1, Object3D* trackBall_2, Object3D* trackBall_3);
 
 	void generate();
 	void update();

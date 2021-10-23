@@ -19,6 +19,12 @@ void Object3Droad::bind(Object3D* trackBall_0, Object3D* trackBall_1, Object3D* 
 	trackBall_2->setPosition(glm::vec3(2.0f, roadYposition, 5.1f));
 	trackBall_3->setRGBcolor(glm::vec3(1, 1, 0));
 	trackBall_3->setPosition(glm::vec3(5.0f, roadYposition, 0.0f));
+
+	trackBall_0->setProtection(true);
+	trackBall_1->setProtection(true);
+	trackBall_2->setProtection(true);
+	trackBall_3->setProtection(true);
+
 	this->trackBalls[0] = trackBall_0;
 	this->trackBalls[1] = trackBall_1;
 	this->trackBalls[2] = trackBall_2;
@@ -27,6 +33,15 @@ void Object3Droad::bind(Object3D* trackBall_0, Object3D* trackBall_1, Object3D* 
 	generate();
 }
 
+void Object3Droad::reBind(Object3D* trackBall_0, Object3D* trackBall_1, Object3D* trackBall_2, Object3D* trackBall_3) {
+	this->trackBalls[0] = trackBall_0;
+	this->trackBalls[1] = trackBall_1;
+	this->trackBalls[2] = trackBall_2;
+	this->trackBalls[3] = trackBall_3;
+	this->updateBasePoints();
+}
+
+//TODO OTHER OBJECTS DELETE BUG
 void Object3Droad::updateBasePoints() {
 	for (size_t i = 0; i < 4; i++) {
 		basePoints[i] = trackBalls[i]->getPosition();
