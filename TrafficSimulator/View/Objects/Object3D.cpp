@@ -191,6 +191,7 @@ glm::vec4 Object3D::getHitSphere() {
 	sphere.x += this->position.x;
 	sphere.y += this->position.y;
 	sphere.z += this->position.z;
+	//if(this->scale.y != 0) hitSphere.w *= this->scale.y;
 	return sphere;
 }
 

@@ -1,3 +1,6 @@
+/**
+* AX400
+*/
 #include "Render.h"
 #include "WorkWindow.h"
 #include "GUI.h"
@@ -26,9 +29,11 @@ void Render::bind(WorkWindow* currentWindow) {
 	objectStorage = workingWindow->getObjectStorage();
 	setWindowIcon(objectStorage->getWindowIcon());
 	fpsCounter::bind();
-	/*multisamplingOn();
+	//faceTestOn();
+	multisamplingOn();
 	vsyncOn();
-	wireframeOn();*/
+	//SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
+	//wireframeOn();
 	/*void vsyncOff();
 	fpsCounter::fpsLimiterOn();
 	fpsCounter::setFpsLimit(60);*/
@@ -197,44 +202,52 @@ void Render::renderScrean() {
 			drawMesh(renderableObjects[i].getMesh());
 		}
 
-		/*if (renderableRoads.size() >= 1) {
-			for (size_t i = 0; i < renderableRoads[0]->trackOne.size(); i += 1) {
-				Object3D hitSphere = objectStorage->getObject3D(1);
-				hitSphere.setPosition(renderableRoads[0]->trackOne[i]);
-				hitSphere.setScale(glm::vec3(1,1,1));
-				hitSphere.setRGBcolor(glm::vec3(1, 0, 0));
-				hitSphere.setOpacity(0.5f);
-				setTexture(hitSphere.getTexture());
-				shaderPreDrawingUpdate(hitSphere.getWorldMatrix(), hitSphere.getRGBAcolor());
-				drawMesh(hitSphere.getMesh());
+		//Road Line Debug
+		if (false) {
+			if (renderableRoads.size() >= 1) {
+				for (size_t i = 0; i < renderableRoads[0]->trackOne.size(); i += 1) {
+					Object3D hitSphere = objectStorage->getObject3D(1);
+					hitSphere.setPosition(renderableRoads[0]->trackOne[i]);
+					hitSphere.setScale(glm::vec3(1, 1, 1));
+					hitSphere.setRGBcolor(glm::vec3(1, 0, 0));
+					hitSphere.setOpacity(0.2f);
+					setTexture(hitSphere.getTexture());
+					shaderPreDrawingUpdate(hitSphere.getWorldMatrix(), hitSphere.getRGBAcolor());
+					drawMesh(hitSphere.getMesh());
+				}
 			}
-		}*/
-		/*//debug
-		Object3D hitSphere = objectStorage->getObject3D(1);
-		hitSphere.setPosition(glm::vec3(renderableObjects[i].getHitSphere().x,
-			renderableObjects[i].getHitSphere().y, 
-			renderableObjects[i].getHitSphere().z));
-		hitSphere.setScale(glm::vec3(renderableObjects[i].getHitSphere().w,
-			renderableObjects[i].getHitSphere().w,
-			renderableObjects[i].getHitSphere().w));
-		hitSphere.setOpacity(0.5f);
+		}
 
-		setTexture(hitSphere.getTexture());
-		shaderPreDrawingUpdate(hitSphere.getWorldMatrix(), hitSphere.getRGBAcolor());
-		drawMesh(hitSphere.getMesh());*/
+		//Hit sphare debug
+		if (false) {
+			Object3D hitSphere = objectStorage->getObject3D(1);
+			hitSphere.setPosition(glm::vec3(renderableObjects[i].getHitSphere().x,
+				renderableObjects[i].getHitSphere().y,
+				renderableObjects[i].getHitSphere().z));
+			hitSphere.setScale(glm::vec3(renderableObjects[i].getHitSphere().w,
+				renderableObjects[i].getHitSphere().w,
+				renderableObjects[i].getHitSphere().w));
+			hitSphere.setOpacity(0.2f);
+
+			setTexture(hitSphere.getTexture());
+			shaderPreDrawingUpdate(hitSphere.getWorldMatrix(), hitSphere.getRGBAcolor());
+			drawMesh(hitSphere.getMesh());
+		}
 	}
+	//wireframeOn();
 	for (size_t i = 0; i < renderableRoads.size(); i++) {
 		setTexture(objectStorage->getTexture("road.png"));
 		shaderPreDrawingUpdate(renderableRoads[i]->getWorldMatrix(), renderableRoads[i]->getRGBAcolor());
 		drawVao(renderableRoads[i]->getVAO(), 596);
 	}
+	//wireframeOff();
 
 }
 
 void Render::render() {
 	fpsCounter::start();
-	faceTestOn();
-	clearScrean();
+	//faceTestOn();
+	//clearScrean();
 	shader->Use();
 	shaderCameraUpdate();
 

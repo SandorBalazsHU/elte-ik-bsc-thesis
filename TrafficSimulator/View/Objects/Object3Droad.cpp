@@ -2,7 +2,7 @@
 #include <glm/gtx/transform2.hpp>
 
 Object3Droad::Object3Droad() {
-	this->roadYposition = 0.0f;
+	this->roadYposition = 0.1f;
 	this->color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 };
 
@@ -19,6 +19,11 @@ void Object3Droad::bind(Object3D* trackBall_0, Object3D* trackBall_1, Object3D* 
 	trackBall_2->setPosition(glm::vec3(2.0f, roadYposition, 5.1f));
 	trackBall_3->setRGBcolor(glm::vec3(1, 1, 0));
 	trackBall_3->setPosition(glm::vec3(5.0f, roadYposition, 0.0f));
+
+	/*trackBall_0->setScale(glm::vec3(1.0f, 1.0f, 1.0f));
+	trackBall_1->setScale(glm::vec3(1.0f, 1.0f, 1.0f));
+	trackBall_2->setScale(glm::vec3(1.0f, 1.0f, 1.0f));
+	trackBall_3->setScale(glm::vec3(1.0f, 1.0f, 1.0f));*/
 
 	trackBall_0->setProtection(true);
 	trackBall_1->setProtection(true);

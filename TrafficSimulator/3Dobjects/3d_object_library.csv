@@ -4,7 +4,7 @@ Id;Name;Type;Main object;Icon;Base texture;light texture;break texture;right tex
 -1;Default texture;texture;default.png;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;0
 -1;Road texture;texture;road.png;road_mini.png;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;0
 -1;Logo;texture;app_logo.png;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;0
-1;Mark sphere;mark;sphere_mark.obj;sphere_mark_mini.png;white.png;*;*;*;*;0.0;0.0;0.0;0.1;0.1;0.1;0.0;0;1;0;0.0;0.0;0.0;1.0;0.0;0.0;0.0;1.1;1.0;1.0;1.0;1.0;0
+1;Mark sphere;mark;sphere_mark.obj;sphere_mark_mini.png;white.png;*;*;*;*;0.0;0.0;0.0;0.8;0.8;0.8;0.0;0;1;0;0.0;0.0;0.0;0.8;0.0;0.0;0.0;1.1;1.0;1.0;1.0;1.0;0
 2;Big tree 01;object;big_tree_01.obj;big_tree_01_mini.png;big_tree_01.png;*;*;*;*;0.0;0.0;0.0;0.1;0.1;0.1;0.0;0;1;0;0.0;0.0;0.0;3.0;0.0;0.0;0.0;1.0;1.0;1.0;1.0;1.0;0
 3;Big tree 02;object;big_tree_02.obj;big_tree_02_mini.png;big_tree_02.png;*;*;*;*;0.0;0.0;0.0;0.1;0.1;0.1;0.0;0;1;0;0.0;0.0;0.0;3.0;0.0;0.0;0.0;1.0;1.0;1.0;1.0;1.0;0
 4;Round desk;desk;desk_round.obj;desk_round_mini.png;desk_round.png;*;*;*;*;0.0;-0.1;0.0;3.0;3.0;3.0;0.0;0;1;0;0.0;0.0;0.0;3.0;0.0;0.0;0.0;1.0;1.0;1.0;1.0;1.0;0

@@ -1,6 +1,7 @@
+Jobb klikk görgõ forgatás.
 Törlés gomb hozzáadása
-Tereptárgy törlés
-Több út beszúrása
+- Tereptárgy törlés
+- Több út beszúrása
 Út kiválasztás (Minden x-edig pontra z átmérõjû metszõ gömb)
 Út törlés
 Út színezés

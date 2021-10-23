@@ -45,6 +45,8 @@ int WorkWindow::sdlInit() {
 	return 0;
 }
 
+//TODO MIPMAPPING
+//TODO Multiple gpu select
 int WorkWindow::openGLpreConfig() {
 	//OpenGL Configuration
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
@@ -58,7 +60,9 @@ int WorkWindow::openGLpreConfig() {
 	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);  //Anti aliasing ON
 	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 16); //Anti aliasing 4
 	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);	//Hardware accelerated
-
+	//TODO IS OK?
+	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
+	//glDepthMask(GL_FALSE);
 	return 0;
 }
 
@@ -129,6 +133,8 @@ int WorkWindow::openGLpostConfig() {
 	glEnable(GL_BLEND);						//Alpha
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+	//TODO TEST
+	glCullFace(GL_BACK);
 	return 0;
 }
 

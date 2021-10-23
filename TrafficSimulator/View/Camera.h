@@ -182,12 +182,12 @@ protected:
 	/**
 	* @brief The default near cutting line.
 	*/
-	const float zNear = 0.001f;
+	const float zNear = 0.8f;
 
 	/**
 	* @brief The default far cutting line.
 	*/
-	const float zFar = 1000.0f;
+	const float zFar = 350.0f;
 
 	/**
 	 * @brief Update viewMatrix from cameraPosition, lookedPoint and upwardDirection for apply changes.
