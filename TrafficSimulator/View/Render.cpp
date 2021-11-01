@@ -178,6 +178,7 @@ int Render::addRoad() {
 
 	road->bind(trackBall_0, trackBall_1, trackBall_2, trackBall_3);
 	renderableRoads.push_back(road);
+	rebindRoads();
 	return renderableRoads.size() - 1;
 }
 

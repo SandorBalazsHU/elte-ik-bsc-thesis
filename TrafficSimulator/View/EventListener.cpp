@@ -73,6 +73,8 @@ void EventListener::mouseMove(SDL_MouseMotionEvent& mouse) {
 			selectedItems[i]->move(rotatedShift);
 			if (selectedItems[i]->getDependencyID() > -1) {
 				render->updateDynamicObject(selectedItems[i]->getDependencyID());
+				std::cout << selectedItems[i]->getDependencyID() << " , " << selectedItems[i]->getRenderID() << std::endl;
+				std::cout  << std::endl;
 			}
 		}
 	}
@@ -160,8 +162,6 @@ int EventListener::getClickedObjectId(SDL_MouseButtonEvent& mouse) {
 			//std::cout << i << std::endl;
 		}
 	}
-
-
 
 	if (!hits.empty()) {
 		return hits.begin()->second;

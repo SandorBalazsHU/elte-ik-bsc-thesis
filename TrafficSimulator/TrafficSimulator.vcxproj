@@ -217,6 +217,7 @@
     <None Include="View\Utilities\VertexArrayObject.inl" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="BUGS.txt" />
     <Text Include="TODO.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

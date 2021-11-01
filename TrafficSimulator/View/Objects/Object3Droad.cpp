@@ -50,7 +50,9 @@ void Object3Droad::reBind(Object3D* trackBall_0, Object3D* trackBall_1, Object3D
 void Object3Droad::updateBasePoints() {
 	for (size_t i = 0; i < 4; i++) {
 		basePoints[i] = trackBalls[i]->getPosition();
+		std::cout << trackBalls[i]->getRenderID() << " | " << trackBalls[i]->getPosition().x << " , " << trackBalls[i]->getPosition().y << " , " << trackBalls[i]->getPosition().z << std::endl;
 	}
+	std::cout << std::endl;
 }
 
 void Object3Droad::setRGBAcolor(glm::vec4 RGBAcolor) {

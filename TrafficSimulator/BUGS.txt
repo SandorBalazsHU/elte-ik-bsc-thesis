@@ -1,0 +1,3 @@
+Több út esetén a régiek nem mozgathatóak.
+Ötlet: Csak 4 mozgató labda legyen és automatikusan ráállnak az út pontjaira. (A pointer invalidáción is segíthetne, az ez elleni védelmek kiiktathatóak lennének.)
+Közös mozgatás elcsúszik
