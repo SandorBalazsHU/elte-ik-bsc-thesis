@@ -29,6 +29,7 @@ class Object3D {
 		void					setOpacity(float opacity);
 		void 					setRenderID(int newRenderID);
 		void 					setProtection(bool isProtected);
+		void 					setSelectable(bool isSelectable);
 		int 					getId();
 		int 					getRenderID();
 		int						getDependencyID();
@@ -52,6 +53,7 @@ class Object3D {
 		glm::vec4				getHitSphere();
 		glm::vec4				getMoveSphere();
 		bool					isProtected();
+		bool					isSelectable();
 		Object3D				copy();
 		Object3D				copy(int renderID);
 		bool					isHidden();
@@ -78,4 +80,5 @@ class Object3D {
 		glm::vec4				moveSphere;
 		bool					hidden = false;
 		bool					protection = false;
+		bool					selectable = true;
 	};

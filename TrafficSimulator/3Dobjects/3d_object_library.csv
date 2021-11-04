@@ -26,3 +26,4 @@ Id;Name;Type;Main object;Icon;Base texture;light texture;break texture;right tex
 20;Bus yellow;vehicle;bus.obj;bus_yellow_mini.png;bus_yellow_base.png;bus_yellow_base.png;bus_yellow_base.png;bus_yellow_base.png;bus_yellow_base.png;0.0;0.0;0.0;1.0;1.0;1.0;0.0;0;1;0;0.0;0.0;0.0;1.4;0.0;1.0;0.0;0.5;1.0;1.0;1.0;1.0;0
 21;Bus blue;vehicle;bus.obj;bus_blue_mini.png;bus_blue_base.png;bus_blue_base.png;bus_blue_base.png;bus_blue_base.png;bus_blue_base.png;0.0;0.0;0.0;1.0;1.0;1.0;0.0;0;1;0;0.0;0.0;0.0;1.4;0.0;1.0;0.0;0.5;1.0;1.0;1.0;1.0;0
 22;Bus gray;vehicle;bus.obj;bus_gray_mini.png;bus_gray_base.png;bus_gray_base.png;bus_gray_base.png;bus_gray_base.png;bus_gray_base.png;0.0;0.0;0.0;1.0;1.0;1.0;0.0;0;1;0;0.0;0.0;0.0;1.4;0.0;1.0;0.0;0.5;1.0;1.0;1.0;1.0;0
+23;Road circle;mark;road_circle.obj;*;road_circle.png;*;*;*;*;0.0;0.0;0.0;1.0;1.0;1.0;0.0;0;1;0;0.0;0.0;0.0;2.0;0.0;0.0;0.0;2.0;1.0;1.0;1.0;1.0;0

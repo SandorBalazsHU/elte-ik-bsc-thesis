@@ -149,13 +149,13 @@ void Render::rebindRoads() {
 		for (size_t i = 0; i < renderableObjects.size(); i++) {
 			if (renderableObjects[i].getDependencyID() > -1) {
 				rebindableObjects.push_back(&renderableObjects[i]);
-				std::cout << renderableObjects[i].getDependencyID() << std::endl;
+				//std::cout << renderableObjects[i].getDependencyID() << std::endl;
 			}
 		}
-		std::cout << std::endl << std::endl << rebindableObjects.size() << std::endl << std::endl;
-		for (size_t i = 0; i < rebindableObjects.size(); i += 4) {
-			std::cout << i << std::endl;
-			renderableRoads[rebindableObjects[i]->getDependencyID()]->reBind(rebindableObjects[i], rebindableObjects[i + 1], rebindableObjects[i + 2], rebindableObjects[i + 3]);
+		//std::cout << std::endl << std::endl << rebindableObjects.size() << std::endl << std::endl;
+		for (size_t i = 0; i < rebindableObjects.size(); i += 6) {
+			//std::cout << i << std::endl;
+			renderableRoads[rebindableObjects[i]->getDependencyID()]->reBind(rebindableObjects[i], rebindableObjects[i + 1], rebindableObjects[i + 2], rebindableObjects[i + 3], rebindableObjects[i + 4], rebindableObjects[i + 5]);
 		}
 	}
 }
@@ -166,19 +166,30 @@ int Render::addRoad() {
 	addObject(1);
 	addObject(1);
 	addObject(1);
-	Object3D* trackBall_0 = getObject(renderableObjects.size() - 4);
-	Object3D* trackBall_1 = getObject(renderableObjects.size() - 3);
-	Object3D* trackBall_2 = getObject(renderableObjects.size() - 2);
-	Object3D* trackBall_3 = getObject(renderableObjects.size() - 1);
+	addObject(23);
+	addObject(23);
+
+	Object3D* trackBall_0		= getObject(renderableObjects.size() - 6);
+	Object3D* trackBall_1		= getObject(renderableObjects.size() - 5);
+	Object3D* trackBall_2		= getObject(renderableObjects.size() - 4);
+	Object3D* trackBall_3		= getObject(renderableObjects.size() - 3);
+	Object3D* roadEndCircle_2	= getObject(renderableObjects.size() - 2);
+	Object3D* roadEndCircle_1	= getObject(renderableObjects.size() - 1);
 
 	trackBall_0->setDependencyID(renderableRoads.size());
 	trackBall_1->setDependencyID(renderableRoads.size());
 	trackBall_2->setDependencyID(renderableRoads.size());
 	trackBall_3->setDependencyID(renderableRoads.size());
+	roadEndCircle_2->setDependencyID(renderableRoads.size());
+	roadEndCircle_1->setDependencyID(renderableRoads.size());
 
-	road->bind(trackBall_0, trackBall_1, trackBall_2, trackBall_3);
+	road->bind(trackBall_0, trackBall_1, trackBall_2, trackBall_3, roadEndCircle_1, roadEndCircle_2);
 	renderableRoads.push_back(road);
+
 	rebindRoads();
+
+	road->setRenderID(renderableRoads.size());
+
 	return renderableRoads.size() - 1;
 }
 

@@ -73,8 +73,8 @@ void EventListener::mouseMove(SDL_MouseMotionEvent& mouse) {
 			selectedItems[i]->move(rotatedShift);
 			if (selectedItems[i]->getDependencyID() > -1) {
 				render->updateDynamicObject(selectedItems[i]->getDependencyID());
-				std::cout << selectedItems[i]->getDependencyID() << " , " << selectedItems[i]->getRenderID() << std::endl;
-				std::cout  << std::endl;
+				//std::cout << selectedItems[i]->getDependencyID() << " , " << selectedItems[i]->getRenderID() << std::endl;
+				//std::cout  << std::endl;
 			}
 		}
 	}
@@ -143,23 +143,25 @@ int EventListener::getClickedObjectId(SDL_MouseButtonEvent& mouse) {
 
 	std::map<float, int> hits;
 	for (size_t i = 1; i < render->renderableObjects.size(); i++) {
-		glm::vec4 hitSphere = render->renderableObjects[i].getHitSphere();
-		glm::vec3 r0 = camera->getCameraPosition();
-		glm::vec3 rd = ray_wor;
-		glm::vec3 s0 = glm::vec3(hitSphere.x, hitSphere.y, hitSphere.z);
-		float sr = hitSphere.w;
+		if (render->renderableObjects[i].isSelectable()) {
+			glm::vec4 hitSphere = render->renderableObjects[i].getHitSphere();
+			glm::vec3 r0 = camera->getCameraPosition();
+			glm::vec3 rd = ray_wor;
+			glm::vec3 s0 = glm::vec3(hitSphere.x, hitSphere.y, hitSphere.z);
+			float sr = hitSphere.w;
 
-		float a = glm::dot(rd, rd);
-		glm::vec3 s0_r0 = r0 - s0;
-		float b = 2.0 * glm::dot(rd, s0_r0);
-		float c = glm::dot(s0_r0, s0_r0) - (sr * sr);
-		float disc = b * b - 4.0 * a * c;
-		if (disc < 0.0) {
-			//std::cout << "NO HIT" << std::endl;
-		}
-		else {
-			hits[glm::distance(s0, camera->getCameraPosition())] = i;
-			//std::cout << i << std::endl;
+			float a = glm::dot(rd, rd);
+			glm::vec3 s0_r0 = r0 - s0;
+			float b = 2.0 * glm::dot(rd, s0_r0);
+			float c = glm::dot(s0_r0, s0_r0) - (sr * sr);
+			float disc = b * b - 4.0 * a * c;
+			if (disc < 0.0) {
+				//std::cout << "NO HIT" << std::endl;
+			}
+			else {
+				hits[glm::distance(s0, camera->getCameraPosition())] = i;
+				//std::cout << i << std::endl;
+			}
 		}
 	}
 

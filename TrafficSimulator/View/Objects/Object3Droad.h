@@ -10,8 +10,8 @@ public:
 	Object3Droad(const Object3Droad&);
 	~Object3Droad(void) {}
 
-	void bind(Object3D* trackBall_0, Object3D* trackBall_1, Object3D* trackBall_2, Object3D* trackBall_3);
-	void reBind(Object3D* trackBall_0, Object3D* trackBall_1, Object3D* trackBall_2, Object3D* trackBall_3);
+	void bind(Object3D* trackBall_0, Object3D* trackBall_1, Object3D* trackBall_2, Object3D* trackBall_3, Object3D* roadEndCircle_1, Object3D* roadEndCircle_2);
+	void reBind(Object3D* trackBall_0, Object3D* trackBall_1, Object3D* trackBall_2, Object3D* trackBall_3, Object3D* roadEndCircle_1, Object3D* roadEndCircle_2);
 
 	void generate();
 	void update();
@@ -24,6 +24,8 @@ public:
 		return trackBalls;
 	}
 
+	int 					getRenderID();
+	void					setRenderID(int newRenderID);
 	void					setRGBAcolor(glm::vec4 RGBAcolor);
 	void					setRGBcolor(glm::vec3 RGBcolor);
 	void					setOpacity(float opacity);
@@ -43,7 +45,7 @@ public:
 protected:
 	void generateRoadPoints();
 	glm::vec3 bezierPoint(float u);
-	glm::vec3 shiftPoint(glm::vec3 point1, glm::vec3 point2, float currentShift);
+	glm::vec3 shiftPoint(glm::vec3 point1, glm::vec3 point2, float currentShift, float yPosition);
 	void updateBasePoints();
 	void clean();
 
@@ -52,11 +54,13 @@ protected:
 	void fillModelTextures();
 	void fillModelIndices();
 
+	int renderID = -1;
 	bool selected = true;
 	glm::vec4 color;
 
 	float shift = 4.0f;
 	Object3D* trackBalls[4];
+	Object3D* roadEndCircles[2];
 	glm::vec3 basePoints[4];
 	float roadYposition;
 	std::vector<glm::vec3> points;

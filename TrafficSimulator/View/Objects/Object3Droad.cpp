@@ -10,7 +10,17 @@ Object3Droad::Object3Droad(const Object3Droad&) {}
 
 //Object3Droad::~Object3Droad(void) {}
 
-void Object3Droad::bind(Object3D* trackBall_0, Object3D* trackBall_1, Object3D* trackBall_2, Object3D* trackBall_3) {
+int  Object3Droad::getRenderID() {
+	return renderID;
+}
+
+void Object3Droad::setRenderID(int newRenderID) {
+	renderID = newRenderID;
+	roadYposition += renderID / 100.0f;
+	std::cout << renderID << ". road " << roadYposition << " Position" << std::endl;
+}
+
+void Object3Droad::bind(Object3D* trackBall_0, Object3D* trackBall_1, Object3D* trackBall_2, Object3D* trackBall_3, Object3D* roadEndCircle_1, Object3D* roadEndCircle_2) {
 	trackBall_0->setRGBcolor(glm::vec3(1, 0, 0));
 	trackBall_0->setPosition(glm::vec3(-5.0f, roadYposition, 0.0f));
 	trackBall_1->setRGBcolor(glm::vec3(0, 1, 0));
@@ -19,7 +29,7 @@ void Object3Droad::bind(Object3D* trackBall_0, Object3D* trackBall_1, Object3D* 
 	trackBall_2->setPosition(glm::vec3(2.0f, roadYposition, 5.1f));
 	trackBall_3->setRGBcolor(glm::vec3(1, 1, 0));
 	trackBall_3->setPosition(glm::vec3(5.0f, roadYposition, 0.0f));
-
+	
 	/*trackBall_0->setScale(glm::vec3(1.0f, 1.0f, 1.0f));
 	trackBall_1->setScale(glm::vec3(1.0f, 1.0f, 1.0f));
 	trackBall_2->setScale(glm::vec3(1.0f, 1.0f, 1.0f));
@@ -34,25 +44,38 @@ void Object3Droad::bind(Object3D* trackBall_0, Object3D* trackBall_1, Object3D* 
 	this->trackBalls[1] = trackBall_1;
 	this->trackBalls[2] = trackBall_2;
 	this->trackBalls[3] = trackBall_3;
+
 	this->updateBasePoints();
 	generate();
+
+	roadEndCircle_1->setPosition(shiftPoint(points[0], points[1], shift/2.0f, roadYposition - 0.01f));
+	roadEndCircle_2->setPosition(shiftPoint(points[points.size()-2], points[points.size()-1], shift / 2.0f, roadYposition - 0.01f));
+	roadEndCircle_1->setProtection(true);
+	roadEndCircle_2->setProtection(true);
+	roadEndCircle_1->setSelectable(false);
+	roadEndCircle_2->setSelectable(false);
+	this->roadEndCircles[0] = roadEndCircle_1;
+	this->roadEndCircles[1] = roadEndCircle_2;
+
 }
 
-void Object3Droad::reBind(Object3D* trackBall_0, Object3D* trackBall_1, Object3D* trackBall_2, Object3D* trackBall_3) {
+void Object3Droad::reBind(Object3D* trackBall_0, Object3D* trackBall_1, Object3D* trackBall_2, Object3D* trackBall_3, Object3D* roadEndCircle_1, Object3D* roadEndCircle_2) {
 	this->trackBalls[0] = trackBall_0;
 	this->trackBalls[1] = trackBall_1;
 	this->trackBalls[2] = trackBall_2;
 	this->trackBalls[3] = trackBall_3;
 	this->updateBasePoints();
+	this->roadEndCircles[0] = roadEndCircle_1;
+	this->roadEndCircles[1] = roadEndCircle_2;
 }
 
 //TODO OTHER OBJECTS DELETE BUG
 void Object3Droad::updateBasePoints() {
 	for (size_t i = 0; i < 4; i++) {
 		basePoints[i] = trackBalls[i]->getPosition();
-		std::cout << trackBalls[i]->getRenderID() << " | " << trackBalls[i]->getPosition().x << " , " << trackBalls[i]->getPosition().y << " , " << trackBalls[i]->getPosition().z << std::endl;
+		//std::cout << trackBalls[i]->getRenderID() << " | " << trackBalls[i]->getPosition().x << " , " << trackBalls[i]->getPosition().y << " , " << trackBalls[i]->getPosition().z << std::endl;
 	}
-	std::cout << std::endl;
+	//std::cout << std::endl;
 }
 
 void Object3Droad::setRGBAcolor(glm::vec4 RGBAcolor) {
@@ -100,24 +123,24 @@ void Object3Droad::generateRoadPoints() {
 		points.push_back(bezierPoint(u));
 	}
 
-	shiftedPoints.push_back(shiftPoint(points[0], points[1], shift));
-	trackOne.push_back(shiftPoint(points[0], points[1], (shift * (1.0f / 4.0f))));
-	trackTwo.push_back(shiftPoint(points[0], points[1], (shift * (3.0f / 4.0f))));
+	shiftedPoints.push_back(shiftPoint(points[0], points[1], shift, roadYposition));
+	trackOne.push_back(shiftPoint(points[0], points[1], (shift * (1.0f / 4.0f)), roadYposition));
+	trackTwo.push_back(shiftPoint(points[0], points[1], (shift * (3.0f / 4.0f)), roadYposition));
 
 	for (size_t i = 1; i < points.size(); i++) {
-		shiftedPoints.push_back(shiftPoint(points[i-1], points[i], shift));
-		trackOne.push_back(shiftPoint(points[i-1], points[i], (shift * (1.0f / 4.0f))));
-		trackTwo.push_back(shiftPoint(points[i-1], points[i], (shift * (3.0f / 4.0f))));
+		shiftedPoints.push_back(shiftPoint(points[i-1], points[i], shift, roadYposition));
+		trackOne.push_back(shiftPoint(points[i-1], points[i], (shift * (1.0f / 4.0f)), roadYposition));
+		trackTwo.push_back(shiftPoint(points[i-1], points[i], (shift * (3.0f / 4.0f)), roadYposition));
 	}
 }
 
-glm::vec3 Object3Droad::shiftPoint(glm::vec3 point1, glm::vec3 point2, float currentShift) {
+glm::vec3 Object3Droad::shiftPoint(glm::vec3 point1, glm::vec3 point2, float currentShift, float yPosition) {
 	glm::vec3 shiftedPoint;
 	float xnormal = -1 * (point2.z - point1.z);
 	float znormal = (point2.x - point1.x);
 	float normalLenght = sqrt(xnormal * xnormal + znormal * znormal);
 	shiftedPoint.x = point2.x + ((xnormal / normalLenght) * currentShift);
-	shiftedPoint.y = roadYposition;
+	shiftedPoint.y = yPosition;
 	shiftedPoint.z = point2.z + ((znormal / normalLenght) * currentShift);
 	return shiftedPoint;
 }
@@ -206,5 +229,10 @@ void Object3Droad::generate() {
 
 void Object3Droad::update() {
 	this->updateBasePoints();
-	generate();
+	this->generate();
+	this->roadEndCircles[0]->setPosition(shiftPoint(points[0], points[1], shift / 2.0f, roadYposition - 0.01f));
+	this->roadEndCircles[1]->setPosition(shiftPoint(points[points.size() - 2], points[points.size() - 1], shift / 2.0f, roadYposition - 0.01f));
+
+	//this->roadEndCircles[0]->setPosition(basePoints[0]);
+	//this->roadEndCircles[1]->setPosition(basePoints[3]);
 }

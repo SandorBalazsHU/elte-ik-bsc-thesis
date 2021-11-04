@@ -1,3 +1,9 @@
-Több út esetén a régiek nem mozgathatóak.
-Ötlet: Csak 4 mozgató labda legyen és automatikusan ráállnak az út pontjaira. (A pointer invalidáción is segíthetne, az ez elleni védelmek kiiktathatóak lennének.)
-Közös mozgatás elcsúszik
++ Több út esetén a régiek nem mozgathatóak.
+- Ötlet: Csak 4 mozgató labda legyen és automatikusan ráállnak az út pontjaira. (A pointer invalidáción is segíthetne, az ez elleni védelmek kiiktathatóak lennének.)
+- Közös mozgatás elcsúszik
+- Ne használjunk sehol object ID-t beszúráshoz, hanem nevet.
+- Debug üzenetek eltávolítása
+- * biztonság felülvizsgálata a csv beolvasásnál
+- konstansok irtása
+- Kikommentezett cuccok eliminálása
++ Útmagasságok finom módosítása

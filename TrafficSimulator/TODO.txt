@@ -17,3 +17,11 @@ Gráf generálás
 Útvonal jelölés
 Útvonal kiemelés
 Autó végighaladás.
+
+User story:
+- Ha közel ér egymáshoz két útvég akkor azok összepattannak és fixálódnak. (Pont eltolás középre?)
+	Ha frissül az adott út, akkor a render megnézi, hogy
+- Színváltozással jelezze a végpont, ha kapcsolódott.
+- Ha összekapcsolódott jelenjen meg alatta a kapcsolódás alatt egy körlap.
+
+Vonal a jelölõpontok közé?

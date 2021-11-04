@@ -73,7 +73,7 @@ void Object3D::setScale(glm::vec3 scale) {
 }
 
 void Object3D::move(glm::vec3 move) {
-	this->position += move;
+		this->position += move;
 }
 void Object3D::rotateLeft(float rotateLeft) {
 	this->rotation += glm::vec4(rotateLeft, 0, 0, 0);
@@ -98,6 +98,10 @@ void Object3D::setOpacity(float opacity) {
 
 void Object3D::setProtection(bool isProtected) {
 	this->protection = isProtected;
+}
+
+void Object3D::setSelectable(bool isSelectable) {
+	this->selectable = isSelectable;
 }
 
 int	Object3D::getId() {
@@ -178,6 +182,10 @@ float Object3D::getOpacity() {
 
 bool Object3D::isProtected() {
 	return protection;
+}
+
+bool Object3D::isSelectable() {
+	return selectable;
 }
 
 glm::mat4 Object3D::getWorldMatrix() {

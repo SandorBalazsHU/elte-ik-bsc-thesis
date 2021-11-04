@@ -33,7 +33,7 @@ void ObjectStorage::load() {
             if (!isThisObjectLoaded(fileName)) threads.push_back(loadObjectParallel(fileName));
 
             fileName = parsedCSV[i][4];
-            if (!isThisTextureLoaded(fileName)) threads.push_back(loadTextureParallel(miniatureFolder+fileName));
+            if (!isThisTextureLoaded(fileName) && fileName != "*") threads.push_back(loadTextureParallel(miniatureFolder+fileName));
 
             fileName = parsedCSV[i][5];
             if (!isThisTextureLoaded(fileName)) threads.push_back(loadTextureParallel(fileName));
