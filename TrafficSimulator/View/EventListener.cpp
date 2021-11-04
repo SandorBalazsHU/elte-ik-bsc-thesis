@@ -85,7 +85,14 @@ void EventListener::mouseDown(SDL_MouseButtonEvent& mouse) {
 		int selectedObjectId = getClickedObjectId(mouse);
 		if (selectedObjectId != -1) {
 			select(selectedObjectId);
-			//std::cout << "HIT" << std::endl;
+			std::cout << "HIT" << std::endl;
+		}else{
+			for (size_t i = 0; i < render->renderableRoads.size(); i++)	{
+				if (render->renderableRoads[i]->isClicked(camera->getCameraPosition(), ray)) {
+					render->renderableRoads[i]->select();
+					std::cout << "ROAD HIT" << std::endl;
+				}
+			}
 		}
 	}
 }
@@ -137,7 +144,7 @@ int EventListener::getClickedObjectId(SDL_MouseButtonEvent& mouse) {
 	glm::vec3 ray_wor = glm::inverse(camera->getViewMatrix()) * ray_eye;
 
 	//Step 5: Normalize
-	glm::vec3 ray = glm::normalize(ray_wor);
+	ray = glm::normalize(ray_wor);
 
 	//std::cout << "ray_wor: " << ray_wor.x << "," << ray_wor.y << "," << ray_wor.z << std::endl;
 
@@ -158,7 +165,7 @@ int EventListener::getClickedObjectId(SDL_MouseButtonEvent& mouse) {
 				//std::cout << "NO HIT" << std::endl;
 			}
 			else {
-				hits[glm::distance(hitSphereCenter, camera->getCameraPosition())] = i;
+				hits[glm::distance(hitSphereCenter, cameraPosition)] = i;
 				//std::cout << i << std::endl;
 			}
 		}

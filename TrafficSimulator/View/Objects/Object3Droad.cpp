@@ -1,5 +1,6 @@
 #include "Object3Droad.h"
 #include <glm/gtx/transform2.hpp>
+#include <map>
 
 Object3Droad::Object3Droad() {
 	this->roadYposition = 0.1f;
@@ -82,6 +83,26 @@ void Object3Droad::updateBasePoints() {
 	//std::cout << std::endl;
 }
 
+bool Object3Droad::isClicked(glm::vec3 cameraPosition, glm::vec3 ray) {
+	for (size_t i = 1; i < points.size(); i++) {
+		glm::vec3 hitSphereCenter = points[i];
+		float hitSphereRadius = shift*2.0f;
+
+		float a = glm::dot(ray, ray);
+		glm::vec3 camToPointDirection = cameraPosition - hitSphereCenter;
+		float b = 2.0 * glm::dot(ray, camToPointDirection);
+		float c = glm::dot(camToPointDirection, camToPointDirection) - (hitSphereRadius * hitSphereRadius);
+		float hitDistance = b * b - 4.0 * a * c;
+		if (hitDistance < 0.0) {
+			//std::cout << "NO HIT" << std::endl;
+		}else{
+			std::cout << "ROAD INSIDE HIT" << std::endl;
+			return true;
+		}
+	}
+	return false;
+}
+
 void Object3Droad::setRGBAcolor(glm::vec4 RGBAcolor) {
 	this->color = RGBAcolor;
 }
@@ -115,10 +136,16 @@ bool Object3Droad::isSelected() {
 }
 
 void Object3Droad::select() {
+	setOpacity(0.5f);
+	roadEndCircles[0]->setOpacity(0.5f);
+	roadEndCircles[1]->setOpacity(0.5f);
 	selected = true;
 }
 
 void Object3Droad::deselect() {
+	setOpacity(1.0f);
+	roadEndCircles[0]->setOpacity(1.0f);
+	roadEndCircles[1]->setOpacity(1.0f);
 	selected = false;
 }
 

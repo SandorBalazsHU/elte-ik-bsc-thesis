@@ -36,6 +36,7 @@ public:
 	bool					isSelected();
 	void					select();
 	void					deselect();
+	bool					isClicked(glm::vec3 cameraPosition, glm::vec3 ray);
 
 	std::vector<glm::vec3> points;
 	std::vector<glm::vec3> shiftedPoints_1;

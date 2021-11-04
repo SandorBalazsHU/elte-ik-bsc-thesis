@@ -29,6 +29,8 @@ private:
 	std::vector<Object3D*> selectedItems;
 	bool keepSelect = false;
 
+	glm::vec3 ray;
+
 	void deleteSelectedItems();
 
 	void keyboardDown(SDL_KeyboardEvent&);
