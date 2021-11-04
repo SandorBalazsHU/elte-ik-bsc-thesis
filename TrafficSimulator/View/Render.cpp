@@ -217,10 +217,40 @@ void Render::renderScrean() {
 		//Road Line Debug
 		if (false) {
 			if (renderableRoads.size() >= 1) {
-				for (size_t i = 0; i < renderableRoads[0]->trackOne.size(); i += 1) {
+				for (size_t i = 0; i < renderableRoads[0]->points.size(); i += 1) {
 					Object3D hitSphere = objectStorage->getObject3D(1);
-					hitSphere.setPosition(renderableRoads[0]->trackOne[i]);
-					hitSphere.setScale(glm::vec3(1, 1, 1));
+					hitSphere.setPosition(renderableRoads[0]->points[i]);
+					hitSphere.setScale(glm::vec3(0.3f, 0.3f, 0.3f));
+					hitSphere.setRGBcolor(glm::vec3(1, 0, 0));
+					hitSphere.setOpacity(0.2f);
+					setTexture(hitSphere.getTexture());
+					shaderPreDrawingUpdate(hitSphere.getWorldMatrix(), hitSphere.getRGBAcolor());
+					drawMesh(hitSphere.getMesh());
+				}
+			}
+		}
+
+		if (false) {
+			if (renderableRoads.size() >= 1) {
+				for (size_t i = 0; i < renderableRoads[0]->shiftedPoints_1.size(); i += 1) {
+					Object3D hitSphere = objectStorage->getObject3D(1);
+					hitSphere.setPosition(renderableRoads[0]->shiftedPoints_1[i]);
+					hitSphere.setScale(glm::vec3(0.3f, 0.3f, 0.3f));
+					hitSphere.setRGBcolor(glm::vec3(1, 0, 0));
+					hitSphere.setOpacity(0.2f);
+					setTexture(hitSphere.getTexture());
+					shaderPreDrawingUpdate(hitSphere.getWorldMatrix(), hitSphere.getRGBAcolor());
+					drawMesh(hitSphere.getMesh());
+				}
+			}
+		}
+
+		if (false) {
+			if (renderableRoads.size() >= 1) {
+				for (size_t i = 0; i < renderableRoads[0]->shiftedPoints_2.size(); i += 1) {
+					Object3D hitSphere = objectStorage->getObject3D(1);
+					hitSphere.setPosition(renderableRoads[0]->shiftedPoints_2[i]);
+					hitSphere.setScale(glm::vec3(0.3f, 0.3f, 0.3f));
 					hitSphere.setRGBcolor(glm::vec3(1, 0, 0));
 					hitSphere.setOpacity(0.2f);
 					setTexture(hitSphere.getTexture());

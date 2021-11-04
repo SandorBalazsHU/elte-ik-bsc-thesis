@@ -47,15 +47,19 @@ void Object3Droad::bind(Object3D* trackBall_0, Object3D* trackBall_1, Object3D* 
 
 	this->updateBasePoints();
 	generate();
-
-	roadEndCircle_1->setPosition(shiftPoint(points[0], points[1], shift/2.0f, roadYposition - 0.01f));
-	roadEndCircle_2->setPosition(shiftPoint(points[points.size()-2], points[points.size()-1], shift / 2.0f, roadYposition - 0.01f));
+	//TODO SHIT
+	//roadEndCircle_1->setPosition(shiftPoint(points[0], points[1], shift/2.0f, roadYposition - 0.01f));
+	//roadEndCircle_2->setPosition(shiftPoint(points[points.size()-2], points[points.size()-1], shift / 2.0f, roadYposition - 0.01f));
 	roadEndCircle_1->setProtection(true);
 	roadEndCircle_2->setProtection(true);
 	roadEndCircle_1->setSelectable(false);
 	roadEndCircle_2->setSelectable(false);
 	this->roadEndCircles[0] = roadEndCircle_1;
 	this->roadEndCircles[1] = roadEndCircle_2;
+	//this->roadEndCircles[0]->setPosition(basePoints[0]);
+	//this->roadEndCircles[1]->setPosition(basePoints[3]);
+	this->roadEndCircles[0]->setPosition(glm::vec3(points[1].x, roadYposition - 0.01f, points[1].z));
+	this->roadEndCircles[1]->setPosition(glm::vec3(points[points.size() - 1].x, roadYposition - 0.01f, points[points.size() - 1].z));
 
 }
 
@@ -123,14 +127,16 @@ void Object3Droad::generateRoadPoints() {
 		points.push_back(bezierPoint(u));
 	}
 
-	shiftedPoints.push_back(shiftPoint(points[0], points[1], shift, roadYposition));
-	trackOne.push_back(shiftPoint(points[0], points[1], (shift * (1.0f / 4.0f)), roadYposition));
-	trackTwo.push_back(shiftPoint(points[0], points[1], (shift * (3.0f / 4.0f)), roadYposition));
+	shiftedPoints_1.push_back(shiftPoint(points[0], points[1], shift, roadYposition));
+	shiftedPoints_2.push_back(shiftPoint(points[0], points[1], shift*-1.0f, roadYposition));
+	trackOne.push_back(shiftPoint(points[0], points[1], (shift/2.0f), roadYposition));
+	trackTwo.push_back(shiftPoint(points[0], points[1], ((shift/2.0f) * -1.0f), roadYposition));
 
 	for (size_t i = 1; i < points.size(); i++) {
-		shiftedPoints.push_back(shiftPoint(points[i-1], points[i], shift, roadYposition));
-		trackOne.push_back(shiftPoint(points[i-1], points[i], (shift * (1.0f / 4.0f)), roadYposition));
-		trackTwo.push_back(shiftPoint(points[i-1], points[i], (shift * (3.0f / 4.0f)), roadYposition));
+		shiftedPoints_1.push_back(shiftPoint(points[i-1], points[i], shift, roadYposition));
+		shiftedPoints_2.push_back(shiftPoint(points[i-1], points[i], shift * -1.0f, roadYposition));
+		trackOne.push_back(shiftPoint(points[i-1], points[i], (shift / 2.0f), roadYposition));
+		trackTwo.push_back(shiftPoint(points[i-1], points[i], ((shift / 2.0f) * -1.0f), roadYposition));
 	}
 }
 
@@ -157,7 +163,8 @@ glm::vec3 Object3Droad::bezierPoint(float u) {
 
 void Object3Droad::clean() {
 	points.clear();
-	shiftedPoints.clear();
+	shiftedPoints_1.clear();
+	shiftedPoints_2.clear();
 	trackOne.clear();
 	trackTwo.clear();
 }
@@ -165,8 +172,8 @@ void Object3Droad::clean() {
 void Object3Droad::fillModelCoordinates() {
 	std::vector<glm::vec3> modelPoints;
 	for (size_t i = 0; i < points.size(); i++) {
-		modelPoints.push_back(points[i]);
-		modelPoints.push_back(shiftedPoints[i]);
+		modelPoints.push_back(shiftedPoints_2[i]);
+		modelPoints.push_back(shiftedPoints_1[i]);
 	}
 	modelPointCount = modelPoints.size();
 	modelCoordinates.BufferData(modelPoints);
@@ -227,12 +234,12 @@ void Object3Droad::generate() {
 	}, modelIndices);
 }
 
+//TODO SHIT
 void Object3Droad::update() {
 	this->updateBasePoints();
 	this->generate();
-	this->roadEndCircles[0]->setPosition(shiftPoint(points[0], points[1], shift / 2.0f, roadYposition - 0.01f));
-	this->roadEndCircles[1]->setPosition(shiftPoint(points[points.size() - 2], points[points.size() - 1], shift / 2.0f, roadYposition - 0.01f));
-
+	this->roadEndCircles[0]->setPosition(glm::vec3(points[1].x, roadYposition - 0.01f, points[1].z));
+	this->roadEndCircles[1]->setPosition(glm::vec3(points[points.size() - 1].x, roadYposition - 0.01f, points[points.size() - 1].z));
 	//this->roadEndCircles[0]->setPosition(basePoints[0]);
 	//this->roadEndCircles[1]->setPosition(basePoints[3]);
 }

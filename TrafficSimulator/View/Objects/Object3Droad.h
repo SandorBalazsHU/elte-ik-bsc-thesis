@@ -37,10 +37,11 @@ public:
 	void					select();
 	void					deselect();
 
-	//std::vector<glm::vec3> points;
-	//std::vector<glm::vec3> shiftedPoints;
+	std::vector<glm::vec3> points;
+	std::vector<glm::vec3> shiftedPoints_1;
+	std::vector<glm::vec3> shiftedPoints_2;
 	std::vector<glm::vec3> trackOne;
-	//std::vector<glm::vec3> trackTwo;
+	std::vector<glm::vec3> trackTwo;
 
 protected:
 	void generateRoadPoints();
@@ -58,15 +59,16 @@ protected:
 	bool selected = true;
 	glm::vec4 color;
 
-	float shift = 4.0f;
+	float shift = 2.0f;
 	Object3D* trackBalls[4];
 	Object3D* roadEndCircles[2];
 	glm::vec3 basePoints[4];
 	float roadYposition;
-	std::vector<glm::vec3> points;
-	std::vector<glm::vec3> shiftedPoints;
-	//std::vector<glm::vec3> trackOne;
-	std::vector<glm::vec3> trackTwo;
+	/*/std::vector<glm::vec3> points;
+	std::vector<glm::vec3> shiftedPoints_1;
+	std::vector<glm::vec3> shiftedPoints_2;
+	std::vector<glm::vec3> trackOne;
+	std::vector<glm::vec3> trackTwo;*/
 
 	size_t	modelPointCount;
 
