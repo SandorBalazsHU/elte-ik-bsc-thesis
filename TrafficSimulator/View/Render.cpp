@@ -119,6 +119,8 @@ void Render::sceneInit() {
 	for (size_t i = 0; i < firstSceneElements.size(); i++) {
 		addObject(firstSceneElements[i]);
 	}
+	//To PhotoMode
+	//getObject(0)->hide();
 }
 
 int Render::addObject(int id) {

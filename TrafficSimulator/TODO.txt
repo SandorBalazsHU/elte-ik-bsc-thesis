@@ -25,3 +25,13 @@ User story:
 - Ha összekapcsolódott jelenjen meg alatta a kapcsolódás alatt egy körlap.
 
 Vonal a jelölõpontok közé?
+
+map mentés és betöltés
+
+több tárgy
+
+kategóriák
+
+katalógusfájlba téma kategória oszlop beillesztése
+sor rendezés
+sorszám fügetlenítés. A cím legyen az elsõdleges kulcs.
