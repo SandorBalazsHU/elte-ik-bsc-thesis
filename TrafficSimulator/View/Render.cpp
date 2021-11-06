@@ -168,8 +168,8 @@ int Render::addRoad() {
 	addObject(1);
 	addObject(1);
 	addObject(1);
-	addObject(23);
-	addObject(23);
+	addObject(2);
+	addObject(2);
 
 	Object3D* trackBall_0		= getObject(renderableObjects.size() - 6);
 	Object3D* trackBall_1		= getObject(renderableObjects.size() - 5);
