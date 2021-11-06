@@ -199,6 +199,11 @@ Object3D* Render::getObject(int id) {
 
 void Render::updateDynamicObject(int id) {
 	renderableRoads[id]->update();
+	for (size_t i = 0; i < renderableRoads.size(); i++) {
+		if (i != id) {
+			renderableRoads[id]->stuckTest(renderableRoads[i]);
+		}
+	}
 }
 
 void Render::renderScrean() {

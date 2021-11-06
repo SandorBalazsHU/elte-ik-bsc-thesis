@@ -27,11 +27,20 @@ void EventListener::select(int objectID) {
 	selectedObject->setOpacity(0.5);
 }
 
-void EventListener::deSelect() {
+void EventListener::deselect() {
 	for (size_t i = 0; i < selectedItems.size(); i++) {
 		selectedItems[i]->setOpacity(1.0);
 	}
 	selectedItems.clear();
+}
+
+void EventListener::roadDeselect() {
+	if(selectedRoads.size() > 0) {
+		for (size_t i = 0; i < selectedRoads.size(); i++) {
+			selectedRoads[i]->deselect();
+		}
+		selectedRoads.clear();
+	}
 }
 
 void EventListener::keyboardDown(SDL_KeyboardEvent& key) {
@@ -85,22 +94,26 @@ void EventListener::mouseDown(SDL_MouseButtonEvent& mouse) {
 		int selectedObjectId = getClickedObjectId(mouse);
 		if (selectedObjectId != -1) {
 			select(selectedObjectId);
-			std::cout << "HIT" << std::endl;
+			//std::cout << "HIT" << std::endl;
 		}else{
 			for (size_t i = 0; i < render->renderableRoads.size(); i++)	{
 				if (render->renderableRoads[i]->isClicked(camera->getCameraPosition(), ray)) {
 					render->renderableRoads[i]->select();
-					std::cout << "ROAD HIT" << std::endl;
+					selectedRoads.push_back(render->renderableRoads[i]);
+					//std::cout << "ROAD HIT" << std::endl;
 				}
 			}
 		}
+	}
+	if (mouse.button == SDL_BUTTON_LEFT) {
+		roadDeselect();
 	}
 }
 
 void EventListener::mouseUp(SDL_MouseButtonEvent& mouse) {
 	if (mouse.button == SDL_BUTTON_RIGHT) {
 		//std::cout << "deselect" << std::endl;
-		if(!keepSelect) deSelect();
+		if(!keepSelect) deselect();
 	}
 }
 
@@ -150,7 +163,7 @@ int EventListener::getClickedObjectId(SDL_MouseButtonEvent& mouse) {
 
 	std::map<float, int> hits;
 	for (size_t i = 1; i < render->renderableObjects.size(); i++) {
-		if (render->renderableObjects[i].isSelectable()) {
+		if (render->renderableObjects[i].isSelectable() && !render->renderableObjects[i].isHidden()) {
 			glm::vec4 hitSphere = render->renderableObjects[i].getHitSphere();
 			glm::vec3 cameraPosition = camera->getCameraPosition();
 			glm::vec3 hitSphereCenter = glm::vec3(hitSphere.x, hitSphere.y, hitSphere.z);

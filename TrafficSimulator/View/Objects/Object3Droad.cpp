@@ -1,3 +1,4 @@
+//Tendi
 #include "Object3Droad.h"
 #include <glm/gtx/transform2.hpp>
 #include <map>
@@ -35,6 +36,11 @@ void Object3Droad::bind(Object3D* trackBall_0, Object3D* trackBall_1, Object3D* 
 	trackBall_1->setScale(glm::vec3(1.0f, 1.0f, 1.0f));
 	trackBall_2->setScale(glm::vec3(1.0f, 1.0f, 1.0f));
 	trackBall_3->setScale(glm::vec3(1.0f, 1.0f, 1.0f));*/
+
+	trackBall_0->hide();
+	trackBall_1->hide();
+	trackBall_2->hide();
+	trackBall_3->hide();
 
 	trackBall_0->setProtection(true);
 	trackBall_1->setProtection(true);
@@ -76,6 +82,24 @@ void Object3Droad::reBind(Object3D* trackBall_0, Object3D* trackBall_1, Object3D
 
 //TODO OTHER OBJECTS DELETE BUG
 void Object3Droad::updateBasePoints() {
+	if (this->stickMarkA != 'Q') {
+		if (this->stickMarkA == 'A') {
+			trackBalls[0]->setPosition(this->stickA->getEndpointA());
+		}
+		if (this->stickMarkA == 'B') {
+			trackBalls[0]->setPosition(this->stickA->getEndpointB());
+		}
+	}
+
+	if (this->stickMarkB != 'Q') {
+		if (this->stickMarkB == 'A') {
+			trackBalls[3]->setPosition(this->stickB->getEndpointA());
+		}
+		if (this->stickMarkB == 'B') {
+			trackBalls[3]->setPosition(this->stickB->getEndpointB());
+		}
+	}
+
 	for (size_t i = 0; i < 4; i++) {
 		basePoints[i] = trackBalls[i]->getPosition();
 		//std::cout << trackBalls[i]->getRenderID() << " | " << trackBalls[i]->getPosition().x << " , " << trackBalls[i]->getPosition().y << " , " << trackBalls[i]->getPosition().z << std::endl;
@@ -96,7 +120,7 @@ bool Object3Droad::isClicked(glm::vec3 cameraPosition, glm::vec3 ray) {
 		if (hitDistance < 0.0) {
 			//std::cout << "NO HIT" << std::endl;
 		}else{
-			std::cout << "ROAD INSIDE HIT" << std::endl;
+			//std::cout << "ROAD INSIDE HIT" << std::endl;
 			return true;
 		}
 	}
@@ -135,10 +159,41 @@ bool Object3Droad::isSelected() {
 	return selected;
 }
 
+glm::vec3 Object3Droad::getEndpointA() {
+	return basePoints[0];
+}
+
+glm::vec3 Object3Droad::getEndpointB() {
+	return basePoints[3];
+}
+
+void Object3Droad::stuckTest(Object3Droad* road) {
+	if (glm::distance(road->getEndpointA(), this->getEndpointA()) < this->shift) {
+		this->stickA = road;
+		this->stickMarkA = 'A';
+	}
+	if (glm::distance(road->getEndpointA(), this->getEndpointB()) < this->shift) {
+		this->stickB = road;
+		this->stickMarkB = 'A';
+	}
+	if (glm::distance(road->getEndpointB(), this->getEndpointA()) < this->shift) {
+		this->stickA = road;
+		this->stickMarkA = 'B';
+	}
+	if (glm::distance(road->getEndpointB(), this->getEndpointB()) < this->shift) {
+		this->stickB = road;
+		this->stickMarkB = 'B';
+	}
+}
+
 void Object3Droad::select() {
 	setOpacity(0.5f);
 	roadEndCircles[0]->setOpacity(0.5f);
 	roadEndCircles[1]->setOpacity(0.5f);
+	trackBalls[0]->show();
+	trackBalls[1]->show();
+	trackBalls[2]->show();
+	trackBalls[3]->show();
 	selected = true;
 }
 
@@ -146,6 +201,10 @@ void Object3Droad::deselect() {
 	setOpacity(1.0f);
 	roadEndCircles[0]->setOpacity(1.0f);
 	roadEndCircles[1]->setOpacity(1.0f);
+	trackBalls[0]->hide();
+	trackBalls[1]->hide();
+	trackBalls[2]->hide();
+	trackBalls[3]->hide();
 	selected = false;
 }
 

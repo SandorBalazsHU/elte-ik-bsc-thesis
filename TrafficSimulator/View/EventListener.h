@@ -8,6 +8,7 @@ class Render;
 #include<vector>
 #include"Camera.h"
 #include"Objects/Object3D.h"
+#include"Objects/Object3Droad.h"
 
 
 class WorkWindow;
@@ -19,7 +20,8 @@ public:
 	void bind(WorkWindow* currentWindow);
 	void eventProcessor();
 	void select(int objectID);
-	void deSelect();
+	void deselect();
+	void roadDeselect();
 private:
 	WorkWindow* workingWindow;
 	Camera* camera;
@@ -27,6 +29,7 @@ private:
 	Render* render;
 
 	std::vector<Object3D*> selectedItems;
+	std::vector<Object3Droad*> selectedRoads;
 	bool keepSelect = false;
 
 	glm::vec3 ray;

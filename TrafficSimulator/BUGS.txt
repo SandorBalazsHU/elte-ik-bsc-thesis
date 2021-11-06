@@ -7,3 +7,7 @@
 - konstansok irtása
 - Kikommentezett cuccok eliminálása
 + Útmagasságok finom módosítása
+
+- Object3D selection-t átvinni asz osztályba 
+
+- út törlés esetén az út kapcsolatokat is újra kell kötni.

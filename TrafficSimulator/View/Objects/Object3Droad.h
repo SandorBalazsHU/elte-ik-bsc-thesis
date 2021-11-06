@@ -1,3 +1,4 @@
+//T'ana
 #pragma once
 #include "Object3D.h"
 #include "../Utilities/VertexArrayObject.h"
@@ -37,6 +38,10 @@ public:
 	void					select();
 	void					deselect();
 	bool					isClicked(glm::vec3 cameraPosition, glm::vec3 ray);
+	glm::vec3				getEndpointA();
+	glm::vec3				getEndpointB();
+	//TODO: road delete rebind problem.
+	void					stuckTest(Object3Droad* road);
 
 	std::vector<glm::vec3> points;
 	std::vector<glm::vec3> shiftedPoints_1;
@@ -59,6 +64,11 @@ protected:
 	int renderID = -1;
 	bool selected = true;
 	glm::vec4 color;
+
+	Object3Droad* stickA = NULL;
+	char stickMarkA = 'Q';
+	Object3Droad* stickB = NULL;
+	char stickMarkB = 'Q';
 
 	float shift = 2.0f;
 	Object3D* trackBalls[4];
