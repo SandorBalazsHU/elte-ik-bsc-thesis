@@ -186,6 +186,10 @@ void GUI::draw() {
 		if (ImGui::ImageButton((void*)(intptr_t)objectStorage->getTexture("miniatures/road_mini.png"), ImVec2(100, 100))) {
 			int newRoadID = windowRender->addRoad();
 		}
+		ImGui::SameLine();
+		if (ImGui::ImageButton((void*)(intptr_t)objectStorage->getTexture("miniatures/delete_mini.png"), ImVec2(100, 100))) {
+			//TODO function
+		}
 		itemList();
 	}
 	ImGui::End();

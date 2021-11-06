@@ -22,7 +22,7 @@ void ObjectStorage::load() {
 
         if (currentType == "texture") { 
             std::string fileName = parsedCSV[i][3];
-            if (!isThisTextureLoaded(fileName)) threads.push_back(loadTextureParallel(fileName));
+            if (!isThisTextureLoaded(fileName) && fileName != "*") threads.push_back(loadTextureParallel(fileName));
 
             fileName = parsedCSV[i][4];
             if (!isThisTextureLoaded(fileName) && fileName != "*") threads.push_back(loadTextureParallel(miniatureFolder + fileName));
