@@ -34,6 +34,9 @@ private:
 
 	glm::vec3 ray;
 
+	bool leftButtonIsPressed = false;
+	bool rightButtonIsPressed = false;
+
 	void deleteSelectedItems();
 
 	void keyboardDown(SDL_KeyboardEvent&);

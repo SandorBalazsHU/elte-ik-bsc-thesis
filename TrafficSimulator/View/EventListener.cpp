@@ -104,9 +104,11 @@ void EventListener::mouseDown(SDL_MouseButtonEvent& mouse) {
 				}
 			}
 		}
+		rightButtonIsPressed = true;
 	}
 	if (mouse.button == SDL_BUTTON_LEFT) {
 		roadDeselect();
+		leftButtonIsPressed = true;
 	}
 }
 
@@ -114,11 +116,21 @@ void EventListener::mouseUp(SDL_MouseButtonEvent& mouse) {
 	if (mouse.button == SDL_BUTTON_RIGHT) {
 		//std::cout << "deselect" << std::endl;
 		if(!keepSelect) deselect();
+		rightButtonIsPressed = false;
+	}
+	if (mouse.button == SDL_BUTTON_LEFT) {
+		leftButtonIsPressed = false;
 	}
 }
 
 void EventListener::mouseWheel(SDL_MouseWheelEvent& wheel) {
-	camera->mouseWheel(wheel);
+	if(!rightButtonIsPressed) camera->mouseWheel(wheel);
+	if (selectedItems.size() > 0) {
+		for (size_t i = 0; i < selectedItems.size(); i++) {
+			if (wheel.y>0) selectedItems[i]->rotateLeft(10.0f);
+			if (wheel.y<0) selectedItems[i]->rotateRight(10.0f);
+		}
+	}
 }
 
 void EventListener::resize(SDL_WindowEvent& window) {
