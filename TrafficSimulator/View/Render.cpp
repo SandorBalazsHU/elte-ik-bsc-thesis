@@ -29,6 +29,10 @@ void Render::bind(WorkWindow* currentWindow) {
 	objectStorage = workingWindow->getObjectStorage();
 	setWindowIcon(objectStorage->getWindowIcon());
 	fpsCounter::bind();
+	mapLoader.bind(this);
+	mapSaver.bind(this);
+	mapSaver.saveMap("testSave.sbx");
+	// --- Consfig --- 
 	//faceTestOn();
 	multisamplingOn();
 	vsyncOn();

@@ -114,6 +114,12 @@
     <ClCompile Include="View\Objects\Object3Droad.cpp">
       <Filter>Source Files\View\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Control\MapLoader.cpp">
+      <Filter>Source Files\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="Control\MapSaver.cpp">
+      <Filter>Source Files\Control</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="View\WorkWindow.h">
@@ -202,6 +208,12 @@
     </ClInclude>
     <ClInclude Include="View\Objects\Object3Droad.h">
       <Filter>Source Files\View\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Control\MapLoader.h">
+      <Filter>Source Files\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Control\MapSaver.h">
+      <Filter>Source Files\Control</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

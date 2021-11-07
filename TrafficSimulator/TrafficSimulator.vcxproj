@@ -152,6 +152,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Control\Logger.cpp" />
+    <ClCompile Include="Control\MapLoader.cpp" />
+    <ClCompile Include="Control\MapSaver.cpp" />
     <ClCompile Include="Model\Dijkstra.cpp" />
     <ClCompile Include="Model\RayPicking.cpp" />
     <ClCompile Include="Model\reverseMap.cpp" />
@@ -179,6 +181,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Control\Logger.h" />
+    <ClInclude Include="Control\MapLoader.h" />
+    <ClInclude Include="Control\MapSaver.h" />
     <ClInclude Include="Model\Dijkstra.h" />
     <ClInclude Include="Model\RayPicking.h" />
     <ClInclude Include="Model\reverseMap.h" />

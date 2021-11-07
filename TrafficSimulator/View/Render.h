@@ -9,6 +9,8 @@ class GUI;
 #include "Utilities/VertexArrayObject.h"
 #include "Objects/ObjectStorage.h"
 #include "Objects/Object3Droad.h"
+#include "../Control/MapLoader.h"
+#include "../Control/MapSaver.h"
 
 class Render {
 public:
@@ -57,4 +59,6 @@ private:
 	ProgramObject* shader;
 	GUI* gui;
 	ObjectStorage* objectStorage;
+	MapLoader mapLoader;
+	MapSaver mapSaver;
 };
