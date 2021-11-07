@@ -3,13 +3,17 @@
 class Render;
 
 #include <string>
+#include <vector>
 
 class MapLoader {
 public:
 	MapLoader(void);
 	~MapLoader(void);
 	void bind(Render* render);
-	void saveMap(std::string fileName);
+	void loadMap(std::string fileName);
 private:
+	std::string saveFolder = "Saves\\";
 	Render* render;
+	std::vector<std::vector<std::string>> parsedCSV;
+	void readCSV(std::string fileName);
 };

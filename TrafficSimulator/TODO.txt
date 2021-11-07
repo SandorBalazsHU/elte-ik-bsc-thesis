@@ -29,3 +29,4 @@ x Vonal a jelölõpontok közé?
 + sor rendezés
 x sorszám fügetlenítés. A cím legyen az elsõdleges kulcs.
 -logaritmikus mozgatás
+- 4-es asztal kiemelése globális változóba

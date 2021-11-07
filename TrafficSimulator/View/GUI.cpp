@@ -189,7 +189,17 @@ void GUI::draw() {
 		ImGui::SameLine();
 		if (ImGui::ImageButton((void*)(intptr_t)objectStorage->getTexture("miniatures/delete_mini.png"), ImVec2(100, 100))) {
 			//TODO function
-			windowRender->mapSaver.saveMap("testSave.sbx");
+		}
+		if (ImGui::ImageButton((void*)(intptr_t)objectStorage->getTexture("miniatures/large_car_green_mini.png"), ImVec2(100, 100))) {
+			//TODO function
+			windowRender->mapSaver.saveMap("testSave.csv");
+			std::cout << "SAVED" << std::endl;
+		}
+		ImGui::SameLine();
+		if (ImGui::ImageButton((void*)(intptr_t)objectStorage->getTexture("miniatures/large_car_blue_mini.png"), ImVec2(100, 100))) {
+			//TODO function
+			windowRender->mapLoader.loadMap("testSave.csv");
+			std::cout << "LOADED" << std::endl;
 		}
 		itemList();
 	}
