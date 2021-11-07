@@ -22,7 +22,8 @@
 - Színváltozással jelezze a végpont, ha kapcsolódott.
 + Ha összekapcsolódott jelenjen meg alatta a kapcsolódás alatt egy körlap.
 x Vonal a jelölõpontok közé?
-- map mentés és betöltés
++ map mentés
++ map betöltés
 + több tárgy
 - kategóriák
 - katalógusfájlba téma kategória oszlop beillesztése

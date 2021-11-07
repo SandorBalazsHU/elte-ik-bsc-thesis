@@ -35,13 +35,13 @@ void MapSaver::saveMap(std::string fileName) {
 	}
 
 	for (size_t i = 0; i < render->renderableRoads.size(); i++) {
-		saveFile << "-1";
+		saveFile << "-1;";
 		Object3D** trackBalls = render->renderableRoads[i]->getTrackBalls();
 		for (size_t j = 0; j < 4; j++) {
 			glm::vec3 position = trackBalls[j]->getPosition();
-			saveFile << position.x << ";" << position.y << ";" << position.z;
+			saveFile << position.x << ";" << position.y << ";" << position.z << ";";
 		}
-		saveFile << std::endl;
+		saveFile << ";" << std::endl;
 	}
 
 	saveFile.close();
