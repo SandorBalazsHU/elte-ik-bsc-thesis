@@ -189,6 +189,7 @@ void GUI::draw() {
 		ImGui::SameLine();
 		if (ImGui::ImageButton((void*)(intptr_t)objectStorage->getTexture("miniatures/delete_mini.png"), ImVec2(100, 100))) {
 			//TODO function
+			windowRender->mapSaver.saveMap("testSave.sbx");
 		}
 		itemList();
 	}

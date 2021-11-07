@@ -31,7 +31,6 @@ void Render::bind(WorkWindow* currentWindow) {
 	fpsCounter::bind();
 	mapLoader.bind(this);
 	mapSaver.bind(this);
-	mapSaver.saveMap("testSave.sbx");
 	// --- Consfig --- 
 	//faceTestOn();
 	multisamplingOn();

@@ -46,6 +46,9 @@ public:
 
 	std::vector<Object3Droad*> renderableRoads;
 
+	MapLoader mapLoader;
+	MapSaver mapSaver;
+
 private:
 	void renderScrean();
 	void sceneInit();
@@ -59,6 +62,4 @@ private:
 	ProgramObject* shader;
 	GUI* gui;
 	ObjectStorage* objectStorage;
-	MapLoader mapLoader;
-	MapSaver mapSaver;
 };
