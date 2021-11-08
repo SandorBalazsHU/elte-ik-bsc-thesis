@@ -211,6 +211,11 @@ void Render::updateDynamicObject(int id) {
 			renderableRoads[id]->stuckTest(renderableRoads[i]);
 		}
 	}
+	for (size_t i = 0; i < renderableObjects.size(); i++) {
+		if (renderableObjects[i].getName() == "Start sign" || renderableObjects[i].getName() == "Stop sign") {
+			renderableRoads[id]->markerTest(&renderableObjects[i]);
+		}
+	}
 }
 
 void Render::renderScrean() {

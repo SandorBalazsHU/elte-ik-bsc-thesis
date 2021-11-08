@@ -42,12 +42,18 @@ public:
 	glm::vec3				getEndpointB();
 	//TODO: road delete rebind problem.
 	void					stuckTest(Object3Droad* road);
+	bool					markerTest(Object3D* marker);
+
 	void					setEndpointLock(bool lock) {
 		endpointLock = lock;
 		stickA = NULL;
 		stickMarkA = 'Q';
 		stickB = NULL;
 		stickMarkB = 'Q';
+		if(markerA != NULL) markerA->setSelectable(true);
+		if(markerB != NULL) markerB->setSelectable(true);
+		markerA = NULL;
+		markerB = NULL;
 	}
 
 	std::vector<glm::vec3> points;
@@ -78,6 +84,10 @@ protected:
 	char stickMarkA = 'Q';
 	Object3Droad* stickB = NULL;
 	char stickMarkB = 'Q';
+
+	Object3D* markerA = NULL;
+	Object3D* markerB = NULL;
+
 
 	float shift = 2.0f;
 	Object3D* trackBalls[4];

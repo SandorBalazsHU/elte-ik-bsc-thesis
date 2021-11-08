@@ -106,6 +106,15 @@ void Object3Droad::updateBasePoints() {
 		}
 	}
 
+	if (this->markerA != NULL && endpointLock) {
+		trackBalls[0]->setPosition(this->markerA->getPosition());
+	}
+
+	if (this->markerB != NULL && endpointLock) {
+		trackBalls[3]->setPosition(this->markerB->getPosition());
+
+	}
+
 	for (size_t i = 0; i < 4; i++) {
 		basePoints[i] = trackBalls[i]->getPosition();
 		//std::cout << trackBalls[i]->getRenderID() << " | " << trackBalls[i]->getPosition().x << " , " << trackBalls[i]->getPosition().y << " , " << trackBalls[i]->getPosition().z << std::endl;
@@ -191,25 +200,23 @@ void Object3Droad::stuckTest(Object3Droad* road) {
 		this->stickMarkB = 'B';
 	}
 }
-/*
-void Object3Droad::endpointTest(Object3D* endpoint) {
-	if (glm::distance(road->getEndpointA(), this->getEndpointA()) < this->shift + 1) {
-		this->stickA = road;
-		this->stickMarkA = 'A';
+
+bool  Object3Droad::markerTest(Object3D* marker) {
+	bool result = false;
+	if ((glm::distance(this->getEndpointA(), marker->getPosition()) < this->shift + 1) && endpointLock) {
+		result = true;
+		this->markerA = marker;
+		marker->setSelectable(false);
+		marker->setPosition(this->getEndpointA());
 	}
-	if (glm::distance(road->getEndpointA(), this->getEndpointB()) < this->shift + 1) {
-		this->stickB = road;
-		this->stickMarkB = 'A';
+	if ((glm::distance(this->getEndpointB(), marker->getPosition()) < this->shift + 1) && endpointLock) {
+		result = true;
+		this->markerB = marker;
+		//marker->setSelectable(false);
+		//marker->setPosition(this->getEndpointB());
 	}
-	if (glm::distance(road->getEndpointB(), this->getEndpointA()) < this->shift + 1) {
-		this->stickA = road;
-		this->stickMarkA = 'B';
-	}
-	if (glm::distance(road->getEndpointB(), this->getEndpointB()) < this->shift + 1) {
-		this->stickB = road;
-		this->stickMarkB = 'B';
-	}
-}*/
+	return result;
+}
 
 void Object3Droad::select() {
 	setOpacity(0.5f);

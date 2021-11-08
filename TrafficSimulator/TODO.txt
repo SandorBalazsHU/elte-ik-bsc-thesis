@@ -1,5 +1,4 @@
-A kezdõ és végpontjelölõ ragadjon rá az út végpontra
-A jelölt út végpontra más út már ne ragadhasson.
+Nagy BUG teszt 1
 
 Ötletek:
 - Nagyobb asztal, blokkoló keretekkel.
@@ -38,10 +37,12 @@ Elkészült ötletek:
 + fájl sor rendezés
 + Végpont hozzáadás
 + Összekapcsolt útvég feloldása
++ A kezdõ és végpontjelölõ ragadjon rá az út végpontra
 
 Elvetett ötletek:
 x sorszám fügetlenítés. A cím legyen az elsõdleges kulcs.
 x Vonal a jelölõpontok közé?
+x A jelölt út végpontra más út már ne ragadhasson.
 
 Ha lesz rá idõ:
 * Kattintás gyorsítás.

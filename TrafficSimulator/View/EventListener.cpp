@@ -92,7 +92,21 @@ void EventListener::mouseMove(SDL_MouseMotionEvent& mouse) {
 		glm::vec3 rotatedShift = rotateMatrix2 * originalShift;
 
 		for (size_t i = 0; i < selectedItems.size(); i++) {
+			
+			if (selectedItems[i]->getName() == "Start sign" || selectedItems[i]->getName() == "Stop sign") {
+				bool result = false;
+				for (size_t j = 0; j < render->renderableRoads.size(); j++) {
+					result = render->renderableRoads[j]->markerTest(selectedItems[i]);
+					//if(result) selectedItems[i]->setPosition(render->renderableRoads[j]->getEndpointB());
+				}
+				if (result && (pressedKeys.find(SDLK_f) == pressedKeys.end())) {
+					deselect();
+					break;
+				}
+			}
+
 			selectedItems[i]->move(rotatedShift);
+
 			if (selectedItems[i]->getDependencyID() > -1) {
 				render->updateDynamicObject(selectedItems[i]->getDependencyID());
 				//std::cout << selectedItems[i]->getDependencyID() << " , " << selectedItems[i]->getRenderID() << std::endl;
