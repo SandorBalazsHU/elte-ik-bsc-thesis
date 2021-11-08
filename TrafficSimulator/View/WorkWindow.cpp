@@ -1,3 +1,13 @@
+/**
+ * @name Traffic Simulation
+ * @file WorkingWindow.cpp
+ * @class WorkingWindow
+ * @author Sándor Balázs - AZA6NL
+ * @date 2021.11.08.
+ * @brief Opengl 3D system initialisation and window open.
+ * Contact: sandorbalazs9402@gmail.com
+*/
+
 #include "WorkWindow.h"
 
 #include <iostream>
@@ -13,9 +23,25 @@
 #include "Utilities/ProgramObject.h"
 #include "Utilities/ObjParser_OGL3.h"
 
+/**
+ * @brief OpenGL 3D Window konstructor.
+*/
 WorkWindow::WorkWindow(void) {
 };
 
+/**
+ * @brief Open and show the window. This run all the preparation function and start the rendering.
+ * Possible error codes:
+ * 0 - Everithing is fine.
+ * 1 - SDL Initialisation error.
+ * 2 - OpenGL 3D Window creation error.
+ * 3 - imGUI GUI system Initialisation error.
+ * 4 - OpenGL Context creation error.
+ * 5 - GLEW system initialisation error.
+ * 6 - OpenGL starting or version error.
+ * 7 - Shader compiling or starting error.
+ * @return The starting process status number. 0 is OK Other ID-s mean errors.
+*/
 int WorkWindow::open() {
 	int status				= sdlInit();
 	if (status == 0) status = openGLpreConfig();
@@ -31,6 +57,10 @@ int WorkWindow::open() {
 	return  status;
 }
 
+/**
+ * @brief SDL system initialisation.
+ * @return Status ID. 0 is OK status.
+*/
 int WorkWindow::sdlInit() {
 	//Exit Callback
 	atexit(WorkWindow::exitWindow);
@@ -45,10 +75,11 @@ int WorkWindow::sdlInit() {
 	return 0;
 }
 
-//TODO MIPMAPPING
-//TODO Multiple gpu select
+/**
+ * @brief OpenGL preconfiguration.
+ * @return Status ID. 0 is OK status.
+*/
 int WorkWindow::openGLpreConfig() {
-	//OpenGL Configuration
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 	SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 32);		//Color buffer size 32
 	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);			//Red 8 bit
@@ -60,14 +91,15 @@ int WorkWindow::openGLpreConfig() {
 	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);  //Anti aliasing ON
 	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 16); //Anti aliasing 4
 	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);	//Hardware accelerated
-	//TODO IS OK?
 	SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
-	//glDepthMask(GL_FALSE);
 	return 0;
 }
 
+/**
+ * @brief SDL window opening.
+ * @return Status ID. 0 is OK status.
+*/
 int WorkWindow::openSDLWindow() {
-	//Creating Window
 	window = 0;
 	window = SDL_CreateWindow(windowDefTitle, windowDefPosX, windowDefPosY, windowDefSizeX, windowDefSizeY,
 	SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_MAXIMIZED);
@@ -79,19 +111,25 @@ int WorkWindow::openSDLWindow() {
 	return 0;
 }
 
+/**
+ * @brief inGUI GUS system start.
+ * @return Status ID. 0 is OK status.
+*/
 int WorkWindow::imGUIinit() {
-	//imgui initialisation
 	bool status = GUI::init(window);
 	if (status) {
 		return 0;
-	}else{
+	} else {
 		Logger::error("[IMGUI START ERROR]");
 		return 3;
 	}
 }
 
+/**
+ * @brief OpenGL Context creation.
+ * @return Status ID. 0 is OK status.
+*/
 int WorkWindow::createOpenGLContext() {
-	//Create OpenGL context
 	context = SDL_GL_CreateContext(window);
 	if (context == 0) {
 		std::string SDLerror = SDL_GetError();
@@ -101,8 +139,11 @@ int WorkWindow::createOpenGLContext() {
 	return 0;
 }
 
+/**
+ * @brief GLEW System start.
+ * @return Status ID. 0 is OK status.
+*/
 int WorkWindow::glewStart() {
-	//GLEW start
 	GLenum error = glewInit();
 	if (error != GLEW_OK) {
 		Logger::error("[GLEW start error]");
@@ -111,6 +152,10 @@ int WorkWindow::glewStart() {
 	return 0;
 }
 
+/**
+ * @brief OpenGL Variables setting.
+ * @return Status ID. 0 is OK status.
+*/
 int WorkWindow::openGLpostConfig() {
 	//VSINC ON
 	SDL_GL_SetSwapInterval(1);
@@ -133,15 +178,17 @@ int WorkWindow::openGLpostConfig() {
 	glEnable(GL_BLEND);						//Alpha
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	//TODO TEST
+	//Face test
 	glCullFace(GL_BACK);
 	return 0;
 }
 
+/**
+ * @brief OpenGL Shader configurationvand compiling.
+ * @return Status ID. 0 is OK status.
+*/
 int WorkWindow::shaderConfig() {
-	//Shader loading
 	try {
-		//ProgramObject	shader;
 		shader.createProgram();
 		shader.Init({
 			{ GL_VERTEX_SHADER, "View/Shaders/vertexShader.vert" },
@@ -159,10 +206,17 @@ int WorkWindow::shaderConfig() {
 	return 0;
 }
 
+/**
+ * @brief Clear the screen
+*/
 void WorkWindow::clearScreen() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
+/**
+ * @brief Render variable setting.
+ * @return Status ID. 0 is OK status.
+*/
 int WorkWindow::renderPreconfig() {
 	eventListener.bind(this);
 	render.bind(this);
@@ -171,8 +225,11 @@ int WorkWindow::renderPreconfig() {
 	return 0;
 }
 
+/**
+ * @brief Render Start!
+ * @return Status ID. 0 is OK status.
+*/
 int WorkWindow::renderStart() {
-	//The render loop
 	while (!exit) {
 		if (!objectStorage.isLoaded()) {
 			if (objectStorage.loadingCheck()) objectStorage.finaliseLoading();
@@ -187,16 +244,25 @@ int WorkWindow::renderStart() {
 	return 0;
 }
 
+/**
+ * @brief Cleanup before closing.
+*/
 void WorkWindow::cleanup() {
 	GUI::clean();
 	SDL_GL_DeleteContext(context);
 	SDL_DestroyWindow(window);
 }
 
+/**
+ * @brief OpenGL 3D Window destructor.
+*/
 WorkWindow::~WorkWindow(void) {
 	cleanup();
 }
 
+/**
+ * @brief Windows close callback function.
+*/
 void WorkWindow::exitWindow() {
 	SDL_Quit();
 }

@@ -14,6 +14,16 @@
 
 /**
  * @brief Program main function.
+ * Possible error codes:
+ * 0 - Everithing is fine.
+ * 1 - SDL Initialisation error.
+ * 2 - OpenGL 3D Window creation error.
+ * 3 - imGUI GUI system Initialisation error.
+ * 4 - OpenGL Context creation error.
+ * 5 - GLEW system initialisation error.
+ * 6 - OpenGL starting or version error.
+ * 7 - Shader compiling or starting error.
+ * @return The starting process status number. 0 is OK Other ID-s mean errors.
  * @param argc Consol Argument count.
  * @param args Cosol arguments array.
  * @return program exit status.
