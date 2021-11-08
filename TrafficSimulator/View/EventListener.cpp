@@ -43,11 +43,17 @@ void EventListener::roadDeselect() {
 	}
 }
 
+//TODO Lenyomott F közbenti deselect, egyszerre több lenyomott gomb?
 void EventListener::keyboardDown(SDL_KeyboardEvent& key) {
 	camera->keyboardDown(key);
 	if (key.keysym.sym == SDLK_ESCAPE) exit();
 	if (key.keysym.sym == SDLK_LCTRL) keepSelect = true;
 	if (key.keysym.sym == SDLK_RCTRL) keepSelect = true;
+	if (key.keysym.sym == SDLK_f) {
+		for (size_t i = 0; i < selectedRoads.size(); i++) {
+			selectedRoads[i]->setEndpointLock(false);
+		}
+	}
 }
 
 void EventListener::deleteSelectedItems() {
@@ -63,6 +69,11 @@ void EventListener::keyboardUp(SDL_KeyboardEvent& key) {
 	if (key.keysym.sym == SDLK_LCTRL) keepSelect = false;
 	if (key.keysym.sym == SDLK_RCTRL) keepSelect = false;
 	if (key.keysym.sym == SDLK_DELETE) deleteSelectedItems();
+	if (key.keysym.sym == SDLK_f) {
+		for (size_t i = 0; i < selectedRoads.size(); i++) {
+			selectedRoads[i]->setEndpointLock(true);
+		}
+	}
 }
 
 //https://en.wikipedia.org/wiki/Rotation_of_axes

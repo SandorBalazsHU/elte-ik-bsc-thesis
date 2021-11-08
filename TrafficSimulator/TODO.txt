@@ -1,33 +1,46 @@
+
+
+Ötletek:
 - Nagyobb asztal, blokkoló keretekkel.
-+ Jobb klikk görgõ forgatás.
-+ Törlés gomb hozzáadása
 - Törlés gomb mûködése
-+ Tereptárgy törlés
-+ Több út beszúrása
-+ Út kiválasztás (Minden x-edig pontra z átmérõjû metszõ gömb)
-* Kattintás gyorsítás.
 - Út törlés
-+ Út színezés
-- Útvég és Út eleje clipping, fitting
+- Útvég feloldása
+- Útvég mozgatása
+- Végpont jelölõ rögzülés
+- Végpontjelölõ feloldás
 - Úthossz számítás
 - Út jobbgombos menü
 - Kezdõpont hozzáadás
-- Végpont hozzáadás
 - Gráf generálás
 - Útvonal generálás
 - Útvonal jelölés
 - Útvonal kiemelés
 - Autó végighaladás.
-+ Ha közel ér egymáshoz két útvég akkor azok összepattannak és fixálódnak. (Pont eltolás középre?)
 - Színváltozással jelezze a végpont, ha kapcsolódott.
+- kategóriák
+- katalógusfájlba téma kategória oszlop beillesztése
+- logaritmikus mozgatás
+- 4-es asztal kiemelése globális változóba
+
+Elkészült ötletek:
++ Jobb klikk görgõ forgatás.
++ Törlés gomb hozzáadása
++ Tereptárgy törlés
++ Több út beszúrása
++ Út kiválasztás (Minden x-edig pontra z átmérõjû metszõ gömb)
++ Út színezés
++ Útvég és Út eleje clipping, fitting
++ Ha közel ér egymáshoz két útvég akkor azok összepattannak és fixálódnak. (Pont eltolás középre?)
 + Ha összekapcsolódott jelenjen meg alatta a kapcsolódás alatt egy körlap.
-x Vonal a jelölõpontok közé?
 + map mentés
 + map betöltés
 + több tárgy
-- kategóriák
-- katalógusfájlba téma kategória oszlop beillesztése
-+ sor rendezés
++ fájl sor rendezés
++ Végpont hozzáadás
+
+Elvetett ötletek:
 x sorszám fügetlenítés. A cím legyen az elsõdleges kulcs.
--logaritmikus mozgatás
-- 4-es asztal kiemelése globális változóba
+x Vonal a jelölõpontok közé?
+
+Ha lesz rá idõ:
+* Kattintás gyorsítás.

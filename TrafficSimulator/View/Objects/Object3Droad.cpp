@@ -82,7 +82,7 @@ void Object3Droad::reBind(Object3D* trackBall_0, Object3D* trackBall_1, Object3D
 
 //TODO OTHER OBJECTS DELETE BUG
 void Object3Droad::updateBasePoints() {
-	if (this->stickMarkA != 'Q') {
+	if (this->stickMarkA != 'Q' && endpointLock) {
 		if (this->stickMarkA == 'A') {
 			trackBalls[0]->setPosition(this->stickA->getEndpointA());
 		}
@@ -91,7 +91,7 @@ void Object3Droad::updateBasePoints() {
 		}
 	}
 
-	if (this->stickMarkB != 'Q') {
+	if (this->stickMarkB != 'Q' && endpointLock) {
 		if (this->stickMarkB == 'A') {
 			trackBalls[3]->setPosition(this->stickB->getEndpointA());
 		}
@@ -168,19 +168,19 @@ glm::vec3 Object3Droad::getEndpointB() {
 }
 
 void Object3Droad::stuckTest(Object3Droad* road) {
-	if (glm::distance(road->getEndpointA(), this->getEndpointA()) < this->shift) {
+	if (glm::distance(road->getEndpointA(), this->getEndpointA()) < this->shift + 1) {
 		this->stickA = road;
 		this->stickMarkA = 'A';
 	}
-	if (glm::distance(road->getEndpointA(), this->getEndpointB()) < this->shift) {
+	if (glm::distance(road->getEndpointA(), this->getEndpointB()) < this->shift + 1) {
 		this->stickB = road;
 		this->stickMarkB = 'A';
 	}
-	if (glm::distance(road->getEndpointB(), this->getEndpointA()) < this->shift) {
+	if (glm::distance(road->getEndpointB(), this->getEndpointA()) < this->shift + 1) {
 		this->stickA = road;
 		this->stickMarkA = 'B';
 	}
-	if (glm::distance(road->getEndpointB(), this->getEndpointB()) < this->shift) {
+	if (glm::distance(road->getEndpointB(), this->getEndpointB()) < this->shift + 1) {
 		this->stickB = road;
 		this->stickMarkB = 'B';
 	}

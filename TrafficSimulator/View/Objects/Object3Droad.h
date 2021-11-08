@@ -42,6 +42,13 @@ public:
 	glm::vec3				getEndpointB();
 	//TODO: road delete rebind problem.
 	void					stuckTest(Object3Droad* road);
+	void					setEndpointLock(bool lock) {
+		endpointLock = lock;
+		stickA = NULL;
+		stickMarkA = 'Q';
+		stickB = NULL;
+		stickMarkB = 'Q';
+	}
 
 	std::vector<glm::vec3> points;
 	std::vector<glm::vec3> shiftedPoints_1;
@@ -63,6 +70,8 @@ protected:
 
 	int renderID = -1;
 	bool selected = true;
+	bool endpointLock = true;
+	
 	glm::vec4 color;
 
 	Object3Droad* stickA = NULL;

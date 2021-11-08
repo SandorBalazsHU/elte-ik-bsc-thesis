@@ -31,7 +31,7 @@ void Render::bind(WorkWindow* currentWindow) {
 	fpsCounter::bind();
 	mapLoader.bind(this);
 	mapSaver.bind(this);
-	// --- Consfig --- 
+	// --- Config --- 
 	//faceTestOn();
 	multisamplingOn();
 	vsyncOn();
