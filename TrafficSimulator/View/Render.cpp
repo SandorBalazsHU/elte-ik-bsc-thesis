@@ -1,6 +1,14 @@
 /**
-* AX400
+ * @name Traffic Simulation
+ * @file Render.h
+ * @class Render
+ * @author Sándor Balázs - AZA6NL
+ * @date 2021.11.08.
+ * @brief The 3D Scene render class
+ * Contact: sandorbalazs9402@gmail.com
+ * AX400
 */
+
 #include "Render.h"
 #include "WorkWindow.h"
 #include "GUI.h"
@@ -90,6 +98,14 @@ void Render::setWindowTitle(std::string title) {
 	std::stringstream window_title;
 	window_title << title << " - " << fpsCounter::getAverageFPS();
 	SDL_SetWindowTitle(window, window_title.str().c_str());
+}
+
+MapLoader* Render::getMapLoader() {
+	return &mapLoader;
+}
+
+MapSaver* Render::getMapSaver() {
+	return &mapSaver;
 }
 
 void Render::shaderPreDrawingUpdate(glm::mat4 worldMatrix, glm::vec4 color) {
