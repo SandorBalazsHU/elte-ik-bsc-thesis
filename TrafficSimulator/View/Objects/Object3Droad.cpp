@@ -16,10 +16,19 @@ int  Object3Droad::getRenderID() {
 	return renderID;
 }
 
+//TODO Talán felül lenne jobb a lap?
 void Object3Droad::setRenderID(int newRenderID) {
 	renderID = newRenderID;
 	roadYposition += renderID / 100.0f;
-	std::cout << renderID << ". road " << roadYposition << " Position" << std::endl;
+	std::cout << renderID << ". road " << roadYposition << " Position " << roadYposition - 0.005f << ". Point positions" << std::endl;
+	this->roadEndCircles[0]->setPosition(glm::vec3(points[1].x, roadYposition + 0.05f, points[1].z));
+	this->roadEndCircles[1]->setPosition(glm::vec3(points[points.size() - 1].x, roadYposition + 0.05f, points[points.size() - 1].z));
+	/*this->roadEndCircles[0]->setPosition(glm::vec3(basePoints[0].x, roadYposition - 0.05f, basePoints[0].z));
+	this->roadEndCircles[1]->setPosition(glm::vec3(basePoints[3].x, roadYposition - 0.05f, basePoints[3].z));*/
+	//this->roadEndCircles[0]->setOpacity(0.4f);
+	//this->roadEndCircles[1]->setOpacity(0.4f);
+	/*this->roadEndCircles[0]->setRGBcolor(glm::vec3(1, 0, 0));
+	this->roadEndCircles[1]->setRGBcolor(glm::vec3(1, 0, 0));*/
 }
 
 void Object3Droad::bind(Object3D* trackBall_0, Object3D* trackBall_1, Object3D* trackBall_2, Object3D* trackBall_3, Object3D* roadEndCircle_1, Object3D* roadEndCircle_2) {
@@ -65,9 +74,6 @@ void Object3Droad::bind(Object3D* trackBall_0, Object3D* trackBall_1, Object3D* 
 	this->roadEndCircles[1] = roadEndCircle_2;
 	//this->roadEndCircles[0]->setPosition(basePoints[0]);
 	//this->roadEndCircles[1]->setPosition(basePoints[3]);
-	this->roadEndCircles[0]->setPosition(glm::vec3(points[1].x, roadYposition - 0.01f, points[1].z));
-	this->roadEndCircles[1]->setPosition(glm::vec3(points[points.size() - 1].x, roadYposition - 0.01f, points[points.size() - 1].z));
-
 }
 
 void Object3Droad::reBind(Object3D* trackBall_0, Object3D* trackBall_1, Object3D* trackBall_2, Object3D* trackBall_3, Object3D* roadEndCircle_1, Object3D* roadEndCircle_2) {
@@ -185,6 +191,25 @@ void Object3Droad::stuckTest(Object3Droad* road) {
 		this->stickMarkB = 'B';
 	}
 }
+/*
+void Object3Droad::endpointTest(Object3D* endpoint) {
+	if (glm::distance(road->getEndpointA(), this->getEndpointA()) < this->shift + 1) {
+		this->stickA = road;
+		this->stickMarkA = 'A';
+	}
+	if (glm::distance(road->getEndpointA(), this->getEndpointB()) < this->shift + 1) {
+		this->stickB = road;
+		this->stickMarkB = 'A';
+	}
+	if (glm::distance(road->getEndpointB(), this->getEndpointA()) < this->shift + 1) {
+		this->stickA = road;
+		this->stickMarkA = 'B';
+	}
+	if (glm::distance(road->getEndpointB(), this->getEndpointB()) < this->shift + 1) {
+		this->stickB = road;
+		this->stickMarkB = 'B';
+	}
+}*/
 
 void Object3Droad::select() {
 	setOpacity(0.5f);
@@ -324,8 +349,10 @@ void Object3Droad::generate() {
 void Object3Droad::update() {
 	this->updateBasePoints();
 	this->generate();
-	this->roadEndCircles[0]->setPosition(glm::vec3(points[1].x, roadYposition - 0.01f, points[1].z));
-	this->roadEndCircles[1]->setPosition(glm::vec3(points[points.size() - 1].x, roadYposition - 0.01f, points[points.size() - 1].z));
+	this->roadEndCircles[0]->setPosition(glm::vec3(points[1].x, roadYposition + 0.05f, points[1].z));
+	this->roadEndCircles[1]->setPosition(glm::vec3(points[points.size() - 1].x, roadYposition + 0.05f, points[points.size() - 1].z));
+	/*this->roadEndCircles[0]->setPosition(glm::vec3(basePoints[0].x, roadYposition - 0.05f, basePoints[0].z));
+	this->roadEndCircles[1]->setPosition(glm::vec3(basePoints[3].x, roadYposition - 0.05f, basePoints[3].z));*/
 	//this->roadEndCircles[0]->setPosition(basePoints[0]);
 	//this->roadEndCircles[1]->setPosition(basePoints[3]);
 }

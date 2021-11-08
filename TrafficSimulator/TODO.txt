@@ -1,11 +1,11 @@
-
+A kezdõ és végpontjelölõ ragadjon rá az út végpontra
+A jelölt út végpontra más út már ne ragadhasson.
 
 Ötletek:
 - Nagyobb asztal, blokkoló keretekkel.
 - Törlés gomb mûködése
 - Út törlés
-- Útvég feloldása
-- Útvég mozgatása
+- Összekapcsolt útvég mozgatása
 - Végpont jelölõ rögzülés
 - Végpontjelölõ feloldás
 - Úthossz számítás
@@ -37,6 +37,7 @@ Elkészült ötletek:
 + több tárgy
 + fájl sor rendezés
 + Végpont hozzáadás
++ Összekapcsolt útvég feloldása
 
 Elvetett ötletek:
 x sorszám fügetlenítés. A cím legyen az elsõdleges kulcs.

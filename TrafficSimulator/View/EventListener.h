@@ -6,6 +6,7 @@ class Render;
 
 #include<SDL.h>
 #include<vector>
+#include<set>
 #include"Camera.h"
 #include"Objects/Object3D.h"
 #include"Objects/Object3Droad.h"
@@ -28,14 +29,14 @@ private:
 	GUI* gui;
 	Render* render;
 
+	std::set<int> pressedKeys;
+	std::set<int> moseButtonPressed;
+
 	std::vector<Object3D*> selectedItems;
 	std::vector<Object3Droad*> selectedRoads;
 	bool keepSelect = false;
 
 	glm::vec3 ray;
-
-	bool leftButtonIsPressed = false;
-	bool rightButtonIsPressed = false;
 
 	void deleteSelectedItems();
 

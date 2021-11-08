@@ -45,6 +45,7 @@ void EventListener::roadDeselect() {
 
 //TODO Lenyomott F közbenti deselect, egyszerre több lenyomott gomb?
 void EventListener::keyboardDown(SDL_KeyboardEvent& key) {
+	pressedKeys.insert(key.keysym.sym);
 	camera->keyboardDown(key);
 	if (key.keysym.sym == SDLK_ESCAPE) exit();
 	if (key.keysym.sym == SDLK_LCTRL) keepSelect = true;
@@ -65,6 +66,7 @@ void EventListener::deleteSelectedItems() {
 }
 
 void EventListener::keyboardUp(SDL_KeyboardEvent& key) {
+	pressedKeys.erase(key.keysym.sym);
 	camera->keyboardUp(key);
 	if (key.keysym.sym == SDLK_LCTRL) keepSelect = false;
 	if (key.keysym.sym == SDLK_RCTRL) keepSelect = false;
@@ -101,6 +103,7 @@ void EventListener::mouseMove(SDL_MouseMotionEvent& mouse) {
 }
 
 void EventListener::mouseDown(SDL_MouseButtonEvent& mouse) {
+	moseButtonPressed.insert(mouse.button);
 	if (mouse.button == SDL_BUTTON_RIGHT) {
 		int selectedObjectId = getClickedObjectId(mouse);
 		if (selectedObjectId != -1) {
@@ -115,27 +118,22 @@ void EventListener::mouseDown(SDL_MouseButtonEvent& mouse) {
 				}
 			}
 		}
-		rightButtonIsPressed = true;
 	}
 	if (mouse.button == SDL_BUTTON_LEFT) {
-		roadDeselect();
-		leftButtonIsPressed = true;
+		if(pressedKeys.find(SDLK_f) == pressedKeys.end()) roadDeselect();
 	}
 }
 
 void EventListener::mouseUp(SDL_MouseButtonEvent& mouse) {
+	moseButtonPressed.erase(mouse.button);
 	if (mouse.button == SDL_BUTTON_RIGHT) {
 		//std::cout << "deselect" << std::endl;
 		if(!keepSelect) deselect();
-		rightButtonIsPressed = false;
-	}
-	if (mouse.button == SDL_BUTTON_LEFT) {
-		leftButtonIsPressed = false;
 	}
 }
 
 void EventListener::mouseWheel(SDL_MouseWheelEvent& wheel) {
-	if(!rightButtonIsPressed) camera->mouseWheel(wheel);
+	if(moseButtonPressed.find(SDL_BUTTON_RIGHT) == moseButtonPressed.end()) camera->mouseWheel(wheel);
 	if (selectedItems.size() > 0) {
 		for (size_t i = 0; i < selectedItems.size(); i++) {
 			if (wheel.y>0) selectedItems[i]->rotateLeft(10.0f);
@@ -203,6 +201,8 @@ int EventListener::getClickedObjectId(SDL_MouseButtonEvent& mouse) {
 			else {
 				hits[glm::distance(hitSphereCenter, cameraPosition)] = i;
 				//std::cout << i << std::endl;
+				//ATTENTION !!!!
+				//select(i);
 			}
 		}
 	}

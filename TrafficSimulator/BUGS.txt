@@ -1,4 +1,5 @@
-- Lenyomott F közbenti deselect, egyszerre több lenyomott gomb?
+- Billentyûleütésre visszafordul eredeti irányba a kamera.
+
 - Közös mozgatás elcsúszik
 - Debug üzenetek eltávolítása
 - biztonság felülvizsgálata a csv beolvasásnál
@@ -9,6 +10,9 @@
 
 + Útmagasságok finom módosítása
 + Több út esetén a régiek nem mozgathatóak.
++ Lenyomott F közbenti deselect, egyszerre több lenyomott gomb?
 
 x Ötlet: Csak 4 mozgató labda legyen és automatikusan ráállnak az út pontjaira. (A pointer invalidáción is segíthetne, az ez elleni védelmek kiiktathatóak lennének.)
 x Ne használjunk sehol object ID-t beszúráshoz, hanem nevet.
+
+* A szabad végpont és útvég invalid állapot? Valószínûleg nem.
