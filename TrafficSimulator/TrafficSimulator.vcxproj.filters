@@ -108,9 +108,6 @@
     <ClCompile Include="Model\reverseMap.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
-    <ClCompile Include="Model\RayPicking.cpp">
-      <Filter>Source Files\View</Filter>
-    </ClCompile>
     <ClCompile Include="View\Objects\Object3Droad.cpp">
       <Filter>Source Files\View\Objects</Filter>
     </ClCompile>
@@ -119,6 +116,9 @@
     </ClCompile>
     <ClCompile Include="Control\MapSaver.cpp">
       <Filter>Source Files\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="View\RayPicking.cpp">
+      <Filter>Source Files\View</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -176,9 +176,6 @@
     <ClInclude Include="Control\Logger.h">
       <Filter>Source Files\Control</Filter>
     </ClInclude>
-    <ClInclude Include="View\EventListener.h">
-      <Filter>Source Files\View</Filter>
-    </ClInclude>
     <ClInclude Include="View\Render.h">
       <Filter>Source Files\View</Filter>
     </ClInclude>
@@ -203,9 +200,6 @@
     <ClInclude Include="Model\reverseMap.h">
       <Filter>Source Files\Model</Filter>
     </ClInclude>
-    <ClInclude Include="Model\RayPicking.h">
-      <Filter>Source Files\View</Filter>
-    </ClInclude>
     <ClInclude Include="View\Objects\Object3Droad.h">
       <Filter>Source Files\View\Objects</Filter>
     </ClInclude>
@@ -214,6 +208,9 @@
     </ClInclude>
     <ClInclude Include="Control\MapSaver.h">
       <Filter>Source Files\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="View\EventListener.h">
+      <Filter>Source Files\View</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

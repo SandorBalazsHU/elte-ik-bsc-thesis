@@ -155,7 +155,6 @@
     <ClCompile Include="Control\MapLoader.cpp" />
     <ClCompile Include="Control\MapSaver.cpp" />
     <ClCompile Include="Model\Dijkstra.cpp" />
-    <ClCompile Include="Model\RayPicking.cpp" />
     <ClCompile Include="Model\reverseMap.cpp" />
     <ClCompile Include="T:\OGLPack\include\imgui\imgui.cpp" />
     <ClCompile Include="T:\OGLPack\include\imgui\imgui_demo.cpp" />
@@ -170,6 +169,7 @@
     <ClCompile Include="View\Objects\Object3Droad.cpp" />
     <ClCompile Include="View\Objects\Object3Dvehicle.cpp" />
     <ClCompile Include="View\Objects\ObjectStorage.cpp" />
+    <ClCompile Include="View\RayPicking.cpp" />
     <ClCompile Include="View\Render.cpp" />
     <ClCompile Include="View\Utilities\GLconversions.cpp" />
     <ClCompile Include="View\Utilities\Mesh_OGL3.cpp" />
@@ -184,7 +184,6 @@
     <ClInclude Include="Control\MapLoader.h" />
     <ClInclude Include="Control\MapSaver.h" />
     <ClInclude Include="Model\Dijkstra.h" />
-    <ClInclude Include="Model\RayPicking.h" />
     <ClInclude Include="Model\reverseMap.h" />
     <ClInclude Include="T:\OGLPack\include\imgui\imconfig.h" />
     <ClInclude Include="T:\OGLPack\include\imgui\imgui.h" />
@@ -193,10 +192,10 @@
     <ClInclude Include="T:\OGLPack\include\imgui\stb_rect_pack.h" />
     <ClInclude Include="T:\OGLPack\include\imgui\stb_textedit.h" />
     <ClInclude Include="T:\OGLPack\include\imgui\stb_truetype.h" />
+    <ClInclude Include="View\EventListener.h" />
     <ClInclude Include="View\fpsCounter.h" />
     <ClInclude Include="View\GUI.h" />
     <ClInclude Include="View\Camera.h" />
-    <ClInclude Include="View\EventListener.h" />
     <ClInclude Include="View\Objects\Object3D.h" />
     <ClInclude Include="View\Objects\Object3Droad.h" />
     <ClInclude Include="View\Objects\Object3Dvehicle.h" />
