@@ -1,4 +1,5 @@
 Nagy BUG teszt 1
+Ahol lehet referencia szerinti átadás.
 
 Ötletek:
 - Nagyobb asztal, blokkoló keretekkel.
@@ -46,3 +47,20 @@ x A jelölt út végpontra más út már ne ragadhasson.
 
 Ha lesz rá idõ:
 * Kattintás gyorsítás.
+
+
+
+
+
+Grafikai beállítások a menübe, beállítási lehetõség a render bind-ben.
+/*
+	// --- Config --- 
+	//faceTestOn();
+	multisamplingOn();
+	vsyncOn();
+	//SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
+	//wireframeOn();
+	//void vsyncOff();
+	fpsCounter::fpsLimiterOn();
+	fpsCounter::setFpsLimit(40);
+	*/

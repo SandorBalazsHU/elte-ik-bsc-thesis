@@ -148,12 +148,14 @@ public:
 
 	/**
 	 * @brief Add dynamicly generated road to the scene.
+	 * /attention The road objects have 4 marker and 2 filler object for dependencies.
 	 * @return The new road dynamicRenderID.
 	*/
 	int addRoad();
 
 	/**
 	 * @brief Delete a scene object by renderID.
+	 * /attention This cause pointer invalidation in the vector. Use the updateRenderIDs and rebindRoads for repairing pointers.
 	 * @param id renderID
 	*/
 	void deleteObject(int dynamicRenderID);
@@ -215,14 +217,61 @@ private:
 	void updateRenderIDs();
 
 	/**
-	 * @brief Refresh and rebind the renderable roads (Dynamic generated object) renderID-s and byndings after modiflying the renderable objects list.
+	* @brief Refresh and rebind the renderable roads (Dynamic generated object) renderID-s and byndings after modiflying the renderable objects list.
+	* The main goal is repair the pointer invalidation after object delete.
+	* Scan over the all the objects with dependencies and and rebind the six dependecies of all roads.
 	*/
 	void rebindRoads();
 
 	/**
-	 * @brief Flagvariable for the first scene configs.
+	 * @brief Render the hit sphares for each scene objets. (Debug function)
+	 * @param renderID The actual object render ID.
+	*/
+	void showHitSphere(int renderID);
+
+	/**
+	 * @brief Render the hit sphares for each scene road objets. (Debug function)
+	 * @param roadPoints The drawable points
+	 * @param size the marker size
+	 * @param vec3 the marker colors
+	*/
+	void showRoadHitSphere(std::vector<glm::vec3>& roadPoints, float size, glm::vec3 color);
+
+	/**
+	 * @brief Render the hit sphares for each scene road objets. (Debug function)
+	*/
+	void showAllRoadHitSpheres();
+
+	/**
+	 * @brief Flagvariable for the first scene configs. 
+	 * /attention Default value is TRUE.
 	*/
 	bool firstScreen = true;
+
+	/**
+	 * @brief Hide the desk for object photo mode. (Debug function)
+	*/
+	bool objectPhotoMode = false;
+
+	/**
+	 * @brief Active the hit sphare drawing. (DebugFunction)
+	*/
+	bool hitSphare = false;
+
+	/**
+	 * @brief Active the road hit sphare drawing. (DebugFunction)
+	*/
+	bool roadHhitSphare = false;
+
+	/**
+	 * @brief Active the wireframe function for the objets. (DebugFunction)
+	*/
+	bool objectsWireframe = false;
+
+	/**
+	 * @brief Active the wireframe function for the roads. (DebugFunction)
+	*/
+	bool roadWireframe = false;
 
 	/**
 	 * @brief The access pointer for the current working window object.

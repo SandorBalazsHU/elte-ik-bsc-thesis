@@ -235,6 +235,12 @@
     <None Include="View\Shaders\vertexShader.vert">
       <Filter>Source Files\View\Shaders</Filter>
     </None>
+    <None Include="..\NOTES.md">
+      <Filter>Documentation</Filter>
+    </None>
+    <None Include="..\TODO">
+      <Filter>Documentation</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="TODO.txt">

@@ -213,6 +213,8 @@
     <ClInclude Include="View\WorkWindow.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\NOTES.md" />
+    <None Include="..\TODO" />
     <None Include="View\Shaders\fragmentShader.frag" />
     <None Include="View\Shaders\vertexShader.vert" />
     <None Include="View\Utilities\BufferObject.inl" />

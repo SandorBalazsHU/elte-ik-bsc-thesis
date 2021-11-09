@@ -1,9 +1,9 @@
-0 program terminated correctly
-1 SDL initialisation error
-2 SDL Windows creation error
-3 IMGUI start error
-4 OpenGL context creation error
-5 GLEW start error
-6 OpenGL starting error
-7 Shader config error
-8 
+ * Possible error codes:
+ * 0 - Everithing is fine.
+ * 1 - SDL Initialisation error.
+ * 2 - OpenGL 3D Window creation error.
+ * 3 - imGUI GUI system Initialisation error.
+ * 4 - OpenGL Context creation error.
+ * 5 - GLEW system initialisation error.
+ * 6 - OpenGL starting or version error.
+ * 7 - Shader compiling or starting error.
