@@ -11,6 +11,8 @@ public:
 	~MapLoader(void);
 	void bind(Render* render);
 	void loadMap(std::string fileName);
+	std::vector<std::string> listFiles();
+	int deleteSave(std::string fileName);
 private:
 	std::string saveFolder = "Saves\\";
 	Render* render;

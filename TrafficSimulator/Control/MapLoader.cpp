@@ -1,5 +1,8 @@
 #include <sstream>
 #include <fstream>
+#include <string>
+#include <iostream>
+#include <filesystem>
 #include "MapLoader.h"
 #include "../View/Render.h"
 
@@ -51,5 +54,26 @@ void MapLoader::loadMap(std::string fileName) {
             render->updateDynamicObject(newRoadRenderId);
         }
         std::cout << currentType << ". Object added" << std::endl;
+    }
+}
+
+std::vector<std::string> MapLoader::listFiles() {
+    std::vector<std::string> fileList;
+    for (std::filesystem::directory_entry entry : std::filesystem::directory_iterator(saveFolder)) {
+        fileList.push_back(entry.path().filename().string());
+    }
+    return fileList;
+}
+
+int MapLoader::deleteSave(std::string fileName) {
+    try {
+        if (std::filesystem::remove(saveFolder + fileName))
+            return 0;
+        else
+            return 1;
+    }
+    catch (const std::filesystem::filesystem_error& err) {
+        std::cout << "filesystem error: " << err.what() << '\n';
+        return 2;
     }
 }

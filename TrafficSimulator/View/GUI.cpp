@@ -1,5 +1,12 @@
 /**
-* KSP
+ * @name Traffic Simulation
+ * @file Camera.cpp
+ * @class TrafficSimulator
+ * @author Sándor Balázs - AZA6NL
+ * @date 2021.11.08.
+ * @brief Main file.
+ * Contact: sandorbalazs9402@gmail.com
+ * KSP
 */
 
 #include "GUI.h"
@@ -18,12 +25,12 @@ GUI::~GUI(void) {
 }
 
 bool GUI::init(SDL_Window* window) {
-	return ImGui_ImplSdlGL3_Init(window);
-	/*ImGuiStyle& style = ImGui::GetStyle();
+	ImGuiStyle& style = ImGui::GetStyle();
 	style.AntiAliasedLines = true;
 	style.AntiAliasedShapes = true;
 	style.FrameRounding = 3;
-	style.FrameBorderSize = 1;*/
+	style.FrameBorderSize = 1;
+	return ImGui_ImplSdlGL3_Init(window);
 }
 
 void GUI::clean() {
@@ -80,7 +87,32 @@ void GUI::mainMenuBar() {
 	{
 		if (ImGui::BeginMenu("File"))
 		{
-			//ShowExampleMenuFile();
+			if (ImGui::MenuItem("New")) {}
+			if (ImGui::MenuItem("Open", "Ctrl+O", &openWindow)) {
+				
+			}
+
+			if (ImGui::BeginMenu("Open Recent"))
+			{
+				ImGui::MenuItem("fish_hat.c");
+				ImGui::MenuItem("fish_hat.inl");
+				ImGui::MenuItem("fish_hat.h");
+				if (ImGui::BeginMenu("More.."))
+				{
+					ImGui::MenuItem("Hello");
+					ImGui::MenuItem("Sailor");
+					if (ImGui::BeginMenu("Recurse.."))
+					{
+						//ShowExampleMenuFile();
+						ImGui::EndMenu();
+					}
+					ImGui::EndMenu();
+				}
+				ImGui::EndMenu();
+			}
+			if (ImGui::MenuItem("Save", "Ctrl+S")) {}
+			if (ImGui::MenuItem("Save As..")) {}
+			ImGui::Separator();
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("Edit"))
@@ -173,15 +205,76 @@ void GUI::itemList() {
 
 
 void GUI::draw() {
-	mainMenuBar();
+	ImGui::ShowTestWindow();
 	ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiSetCond_FirstUseEver);
 	ImGui::SetNextWindowSize(ImVec2(500, 240), ImGuiCond_FirstUseEver);
+
 	if (ImGui::Begin("Traffic Simulation")) {
+		mainMenuBar();
 		//ImGui::Text("Traffic Simulation");
 		ImGui::Text("By: Sandor Balazs - AZA6NL");
 		//loadingBar();
 		//fpsGraph();
 		//styleTab();
+
+		if (openWindow) {
+			ImGui::SetNextWindowSize(ImVec2(400, 300));
+			ImGui::OpenPopup("Open Map");
+			if (ImGui::BeginPopupModal("Open Map", NULL, ImGuiWindowFlags_AlwaysAutoResize))
+			{
+				ImGui::Text("Saved maps:");
+
+				ImGui::Separator();
+
+				std::vector<std::string> fileList = windowRender->getMapLoader()->listFiles();
+				const int itemNumber = fileList.size();
+
+				const char* items[50];
+
+				for (size_t i = 0; i < itemNumber; i++) {
+					items[i] = fileList[i].c_str();
+				}
+
+				static int selection = 0;
+				ImGui::PushItemWidth(-1);
+				ImGui::PushID(0);
+				ImGui::ListBox("", &selection, items, itemNumber);
+				ImGui::PopID();
+
+				if (ImGui::Button("Open")) {
+					windowRender->getMapLoader()->loadMap(items[selection]);
+					openWindow = false;
+				}
+				ImGui::SameLine();
+				if (ImGui::Button("Delete")) {
+					int status = windowRender->getMapLoader()->deleteSave(items[selection]);
+					if (status == 0) ImGui::OpenPopup("Map deleted");
+					if(status == 1) ImGui::OpenPopup("Map not found");
+					if(status == 2) ImGui::OpenPopup("Map open file system error");
+				}
+				if (ImGui::BeginPopupModal("Map deleted")) {
+					ImGui::Text("Map deleted.");
+					if (ImGui::Button("Close")) ImGui::CloseCurrentPopup();
+					ImGui::EndPopup();
+				}
+				if (ImGui::BeginPopupModal("Map not found")) {
+					ImGui::Text("Map not found.");
+					if (ImGui::Button("Close")) ImGui::CloseCurrentPopup();
+					ImGui::EndPopup();
+				}
+				if (ImGui::BeginPopupModal("Map open file system error")) {
+					ImGui::Text("File system error.");
+					if (ImGui::Button("Close")) ImGui::CloseCurrentPopup();
+					ImGui::EndPopup();
+				}
+				ImGui::SameLine();
+				if (ImGui::Button("Close")) {
+					openWindow = false;
+					ImGui::CloseCurrentPopup();
+				}
+				ImGui::EndPopup();
+			}
+		}
 
 		if (ImGui::ImageButton((void*)(intptr_t)objectStorage->getTexture("miniatures/road_mini.png"), ImVec2(100, 100))) {
 			int newRoadID = windowRender->addRoad();
