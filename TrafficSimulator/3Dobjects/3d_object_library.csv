@@ -5,7 +5,7 @@ Id;Name;Type;Main object;Icon;Base texture;light texture;break texture;right tex
 -1;Road texture;texture;road.png;road_mini.png;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;0
 -1;Delete button;texture;*;delete_mini.png;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;0
 -1;Logo;texture;app_logo.png;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;0
-1;Mark sphere;mark;sphere_mark.obj;sphere_mark_mini.png;white.png;*;*;*;*;0.0;0.0;0.0;0.8;0.8;0.8;0.0;0;1;0;0.0;0.0;0.0;0.8;0.0;0.0;0.0;1.1;1.0;1.0;1.0;1.0;0
+1;Mark sphere;mark;sphere_mark.obj;sphere_mark_mini.png;white.png;*;*;*;*;0.0;0.0;20.0;0.8;0.8;0.8;0.0;0;1;0;0.0;0.0;0.0;0.8;0.0;0.0;0.0;1.1;1.0;1.0;1.0;1.0;0
 2;Road circle;mark;road_circle.obj;*;road_circle.png;*;*;*;*;0.0;0.0;0.0;1.0;1.0;1.0;0.0;0;1;0;0.0;0.0;0.0;2.0;0.0;0.0;0.0;2.0;1.0;1.0;1.0;1.0;0
 3;Round desk;desk;desk_round.obj;desk_round_mini.png;desk_round.png;*;*;*;*;0.0;-0.1;0.0;3.0;3.0;3.0;0.0;0;1;0;0.0;0.0;0.0;3.0;0.0;0.0;0.0;1.0;1.0;1.0;1.0;1.0;0
 4;Square desk;desk;desk_square.obj;desk_square_mini.png;desk_square.png;*;*;*;*;0.0;-0.1;0.0;5.0;5.0;5.0;0.0;0;1;0;0.0;0.0;0.0;3.0;0.0;0.0;0.0;1.0;1.0;1.0;1.0;1.0;1
@@ -21,15 +21,15 @@ Id;Name;Type;Main object;Icon;Base texture;light texture;break texture;right tex
 14;Bus yellow;vehicle;bus.obj;bus_yellow_mini.png;bus_yellow_base.png;bus_yellow_base.png;bus_yellow_base.png;bus_yellow_base.png;bus_yellow_base.png;0.0;0.0;0.0;1.0;1.0;1.0;0.0;0;1;0;0.0;0.0;0.0;1.4;0.0;1.0;0.0;0.5;1.0;1.0;1.0;1.0;0
 15;Bus blue;vehicle;bus.obj;bus_blue_mini.png;bus_blue_base.png;bus_blue_base.png;bus_blue_base.png;bus_blue_base.png;bus_blue_base.png;0.0;0.0;0.0;1.0;1.0;1.0;0.0;0;1;0;0.0;0.0;0.0;1.4;0.0;1.0;0.0;0.5;1.0;1.0;1.0;1.0;0
 16;Bus gray;vehicle;bus.obj;bus_gray_mini.png;bus_gray_base.png;bus_gray_base.png;bus_gray_base.png;bus_gray_base.png;bus_gray_base.png;0.0;0.0;0.0;1.0;1.0;1.0;0.0;0;1;0;0.0;0.0;0.0;1.4;0.0;1.0;0.0;0.5;1.0;1.0;1.0;1.0;0
-17;Start sign;object;sign.obj;start_sign_mini.png;start_sign.png;*;*;*;*;0.0;0.0;0.0;0.5;0.5;0.5;0.0;0;1;0;0.0;0.0;0.0;2.0;0.0;0.0;0.0;2.0;1.0;1.0;1.0;1.0;0
-18;Stop sign;object;sign.obj;stop_sign_mini.png;stop_sign.png;*;*;*;*;0.0;0.0;0.0;0.5;0.5;0.5;0.0;0;1;0;0.0;0.0;0.0;2.0;0.0;0.0;0.0;2.0;1.0;1.0;1.0;1.0;0
-19;Double family house;object;double_family_house.obj;double_family_house_mini.png;double_family_house.png;*;*;*;*;0.0;0.0;0.0;0.4;0.5;0.6;0.0;0;1;0;0.0;0.0;0.0;3.0;0.0;0.0;0.0;1.0;1.0;1.0;1.0;1.0;0
-20;Flat family house;object;flat_family_house.obj;flat_family_house_mini.png;flat_family_house.png;*;*;*;*;0.0;0.0;0.0;0.4;0.5;0.6;0.0;0;1;0;0.0;0.0;0.0;3.0;0.0;0.0;0.0;1.0;1.0;1.0;1.0;1.0;0
-21;High family house;object;high_family_house.obj;high_family_house_mini.png;high_family_house.png;*;*;*;*;0.0;0.0;0.0;0.4;0.5;0.6;0.0;0;1;0;0.0;0.0;0.0;3.0;0.0;0.0;0.0;1.0;1.0;1.0;1.0;1.0;0
-22;High family house 02;object;high_family_house_02.obj;high_family_house_02_mini.png;high_family_house_02.png;*;*;*;*;0.0;0.0;0.0;0.4;0.5;0.6;0.0;0;1;0;0.0;0.0;0.0;3.0;0.0;0.0;0.0;1.0;1.0;1.0;1.0;1.0;0
-23;Simple family house;object;simple_family_house.obj;simple_family_house_mini.png;simple_family_house.png;*;*;*;*;0.0;0.0;0.0;0.4;0.5;0.6;0.0;0;1;0;0.0;0.0;0.0;3.0;0.0;0.0;0.0;1.0;1.0;1.0;1.0;1.0;0
-24;Big tree 01;object;big_tree_01.obj;big_tree_01_mini.png;big_tree_01.png;*;*;*;*;0.0;0.0;0.0;0.2;0.2;0.2;0.0;0;1;0;0.0;0.0;0.0;3.0;0.0;0.0;0.0;1.0;1.0;1.0;1.0;1.0;0
-25;Big tree 02;object;big_tree_02.obj;big_tree_02_mini.png;big_tree_02.png;*;*;*;*;0.0;0.0;0.0;0.15;0.15;0.15;0.0;0;1;0;0.0;0.0;0.0;3.0;0.0;0.0;0.0;1.0;1.0;1.0;1.0;1.0;0
-26;Big tree 03;object;big_tree_03.obj;big_tree_03_mini.png;big_tree_03.png;*;*;*;*;0.0;0.0;0.0;0.15;0.15;0.15;0.0;0;1;0;0.0;0.0;0.0;3.0;0.0;0.0;0.0;1.0;1.0;1.0;1.0;1.0;0
-27;Big tree 04;object;big_tree_04.obj;big_tree_04_mini.png;big_tree_04.png;*;*;*;*;0.0;0.0;0.0;0.25;0.25;0.25;0.0;0;1;0;0.0;0.0;0.0;3.0;0.0;0.0;0.0;1.0;1.0;1.0;1.0;1.0;0
-28;Big tree 05;object;big_tree_05.obj;big_tree_05_mini.png;big_tree_05.png;*;*;*;*;0.0;0.0;0.0;0.3;0.3;0.3;0.0;0;1;0;0.0;0.0;0.0;3.0;0.0;0.0;0.0;1.0;1.0;1.0;1.0;1.0;0
+17;Start sign;object;sign.obj;start_sign_mini.png;start_sign.png;*;*;*;*;55.0;0.0;0.0;0.5;0.5;0.5;0.0;0;1;0;0.0;0.0;0.0;2.0;0.0;0.0;0.0;2.0;1.0;1.0;1.0;1.0;0
+18;Stop sign;object;sign.obj;stop_sign_mini.png;stop_sign.png;*;*;*;*;55.0;0.0;0.0;0.5;0.5;0.5;0.0;0;1;0;0.0;0.0;0.0;2.0;0.0;0.0;0.0;2.0;1.0;1.0;1.0;1.0;0
+19;Double family house;object;double_family_house.obj;double_family_house_mini.png;double_family_house.png;*;*;*;*;55.0;0.0;0.0;0.4;0.5;0.6;0.0;0;1;0;0.0;0.0;0.0;3.0;0.0;0.0;0.0;1.0;1.0;1.0;1.0;1.0;0
+20;Flat family house;object;flat_family_house.obj;flat_family_house_mini.png;flat_family_house.png;*;*;*;*;55.0;0.0;0.0;0.4;0.5;0.6;0.0;0;1;0;0.0;0.0;0.0;3.0;0.0;0.0;0.0;1.0;1.0;1.0;1.0;1.0;0
+21;High family house;object;high_family_house.obj;high_family_house_mini.png;high_family_house.png;*;*;*;*;55.0;0.0;0.0;0.4;0.5;0.6;0.0;0;1;0;0.0;0.0;0.0;3.0;0.0;0.0;0.0;1.0;1.0;1.0;1.0;1.0;0
+22;High family house 02;object;high_family_house_02.obj;high_family_house_02_mini.png;high_family_house_02.png;*;*;*;*;55.0;0.0;0.0;0.4;0.5;0.6;0.0;0;1;0;0.0;0.0;0.0;3.0;0.0;0.0;0.0;1.0;1.0;1.0;1.0;1.0;0
+23;Simple family house;object;simple_family_house.obj;simple_family_house_mini.png;simple_family_house.png;*;*;*;*;55.0;0.0;0.0;0.4;0.5;0.6;0.0;0;1;0;0.0;0.0;0.0;3.0;0.0;0.0;0.0;1.0;1.0;1.0;1.0;1.0;0
+24;Big tree 01;object;big_tree_01.obj;big_tree_01_mini.png;big_tree_01.png;*;*;*;*;55.0;0.0;0.0;0.2;0.2;0.2;0.0;0;1;0;0.0;0.0;0.0;3.0;0.0;0.0;0.0;1.0;1.0;1.0;1.0;1.0;0
+25;Big tree 02;object;big_tree_02.obj;big_tree_02_mini.png;big_tree_02.png;*;*;*;*;55.0;0.0;0.0;0.15;0.15;0.15;0.0;0;1;0;0.0;0.0;0.0;3.0;0.0;0.0;0.0;1.0;1.0;1.0;1.0;1.0;0
+26;Big tree 03;object;big_tree_03.obj;big_tree_03_mini.png;big_tree_03.png;*;*;*;*;55.0;0.0;0.0;0.15;0.15;0.15;0.0;0;1;0;0.0;0.0;0.0;3.0;0.0;0.0;0.0;1.0;1.0;1.0;1.0;1.0;0
+27;Big tree 04;object;big_tree_04.obj;big_tree_04_mini.png;big_tree_04.png;*;*;*;*;55.0;0.0;0.0;0.25;0.25;0.25;0.0;0;1;0;0.0;0.0;0.0;3.0;0.0;0.0;0.0;1.0;1.0;1.0;1.0;1.0;0
+28;Big tree 05;object;big_tree_05.obj;big_tree_05_mini.png;big_tree_05.png;*;*;*;*;55.0;0.0;0.0;0.3;0.3;0.3;0.0;0;1;0;0.0;0.0;0.0;3.0;0.0;0.0;0.0;1.0;1.0;1.0;1.0;1.0;0

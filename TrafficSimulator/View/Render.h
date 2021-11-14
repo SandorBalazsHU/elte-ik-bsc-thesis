@@ -140,6 +140,11 @@ public:
 	void clearScrean();
 
 	/**
+	 * @brief Clean and renew the map editor.
+	*/
+	void clear();
+
+	/**
 	 * @brief Add new renderable object from the preloaded object storage to the scene.
 	 * @param id New object object storage ID.
 	 * @return The new object render ID.
@@ -159,6 +164,11 @@ public:
 	 * @param id renderID
 	*/
 	void deleteObject(int dynamicRenderID);
+
+	/**
+	 * @brief Exit program.
+	*/
+	void close();
 
 	/**
 	 * @brief Update a dynamicly generated object status by dynamicRenderID.

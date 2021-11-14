@@ -1,5 +1,8 @@
 Nagy BUG teszt 1
-Ahol lehet referencia szerinti átadás.
+Ahol lehet referencia szerinti átadás és konstansok.
+Töröljük-e a betöltés elõtt a színteret kérdezõ ablak.
+Utolsó mentés neve mentés és kiírás az ablakkeretre.
+Last saved time + file.
 
 Ötletek:
 - Nagyobb asztal, blokkoló keretekkel.

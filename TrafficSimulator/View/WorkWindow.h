@@ -143,7 +143,7 @@ private:
 	/**
 	 * @brief The main window base tittle text.
 	*/
-	std::string windowTitle = "Traffic simulator v1.0";
+	std::string windowTitle = "Traffic simulator";
 
 	/**
 	 * @brief The SDL window pointer.

@@ -32,14 +32,14 @@ void Object3Droad::setRenderID(int newRenderID) {
 }
 
 void Object3Droad::bind(Object3D* trackBall_0, Object3D* trackBall_1, Object3D* trackBall_2, Object3D* trackBall_3, Object3D* roadEndCircle_1, Object3D* roadEndCircle_2) {
-	trackBall_0->setRGBcolor(glm::vec3(1, 0, 0));
-	trackBall_0->setPosition(glm::vec3(-5.0f, roadYposition, 0.0f));
-	trackBall_1->setRGBcolor(glm::vec3(0, 1, 0));
-	trackBall_1->setPosition(glm::vec3(-2.0f, roadYposition, 5.1f));
-	trackBall_2->setRGBcolor(glm::vec3(0, 0, 1));
-	trackBall_2->setPosition(glm::vec3(2.0f, roadYposition, 5.1f));
-	trackBall_3->setRGBcolor(glm::vec3(1, 1, 0));
-	trackBall_3->setPosition(glm::vec3(5.0f, roadYposition, 0.0f));
+	trackBall_0->setRGBcolor(glm::vec3(1.0f, 0.0f, 0.0f));
+	trackBall_0->setPosition(glm::vec3(50.0f, roadYposition, -5.0f));
+	trackBall_1->setRGBcolor(glm::vec3(0.0f, 1.0f, 0.0f));
+	trackBall_1->setPosition(glm::vec3(53.0f, roadYposition, 7.0f));
+	trackBall_2->setRGBcolor(glm::vec3(0.0f, 0.0f, 1.0f));
+	trackBall_2->setPosition(glm::vec3(57.0f, roadYposition, 7.0f));
+	trackBall_3->setRGBcolor(glm::vec3(1.0f, 1.0f, 0.0f));
+	trackBall_3->setPosition(glm::vec3(60.0f, roadYposition, -5.0f));
 	
 	/*trackBall_0->setScale(glm::vec3(1.0f, 1.0f, 1.0f));
 	trackBall_1->setScale(glm::vec3(1.0f, 1.0f, 1.0f));

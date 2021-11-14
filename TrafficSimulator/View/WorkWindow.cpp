@@ -230,6 +230,7 @@ int WorkWindow::renderPreconfig() {
  * @return Status ID. 0 is OK status.
 */
 int WorkWindow::renderStart() {
+	std::cout << SDL_GetCurrentVideoDriver() << std::endl;
 	while (!exit) {
 		if (!objectStorage.isLoaded()) {
 			if (objectStorage.loadingCheck()) objectStorage.finaliseLoading();

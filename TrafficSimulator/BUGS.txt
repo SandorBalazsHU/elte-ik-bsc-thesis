@@ -1,3 +1,6 @@
+- Nem clippel a sárga végére a jel, de az út igen.
+
+
 - Billentyûleütésre visszafordul eredeti irányba a kamera.
 
 - Közös mozgatás elcsúszik

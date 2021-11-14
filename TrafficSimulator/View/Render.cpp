@@ -50,8 +50,17 @@ void Render::bind(WorkWindow* currentWindow) {
 	mapLoader.bind(this);
 	mapSaver.bind(this);
 	//TODO GUI Graphical settings
+	//fpsCounter::fpsLimiterOn();
+	//fpsCounter::setFpsLimit(45);
 	multisamplingOn();
 	vsyncOn();
+}
+
+/**
+ * @brief Exit program.
+*/
+void Render::close() {
+	workingWindow->close();
 }
 
 /**
@@ -138,7 +147,7 @@ void Render::shaderCameraUpdate() {
 */
 void Render::setWindowTitle(std::string title) {
 	std::stringstream window_title;
-	window_title << title << " - " << fpsCounter::getAverageFPS();
+	window_title << title << "  -  " << fpsCounter::getAverageFPS() << " fps";
 	SDL_SetWindowTitle(window, window_title.str().c_str());
 }
 
@@ -213,6 +222,16 @@ void Render::sceneInit() {
 		addObject(firstSceneElements[i]);
 	}
 	if(objectPhotoMode) getObject(0)->hide();
+}
+
+/**
+ * @brief Clean and renew the map editor.
+*/
+void Render::clear() {
+	mapSaver.reset();
+	renderableObjects.clear();
+	renderableRoads.clear();
+	sceneInit();
 }
 
 /**
@@ -424,7 +443,7 @@ void Render::render() {
 	shader->Unuse();
 	gui->render();
 	rendering();
-	setWindowTitle(workingWindow->getWindowTitle());
+	setWindowTitle(workingWindow->getWindowTitle() + "  -  " + mapSaver.getLastSave());
 	setWindowIcon(objectStorage->getWindowIcon());
 	fpsCounter::stop();
 }

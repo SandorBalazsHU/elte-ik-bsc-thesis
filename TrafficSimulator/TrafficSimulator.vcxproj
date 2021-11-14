@@ -166,6 +166,7 @@
     <ClCompile Include="View\GUI.cpp" />
     <ClCompile Include="View\Camera.cpp" />
     <ClCompile Include="View\EventListener.cpp" />
+    <ClCompile Include="View\GUIWindows.cpp" />
     <ClCompile Include="View\Objects\Object3D.cpp" />
     <ClCompile Include="View\Objects\Object3Droad.cpp" />
     <ClCompile Include="View\Objects\Object3Dvehicle.cpp" />

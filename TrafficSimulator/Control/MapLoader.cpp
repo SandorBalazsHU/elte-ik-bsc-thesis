@@ -53,7 +53,7 @@ void MapLoader::loadMap(std::string fileName) {
             trackBalls[3]->setPosition(glm::vec3(std::stof(parsedCSV[i][10]), std::stof(parsedCSV[i][11]), std::stof(parsedCSV[i][12])));
             render->updateDynamicObject(newRoadRenderId);
         }
-        std::cout << currentType << ". Object added" << std::endl;
+        //std::cout << currentType << ". Object added" << std::endl;
     }
 }
 

@@ -120,6 +120,9 @@
     <ClCompile Include="View\RayPicking.cpp">
       <Filter>Source Files\View</Filter>
     </ClCompile>
+    <ClCompile Include="View\GUIWindows.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="View\WorkWindow.h">

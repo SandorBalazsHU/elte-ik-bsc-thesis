@@ -4,6 +4,7 @@
 #include "MapSaver.h"
 #include "../View/Render.h"
 #include "../View/Objects/Object3D.h"
+#include "Logger.h"
 
 MapSaver::MapSaver(void) {
 
@@ -17,7 +18,31 @@ void MapSaver::bind(Render* render) {
 	this->render = render;
 }
 
+void MapSaver::reset() {
+	currentSave = "Unsaved";
+	lastSaveTime = "Unsaved";
+}
+
+std::string MapSaver::getLastSave() {
+	return currentSave;
+}
+
+void MapSaver::setLastSave(std::string loadedMap) {
+	currentSave = loadedMap;
+	setLastSaveTime();
+}
+
+std::string MapSaver::getLastSaveTime() {
+	return lastSaveTime;
+}
+
+void MapSaver::setLastSaveTime() {
+	lastSaveTime = Logger::currentDateTime();
+}
+
 void MapSaver::saveMap(std::string fileName) {
+	currentSave = fileName;
+	setLastSaveTime();
 	std::ofstream saveFile;
 	saveFile.open(this->saveFolder + fileName);
 

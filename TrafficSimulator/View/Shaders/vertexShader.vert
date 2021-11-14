@@ -1,3 +1,4 @@
+#version 460
 // VBO-ból érkezõ változók
 in vec3 vertexInPosition;
 in vec3 vertexInNormal;

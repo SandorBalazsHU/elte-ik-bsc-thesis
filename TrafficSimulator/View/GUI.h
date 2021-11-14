@@ -1,10 +1,10 @@
 /**
  * @name Traffic Simulation
- * @file Gui.h
- * @class TrafficSimulator
+ * @file GUI.h
+ * @class GUI
  * @author Sándor Balázs - AZA6NL
  * @date 2021.11.08.
- * @brief The gui descriptor file, with IMgui
+ * @brief GUI Descriptor class.
  * Contact: sandorbalazs9402@gmail.com
  * KSP
 */
@@ -79,8 +79,13 @@ public:
 	bool isMouseCaptured();
 
 private:
-
-	bool openWindow = false;
+	ImGuiWindowFlags trafficSimulationWindowFlag = 0;
+	ImGuiWindowFlags mapEditorWindowFlag = 0;
+	bool openWindowStatus = false;
+	bool saveWindowStatus = false;
+	bool saveAsWindowStatus = false;
+	bool ImGuiSettingsWindowStatus = false;
+	bool newMapConfirmWindowStatus = false;
 
 	/**
 	 * @brief The current binded working window.
@@ -108,14 +113,14 @@ private:
 	EventListener* eventListener;
 
 	/**
-	 * @brief The program style tab.
-	*/
-	void styleTab();
-
-	/**
 	 * @brief The main menu bar description.
 	*/
 	void mainMenuBar();
+
+	/**
+	 * @brief The widows opening and closing system.
+	*/
+	void windowHandler();
 
 	/**
 	 * @brief The FPS graph.
@@ -123,15 +128,24 @@ private:
 	void fpsGraph();
 
 	/**
-	 * @brief Loading bar.
+	 * @brief Description of the opening window.
 	*/
-	void loadingBar();
+	void openWindow();
+	
+	/**
+	 * @brief the save window descriptor.
+	*/
+	void saveWindow();
 
 	/**
-	 * @brief Add new item window.
-	 * @param p_open open event.
+	 * @brief the save as window descriptor.
 	*/
-	static void addNewItemWindow(bool* p_open);
+	void saveAsWindow();
+
+	/**
+	 * @brief Window for the new map confirmation.
+	*/
+	void newMapConfirmWindow();
 
 	/**
 	 * @brief Item list window.

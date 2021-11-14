@@ -1,10 +1,10 @@
 /**
  * @name Traffic Simulation
- * @file Camera.cpp
- * @class TrafficSimulator
+ * @file GUI.cpp
+ * @class GUI
  * @author Sándor Balázs - AZA6NL
  * @date 2021.11.08.
- * @brief Main file.
+ * @brief GUI Descriptor class.
  * Contact: sandorbalazs9402@gmail.com
  * KSP
 */
@@ -57,145 +57,87 @@ bool GUI::isMouseCaptured() {
 	return ImGui::GetIO().WantCaptureKeyboard;
 }
 
-void GUI::styleTab() {
-	ImGuiStyle& style = ImGui::GetStyle();
-
-	static int style_idx = 0;
-	if (ImGui::Combo("Theme selector", &style_idx, "Classic\0Dark\0Light\0"))
-	{
-		switch (style_idx)
-		{
-		case 0: ImGui::StyleColorsClassic(); break;
-		case 1: ImGui::StyleColorsDark(); break;
-		case 2: ImGui::StyleColorsLight(); break;
-		}
-	}
-
-	// Simplified Settings
-	if (ImGui::SliderFloat("Frame rounding", &style.FrameRounding, 0.0f, 12.0f, "%.0f"))
-		style.GrabRounding = style.FrameRounding; // Make GrabRounding always the same value as FrameRounding
-	{ bool window_border = (style.WindowBorderSize > 0.0f); if (ImGui::Checkbox("WindowBorder", &window_border)) style.WindowBorderSize = window_border ? 1.0f : 0.0f; }
-	ImGui::SameLine();
-	{ bool frame_border = (style.FrameBorderSize > 0.0f); if (ImGui::Checkbox("FrameBorder", &frame_border)) style.FrameBorderSize = frame_border ? 1.0f : 0.0f; }
-	ImGui::SameLine();
-	{ bool popup_border = (style.PopupBorderSize > 0.0f); if (ImGui::Checkbox("PopupBorder", &popup_border)) style.PopupBorderSize = popup_border ? 1.0f : 0.0f; }
-
-}
-
 void GUI::mainMenuBar() {
 	if (ImGui::BeginMainMenuBar())
 	{
 		if (ImGui::BeginMenu("File"))
 		{
-			if (ImGui::MenuItem("New")) {}
-			if (ImGui::MenuItem("Open", "Ctrl+O", &openWindow)) {
-				
-			}
-
-			if (ImGui::BeginMenu("Open Recent"))
-			{
-				ImGui::MenuItem("fish_hat.c");
-				ImGui::MenuItem("fish_hat.inl");
-				ImGui::MenuItem("fish_hat.h");
-				if (ImGui::BeginMenu("More.."))
-				{
-					ImGui::MenuItem("Hello");
-					ImGui::MenuItem("Sailor");
-					if (ImGui::BeginMenu("Recurse.."))
-					{
-						//ShowExampleMenuFile();
-						ImGui::EndMenu();
-					}
-					ImGui::EndMenu();
-				}
-				ImGui::EndMenu();
-			}
-			if (ImGui::MenuItem("Save", "Ctrl+S")) {}
-			if (ImGui::MenuItem("Save As..")) {}
+			if (ImGui::MenuItem("New", "Ctrl+N", &newMapConfirmWindowStatus)) {}
+			if (ImGui::MenuItem("Open", "Ctrl+O", &openWindowStatus)) {}
 			ImGui::Separator();
+			if (ImGui::MenuItem("Save", "Ctrl+S", &saveWindowStatus)) {}
+			if (ImGui::MenuItem("Save As..", "Ctrl+A", &saveAsWindowStatus)) {}
+			if (ImGui::MenuItem("Close", "Ctrl+X")) {
+				windowRender->close();
+			}
 			ImGui::EndMenu();
 		}
-		if (ImGui::BeginMenu("Edit"))
-		{
-			if (ImGui::MenuItem("Undo", "CTRL+Z")) {}
-			if (ImGui::MenuItem("Redo", "CTRL+Y", false, false)) {}  // Disabled item
+		if (ImGui::BeginMenu("Settings")) {
+			if (ImGui::MenuItem("Graphics settings", "CTRL+G")) {}
+			if (ImGui::MenuItem("ImGui settings", "CTRL+I", &ImGuiSettingsWindowStatus));
 			ImGui::Separator();
-			if (ImGui::MenuItem("Cut", "CTRL+X")) {}
-			if (ImGui::MenuItem("Copy", "CTRL+C")) {}
-			if (ImGui::MenuItem("Paste", "CTRL+V")) {}
+			if (ImGui::MenuItem("Running statistics", "CTRL+R")) {}
+			if (ImGui::MenuItem("Debug options", "CTRL+D")) {}
+			ImGui::EndMenu();
+		}
+		if (ImGui::BeginMenu("Simulation"))
+		{
+			if (ImGui::MenuItem("START Simulation", "CTRL+Q")) {}
+			if (ImGui::MenuItem("STOP Simulation", "CTRL+W")) {}
+			ImGui::Separator();
+			if (ImGui::MenuItem("Simulation settings", "CTRL+E")) {}
+			ImGui::Separator();
+			if (ImGui::MenuItem("Simulation statistics", "CTRL+f")) {}
+			ImGui::EndMenu();
+		}
+		if (ImGui::BeginMenu("Help"))
+		{
+			if (ImGui::MenuItem("Help", "CTRL+H")) {}
+			ImGui::Separator();
+			if (ImGui::MenuItem("About", "CTRL+K")) {}
 			ImGui::EndMenu();
 		}
 		ImGui::EndMainMenuBar();
 	}
 }
 
+void GUI::windowHandler() {
+	if (openWindowStatus) openWindow();
+	if (saveWindowStatus) saveWindow();
+	if (saveAsWindowStatus) saveAsWindow();
+	if (newMapConfirmWindowStatus) newMapConfirmWindow();
+	if (ImGuiSettingsWindowStatus) { ImGui::Begin("ImGui Style Editor", &ImGuiSettingsWindowStatus); ImGui::ShowStyleEditor(); ImGui::End(); }
+}
+
 void GUI::fpsGraph() {
 	std::ostringstream ss;
 	ss << "Average FPS: " << fpsCounter::getAverageFPS();
 	ImGui::Text(ss.str().c_str());
-	ImGui::PlotLines("FPS", fpsCounter::fpsLog, IM_ARRAYSIZE(fpsCounter::fpsLog), 0, "FPS", 0.0f, 100.0f, ImVec2(0, 80));
-}
-
-void GUI::loadingBar() {
-;
-	float percent = ((float) objectStorage->getLoadingState()) / ((float)objectStorage->getLoadingStateMax());
-
-	/*std::ostringstream ss;
-	ss << "Loading: " << objectStorage->getLoadingState() << "/" << objectStorage->getLoadingStateMax() << " " << percent;
-	ImGui::Text(ss.str().c_str());*/
-
-	ImGui::ProgressBar(percent, ImVec2(0.0f, 0.0f));
-}
-
-
-static void addNewItemWindow(bool* p_open) {
-	/*ImGui::SetNextWindowSize(ImVec2(500, 440), ImGuiCond_FirstUseEver);
-	if (ImGui::Begin("Example: Layout", p_open, ImGuiWindowFlags_MenuBar)) {
-		if (ImGui::BeginMenuBar()) {
-			if (ImGui::BeginMenu("File")) {
-				if (ImGui::MenuItem("Close")) *p_open = false;
-				ImGui::EndMenu();
-			}
-			ImGui::EndMenuBar();
-		}
-
-		// left
-		static int selected = 0;
-		ImGui::BeginChild("left pane", ImVec2(150, 0), true);
-		for (int i = 0; i < 100; i++) {
-			char label[128];
-			sprintf(label, "MyObject %d", i);
-			if (ImGui::Selectable(label, selected == i))
-				selected = i;
-		}
-		ImGui::EndChild();
-		ImGui::SameLine();
-
-		// right
-		ImGui::BeginGroup();
-		ImGui::BeginChild("item view", ImVec2(0, -ImGui::GetItemsLineHeightWithSpacing())); // Leave room for 1 line below us
-		ImGui::Text("MyObject: %d", selected);
-		ImGui::Separator();
-		ImGui::TextWrapped("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ");
-		ImGui::EndChild();
-		ImGui::BeginChild("buttons");
-		if (ImGui::Button("Revert")) {}
-		ImGui::SameLine();
-		if (ImGui::Button("Save")) {}
-		ImGui::EndChild();
-		ImGui::EndGroup();
-	}
-	ImGui::End();*/
+	ImGui::Text("ImGUI average: %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+	ImGui::PushItemWidth(-1);
+	ImGui::PlotLines("FPS", fpsCounter::fpsLog, IM_ARRAYSIZE(fpsCounter::fpsLog), 0, "FPS", 0.0f, 150.0f, ImVec2(0, 80));
+	ImGui::PlotHistogram("FP2S", fpsCounter::fpsLog, IM_ARRAYSIZE(fpsCounter::fpsLog), 0, "FPS2", 0.0f, 150.0f, ImVec2(0, 80));
 }
 
 void GUI::itemList() {
 	int i = 0;
 	std::map<int, Object3D>::iterator it = objectStorage->object3Ds.begin();
 	while (it != objectStorage->object3Ds.end()) {
+		ImVec2 size = ImVec2(100, 100);
+			if (i < 2) {
+				size = ImVec2(42, 42);
+				ImGui::SameLine();
+			} else {
+				size = ImVec2(100, 100);
+			}
 		if (it->second.getType() == "object") {
-			if (ImGui::ImageButton((void*)(intptr_t)it->second.getIcon(), ImVec2(100, 100))) {
+			if (ImGui::ImageButton((void*)(intptr_t)it->second.getIcon(), size)) {
 				int renderableObjectID = windowRender->addObject(it->first);
-				//eventListener->select(renderableObjectID);
+			}
+			if (i == 1) {
+				ImGui::Text("");
+				ImGui::Separator();
+				ImGui::Text("");
 			}
 			if (i++ % 2 == 0) ImGui::SameLine();
 		}
@@ -203,96 +145,40 @@ void GUI::itemList() {
 	}
 }
 
-
 void GUI::draw() {
 	ImGui::ShowTestWindow();
-	ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiSetCond_FirstUseEver);
-	ImGui::SetNextWindowSize(ImVec2(500, 240), ImGuiCond_FirstUseEver);
-
-	if (ImGui::Begin("Traffic Simulation")) {
+	ImGui::SetNextWindowPos(ImVec2(0, 20), ImGuiSetCond_FirstUseEver);
+	ImGui::SetNextWindowSize(ImVec2(251, 130), ImGuiCond_FirstUseEver);
+	trafficSimulationWindowFlag |= ImGuiWindowFlags_NoMove;
+	trafficSimulationWindowFlag |= ImGuiWindowFlags_NoResize;
+	trafficSimulationWindowFlag |= ImGuiWindowFlags_NoCollapse;
+	if (ImGui::Begin("Traffic Simulation", NULL,  trafficSimulationWindowFlag)) {
 		mainMenuBar();
-		//ImGui::Text("Traffic Simulation");
-		ImGui::Text("By: Sandor Balazs - AZA6NL");
-		//loadingBar();
+		windowHandler();
+
+		ImGui::Image((void*)(intptr_t)objectStorage->getTexture("app_logo.png"), ImVec2(70, 70));
+		ImGui::SameLine();
+		ImGui::Text("Traffic Simulation \nBy: Sandor Balazs \nAZA6NL");
+
+		if (ImGui::Button("- Finalizing map and start! -")) {}
+	}
+	ImGui::End();
+
+	ImGui::SetNextWindowPos(ImVec2(0, 150), ImGuiSetCond_FirstUseEver);
+	ImGui::SetNextWindowSize(ImVec2(252, 643), ImGuiCond_FirstUseEver);
+	mapEditorWindowFlag |= ImGuiWindowFlags_NoMove;
+	if (ImGui::Begin("Map editor", NULL, mapEditorWindowFlag)) {
 		//fpsGraph();
-		//styleTab();
+		ImGui::Text("Edit map and add new items:");
+		ImGui::Separator();
+		ImGui::Text("");
 
-		if (openWindow) {
-			ImGui::SetNextWindowSize(ImVec2(400, 300));
-			ImGui::OpenPopup("Open Map");
-			if (ImGui::BeginPopupModal("Open Map", NULL, ImGuiWindowFlags_AlwaysAutoResize))
-			{
-				ImGui::Text("Saved maps:");
-
-				ImGui::Separator();
-
-				std::vector<std::string> fileList = windowRender->getMapLoader()->listFiles();
-				const int itemNumber = fileList.size();
-
-				const char* items[50];
-
-				for (size_t i = 0; i < itemNumber; i++) {
-					items[i] = fileList[i].c_str();
-				}
-
-				static int selection = 0;
-				ImGui::PushItemWidth(-1);
-				ImGui::PushID(0);
-				ImGui::ListBox("", &selection, items, itemNumber);
-				ImGui::PopID();
-
-				if (ImGui::Button("Open")) {
-					windowRender->getMapLoader()->loadMap(items[selection]);
-					openWindow = false;
-				}
-				ImGui::SameLine();
-				if (ImGui::Button("Delete")) {
-					int status = windowRender->getMapLoader()->deleteSave(items[selection]);
-					if (status == 0) ImGui::OpenPopup("Map deleted");
-					if(status == 1) ImGui::OpenPopup("Map not found");
-					if(status == 2) ImGui::OpenPopup("Map open file system error");
-				}
-				if (ImGui::BeginPopupModal("Map deleted")) {
-					ImGui::Text("Map deleted.");
-					if (ImGui::Button("Close")) ImGui::CloseCurrentPopup();
-					ImGui::EndPopup();
-				}
-				if (ImGui::BeginPopupModal("Map not found")) {
-					ImGui::Text("Map not found.");
-					if (ImGui::Button("Close")) ImGui::CloseCurrentPopup();
-					ImGui::EndPopup();
-				}
-				if (ImGui::BeginPopupModal("Map open file system error")) {
-					ImGui::Text("File system error.");
-					if (ImGui::Button("Close")) ImGui::CloseCurrentPopup();
-					ImGui::EndPopup();
-				}
-				ImGui::SameLine();
-				if (ImGui::Button("Close")) {
-					openWindow = false;
-					ImGui::CloseCurrentPopup();
-				}
-				ImGui::EndPopup();
-			}
-		}
-
-		if (ImGui::ImageButton((void*)(intptr_t)objectStorage->getTexture("miniatures/road_mini.png"), ImVec2(100, 100))) {
+		if (ImGui::ImageButton((void*)(intptr_t)objectStorage->getTexture("miniatures\\road_mini.png"), ImVec2(42, 42))) {
 			int newRoadID = windowRender->addRoad();
 		}
 		ImGui::SameLine();
-		if (ImGui::ImageButton((void*)(intptr_t)objectStorage->getTexture("miniatures/delete_mini.png"), ImVec2(100, 100))) {
+		if (ImGui::ImageButton((void*)(intptr_t)objectStorage->getTexture("miniatures\\delete_mini.png"), ImVec2(42, 42))) {
 			//TODO function
-		}
-		if (ImGui::ImageButton((void*)(intptr_t)objectStorage->getTexture("miniatures/large_car_green_mini.png"), ImVec2(100, 100))) {
-			//TODO function
-			windowRender->getMapSaver()->saveMap("testSave.csv");
-			std::cout << "SAVED" << std::endl;
-		}
-		ImGui::SameLine();
-		if (ImGui::ImageButton((void*)(intptr_t)objectStorage->getTexture("miniatures/large_car_blue_mini.png"), ImVec2(100, 100))) {
-			//TODO function
-			windowRender->getMapLoader()->loadMap("testSave.csv");
-			std::cout << "LOADED" << std::endl;
 		}
 		itemList();
 	}
