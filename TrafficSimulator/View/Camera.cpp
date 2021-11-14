@@ -110,6 +110,7 @@ void Camera::sphericalCoordinateUpdate() {
  * @param inclination The spherical coordinates inclination;
 */
 void Camera::sphericalCoordinateShift(float radius, float azimuth, float inclination) {
+	//sphericalCoordinateUpdate();
 	sphericalCameraPosition.x += radius;
 	sphericalCameraPosition.y += inclination;
 	sphericalCameraPosition.z += azimuth;
@@ -148,6 +149,10 @@ void Camera::resize(int width, int height) {
  * @param key keyboard down event.
 */
 void Camera::keyboardDown(SDL_KeyboardEvent& key) {
+
+	/*sphericalCoordinateUpdate();
+	cameraCoordinateUpdate();*/
+
 	glm::vec2 shift2D(0, 0);
 	pressedKeys.insert(key.keysym.sym);
 
@@ -178,8 +183,9 @@ void Camera::keyboardDown(SDL_KeyboardEvent& key) {
 	lookedPoint += rotatedShift;
 	cameraPosition += rotatedShift;
 
-	sphericalCoordinateUpdate();
-	cameraCoordinateUpdate();
+	update();
+	/*sphericalCoordinateUpdate();
+	cameraCoordinateUpdate();*/
 }
 
 /**

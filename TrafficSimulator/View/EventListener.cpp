@@ -100,10 +100,10 @@ void EventListener::mouseMove(SDL_MouseMotionEvent& mouse) {
 					result = render->renderableRoads[j]->markerTest(selectedItems[i]);
 					//if(result) selectedItems[i]->setPosition(render->renderableRoads[j]->getEndpointB());
 				}
-				if (result && (pressedKeys.find(SDLK_f) == pressedKeys.end())) {
+				/*if (result && (pressedKeys.find(SDLK_f) == pressedKeys.end())) {
 					deselect();
 					break;
-				}
+				}*/
 			}
 
 			selectedItems[i]->move(rotatedShift);

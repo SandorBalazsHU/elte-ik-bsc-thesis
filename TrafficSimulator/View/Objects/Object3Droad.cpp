@@ -107,11 +107,11 @@ void Object3Droad::updateBasePoints() {
 	}
 
 	if (this->markerA != NULL && endpointLock) {
-		trackBalls[0]->setPosition(this->markerA->getPosition());
+		//trackBalls[0]->setPosition(this->markerA->getPosition());
 	}
 
 	if (this->markerB != NULL && endpointLock) {
-		trackBalls[3]->setPosition(this->markerB->getPosition());
+		//trackBalls[3]->setPosition(this->markerB->getPosition());
 
 	}
 
@@ -206,14 +206,14 @@ bool  Object3Droad::markerTest(Object3D* marker) {
 	if ((glm::distance(this->getEndpointA(), marker->getPosition()) < this->shift + 1) && endpointLock) {
 		result = true;
 		this->markerA = marker;
-		marker->setSelectable(false);
+		//marker->setSelectable(false);
 		marker->setPosition(this->getEndpointA());
 	}
 	if ((glm::distance(this->getEndpointB(), marker->getPosition()) < this->shift + 1) && endpointLock) {
 		result = true;
 		this->markerB = marker;
 		//marker->setSelectable(false);
-		//marker->setPosition(this->getEndpointB());
+		marker->setPosition(this->getEndpointB());
 	}
 	return result;
 }
