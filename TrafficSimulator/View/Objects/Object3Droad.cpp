@@ -201,16 +201,16 @@ void Object3Droad::stuckTest(Object3Droad* road) {
 	}
 }
 
-bool  Object3Droad::markerTest(Object3D* marker) {
-	bool result = false;
+char  Object3Droad::markerTest(Object3D* marker) {
+	char result = 'Q';
 	if ((glm::distance(this->getEndpointA(), marker->getPosition()) < this->shift + 1) && endpointLock) {
-		result = true;
+		result = 'A';
 		this->markerA = marker;
 		//marker->setSelectable(false);
 		marker->setPosition(this->getEndpointA());
 	}
 	if ((glm::distance(this->getEndpointB(), marker->getPosition()) < this->shift + 1) && endpointLock) {
-		result = true;
+		result = 'B';
 		this->markerB = marker;
 		//marker->setSelectable(false);
 		marker->setPosition(this->getEndpointB());

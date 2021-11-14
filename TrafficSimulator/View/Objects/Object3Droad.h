@@ -42,7 +42,7 @@ public:
 	glm::vec3				getEndpointB();
 	//TODO: road delete rebind problem.
 	void					stuckTest(Object3Droad* road);
-	bool					markerTest(Object3D* marker);
+	char					markerTest(Object3D* marker);
 
 	void					setEndpointLock(bool lock) {
 		endpointLock = lock;

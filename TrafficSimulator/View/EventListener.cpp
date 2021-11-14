@@ -95,10 +95,10 @@ void EventListener::mouseMove(SDL_MouseMotionEvent& mouse) {
 		for (size_t i = 0; i < selectedItems.size(); i++) {
 			
 			if (selectedItems[i]->getName() == "Start sign" || selectedItems[i]->getName() == "Stop sign") {
-				bool result = false;
 				for (size_t j = 0; j < render->renderableRoads.size(); j++) {
-					result = render->renderableRoads[j]->markerTest(selectedItems[i]);
-					//if(result) selectedItems[i]->setPosition(render->renderableRoads[j]->getEndpointB());
+					char result = render->renderableRoads[j]->markerTest(selectedItems[i]);
+					if(result == 'A') selectedItems[i]->setPosition(render->renderableRoads[j]->getEndpointA());
+					if(result == 'B') selectedItems[i]->setPosition(render->renderableRoads[j]->getEndpointB());
 				}
 				/*if (result && (pressedKeys.find(SDLK_f) == pressedKeys.end())) {
 					deselect();
