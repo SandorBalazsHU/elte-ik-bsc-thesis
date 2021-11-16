@@ -54,27 +54,30 @@ int EventListener::getClickedObjectId(SDL_MouseButtonEvent& mouse) {
 	ray = glm::normalize(ray_world);
 
 	//Set of the found hits for the distance checking.
-	std::map<float, int> hits;
+	std::map<float, size_t> hits;
 
 	//Step 6: Intersect the world mouse vector with all the renderable object's hit spheres.
-	for (size_t i = 1; i < render->renderableObjects.size(); i++) {
-		//Don't check when the object not selectable or hidden.
-		if (render->renderableObjects[i].isSelectable() && !render->renderableObjects[i].isHidden()) {
-			//Parameter preparation.
-			glm::vec4 hitSphere = render->renderableObjects[i].getHitSphere();
-			glm::vec3 cameraPosition = camera->getCameraPosition();
-			glm::vec3 hitSphereCenter = glm::vec3(hitSphere.x, hitSphere.y, hitSphere.z);
-			float hitSphereRadius = hitSphere.w;
+	for (size_t i = 1; i < render->getObjectsNumber(); i++) {
+		//This object is erased?
+		if (!render->getObject(i)->isDeleted()) {
+			//Don't check when the object not selectable or hidden.
+			if (render->getObject(i)->isSelectable() && !render->getObject(i)->isHidden()) {
+				//Parameter preparation.
+				glm::vec4 hitSphere = render->getObject(i)->getHitSphere();
+				glm::vec3 cameraPosition = camera->getCameraPosition();
+				glm::vec3 hitSphereCenter = glm::vec3(hitSphere.x, hitSphere.y, hitSphere.z);
+				float hitSphereRadius = hitSphere.w;
 
-			//Ray and hit sphere center distance calculation.
-			float a = glm::dot(ray, ray);
-			glm::vec3 camToPointDirection = cameraPosition - hitSphereCenter;
-			float b = 2.0f * glm::dot(ray, camToPointDirection);
-			float c = glm::dot(camToPointDirection, camToPointDirection) - (hitSphereRadius * hitSphereRadius);
-			float hitDistance = b * b - 4.0f * a * c;
-			if (hitDistance >= 0.0f) {
-				//Set by the camera and the object distance for the depth test.
-				hits[glm::distance(hitSphereCenter, cameraPosition)] = i;
+				//Ray and hit sphere center distance calculation.
+				float a = glm::dot(ray, ray);
+				glm::vec3 camToPointDirection = cameraPosition - hitSphereCenter;
+				float b = 2.0f * glm::dot(ray, camToPointDirection);
+				float c = glm::dot(camToPointDirection, camToPointDirection) - (hitSphereRadius * hitSphereRadius);
+				float hitDistance = b * b - 4.0f * a * c;
+				if (hitDistance >= 0.0f) {
+					//Set by the camera and the object distance for the depth test.
+					hits[glm::distance(hitSphereCenter, cameraPosition)] = i;
+				}
 			}
 		}
 	}

@@ -234,3 +234,11 @@ void Object3D::hide() {
 void Object3D::show() {
 	hidden = false;
 }
+
+void Object3D::erase() {
+	deleted = true;
+}
+
+bool Object3D::isDeleted() {
+	return deleted;
+}

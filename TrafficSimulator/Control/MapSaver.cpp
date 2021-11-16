@@ -46,27 +46,31 @@ void MapSaver::saveMap(std::string fileName) {
 	std::ofstream saveFile;
 	saveFile.open(this->saveFolder + fileName);
 
-	for (size_t i = 0; i < render->renderableObjects.size(); i++) {
-		int id = render->renderableObjects[i].getId();
-		if ( id != 1 && id != 2 && id != 4) {
-			saveFile << render->renderableObjects[i].getId() << ";";
+	for (size_t i = 0; i < render->getObjectsNumber(); i++) {
+		if (!render->getObject(i)->isDeleted()) {
+			int id = render->getObject(i)->getId();
+			if (id != 1 && id != 2 && id != 4) {
+				saveFile << render->getObject(i)->getId() << ";";
 
-			glm::vec3 position = render->renderableObjects[i].getPosition();
-			saveFile << position.x << ";" << position.y << ";" << position.z << ";";
+				glm::vec3 position = render->getObject(i)->getPosition();
+				saveFile << position.x << ";" << position.y << ";" << position.z << ";";
 
-			glm::vec3 rotation = render->renderableObjects[i].getRotation();
-			saveFile << rotation.x << std::endl;
+				glm::vec3 rotation = render->getObject(i)->getRotation();
+				saveFile << rotation.x << std::endl;
+			}
 		}
 	}
 
-	for (size_t i = 0; i < render->renderableRoads.size(); i++) {
-		saveFile << "-1;";
-		Object3D** trackBalls = render->renderableRoads[i]->getTrackBalls();
-		for (size_t j = 0; j < 4; j++) {
-			glm::vec3 position = trackBalls[j]->getPosition();
-			saveFile << position.x << ";" << position.y << ";" << position.z << ";";
+	for (size_t i = 0; i < render->getDynamicObjectsNumber(); i++) {
+		if (render->getDynamicObject(i) != NULL) {
+			saveFile << "-1;";
+			size_t* trackBalls = render->getDynamicObject(i)->getTrackBalls();
+			for (size_t j = 0; j < 4; j++) {
+				glm::vec3 position = render->getObject(j)->getPosition();
+				saveFile << position.x << ";" << position.y << ";" << position.z << ";";
+			}
+			saveFile << ";" << std::endl;
 		}
-		saveFile << ";" << std::endl;
 	}
 
 	saveFile.close();

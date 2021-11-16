@@ -1,5 +1,8 @@
 //T'ana
 #pragma once
+
+class Render;
+
 #include "Object3D.h"
 #include "../Utilities/VertexArrayObject.h"
 #include "../Utilities/BufferObject.h"
@@ -9,24 +12,30 @@ class Object3Droad {
 public:
 	Object3Droad();
 	Object3Droad(const Object3Droad&);
-	~Object3Droad(void) {}
+	~Object3Droad(void);
 
-	void bind(Object3D* trackBall_0, Object3D* trackBall_1, Object3D* trackBall_2, Object3D* trackBall_3, Object3D* roadEndCircle_1, Object3D* roadEndCircle_2);
-	void reBind(Object3D* trackBall_0, Object3D* trackBall_1, Object3D* trackBall_2, Object3D* trackBall_3, Object3D* roadEndCircle_1, Object3D* roadEndCircle_2);
+	void bind(Render* render, size_t newRenderID, size_t trackBall_0, size_t trackBall_1, size_t trackBall_2, size_t trackBall_3, size_t roadEndCircle_1, size_t roadEndCircle_2);
+	void reBind(size_t trackBall_0, size_t trackBall_1, size_t trackBall_2, size_t trackBall_3, size_t roadEndCircle_1, size_t roadEndCircle_2);
 
 	void generate();
 	void update();
 	VertexArrayObject& getVAO() {
-		//updateBasePoints();
 		return model;
 	};
 
-	Object3D** getTrackBalls() {
+	size_t* getTrackBalls() {
 		return trackBalls;
-	}
+	};
 
-	int 					getRenderID();
-	void					setRenderID(int newRenderID);
+	size_t* getRoadEndCircles() {
+		return roadEndCircles;
+	};
+
+	glm::vec3* getBasepoints() {
+		return basepoints;
+	};
+
+	size_t 					getRenderID();
 	void					setRGBAcolor(glm::vec4 RGBAcolor);
 	void					setRGBcolor(glm::vec3 RGBcolor);
 	void					setOpacity(float opacity);
@@ -40,71 +49,63 @@ public:
 	bool					isClicked(glm::vec3 cameraPosition, glm::vec3 ray);
 	glm::vec3				getEndpointA();
 	glm::vec3				getEndpointB();
-	//TODO: road delete rebind problem.
-	void					stuckTest(Object3Droad* road);
-	char					markerTest(Object3D* marker);
-
-	void					setEndpointLock(bool lock) {
-		endpointLock = lock;
-		stickA = NULL;
-		stickMarkA = 'Q';
-		stickB = NULL;
-		stickMarkB = 'Q';
-		if(markerA != NULL) markerA->setSelectable(true);
-		if(markerB != NULL) markerB->setSelectable(true);
-		markerA = NULL;
-		markerB = NULL;
-	}
+	void					stuckTest(size_t road);
+	char					markerTest(size_t marker);
+	void					setEndpointLock(bool lock);
 
 	std::vector<glm::vec3> points;
-	std::vector<glm::vec3> shiftedPoints_1;
-	std::vector<glm::vec3> shiftedPoints_2;
+	std::vector<glm::vec3> shiftedpoints_1;
+	std::vector<glm::vec3> shiftedpoints_2;
 	std::vector<glm::vec3> trackOne;
 	std::vector<glm::vec3> trackTwo;
 
-protected:
-	void generateRoadPoints();
-	glm::vec3 bezierPoint(float u);
-	glm::vec3 shiftPoint(glm::vec3 point1, glm::vec3 point2, float currentShift, float yPosition);
-	void updateBasePoints();
+private:
+	void generateRoadpoints();
+	glm::vec3 bezierpoint(float u);
+	glm::vec3 shiftpoint(glm::vec3 point1, glm::vec3 point2, float currentShift, float yPosition);
+	void updateBasepoints();
 	void clean();
+
+	void endpointsExistTest();
 
 	void fillModelCoordinates();
 	void fillModelNormals();
 	void fillModelTextures();
 	void fillModelIndices();
 
-	int renderID = -1;
+	size_t renderID = -1;
 	bool selected = true;
 	bool endpointLock = true;
 	
 	glm::vec4 color;
 
-	Object3Droad* stickA = NULL;
+	size_t stickA = -1;
 	char stickMarkA = 'Q';
-	Object3Droad* stickB = NULL;
+	size_t stickB = -1;
 	char stickMarkB = 'Q';
 
-	Object3D* markerA = NULL;
-	Object3D* markerB = NULL;
+	size_t markerA = NULL;
+	size_t markerB = NULL;
 
 
 	float shift = 2.0f;
-	Object3D* trackBalls[4];
-	Object3D* roadEndCircles[2];
-	glm::vec3 basePoints[4];
+	size_t trackBalls[4];
+	size_t roadEndCircles[2];
+	glm::vec3 basepoints[4];
 	float roadYposition;
-	/*/std::vector<glm::vec3> points;
-	std::vector<glm::vec3> shiftedPoints_1;
-	std::vector<glm::vec3> shiftedPoints_2;
+
+	/*std::vector<glm::vec3> points;
+	std::vector<glm::vec3> shiftedpoints_1;
+	std::vector<glm::vec3> shiftedpoints_2;
 	std::vector<glm::vec3> trackOne;
 	std::vector<glm::vec3> trackTwo;*/
 
-	size_t	modelPointCount;
+	size_t	modelpointCount;
 
 	VertexArrayObject		model;
 	ArrayBuffer				modelCoordinates;
 	IndexBuffer				modelIndices;
 	ArrayBuffer				modelNormals;
 	ArrayBuffer				modelTextures;
+	Render*					render;
 };

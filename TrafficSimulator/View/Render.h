@@ -161,9 +161,16 @@ public:
 	/**
 	 * @brief Delete a scene object by renderID.
 	 * /attention This cause pointer invalidation in the vector. Use the updateRenderIDs and rebindRoads for repairing pointers.
-	 * @param id renderID
+	 * @param renderID renderID
 	*/
-	void deleteObject(int dynamicRenderID);
+	void deleteObject(int renderID);
+
+	/**
+	 * @brief Delete a scene road object by dynamicRenderID.
+	 * /attention This cause pointer invalidation in the vector. Use the updateRenderIDs and rebindRoads for repairing pointers.
+	 * @param dynamicRenderID dynamicRenderID for the renderable roads.
+	*/
+	void deleteRoad(int dynamicRenderID);
 
 	/**
 	 * @brief Exit program.
@@ -174,14 +181,7 @@ public:
 	 * @brief Update a dynamicly generated object status by dynamicRenderID.
 	 * @param The updatable dynamicRenderID 
 	*/
-	void updateDynamicObject(int dynamicRenderID);
-
-	/**
-	 * @brief Get scene preloaded object from the scene render storage.
-	 * @param id renderID
-	 * @return The scene object.
-	*/
-	Object3D* getObject(int renderID);
+	void updateDynamicObject(size_t dynamicRenderID);
 
 	/**
 	 * @brief Getter for the map loader program.
@@ -196,6 +196,33 @@ public:
 	MapSaver* getMapSaver();
 
 	/**
+	 * @brief Get scene preloaded object from the scene render storage.
+	 * @param id renderID
+	 * @return The scene object.
+	*/
+	Object3D* getObject(int renderID);
+
+	/**
+	 * @brief Getter for the RenderableRoads size.
+	 * @return The renderableRoads size.
+	*/
+	size_t getObjectsNumber();
+
+	/**
+	 * @brief Getter for the RenderableRoads.
+	 * @param renderID The needed object dynamicRenderID.
+	 * @return The needed object.
+	*/
+	Object3Droad* getDynamicObject(size_t dynamicRenderID);
+
+	/**
+	 * @brief Getter for the renderableRoads size.
+	 * @return The renderableRoads size.
+	*/
+	size_t getDynamicObjectsNumber();
+
+private:
+	/**
 	 * @brief List of the renderable scene objets. (Preloaded meshes)
 	*/
 	std::vector<Object3D> renderableObjects;
@@ -205,7 +232,7 @@ public:
 	*/
 	std::vector<Object3Droad*> renderableRoads;
 
-private:
+
 	/**
 	 * @brief Camera position updating in the shadervariable.
 	*/
@@ -220,18 +247,6 @@ private:
 	 * @brief Initialise the scene. Render the first objects.
 	*/
 	void sceneInit();
-
-	/**
-	 * @brief Refresh the renderable objects renderID-s after modiflying the renderable objects list.
-	*/
-	void updateRenderIDs();
-
-	/**
-	* @brief Refresh and rebind the renderable roads (Dynamic generated object) renderID-s and byndings after modiflying the renderable objects list.
-	* The main goal is repair the pointer invalidation after object delete.
-	* Scan over the all the objects with dependencies and and rebind the six dependecies of all roads.
-	*/
-	void rebindRoads();
 
 	/**
 	 * @brief Render the hit sphares for each scene objets. (Debug function)

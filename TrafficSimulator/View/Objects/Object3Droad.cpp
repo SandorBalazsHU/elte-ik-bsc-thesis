@@ -1,127 +1,89 @@
 //Tendi
 #include "Object3Droad.h"
+#include "../Render.h"
 #include <glm/gtx/transform2.hpp>
 #include <map>
 
 Object3Droad::Object3Droad() {
-	this->roadYposition = 0.1f;
-	this->color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+	roadYposition = 0.1f;
+	color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 };
 
 Object3Droad::Object3Droad(const Object3Droad&) {}
 
-//Object3Droad::~Object3Droad(void) {}
+Object3Droad::~Object3Droad(void) {
+	//std::cout << "DESTRUCTOR" << std::endl;
+}
 
-int  Object3Droad::getRenderID() {
+size_t  Object3Droad::getRenderID() {
 	return renderID;
 }
 
-//TODO Talán felül lenne jobb a lap?
-void Object3Droad::setRenderID(int newRenderID) {
-	renderID = newRenderID;
-	roadYposition += renderID / 100.0f;
-	std::cout << renderID << ". road " << roadYposition << " Position " << roadYposition - 0.005f << ". Point positions" << std::endl;
-	this->roadEndCircles[0]->setPosition(glm::vec3(points[1].x, roadYposition + 0.05f, points[1].z));
-	this->roadEndCircles[1]->setPosition(glm::vec3(points[points.size() - 1].x, roadYposition + 0.05f, points[points.size() - 1].z));
-	/*this->roadEndCircles[0]->setPosition(glm::vec3(basePoints[0].x, roadYposition - 0.05f, basePoints[0].z));
-	this->roadEndCircles[1]->setPosition(glm::vec3(basePoints[3].x, roadYposition - 0.05f, basePoints[3].z));*/
-	//this->roadEndCircles[0]->setOpacity(0.4f);
-	//this->roadEndCircles[1]->setOpacity(0.4f);
-	/*this->roadEndCircles[0]->setRGBcolor(glm::vec3(1, 0, 0));
-	this->roadEndCircles[1]->setRGBcolor(glm::vec3(1, 0, 0));*/
-}
+void Object3Droad::bind(Render* render, size_t newRenderID, size_t trackBall_0, size_t trackBall_1, size_t trackBall_2, size_t trackBall_3, size_t roadEndCircle_1, size_t roadEndCircle_2) {
+	this->render = render;
+	this->renderID = newRenderID;
+	this->roadYposition += renderID / 100.0f;
 
-void Object3Droad::bind(Object3D* trackBall_0, Object3D* trackBall_1, Object3D* trackBall_2, Object3D* trackBall_3, Object3D* roadEndCircle_1, Object3D* roadEndCircle_2) {
-	trackBall_0->setRGBcolor(glm::vec3(1.0f, 0.0f, 0.0f));
-	trackBall_0->setPosition(glm::vec3(50.0f, roadYposition, -5.0f));
-	trackBall_1->setRGBcolor(glm::vec3(0.0f, 1.0f, 0.0f));
-	trackBall_1->setPosition(glm::vec3(53.0f, roadYposition, 7.0f));
-	trackBall_2->setRGBcolor(glm::vec3(0.0f, 0.0f, 1.0f));
-	trackBall_2->setPosition(glm::vec3(57.0f, roadYposition, 7.0f));
-	trackBall_3->setRGBcolor(glm::vec3(1.0f, 1.0f, 0.0f));
-	trackBall_3->setPosition(glm::vec3(60.0f, roadYposition, -5.0f));
-	
-	/*trackBall_0->setScale(glm::vec3(1.0f, 1.0f, 1.0f));
-	trackBall_1->setScale(glm::vec3(1.0f, 1.0f, 1.0f));
-	trackBall_2->setScale(glm::vec3(1.0f, 1.0f, 1.0f));
-	trackBall_3->setScale(glm::vec3(1.0f, 1.0f, 1.0f));*/
-
-	trackBall_0->hide();
-	trackBall_1->hide();
-	trackBall_2->hide();
-	trackBall_3->hide();
-
-	trackBall_0->setProtection(true);
-	trackBall_1->setProtection(true);
-	trackBall_2->setProtection(true);
-	trackBall_3->setProtection(true);
-
-	this->trackBalls[0] = trackBall_0;
-	this->trackBalls[1] = trackBall_1;
-	this->trackBalls[2] = trackBall_2;
-	this->trackBalls[3] = trackBall_3;
-
-	this->updateBasePoints();
-	generate();
-	//TODO SHIT
-	//roadEndCircle_1->setPosition(shiftPoint(points[0], points[1], shift/2.0f, roadYposition - 0.01f));
-	//roadEndCircle_2->setPosition(shiftPoint(points[points.size()-2], points[points.size()-1], shift / 2.0f, roadYposition - 0.01f));
-	roadEndCircle_1->setProtection(true);
-	roadEndCircle_2->setProtection(true);
-	roadEndCircle_1->setSelectable(false);
-	roadEndCircle_2->setSelectable(false);
-	this->roadEndCircles[0] = roadEndCircle_1;
-	this->roadEndCircles[1] = roadEndCircle_2;
-	//this->roadEndCircles[0]->setPosition(basePoints[0]);
-	//this->roadEndCircles[1]->setPosition(basePoints[3]);
-}
-
-void Object3Droad::reBind(Object3D* trackBall_0, Object3D* trackBall_1, Object3D* trackBall_2, Object3D* trackBall_3, Object3D* roadEndCircle_1, Object3D* roadEndCircle_2) {
-	this->trackBalls[0] = trackBall_0;
-	this->trackBalls[1] = trackBall_1;
-	this->trackBalls[2] = trackBall_2;
-	this->trackBalls[3] = trackBall_3;
-	this->updateBasePoints();
-	this->roadEndCircles[0] = roadEndCircle_1;
-	this->roadEndCircles[1] = roadEndCircle_2;
-}
-
-//TODO OTHER OBJECTS DELETE BUG
-void Object3Droad::updateBasePoints() {
-	if (this->stickMarkA != 'Q' && endpointLock) {
-		if (this->stickMarkA == 'A') {
-			trackBalls[0]->setPosition(this->stickA->getEndpointA());
-		}
-		if (this->stickMarkA == 'B') {
-			trackBalls[0]->setPosition(this->stickA->getEndpointB());
-		}
-	}
-
-	if (this->stickMarkB != 'Q' && endpointLock) {
-		if (this->stickMarkB == 'A') {
-			trackBalls[3]->setPosition(this->stickB->getEndpointA());
-		}
-		if (this->stickMarkB == 'B') {
-			trackBalls[3]->setPosition(this->stickB->getEndpointB());
-		}
-	}
-
-	if (this->markerA != NULL && endpointLock) {
-		//trackBalls[0]->setPosition(this->markerA->getPosition());
-	}
-
-	if (this->markerB != NULL && endpointLock) {
-		//trackBalls[3]->setPosition(this->markerB->getPosition());
-
-	}
+	trackBalls[0] = trackBall_0;
+	trackBalls[1] = trackBall_1;
+	trackBalls[2] = trackBall_2;
+	trackBalls[3] = trackBall_3;
+	roadEndCircles[0] = roadEndCircle_1;
+	roadEndCircles[1] = roadEndCircle_2;
 
 	for (size_t i = 0; i < 4; i++) {
-		basePoints[i] = trackBalls[i]->getPosition();
-		//std::cout << trackBalls[i]->getRenderID() << " | " << trackBalls[i]->getPosition().x << " , " << trackBalls[i]->getPosition().y << " , " << trackBalls[i]->getPosition().z << std::endl;
+		render->getObject(trackBalls[i])->setDependencyID(renderID);
+		render->getObject(trackBalls[i])->hide();
+		render->getObject(trackBalls[i])->setProtection(true);
 	}
-	//std::cout << std::endl;
+	for (size_t i = 0; i < 2; i++) {
+		render->getObject(roadEndCircles[i])->setDependencyID(renderID);
+	}
+	for (size_t i = 0; i < 2; i++) {
+		render->getObject(roadEndCircles[i])->setProtection(true);
+		render->getObject(roadEndCircles[i])->setSelectable(false);
+	}
+
+	render->getObject(trackBalls[0])->setRGBcolor(glm::vec3(1.0f, 0.0f, 0.0f));
+	render->getObject(trackBalls[1])->setRGBcolor(glm::vec3(0.0f, 1.0f, 0.0f));
+	render->getObject(trackBalls[2])->setRGBcolor(glm::vec3(0.0f, 0.0f, 1.0f));
+	render->getObject(trackBalls[3])->setRGBcolor(glm::vec3(1.0f, 1.0f, 0.0f));
+	render->getObject(trackBalls[0])->setPosition(glm::vec3(50.0f, roadYposition, -5.0f));
+	render->getObject(trackBalls[1])->setPosition(glm::vec3(53.0f, roadYposition, 7.0f));
+	render->getObject(trackBalls[2])->setPosition(glm::vec3(57.0f, roadYposition, 7.0f));
+	render->getObject(trackBalls[3])->setPosition(glm::vec3(60.0f, roadYposition, -5.0f));
+	updateBasepoints();
+	generate();
+	render->getObject(roadEndCircles[0])->setPosition(glm::vec3(points[1].x, roadYposition + 0.05f, points[1].z));
+	render->getObject(roadEndCircles[1])->setPosition(glm::vec3(points[points.size() - 1].x, roadYposition + 0.05f, points[points.size() - 1].z));
 }
 
+void Object3Droad::reBind(size_t trackBall_0, size_t trackBall_1, size_t trackBall_2, size_t trackBall_3, size_t roadEndCircle_1, size_t roadEndCircle_2) {
+	trackBalls[0] = trackBall_0;
+	trackBalls[1] = trackBall_1;
+	trackBalls[2] = trackBall_2;
+	trackBalls[3] = trackBall_3;
+	roadEndCircles[0] = roadEndCircle_1;
+	roadEndCircles[1] = roadEndCircle_2;
+	updateBasepoints();
+}
+
+void Object3Droad::updateBasepoints() {
+	endpointsExistTest();
+	if (stickMarkA != 'Q' && endpointLock) {
+		if (stickMarkA == 'A') render->getObject(trackBalls[0])->setPosition(render->getDynamicObject(stickA)->getEndpointA());
+		if (stickMarkA == 'B') render->getObject(trackBalls[0])->setPosition(render->getDynamicObject(stickA)->getEndpointB());
+	}
+
+	if (stickMarkB != 'Q' && endpointLock) {
+		if (stickMarkB == 'A') render->getObject(trackBalls[3])->setPosition(render->getDynamicObject(stickB)->getEndpointA());
+		if (stickMarkB == 'B') render->getObject(trackBalls[3])->setPosition(render->getDynamicObject(stickB)->getEndpointB());
+	}
+
+	for (size_t i = 0; i < 4; i++) basepoints[i] = render->getObject(trackBalls[i])->getPosition();
+}
+
+//TODO Áthozni a felújított verziót.
 bool Object3Droad::isClicked(glm::vec3 cameraPosition, glm::vec3 ray) {
 	for (size_t i = 1; i < points.size(); i++) {
 		glm::vec3 hitSphereCenter = points[i];
@@ -129,13 +91,10 @@ bool Object3Droad::isClicked(glm::vec3 cameraPosition, glm::vec3 ray) {
 
 		float a = glm::dot(ray, ray);
 		glm::vec3 camToPointDirection = cameraPosition - hitSphereCenter;
-		float b = 2.0 * glm::dot(ray, camToPointDirection);
+		float b = 2.0f * glm::dot(ray, camToPointDirection);
 		float c = glm::dot(camToPointDirection, camToPointDirection) - (hitSphereRadius * hitSphereRadius);
-		float hitDistance = b * b - 4.0 * a * c;
-		if (hitDistance < 0.0) {
-			//std::cout << "NO HIT" << std::endl;
-		}else{
-			//std::cout << "ROAD INSIDE HIT" << std::endl;
+		float hitDistance = b * b - 4.0f * a * c;
+		if (hitDistance >= 0.0) {
 			return true;
 		}
 	}
@@ -143,15 +102,15 @@ bool Object3Droad::isClicked(glm::vec3 cameraPosition, glm::vec3 ray) {
 }
 
 void Object3Droad::setRGBAcolor(glm::vec4 RGBAcolor) {
-	this->color = RGBAcolor;
+	color = RGBAcolor;
 }
 void Object3Droad::setRGBcolor(glm::vec3 RGBcolor) {
-	this->color.x = RGBcolor.x;
-	this->color.y = RGBcolor.y;
-	this->color.z = RGBcolor.z;
+	color.x = RGBcolor.x;
+	color.y = RGBcolor.y;
+	color.z = RGBcolor.z;
 }
 void Object3Droad::setOpacity(float opacity) {
-	this->color.w = opacity;
+	color.w = opacity;
 }
 
 glm::mat4 Object3Droad::getWorldMatrix() {
@@ -167,7 +126,7 @@ glm::vec3 Object3Droad::getRGBcolor() {
 }
 
 float Object3Droad::getOpacity() {
-	return this->color.w;
+	return color.w;
 }
 
 bool Object3Droad::isSelected() {
@@ -175,90 +134,97 @@ bool Object3Droad::isSelected() {
 }
 
 glm::vec3 Object3Droad::getEndpointA() {
-	return basePoints[0];
+	//Törlés utáni endpoint mozgatás index hibát okoz.
+	return basepoints[0];
 }
 
 glm::vec3 Object3Droad::getEndpointB() {
-	return basePoints[3];
+	return basepoints[3];
 }
 
-void Object3Droad::stuckTest(Object3Droad* road) {
-	if (glm::distance(road->getEndpointA(), this->getEndpointA()) < this->shift + 1) {
-		this->stickA = road;
-		this->stickMarkA = 'A';
+void Object3Droad::endpointsExistTest() {
+	if (render->getDynamicObject(stickA) == NULL) {
+		stickA == -1;
+		stickMarkA = 'Q';
 	}
-	if (glm::distance(road->getEndpointA(), this->getEndpointB()) < this->shift + 1) {
-		this->stickB = road;
-		this->stickMarkB = 'A';
-	}
-	if (glm::distance(road->getEndpointB(), this->getEndpointA()) < this->shift + 1) {
-		this->stickA = road;
-		this->stickMarkA = 'B';
-	}
-	if (glm::distance(road->getEndpointB(), this->getEndpointB()) < this->shift + 1) {
-		this->stickB = road;
-		this->stickMarkB = 'B';
+	if (render->getDynamicObject(stickB) == NULL) {
+		stickB == -1;
+		stickMarkB = 'Q';
 	}
 }
 
-char  Object3Droad::markerTest(Object3D* marker) {
+void Object3Droad::stuckTest(size_t road) {
+	std::cout << "RUNNED" << std::endl;
+	//TODO Javasolt endpoint is deleted, marker is deleted hozzáadása ami törli a hibás út függõségeket.
+	endpointsExistTest();
+	if(glm::distance(render->getDynamicObject(road)->getEndpointA(), getEndpointA()) < shift + 1) {
+		stickA = road;
+		stickMarkA = 'A';
+	}
+	if (glm::distance(render->getDynamicObject(road)->getEndpointA(), getEndpointB()) < shift + 1) {
+		stickB = road;
+		stickMarkB = 'A';
+	}
+	if (glm::distance(render->getDynamicObject(road)->getEndpointB(), getEndpointA()) < shift + 1) {
+		stickA = road;
+		stickMarkA = 'B';
+	}
+	if (glm::distance(render->getDynamicObject(road)->getEndpointB(), getEndpointB()) < shift + 1) {
+		stickB = road;
+		stickMarkB = 'B';
+	}
+}
+
+char  Object3Droad::markerTest(size_t marker) {
 	char result = 'Q';
-	if ((glm::distance(this->getEndpointA(), marker->getPosition()) < this->shift + 1) && endpointLock) {
+	if ((glm::distance(getEndpointA(), render->getObject(marker)->getPosition()) < shift + 1) && endpointLock) {
 		result = 'A';
-		this->markerA = marker;
-		//marker->setSelectable(false);
-		marker->setPosition(this->getEndpointA());
+		markerA = marker;
+		render->getObject(marker)->setSelectable(false);
+		render->getObject(marker)->setPosition(getEndpointA());
 	}
-	if ((glm::distance(this->getEndpointB(), marker->getPosition()) < this->shift + 1) && endpointLock) {
+	if ((glm::distance(getEndpointB(), render->getObject(marker)->getPosition()) < shift + 1) && endpointLock) {
 		result = 'B';
-		this->markerB = marker;
-		//marker->setSelectable(false);
-		marker->setPosition(this->getEndpointB());
+		markerB = marker;
+		render->getObject(marker)->setSelectable(false);
+		render->getObject(marker)->setPosition(getEndpointB());
 	}
 	return result;
 }
 
 void Object3Droad::select() {
 	setOpacity(0.5f);
-	roadEndCircles[0]->setOpacity(0.5f);
-	roadEndCircles[1]->setOpacity(0.5f);
-	trackBalls[0]->show();
-	trackBalls[1]->show();
-	trackBalls[2]->show();
-	trackBalls[3]->show();
+	for (size_t i = 0; i < 2; i++) render->getObject(roadEndCircles[i])->setOpacity(0.5f);
+	for (size_t i = 0; i < 4; i++) render->getObject(trackBalls[i])->show();
 	selected = true;
 }
 
 void Object3Droad::deselect() {
 	setOpacity(1.0f);
-	roadEndCircles[0]->setOpacity(1.0f);
-	roadEndCircles[1]->setOpacity(1.0f);
-	trackBalls[0]->hide();
-	trackBalls[1]->hide();
-	trackBalls[2]->hide();
-	trackBalls[3]->hide();
+	for (size_t i = 0; i < 2; i++) render->getObject(roadEndCircles[i])->setOpacity(1.0f);
+	for (size_t i = 0; i < 4; i++) render->getObject(trackBalls[i])->hide();
 	selected = false;
 }
 
-void Object3Droad::generateRoadPoints() {
+void Object3Droad::generateRoadpoints() {
 	for (double u = 0.0; u <= 1.0; u += 0.01) {
-		points.push_back(bezierPoint(u));
+		points.push_back(this->bezierpoint(u));
 	}
 
-	shiftedPoints_1.push_back(shiftPoint(points[0], points[1], shift, roadYposition));
-	shiftedPoints_2.push_back(shiftPoint(points[0], points[1], shift*-1.0f, roadYposition));
-	trackOne.push_back(shiftPoint(points[0], points[1], (shift/2.0f), roadYposition));
-	trackTwo.push_back(shiftPoint(points[0], points[1], ((shift/2.0f) * -1.0f), roadYposition));
+	shiftedpoints_1.push_back(shiftpoint(points[0], points[1], shift, roadYposition));
+	this->shiftedpoints_2.push_back(shiftpoint(points[0], points[1], shift*-1.0f, roadYposition));
+	trackOne.push_back(shiftpoint(points[0], points[1], (shift/2.0f), roadYposition));
+	trackTwo.push_back(shiftpoint(points[0], points[1], ((shift/2.0f) * -1.0f), roadYposition));
 
 	for (size_t i = 1; i < points.size(); i++) {
-		shiftedPoints_1.push_back(shiftPoint(points[i-1], points[i], shift, roadYposition));
-		shiftedPoints_2.push_back(shiftPoint(points[i-1], points[i], shift * -1.0f, roadYposition));
-		trackOne.push_back(shiftPoint(points[i-1], points[i], (shift / 2.0f), roadYposition));
-		trackTwo.push_back(shiftPoint(points[i-1], points[i], ((shift / 2.0f) * -1.0f), roadYposition));
+		shiftedpoints_1.push_back(shiftpoint(points[i-1], points[i], shift, roadYposition));
+		shiftedpoints_2.push_back(shiftpoint(points[i-1], points[i], shift * -1.0f, roadYposition));
+		trackOne.push_back(shiftpoint(points[i-1], points[i], (shift / 2.0f), roadYposition));
+		trackTwo.push_back(this->shiftpoint(points[i-1], points[i], ((shift / 2.0f) * -1.0f), roadYposition));
 	}
 }
 
-glm::vec3 Object3Droad::shiftPoint(glm::vec3 point1, glm::vec3 point2, float currentShift, float yPosition) {
+glm::vec3 Object3Droad::shiftpoint(glm::vec3 point1, glm::vec3 point2, float currentShift, float yPosition) {
 	glm::vec3 shiftedPoint;
 	float xnormal = -1 * (point2.z - point1.z);
 	float znormal = (point2.x - point1.x);
@@ -269,20 +235,20 @@ glm::vec3 Object3Droad::shiftPoint(glm::vec3 point1, glm::vec3 point2, float cur
 	return shiftedPoint;
 }
 
-glm::vec3 Object3Droad::bezierPoint(float u) {
+glm::vec3 Object3Droad::bezierpoint(float u) {
 	glm::vec3 bezierPoint;
-	bezierPoint.x = pow(1.0f - u, 3.0f) * basePoints[0].x + 3.0f * u * pow(1.0f - u, 2.0f) * basePoints[1].x
-	+ 3.0f * pow(u, 2.0f) * (1.0f - u) * basePoints[2].x + pow(u, 3.0f) * basePoints[3].x;
+	bezierPoint.x = pow(1.0f - u, 3.0f) * basepoints[0].x + 3.0f * u * pow(1.0f - u, 2.0f) * basepoints[1].x
+	+ 3.0f * pow(u, 2.0f) * (1.0f - u) * basepoints[2].x + pow(u, 3.0f) * basepoints[3].x;
 	bezierPoint.y = roadYposition;
-	bezierPoint.z = pow(1.0f - u, 3.0f) * basePoints[0].z + 3.0f * u * pow(1.0f - u, 2.0f) * basePoints[1].z
-	+ 3.0f * pow(u, 2.0f) * (1.0f - u) * basePoints[2].z + pow(u, 3.0f) * basePoints[3].z;
+	bezierPoint.z = pow(1.0f - u, 3.0f) * basepoints[0].z + 3.0f * u * pow(1.0f - u, 2.0f) * basepoints[1].z
+	+ 3.0f * pow(u, 2.0f) * (1.0f - u) * basepoints[2].z + pow(u, 3.0f) * basepoints[3].z;
 	return bezierPoint;
 }
 
 void Object3Droad::clean() {
 	points.clear();
-	shiftedPoints_1.clear();
-	shiftedPoints_2.clear();
+	shiftedpoints_1.clear();
+	shiftedpoints_2.clear();
 	trackOne.clear();
 	trackTwo.clear();
 }
@@ -290,16 +256,16 @@ void Object3Droad::clean() {
 void Object3Droad::fillModelCoordinates() {
 	std::vector<glm::vec3> modelPoints;
 	for (size_t i = 0; i < points.size(); i++) {
-		modelPoints.push_back(shiftedPoints_2[i]);
-		modelPoints.push_back(shiftedPoints_1[i]);
+		modelPoints.push_back(shiftedpoints_2[i]);
+		modelPoints.push_back(shiftedpoints_1[i]);
 	}
-	modelPointCount = modelPoints.size();
+	modelpointCount = modelPoints.size();
 	modelCoordinates.BufferData(modelPoints);
 }
 
 void Object3Droad::fillModelNormals() {
 	std::vector<glm::vec3> normals;
-	for (size_t i = 0; i < modelPointCount; i++) {
+	for (size_t i = 0; i < modelpointCount; i++) {
 		normals.push_back(glm::vec3(0, 1, 0));
 	}
 	modelNormals.BufferData(normals);
@@ -307,7 +273,7 @@ void Object3Droad::fillModelNormals() {
 
 void Object3Droad::fillModelTextures() {
 	std::vector<glm::vec2> textures;
-	for (size_t i = 0; i < modelPointCount; i = i + 4) {
+	for (size_t i = 0; i < modelpointCount; i = i + 4) {
 		textures.push_back(glm::vec2(1, 1));
 		textures.push_back(glm::vec2(0, 1));
 		textures.push_back(glm::vec2(1, 0));
@@ -326,7 +292,7 @@ void Object3Droad::fillModelIndices() {
 	indices.push_back(3);
 	indices.push_back(2);
 
-	for (size_t i = 6; i <= modelPointCount * 3; i = i + 6) {
+	for (size_t i = 6; i <= modelpointCount * 3; i = i + 6) {
 		indices.push_back(indices[i - 6] + 2);
 		indices.push_back(indices[i - 5] + 2);
 		indices.push_back(indices[i - 4] + 2);
@@ -340,7 +306,7 @@ void Object3Droad::fillModelIndices() {
 
 void Object3Droad::generate() {
 	clean();
-	generateRoadPoints();
+	generateRoadpoints();
 	fillModelCoordinates();
 	fillModelNormals();
 	fillModelTextures();
@@ -352,14 +318,22 @@ void Object3Droad::generate() {
 	}, modelIndices);
 }
 
-//TODO SHIT
 void Object3Droad::update() {
-	this->updateBasePoints();
-	this->generate();
-	this->roadEndCircles[0]->setPosition(glm::vec3(points[1].x, roadYposition + 0.05f, points[1].z));
-	this->roadEndCircles[1]->setPosition(glm::vec3(points[points.size() - 1].x, roadYposition + 0.05f, points[points.size() - 1].z));
-	/*this->roadEndCircles[0]->setPosition(glm::vec3(basePoints[0].x, roadYposition - 0.05f, basePoints[0].z));
-	this->roadEndCircles[1]->setPosition(glm::vec3(basePoints[3].x, roadYposition - 0.05f, basePoints[3].z));*/
-	//this->roadEndCircles[0]->setPosition(basePoints[0]);
-	//this->roadEndCircles[1]->setPosition(basePoints[3]);
+	//std::cout << "UPDATED " << getRenderID() << std::endl;
+	updateBasepoints();
+	generate();
+	render->getObject(roadEndCircles[0])->setPosition(glm::vec3(points[1].x, roadYposition + 0.05f, points[1].z));
+	render->getObject(roadEndCircles[1])->setPosition(glm::vec3(points[points.size() - 1].x, roadYposition + 0.05f, points[points.size() - 1].z));
+}
+
+void Object3Droad::setEndpointLock(bool lock) {
+	endpointLock = lock;
+	stickA = -1;
+	stickMarkA = 'Q';
+	stickB = -1;
+	stickMarkB = 'Q';
+	if (markerA != -1) render->getObject(markerA)->setSelectable(true);
+	if (markerB != -1) render->getObject(markerB)->setSelectable(true);
+	markerA = -1;
+	markerB = -1;
 }

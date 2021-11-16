@@ -20,7 +20,7 @@ public:
 	~EventListener(void);
 	void bind(WorkWindow* currentWindow);
 	void eventProcessor();
-	void select(int objectID);
+	void select(size_t objectID);
 	void deselect();
 	void roadDeselect();
 private:
@@ -32,8 +32,8 @@ private:
 	std::set<int> pressedKeys;
 	std::set<int> moseButtonPressed;
 
-	std::vector<Object3D*> selectedItems;
-	std::vector<Object3Droad*> selectedRoads;
+	std::vector<size_t> selectedItems;
+	std::vector<size_t> selectedRoads;
 	bool keepSelect = false;
 
 	glm::vec3 ray;

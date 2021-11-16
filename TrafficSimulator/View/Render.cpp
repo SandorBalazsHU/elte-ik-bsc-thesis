@@ -240,50 +240,33 @@ void Render::clear() {
  * @return The new object render ID.
 */
 int Render::addObject(int id) {
-	renderableObjects.push_back(objectStorage->getObject3D(id, renderableObjects.size()));
+	renderableObjects.push_back(objectStorage->getObject3D(id, renderableObjects.size()-1));
 	return renderableObjects.size()-1;
 }
 
 /**
  * @brief Delete a scene object by renderID.
  * \attention This cause pointer invalidation in the vector. Use the updateRenderIDs and rebindRoads for repairing pointers.
- * @param id renderID
+ * @param renderID renderableObjects for the 
 */
 void Render::deleteObject(int renderID) {
 	if (!renderableObjects[renderID].isProtected()) {
-		renderableObjects.erase(renderableObjects.begin() + renderID);
-		updateRenderIDs();
-		rebindRoads();
+		renderableObjects[renderID].erase();
 	}
 }
 
 /**
- * @brief Refresh the renderable objects renderID-s after modiflying the renderable objects list.
- * The main goal is repair the pointer invalidation after object delete.
+ * @brief Delete a scene object by renderID.
+ * /attention This cause pointer invalidation in the vector. Use the updateRenderIDs and rebindRoads for repairing pointers.
+ * @param renderID renderID
 */
-void Render::updateRenderIDs() {
-	for (size_t i = 0; i < renderableObjects.size(); i++) {
-		renderableObjects[i].setRenderID(i);
-	}
-}
+void Render::deleteRoad(int dynamicRenderID) {
 
-/**
-* @brief Refresh and rebind the renderable roads (Dynamic generated object) renderID-s and byndings after modiflying the renderable objects list.
-* The main goal is repair the pointer invalidation after object delete.
-* Scan over the all the objects with dependencies and and rebind the six dependecies of all roads.
-*/
-void Render::rebindRoads() {
-	if (renderableRoads.size() > 0) {
-		std::vector<Object3D*> rebindableObjects;
-		for (size_t i = 0; i < renderableObjects.size(); i++) {
-			if (renderableObjects[i].getDependencyID() > -1) {
-				rebindableObjects.push_back(&renderableObjects[i]);
-			}
-		}
-		for (size_t i = 0; i < rebindableObjects.size(); i += 6) {
-			renderableRoads[rebindableObjects[i]->getDependencyID()]->reBind(rebindableObjects[i], rebindableObjects[i + 1], rebindableObjects[i + 2], rebindableObjects[i + 3], rebindableObjects[i + 4], rebindableObjects[i + 5]);
-		}
-	}
+	for (size_t i = 0; i < 4; i++) renderableObjects[renderableRoads[dynamicRenderID]->getTrackBalls()[i]].erase();
+	for (size_t i = 0; i < 2; i++) renderableObjects[renderableRoads[dynamicRenderID]->getRoadEndCircles()[i]].erase();
+
+	delete renderableRoads[dynamicRenderID];
+	renderableRoads[dynamicRenderID] = NULL;
 }
 
 /**
@@ -293,35 +276,17 @@ void Render::rebindRoads() {
 */
 int Render::addRoad() {
 	Object3Droad* road = new Object3Droad();
-	addObject(1);
-	addObject(1);
-	addObject(1);
-	addObject(1);
-	addObject(2);
-	addObject(2);
-
-	Object3D* trackBall_0		= getObject(renderableObjects.size() - 6);
-	Object3D* trackBall_1		= getObject(renderableObjects.size() - 5);
-	Object3D* trackBall_2		= getObject(renderableObjects.size() - 4);
-	Object3D* trackBall_3		= getObject(renderableObjects.size() - 3);
-	Object3D* roadEndCircle_2	= getObject(renderableObjects.size() - 2);
-	Object3D* roadEndCircle_1	= getObject(renderableObjects.size() - 1);
-
-	trackBall_0->setDependencyID(renderableRoads.size());
-	trackBall_1->setDependencyID(renderableRoads.size());
-	trackBall_2->setDependencyID(renderableRoads.size());
-	trackBall_3->setDependencyID(renderableRoads.size());
-	roadEndCircle_2->setDependencyID(renderableRoads.size());
-	roadEndCircle_1->setDependencyID(renderableRoads.size());
-
-	road->bind(trackBall_0, trackBall_1, trackBall_2, trackBall_3, roadEndCircle_1, roadEndCircle_2);
 	renderableRoads.push_back(road);
 
-	rebindRoads();
+	for (size_t i = 0; i < 2; i++) addObject(2);
+	for (size_t i = 0; i < 4; i++) addObject(1);
 
-	road->setRenderID(renderableRoads.size());
+	size_t objectsNumber = getObjectsNumber();
+	size_t dynamicObjectsNumber = getDynamicObjectsNumber();
 
-	return renderableRoads.size() - 1;
+	road->bind(this, dynamicObjectsNumber - 1, objectsNumber - 1, objectsNumber - 2, objectsNumber-3, objectsNumber - 4, objectsNumber - 5, objectsNumber - 6);
+	
+	return dynamicObjectsNumber - 1;
 }
 
 /**
@@ -330,23 +295,63 @@ int Render::addRoad() {
  * @return The scene object.
 */
 Object3D* Render::getObject(int id) {
+	/*if (renderableObjects.size() <= id) {
+		std::cout << "getObject OVERINDEXING " << renderableObjects.size() << "-" << id << std::endl;
+	}
+	else {
+		std::cout << "getObject OK " << renderableObjects.size() << "-" << id << std::endl;
+	}*/
 	return &renderableObjects[id];
+}
+
+/**
+ * @brief Getter for the RenderableRoads size.
+ * @return The renderableRoads size.
+*/
+size_t Render::getObjectsNumber() {
+	return renderableObjects.size();
+}
+
+/**
+ * @brief Getter for the RenderableRoads.
+ * @param renderID The needed object dynamicRenderID.
+ * @return The needed object.
+*/
+Object3Droad* Render::getDynamicObject(size_t dynamicRenderID) {
+	/*if (renderableRoads.size() <= dynamicRenderID) {
+		std::cout << "getDynamicObject OVERINDEXING " << dynamicRenderID << std::endl;
+	} else {
+		std::cout << "getDynamicObject OK " << renderableRoads.size() << "-" << dynamicRenderID << std::endl;
+	}*/
+	return renderableRoads[dynamicRenderID];
+}
+
+/**
+ * @brief Getter for the renderableRoads size.
+ * @return The renderableRoads size.
+*/
+size_t Render::getDynamicObjectsNumber() {
+	return renderableRoads.size();
 }
 
 /**
  * @brief Update a dynamicly generated object status by dynamicRenderID.
  * @param The updatable dynamicRenderID
 */
-void Render::updateDynamicObject(int id) {
-	renderableRoads[id]->update();
+void Render::updateDynamicObject(size_t dynamicRenderID) {
+	renderableRoads[dynamicRenderID]->update();
 	for (size_t i = 0; i < renderableRoads.size(); i++) {
-		if (i != id) {
-			renderableRoads[id]->stuckTest(renderableRoads[i]);
+		if (i != dynamicRenderID && renderableRoads[dynamicRenderID] != NULL && renderableRoads[i] != NULL) {
+			//TODO Töröltem egy csomó mindent, utána út mozgatásra index hibával elszáll.
+			renderableRoads[dynamicRenderID]->stuckTest(i);
+			//std::cout  << renderableRoads[dynamicRenderID]->getRenderID() << std::endl;;
 		}
 	}
 	for (size_t i = 0; i < renderableObjects.size(); i++) {
-		if (renderableObjects[i].getName() == "Start sign" || renderableObjects[i].getName() == "Stop sign") {
-			renderableRoads[id]->markerTest(&renderableObjects[i]);
+		if (!renderableObjects[i].isDeleted()) {
+			if (renderableObjects[i].getName() == "Start sign" || renderableObjects[i].getName() == "Stop sign") {
+				renderableRoads[dynamicRenderID]->markerTest(i);
+			}
 		}
 	}
 }
@@ -390,11 +395,13 @@ void Render::showRoadHitSphere(std::vector<glm::vec3>& roadPoints, float size, g
 */
 void Render::showAllRoadHitSpheres() {
 	for (size_t i = 0; i < renderableRoads.size(); i++) {
-		if (false) showRoadHitSphere(renderableRoads[i]->points, 4.0f, glm::vec3(1, 1, 1));
-		if (true) showRoadHitSphere(renderableRoads[i]->shiftedPoints_1, 0.3f, glm::vec3(1, 0, 0));
-		if (true) showRoadHitSphere(renderableRoads[i]->shiftedPoints_2, 0.3f, glm::vec3(0, 1, 0));
-		if (true) showRoadHitSphere(renderableRoads[i]->trackOne, 0.3f, glm::vec3(0, 0, 1));
-		if (true) showRoadHitSphere(renderableRoads[i]->trackTwo, 0.3f, glm::vec3(1, 1, 0));
+		if (renderableRoads[i] != NULL) {
+			if (true) showRoadHitSphere(renderableRoads[i]->points, 4.0f, glm::vec3(1, 1, 1));
+			if (true) showRoadHitSphere(renderableRoads[i]->shiftedpoints_1, 0.3f, glm::vec3(1, 0, 0));
+			if (true) showRoadHitSphere(renderableRoads[i]->shiftedpoints_2, 0.3f, glm::vec3(0, 1, 0));
+			if (true) showRoadHitSphere(renderableRoads[i]->trackOne, 0.3f, glm::vec3(0, 0, 1));
+			if (true) showRoadHitSphere(renderableRoads[i]->trackTwo, 0.3f, glm::vec3(1, 1, 0));
+		}
 	}
 }
 
@@ -409,20 +416,24 @@ void Render::renderScrean() {
 
 	if (objectsWireframe) wireframeOn();
 	for (size_t i = 0; i < renderableObjects.size(); i++) {
-		if (!renderableObjects[i].isHidden()) {
-			setTexture(renderableObjects[i].getTexture());
-			shaderPreDrawingUpdate(renderableObjects[i].getWorldMatrix(), renderableObjects[i].getRGBAcolor());
-			drawMesh(renderableObjects[i].getMesh());
-			if (hitSphare) showHitSphere(i);
+		if (!renderableObjects[i].isDeleted()) {
+			if (!renderableObjects[i].isHidden()) {
+				setTexture(renderableObjects[i].getTexture());
+				shaderPreDrawingUpdate(renderableObjects[i].getWorldMatrix(), renderableObjects[i].getRGBAcolor());
+				drawMesh(renderableObjects[i].getMesh());
+				if (hitSphare) showHitSphere(i);
+			}
 		}
 	}
 	if (objectsWireframe) wireframeOff();
 
 	if(roadWireframe) wireframeOn();
 	for (size_t i = 0; i < renderableRoads.size(); i++) {
-		setTexture(objectStorage->getTexture("road.png"));
-		shaderPreDrawingUpdate(renderableRoads[i]->getWorldMatrix(), renderableRoads[i]->getRGBAcolor());
-		drawVao(renderableRoads[i]->getVAO(), 596);
+		if (renderableRoads[i] != NULL) {
+			setTexture(objectStorage->getTexture("road.png"));
+			shaderPreDrawingUpdate(renderableRoads[i]->getWorldMatrix(), renderableRoads[i]->getRGBAcolor());
+			drawVao(renderableRoads[i]->getVAO(), 596);
+		}
 	}
 	if (roadWireframe) wireframeOff();
 	if (roadHhitSphare) showAllRoadHitSpheres();

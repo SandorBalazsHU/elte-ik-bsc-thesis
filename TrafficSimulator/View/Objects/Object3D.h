@@ -59,6 +59,8 @@ class Object3D {
 		bool					isHidden();
 		void					hide();
 		void					show();
+		void					erase();
+		bool					isDeleted();
 
 
 	protected:
@@ -81,4 +83,5 @@ class Object3D {
 		bool					hidden = false;
 		bool					protection = false;
 		bool					selectable = true;
+		bool					deleted = false;
 	};

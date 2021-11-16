@@ -22,15 +22,14 @@ void EventListener::bind(WorkWindow* currentWindow) {
 	render = workingWindow->getRender();
 }
 
-void EventListener::select(int objectID) {
-	Object3D* selectedObject = render->getObject(objectID);
-	selectedItems.push_back(selectedObject);
-	selectedObject->setOpacity(0.5);
+void EventListener::select(size_t objectID) {
+	selectedItems.push_back(objectID);
+	render->getObject(objectID)->setOpacity(0.5);
 }
 
 void EventListener::deselect() {
 	for (size_t i = 0; i < selectedItems.size(); i++) {
-		selectedItems[i]->setOpacity(1.0);
+		render->getObject(selectedItems[i])->setOpacity(1.0);
 	}
 	selectedItems.clear();
 }
@@ -38,13 +37,12 @@ void EventListener::deselect() {
 void EventListener::roadDeselect() {
 	if(selectedRoads.size() > 0) {
 		for (size_t i = 0; i < selectedRoads.size(); i++) {
-			selectedRoads[i]->deselect();
+			render->getDynamicObject(selectedRoads[i])->deselect();
 		}
 		selectedRoads.clear();
 	}
 }
 
-//TODO Lenyomott F közbenti deselect, egyszerre több lenyomott gomb?
 void EventListener::keyboardDown(SDL_KeyboardEvent& key) {
 	pressedKeys.insert(key.keysym.sym);
 	camera->keyboardDown(key);
@@ -53,17 +51,20 @@ void EventListener::keyboardDown(SDL_KeyboardEvent& key) {
 	if (key.keysym.sym == SDLK_RCTRL) keepSelect = true;
 	if (key.keysym.sym == SDLK_f) {
 		for (size_t i = 0; i < selectedRoads.size(); i++) {
-			selectedRoads[i]->setEndpointLock(false);
+			render->getDynamicObject(selectedRoads[i])->setEndpointLock(false);
 		}
 	}
 }
 
 void EventListener::deleteSelectedItems() {
-	if (selectedItems.size() >= 1) {
-		for (size_t i = 0; i < selectedItems.size(); i++) {
-			render->deleteObject(selectedItems[i]->getRenderID());
-		}
+	for (size_t i = 0; i < selectedItems.size(); i++) {
+		render->deleteObject(selectedItems[i]);
 	}
+	selectedItems.clear();
+	for (size_t i = 0; i < selectedRoads.size(); i++) {
+		render->deleteRoad(selectedRoads[i]);
+	}
+	selectedRoads.clear();
 }
 
 void EventListener::keyboardUp(SDL_KeyboardEvent& key) {
@@ -74,7 +75,7 @@ void EventListener::keyboardUp(SDL_KeyboardEvent& key) {
 	if (key.keysym.sym == SDLK_DELETE) deleteSelectedItems();
 	if (key.keysym.sym == SDLK_f) {
 		for (size_t i = 0; i < selectedRoads.size(); i++) {
-			selectedRoads[i]->setEndpointLock(true);
+			render->getDynamicObject(selectedRoads[i])->setEndpointLock(true);
 		}
 	}
 }
@@ -94,24 +95,29 @@ void EventListener::mouseMove(SDL_MouseMotionEvent& mouse) {
 
 		for (size_t i = 0; i < selectedItems.size(); i++) {
 			
-			if (selectedItems[i]->getName() == "Start sign" || selectedItems[i]->getName() == "Stop sign") {
-				for (size_t j = 0; j < render->renderableRoads.size(); j++) {
-					char result = render->renderableRoads[j]->markerTest(selectedItems[i]);
-					if(result == 'A') selectedItems[i]->setPosition(render->renderableRoads[j]->getEndpointA());
-					if(result == 'B') selectedItems[i]->setPosition(render->renderableRoads[j]->getEndpointB());
+			if (render->getObject(selectedItems[i])->getName() == "Start sign" || render->getObject(selectedItems[i])->getName() == "Stop sign") {
+				for (size_t j = 0; j < render->getDynamicObjectsNumber(); j++) {
+					if (render->getDynamicObject(j) != NULL) {
+						char result = render->getDynamicObject(j)->markerTest(selectedItems[i]);
+						if (result == 'A') {
+							render->getObject(selectedItems[i])->setPosition(render->getDynamicObject(j)->getEndpointA());
+							deselect();
+							break;
+						}
+						if (result == 'B') {
+							render->getObject(selectedItems[i])->setPosition(render->getDynamicObject(j)->getEndpointB());
+							deselect();
+							break;
+						}
+					}
 				}
-				/*if (result && (pressedKeys.find(SDLK_f) == pressedKeys.end())) {
-					deselect();
-					break;
-				}*/
 			}
 
-			selectedItems[i]->move(rotatedShift);
+			render->getObject(selectedItems[i])->move(rotatedShift);
 
-			if (selectedItems[i]->getDependencyID() > -1) {
-				render->updateDynamicObject(selectedItems[i]->getDependencyID());
-				//std::cout << selectedItems[i]->getDependencyID() << " , " << selectedItems[i]->getRenderID() << std::endl;
-				//std::cout  << std::endl;
+			//std::cout << "SelectedDependency: " << render->getObject(selectedItems[i])->getDependencyID() << std::endl;
+			if (render->getObject(selectedItems[i])->getDependencyID() > -1) {
+				render->updateDynamicObject(render->getObject(selectedItems[i])->getDependencyID());
 			}
 		}
 	}
@@ -123,13 +129,13 @@ void EventListener::mouseDown(SDL_MouseButtonEvent& mouse) {
 		int selectedObjectId = getClickedObjectId(mouse);
 		if (selectedObjectId != -1) {
 			select(selectedObjectId);
-			//std::cout << "HIT" << std::endl;
 		}else{
-			for (size_t i = 0; i < render->renderableRoads.size(); i++)	{
-				if (render->renderableRoads[i]->isClicked(camera->getCameraPosition(), ray)) {
-					render->renderableRoads[i]->select();
-					selectedRoads.push_back(render->renderableRoads[i]);
-					//std::cout << "ROAD HIT" << std::endl;
+			for (size_t i = 0; i < render->getDynamicObjectsNumber(); i++)	{
+				if (render->getDynamicObject(i) != NULL) {
+					if (render->getDynamicObject(i)->isClicked(camera->getCameraPosition(), ray)) {
+						render->getDynamicObject(i)->select();
+						selectedRoads.push_back(i);
+					}
 				}
 			}
 		}
@@ -142,7 +148,6 @@ void EventListener::mouseDown(SDL_MouseButtonEvent& mouse) {
 void EventListener::mouseUp(SDL_MouseButtonEvent& mouse) {
 	moseButtonPressed.erase(mouse.button);
 	if (mouse.button == SDL_BUTTON_RIGHT) {
-		//std::cout << "deselect" << std::endl;
 		if(!keepSelect) deselect();
 	}
 }
@@ -151,8 +156,8 @@ void EventListener::mouseWheel(SDL_MouseWheelEvent& wheel) {
 	if(moseButtonPressed.find(SDL_BUTTON_RIGHT) == moseButtonPressed.end()) camera->mouseWheel(wheel);
 	if (selectedItems.size() > 0) {
 		for (size_t i = 0; i < selectedItems.size(); i++) {
-			if (wheel.y>0) selectedItems[i]->rotateLeft(10.0f);
-			if (wheel.y<0) selectedItems[i]->rotateRight(10.0f);
+			if (wheel.y>0) render->getObject(selectedItems[i])->rotateLeft(10.0f);
+			if (wheel.y<0) render->getObject(selectedItems[i])->rotateRight(10.0f);
 		}
 	}
 }
