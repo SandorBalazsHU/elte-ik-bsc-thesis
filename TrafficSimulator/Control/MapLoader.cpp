@@ -47,10 +47,10 @@ void MapLoader::loadMap(std::string fileName) {
         } else {
             int newRoadRenderId = render->addRoad();
             size_t* trackBalls = render->getDynamicObject(newRoadRenderId)->getTrackBalls();
-            render->getObject(0)->setPosition(glm::vec3(std::stof(parsedCSV[i][1]), std::stof(parsedCSV[i][2]), std::stof(parsedCSV[i][3])));
-            render->getObject(1)->setPosition(glm::vec3(std::stof(parsedCSV[i][4]), std::stof(parsedCSV[i][5]), std::stof(parsedCSV[i][6])));
-            render->getObject(2)->setPosition(glm::vec3(std::stof(parsedCSV[i][7]), std::stof(parsedCSV[i][8]), std::stof(parsedCSV[i][9])));
-            render->getObject(3)->setPosition(glm::vec3(std::stof(parsedCSV[i][10]), std::stof(parsedCSV[i][11]), std::stof(parsedCSV[i][12])));
+            render->getObject(trackBalls[0])->setPosition(glm::vec3(std::stof(parsedCSV[i][1]), std::stof(parsedCSV[i][2]), std::stof(parsedCSV[i][3])));
+            render->getObject(trackBalls[1])->setPosition(glm::vec3(std::stof(parsedCSV[i][4]), std::stof(parsedCSV[i][5]), std::stof(parsedCSV[i][6])));
+            render->getObject(trackBalls[2])->setPosition(glm::vec3(std::stof(parsedCSV[i][7]), std::stof(parsedCSV[i][8]), std::stof(parsedCSV[i][9])));
+            render->getObject(trackBalls[3])->setPosition(glm::vec3(std::stof(parsedCSV[i][10]), std::stof(parsedCSV[i][11]), std::stof(parsedCSV[i][12])));
             render->updateDynamicObject(newRoadRenderId);
         }
     }

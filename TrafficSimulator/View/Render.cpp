@@ -240,8 +240,9 @@ void Render::clear() {
  * @return The new object render ID.
 */
 int Render::addObject(int id) {
-	renderableObjects.push_back(objectStorage->getObject3D(id, renderableObjects.size()-1));
-	return renderableObjects.size()-1;
+	size_t newRenderID = renderableObjects.size();
+	renderableObjects.push_back(objectStorage->getObject3D(id, newRenderID));
+	return newRenderID;
 }
 
 /**
