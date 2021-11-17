@@ -14,6 +14,7 @@ public:
 	std::vector<std::string> listFiles();
 	int deleteSave(std::string fileName);
 private:
+	const std::string fileType = ".csv";
 	std::string saveFolder = "Saves\\";
 	Render* render;
 	std::vector<std::vector<std::string>> parsedCSV;

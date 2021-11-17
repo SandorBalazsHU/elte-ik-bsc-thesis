@@ -19,6 +19,7 @@ void MapLoader::bind(Render* render) {
 }
 
 void MapLoader::readCSV(std::string fileName) {
+    parsedCSV.clear();
     std::ifstream file(fileName);
     std::string line;
     int lineCount = 0;
@@ -36,7 +37,7 @@ void MapLoader::readCSV(std::string fileName) {
 }
 
 void MapLoader::loadMap(std::string fileName) {
-    readCSV(this->saveFolder + fileName);
+    readCSV(this->saveFolder + fileName + fileType);
     for (size_t i = 0; i < parsedCSV.size(); i++) {
         int currentType = std::stoi(parsedCSV[i][0]);
 
@@ -64,14 +65,15 @@ void MapLoader::loadMap(std::string fileName) {
 std::vector<std::string> MapLoader::listFiles() {
     std::vector<std::string> fileList;
     for (std::filesystem::directory_entry entry : std::filesystem::directory_iterator(saveFolder)) {
-        fileList.push_back(entry.path().filename().string());
+        std::string fileName = entry.path().filename().string();
+        fileList.push_back(fileName.substr(0, fileName.find(".")));
     }
     return fileList;
 }
 
 int MapLoader::deleteSave(std::string fileName) {
     try {
-        if (std::filesystem::remove(saveFolder + fileName))
+        if (std::filesystem::remove(saveFolder + fileName + fileType))
             return 0;
         else
             return 1;

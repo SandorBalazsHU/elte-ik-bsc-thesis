@@ -93,6 +93,7 @@ void GUI::mainMenuBar() {
 		if (ImGui::BeginMenu("Help"))
 		{
 			if (ImGui::MenuItem("Help", "CTRL+H")) {}
+			if (ImGui::MenuItem("Controls", "CTRL+C")) {}
 			ImGui::Separator();
 			if (ImGui::MenuItem("About", "CTRL+K")) {}
 			ImGui::EndMenu();

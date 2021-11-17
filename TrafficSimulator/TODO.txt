@@ -5,11 +5,9 @@ INT -> SIZE_T
 Object* elimináció helyette renderID
 renderableObjects.size() elimináció
 
-Nagy BUG teszt 1
+Controls menü!
+
 Ahol lehet referencia szerinti átadás és konstansok.
-Töröljük-e a betöltés elõtt a színteret kérdezõ ablak.
-Utolsó mentés neve mentés és kiírás az ablakkeretre.
-Last saved time + file.
 
 Ötletek:
 - Nagyobb asztal, blokkoló keretekkel.
@@ -47,6 +45,12 @@ Elkészült ötletek:
 + Út törlés
 + Végpont jelölõ rögzülés
 + Végpontjelölõ feloldás
++ mi van, ha rámentünk egy mentésre.
++ .csv-t vegyük ki.
++ Töröljük-e a betöltés elõtt a színteret kérdezõ ablak.
++ Utolsó mentés neve mentés és kiírás az ablakkeretre.
++ Last saved time + file.
++ Nagy BUG teszt 1e
 
 
 Elvetett ötletek:

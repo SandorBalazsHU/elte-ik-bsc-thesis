@@ -9,6 +9,8 @@
  * KSP
 */
 
+#include <algorithm>
+#include <vector>
 #include "GUI.h"
 #include "Render.h"
 #include "../Control/Logger.h"
@@ -37,11 +39,42 @@ void GUI::openWindow() {
 		ImGui::ListBox("", &selection, items, itemNumber);
 		ImGui::PopID();
 
+
 		if (ImGui::Button("Open")) {
-			windowRender->getMapLoader()->loadMap(items[selection]);
-			windowRender->getMapSaver()->setLastSave(items[selection]);
-			openWindowStatus = false;
+			if (windowRender->getObjectsNumber() > 1 || windowRender->getDynamicObjectsNumber() > 0) {
+				ImGui::OpenPopup("Are you sure?");
+			}
+			else {
+				windowRender->clear();
+				windowRender->getMapLoader()->loadMap(items[selection]);
+				windowRender->getMapSaver()->setLastSave(items[selection]);
+				openWindowStatus = false;
+			}
 		}
+		if (ImGui::BeginPopupModal("Are you sure?")) {
+			ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "Are you sure overwrite the current map?");
+			ImGui::Separator();
+			if (windowRender->getMapSaver()->getLastSave() == windowRender->getMapSaver()->unsavedMarker) {
+				ImGui::Text("");
+				ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "The current map is UNSAVED!");
+				ImGui::Text("");
+			}else{
+				ImGui::Text("The last save time:  %s", windowRender->getMapSaver()->getLastSaveTime().c_str());
+				ImGui::Text("Now:                 %s", Logger::currentDateTime().c_str());
+				ImGui::Text("The last saved file: %s", windowRender->getMapSaver()->getLastSave());
+			}
+			ImGui::Separator();
+			ImGui::Text("The loadable file:   %s", items[selection]);
+			ImGui::Separator();
+			if (ImGui::Button("Open")) {
+				windowRender->clear();
+				windowRender->getMapLoader()->loadMap(items[selection]);
+				windowRender->getMapSaver()->setLastSave(items[selection]);
+				openWindowStatus = false;
+			}
+			ImGui::EndPopup();
+		}
+
 		ImGui::SameLine();
 		if (ImGui::Button("Delete")) {
 			int status = windowRender->getMapLoader()->deleteSave(items[selection]);
@@ -74,36 +107,68 @@ void GUI::openWindow() {
 }
 
 void GUI::saveWindow() {
-	ImGui::OpenPopup("Save map");
-	if (ImGui::BeginPopupModal("Save map")) {
-		ImGui::Text("Saving the new map.");
-		ImGui::Separator();
-		if (ImGui::Button("Save")) {}
-		ImGui::SameLine();
-		if (ImGui::Button("Close")) {
-			saveWindowStatus = false;
-			ImGui::CloseCurrentPopup();
+	const std::string lastSave = windowRender->getMapSaver()->getLastSave();
+	if (lastSave == windowRender->getMapSaver()->unsavedMarker) {
+		saveWindowStatus = false;
+		ImGui::CloseCurrentPopup();
+		saveAsWindowStatus = true;
+	} else {
+		windowRender->getMapSaver()->saveMap(lastSave);
+		ImGui::SetNextWindowPos(ImVec2(0, 20), ImGuiSetCond_FirstUseEver);
+		ImGui::SetNextWindowSize(ImVec2(251, 130), ImGuiCond_FirstUseEver);
+		ImGui::OpenPopup("Map saved");
+		if (ImGui::BeginPopupModal("Map saved")) {
+			ImGui::Text("%s map saved!", lastSave);
+			ImGui::Separator();
+			if (ImGui::Button("Close")) {
+				saveWindowStatus = false;
+				ImGui::CloseCurrentPopup();
+			}
+			ImGui::EndPopup();
 		}
-		ImGui::EndPopup();
 	}
 }
 
 void GUI::saveAsWindow() {
 	ImGui::SetNextWindowPos(ImVec2(0, 20), ImGuiSetCond_FirstUseEver);
 	ImGui::SetNextWindowSize(ImVec2(251, 130), ImGuiCond_FirstUseEver);
-	ImGui::OpenPopup("Save as map");
-	if (ImGui::BeginPopupModal("Save as map")) {
+	ImGui::OpenPopup("Save map as");
+	if (ImGui::BeginPopupModal("Save map as")) {
 
 		ImGui::Text("Saving the new map.");
 
 		ImGui::Separator();
 
-		static char newFileName[64] = "save.csv";
+		static char newFileName[64] = "save";
 		ImGui::InputText("New map name.", newFileName, 64);
 
 		if (ImGui::Button("Save")) {
-			windowRender->getMapSaver()->saveMap(newFileName);
-			ImGui::OpenPopup("Save map");
+			std::vector<std::string> saves = windowRender->getMapLoader()->listFiles();
+			if (std::find(saves.begin(), saves.end(), newFileName) != saves.end()) {
+				ImGui::OpenPopup("overwrite");
+			} else {
+				windowRender->getMapSaver()->saveMap(newFileName);
+				ImGui::OpenPopup("Save map");
+			}
+		}
+		if (ImGui::BeginPopupModal("overwrite")) {
+			ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "This file already exist!");
+			ImGui::Text("Do you want to overwrite: %s ?", newFileName);
+			if (ImGui::Button("Save")) {
+				windowRender->getMapSaver()->saveMap(newFileName);
+				ImGui::OpenPopup("Save map");
+			}
+			if (ImGui::BeginPopupModal("Save map")) {
+				ImGui::Text("New map saved as: %s", newFileName);
+				if (ImGui::Button("Close")) {
+					saveAsWindowStatus = false;
+					ImGui::CloseCurrentPopup();
+				}
+				ImGui::EndPopup();
+			}
+			ImGui::SameLine();
+			if (ImGui::Button("Close")) ImGui::CloseCurrentPopup();
+			ImGui::EndPopup();
 		}
 		if (ImGui::BeginPopupModal("Save map")) {
 			ImGui::Text("New map saved as: %s", newFileName);

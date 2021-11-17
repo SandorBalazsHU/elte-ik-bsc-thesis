@@ -15,9 +15,12 @@ public:
 	std::string getLastSaveTime();
 	void setLastSaveTime();
 	void reset();
+	const std::string unsavedMarker = "Unsaved";
+
 private:
-	std::string currentSave = "Unsaved";
+	const std::string fileType = ".csv";
+	std::string currentSave = unsavedMarker;
 	const std::string saveFolder = "Saves\\";
-	std::string lastSaveTime = "Unsaved";
+	std::string lastSaveTime = unsavedMarker;
 	Render* render;
 };

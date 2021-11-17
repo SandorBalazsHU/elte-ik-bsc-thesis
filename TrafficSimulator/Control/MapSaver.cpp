@@ -19,8 +19,8 @@ void MapSaver::bind(Render* render) {
 }
 
 void MapSaver::reset() {
-	currentSave = "Unsaved";
-	lastSaveTime = "Unsaved";
+	currentSave = unsavedMarker;
+	lastSaveTime = unsavedMarker;
 }
 
 std::string MapSaver::getLastSave() {
@@ -44,7 +44,7 @@ void MapSaver::saveMap(std::string fileName) {
 	currentSave = fileName;
 	setLastSaveTime();
 	std::ofstream saveFile;
-	saveFile.open(this->saveFolder + fileName);
+	saveFile.open(this->saveFolder + fileName + fileType);
 
 	for (size_t i = 0; i < render->getObjectsNumber(); i++) {
 		if (!render->getObject(i)->isDeleted()) {
