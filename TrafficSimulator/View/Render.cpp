@@ -343,9 +343,7 @@ void Render::updateDynamicObject(size_t dynamicRenderID) {
 	renderableRoads[dynamicRenderID]->update();
 	for (size_t i = 0; i < renderableRoads.size(); i++) {
 		if (i != dynamicRenderID && renderableRoads[dynamicRenderID] != NULL && renderableRoads[i] != NULL) {
-			//TODO Töröltem egy csomó mindent, utána út mozgatásra index hibával elszáll.
 			renderableRoads[dynamicRenderID]->stuckTest(i);
-			//std::cout  << renderableRoads[dynamicRenderID]->getRenderID() << std::endl;;
 		}
 	}
 	for (size_t i = 0; i < renderableObjects.size(); i++) {

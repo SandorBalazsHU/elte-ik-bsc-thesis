@@ -67,6 +67,7 @@ private:
 	void clean();
 
 	void endpointsExistTest();
+	void markersExistTest();
 
 	void fillModelCoordinates();
 	void fillModelNormals();
@@ -84,8 +85,8 @@ private:
 	size_t stickB = -1;
 	char stickMarkB = 'Q';
 
-	size_t markerA = NULL;
-	size_t markerB = NULL;
+	size_t markerA = -1;
+	size_t markerB = -1;
 
 
 	float shift = 2.0f;

@@ -54,6 +54,11 @@ void MapLoader::loadMap(std::string fileName) {
             render->updateDynamicObject(newRoadRenderId);
         }
     }
+    for (size_t i = 0; i < render->getDynamicObjectsNumber(); i++) {
+        if (render->getDynamicObject(i) != NULL) {
+            render->updateDynamicObject(i);
+        }
+    }
 }
 
 std::vector<std::string> MapLoader::listFiles() {

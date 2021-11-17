@@ -70,6 +70,7 @@ void Object3Droad::reBind(size_t trackBall_0, size_t trackBall_1, size_t trackBa
 
 void Object3Droad::updateBasepoints() {
 	endpointsExistTest();
+	markersExistTest();
 	if (stickMarkA != 'Q' && endpointLock) {
 		if (stickMarkA == 'A') render->getObject(trackBalls[0])->setPosition(render->getDynamicObject(stickA)->getEndpointA());
 		if (stickMarkA == 'B') render->getObject(trackBalls[0])->setPosition(render->getDynamicObject(stickA)->getEndpointB());
@@ -153,8 +154,17 @@ void Object3Droad::endpointsExistTest() {
 	}
 }
 
+void Object3Droad::markersExistTest() {
+	if (render->getDynamicObject(markerA) == NULL) {
+		markerA == -1;
+	}
+	if (render->getDynamicObject(markerB) == NULL) {
+		markerB == -1;
+	}
+}
+
 void Object3Droad::stuckTest(size_t road) {
-	std::cout << "RUNNED" << std::endl;
+	//std::cout << "RUNNED" << std::endl;
 	//TODO Javasolt endpoint is deleted, marker is deleted hozzáadása ami törli a hibás út függõségeket.
 	endpointsExistTest();
 	if(glm::distance(render->getDynamicObject(road)->getEndpointA(), getEndpointA()) < shift + 1) {
@@ -176,6 +186,7 @@ void Object3Droad::stuckTest(size_t road) {
 }
 
 char  Object3Droad::markerTest(size_t marker) {
+	markersExistTest();
 	char result = 'Q';
 	if ((glm::distance(getEndpointA(), render->getObject(marker)->getPosition()) < shift + 1) && endpointLock) {
 		result = 'A';

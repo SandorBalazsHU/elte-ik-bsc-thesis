@@ -1,12 +1,8 @@
 //Javasolt endpoint is deleted, marker is deleted hozzáadása ami törli a hibás út függõségeket.
 OBJECT3D ROAD RENDES DESTRUCTOR tag destruktor hívásokkal
 renderableobject pointeresre alakítása. object3d-k destruktora
-
-
 INT -> SIZE_T
-
 Object* elimináció helyette renderID
-
 renderableObjects.size() elimináció
 
 Nagy BUG teszt 1
@@ -18,20 +14,15 @@ Last saved time + file.
 Ötletek:
 - Nagyobb asztal, blokkoló keretekkel.
 - Törlés gomb mûködése
-- Út törlés
-- Összekapcsolt útvég mozgatása
-- Végpont jelölõ rögzülés
-- Végpontjelölõ feloldás
 - Úthossz számítás
 - Út jobbgombos menü
-- Kezdõpont hozzáadás
++ Kezdõpont hozzáadás
 - Gráf generálás
 - Útvonal generálás
 - Útvonal jelölés
 - Útvonal kiemelés
 - Autó végighaladás.
 - Színváltozással jelezze a végpont, ha kapcsolódott.
-- kategóriák
 - katalógusfájlba téma kategória oszlop beillesztése
 - logaritmikus mozgatás
 - 4-es asztal kiemelése globális változóba
@@ -53,11 +44,17 @@ Elkészült ötletek:
 + Végpont hozzáadás
 + Összekapcsolt útvég feloldása
 + A kezdõ és végpontjelölõ ragadjon rá az út végpontra
++ Út törlés
++ Végpont jelölõ rögzülés
++ Végpontjelölõ feloldás
+
 
 Elvetett ötletek:
 x sorszám fügetlenítés. A cím legyen az elsõdleges kulcs.
 x Vonal a jelölõpontok közé?
 x A jelölt út végpontra más út már ne ragadhasson.
+x Összekapcsolt útvég mozgatása
+x kategóriák
 
 Ha lesz rá idõ:
 * Kattintás gyorsítás.
