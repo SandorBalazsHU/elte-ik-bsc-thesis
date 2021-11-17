@@ -236,3 +236,15 @@ void GUI::newMapConfirmWindow() {
 		ImGui::EndPopup();
 	}
 }
+
+void GUI::controlsWindow() {
+	ImGui::OpenPopup("Controls");
+	if (ImGui::BeginPopupModal("Controls")) {
+		ImGui::Image((void*)(intptr_t)objectStorage->getTexture("controls.png"), ImVec2(859, 409));
+		if (ImGui::Button("Close")) {
+			controlsWindowStatus = false;
+			ImGui::CloseCurrentPopup();
+		}
+		ImGui::EndPopup();
+	}
+}

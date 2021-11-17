@@ -86,6 +86,7 @@ private:
 	bool saveAsWindowStatus = false;
 	bool ImGuiSettingsWindowStatus = false;
 	bool newMapConfirmWindowStatus = false;
+	bool controlsWindowStatus = false;
 
 	/**
 	 * @brief The current binded working window.
@@ -151,4 +152,9 @@ private:
 	 * @brief Item list window.
 	*/
 	void itemList();
+
+	/**
+	 * @brief Window for the controls tutorial.
+	*/
+	void controlsWindow();
 };
