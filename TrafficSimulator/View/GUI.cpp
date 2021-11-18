@@ -95,7 +95,7 @@ void GUI::mainMenuBar() {
 			if (ImGui::MenuItem("Help", "CTRL+H")) {}
 			if (ImGui::MenuItem("Controls", "CTRL+C", &controlsWindowStatus)) ;
 			ImGui::Separator();
-			if (ImGui::MenuItem("About", "CTRL+K")) {}
+			if (ImGui::MenuItem("About", "CTRL+K", &aboutWindowStatus)) {}
 			ImGui::EndMenu();
 		}
 		ImGui::EndMainMenuBar();
@@ -108,6 +108,7 @@ void GUI::windowHandler() {
 	if (saveAsWindowStatus) saveAsWindow();
 	if (newMapConfirmWindowStatus) newMapConfirmWindow();
 	if (controlsWindowStatus) controlsWindow();
+	if (aboutWindowStatus) aboutWindow();
 	if (ImGuiSettingsWindowStatus) { ImGui::Begin("ImGui Style Editor", &ImGuiSettingsWindowStatus); ImGui::ShowStyleEditor(); ImGui::End(); }
 }
 

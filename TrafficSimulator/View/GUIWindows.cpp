@@ -248,3 +248,18 @@ void GUI::controlsWindow() {
 		ImGui::EndPopup();
 	}
 }
+
+void GUI::aboutWindow() {
+	ImGui::OpenPopup("About");
+	if (ImGui::BeginPopupModal("About")) {
+		ImGui::Text("Traffic Simulation");
+		ImGui::Text("Created By: Sandor Balazs");
+		ImGui::Text("AZA6NL");
+		ImGui::Text("sandorbalazs9402@gmail.com");
+		if (ImGui::Button("Close")) {
+			aboutWindowStatus = false;
+			ImGui::CloseCurrentPopup();
+		}
+		ImGui::EndPopup();
+	}
+}
