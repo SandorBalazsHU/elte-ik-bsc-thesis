@@ -168,6 +168,14 @@ MapSaver* Render::getMapSaver() {
 }
 
 /**
+ * @brief Getter for the GUI.
+ * @return The current GUI.
+*/
+GUI* Render::getGui() {
+	return gui;
+}
+
+/**
  * @brief Upload the shader datas before rendering an object.
  * @param worldMatrix The world matrix for the shader.
  * @param color The rendering RGBA color.
@@ -221,7 +229,6 @@ void Render::sceneInit() {
 	for (size_t i = 0; i < firstSceneElements.size(); i++) {
 		addObject(firstSceneElements[i]);
 	}
-	if(objectPhotoMode) getObject(0)->hide();
 }
 
 /**
@@ -374,6 +381,20 @@ void Render::showHitSphere(int renderID) {
 }
 
 /**
+ * @brief Hide the desk for object photo mode. Function on.(Debug function)
+*/
+void Render::photoModeOn() {
+	getObject(0)->hide();
+}
+
+/**
+ * @brief Hide the desk for object photo mode. Function off. (Debug function)
+*/
+void Render::photoModeOff() {
+	getObject(0)->show();
+}
+
+/**
  * @brief Render the hit sphares for each scene road objets. (Debug function)
 */
 void Render::showRoadHitSphere(std::vector<glm::vec3>& roadPoints, float size, glm::vec3 color) {
@@ -395,11 +416,11 @@ void Render::showRoadHitSphere(std::vector<glm::vec3>& roadPoints, float size, g
 void Render::showAllRoadHitSpheres() {
 	for (size_t i = 0; i < renderableRoads.size(); i++) {
 		if (renderableRoads[i] != NULL) {
-			if (true) showRoadHitSphere(renderableRoads[i]->points, 4.0f, glm::vec3(1, 1, 1));
-			if (true) showRoadHitSphere(renderableRoads[i]->shiftedpoints_1, 0.3f, glm::vec3(1, 0, 0));
-			if (true) showRoadHitSphere(renderableRoads[i]->shiftedpoints_2, 0.3f, glm::vec3(0, 1, 0));
-			if (true) showRoadHitSphere(renderableRoads[i]->trackOne, 0.3f, glm::vec3(0, 0, 1));
-			if (true) showRoadHitSphere(renderableRoads[i]->trackTwo, 0.3f, glm::vec3(1, 1, 0));
+			if (showRoadHitSphereMiddle) showRoadHitSphere(renderableRoads[i]->points, 4.0f, glm::vec3(1, 1, 1));
+			if (showRoadSide01) showRoadHitSphere(renderableRoads[i]->shiftedpoints_1, 0.3f, glm::vec3(1, 0, 0));
+			if (showRoadSide02) showRoadHitSphere(renderableRoads[i]->shiftedpoints_2, 0.3f, glm::vec3(0, 1, 0));
+			if (showRoadTrack01) showRoadHitSphere(renderableRoads[i]->trackOne, 0.3f, glm::vec3(0, 0, 1));
+			if (showRoadTrack02) showRoadHitSphere(renderableRoads[i]->trackTwo, 0.3f, glm::vec3(1, 1, 0));
 		}
 	}
 }

@@ -67,17 +67,15 @@ void GUI::mainMenuBar() {
 			ImGui::Separator();
 			if (ImGui::MenuItem("Save", "Ctrl+S", &saveWindowStatus)) {}
 			if (ImGui::MenuItem("Save As..", "Ctrl+A", &saveAsWindowStatus)) {}
-			if (ImGui::MenuItem("Close", "Ctrl+X")) {
-				windowRender->close();
-			}
+			if (ImGui::MenuItem("Close", "Ctrl+X", &closingCheckerWindowStatus)) {}
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("Settings")) {
-			if (ImGui::MenuItem("Graphics settings", "CTRL+G")) {}
-			if (ImGui::MenuItem("ImGui settings", "CTRL+I", &ImGuiSettingsWindowStatus));
+			if (ImGui::MenuItem("Graphics settings", "CTRL+G", &graphicSettingsWindowStatus)) {}
+			if (ImGui::MenuItem("ImGui settings", "CTRL+I", &ImGuiSettingsWindowStatus)) {}
 			ImGui::Separator();
-			if (ImGui::MenuItem("Running statistics", "CTRL+R")) {}
-			if (ImGui::MenuItem("Debug options", "CTRL+D")) {}
+			if (ImGui::MenuItem("Running statistics", "CTRL+R", &runningStatisticsWindowStatus)) {}
+			if (ImGui::MenuItem("Debug options", "CTRL+D", &debugOptionsWindowStatus)) {}
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("Simulation"))
@@ -93,7 +91,7 @@ void GUI::mainMenuBar() {
 		if (ImGui::BeginMenu("Help"))
 		{
 			if (ImGui::MenuItem("Help", "CTRL+H")) {}
-			if (ImGui::MenuItem("Controls", "CTRL+C", &controlsWindowStatus)) ;
+			if (ImGui::MenuItem("Controls", "CTRL+C", &controlsWindowStatus)) {}
 			ImGui::Separator();
 			if (ImGui::MenuItem("About", "CTRL+K", &aboutWindowStatus)) {}
 			ImGui::EndMenu();
@@ -109,17 +107,23 @@ void GUI::windowHandler() {
 	if (newMapConfirmWindowStatus) newMapConfirmWindow();
 	if (controlsWindowStatus) controlsWindow();
 	if (aboutWindowStatus) aboutWindow();
+	if (closingCheckerWindowStatus) closeWindow();
+	if (graphicSettingsWindowStatus) graphicSettingsWindow();
+	if (debugOptionsWindowStatus) debugOptionsWindow();
+	if (runningStatisticsWindowStatus) runningStatisticsWindow();
 	if (ImGuiSettingsWindowStatus) { ImGui::Begin("ImGui Style Editor", &ImGuiSettingsWindowStatus); ImGui::ShowStyleEditor(); ImGui::End(); }
 }
 
 void GUI::fpsGraph() {
+	static int graphTop = 150;
 	std::ostringstream ss;
 	ss << "Average FPS: " << fpsCounter::getAverageFPS();
 	ImGui::Text(ss.str().c_str());
 	ImGui::Text("ImGUI average: %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 	ImGui::PushItemWidth(-1);
-	ImGui::PlotLines("FPS", fpsCounter::fpsLog, IM_ARRAYSIZE(fpsCounter::fpsLog), 0, "FPS", 0.0f, 150.0f, ImVec2(0, 80));
-	ImGui::PlotHistogram("FP2S", fpsCounter::fpsLog, IM_ARRAYSIZE(fpsCounter::fpsLog), 0, "FPS2", 0.0f, 150.0f, ImVec2(0, 80));
+	ImGui::PlotLines("FPS", fpsCounter::fpsLog, IM_ARRAYSIZE(fpsCounter::fpsLog), 0, "FPS", 0.0f, graphTop, ImVec2(0, 80));
+	ImGui::PlotHistogram("FP2S", fpsCounter::fpsLog, IM_ARRAYSIZE(fpsCounter::fpsLog), 0, "FPS2", 0.0f, graphTop, ImVec2(0, 80));
+	ImGui::InputInt("Graph top limit", &graphTop);
 }
 
 void GUI::itemList() {
@@ -192,4 +196,27 @@ void GUI::render() {
 	ImGui_ImplSdlGL3_NewFrame(window);
 	draw();
 	ImGui::Render();
+}
+
+/**
+ * @brief Application closing checker window.
+ * @return The user want to close?
+*/
+void GUI::close() {
+	closingCheckerWindowStatus = true;
+}
+
+/**
+ * @brief Show a help when howered.
+ * @param desc The help text.
+*/
+void GUI::showHelpMarker(const char* desc) {
+	ImGui::TextDisabled("(?)");
+	if (ImGui::IsItemHovered())	{
+		ImGui::BeginTooltip();
+		ImGui::PushTextWrapPos(450.0f);
+		ImGui::TextUnformatted(desc);
+		ImGui::PopTextWrapPos();
+		ImGui::EndTooltip();
+	}
 }

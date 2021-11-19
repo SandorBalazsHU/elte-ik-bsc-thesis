@@ -1,20 +1,19 @@
-//Javasolt endpoint is deleted, marker is deleted hozzáadása ami törli a hibás út függõségeket.
-OBJECT3D ROAD RENDES DESTRUCTOR tag destruktor hívásokkal
-renderableobject pointeresre alakítása. object3d-k destruktora
-INT -> SIZE_T
-Object* elimináció helyette renderID
-renderableObjects.size() elimináció
-
-Controls menü!
-
-Ahol lehet referencia szerinti átadás és konstansok.
+Javaslatok:
+- //Javasolt endpoint is deleted, marker is deleted hozzáadása ami törli a hibás út függõségeket.
+- OBJECT3D ROAD RENDES DESTRUCTOR tag destruktor hívásokkal
+- renderableobject pointeresre alakítása. object3d-k destruktora
+- INT -> SIZE_T
+- Object* elimináció helyette renderID
+- renderableObjects.size() elimináció
+- A headerben csak definíciók legyenek
+- ImGui::SameLine(); ShowHelpMarker(""); használata
+- Ahol lehet referencia szerinti átadás és konstansok.
 
 Ötletek:
-- Nagyobb asztal, blokkoló keretekkel.
 - Törlés gomb mûködése
 - Úthossz számítás
 - Út jobbgombos menü
-+ Kezdõpont hozzáadás
+
 - Gráf generálás
 - Útvonal generálás
 - Útvonal jelölés
@@ -51,7 +50,8 @@ Elkészült ötletek:
 + Utolsó mentés neve mentés és kiírás az ablakkeretre.
 + Last saved time + file.
 + Nagy BUG teszt 1e
-
++ Kezdõpont hozzáadás
++ Controls menü!
 
 Elvetett ötletek:
 x sorszám fügetlenítés. A cím legyen az elsõdleges kulcs.
@@ -59,6 +59,7 @@ x Vonal a jelölõpontok közé?
 x A jelölt út végpontra más út már ne ragadhasson.
 x Összekapcsolt útvég mozgatása
 x kategóriák
+x Nagyobb asztal, blokkoló keretekkel.
 
 Ha lesz rá idõ:
 * Kattintás gyorsítás.

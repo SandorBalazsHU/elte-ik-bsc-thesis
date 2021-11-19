@@ -11,8 +11,11 @@
 
 #include <algorithm>
 #include <vector>
+#include <string>
 #include "GUI.h"
+#include "fpsCounter.h"
 #include "Render.h"
+#include "WorkWindow.h"
 #include "../Control/Logger.h"
 
 void GUI::openWindow() {
@@ -261,5 +264,219 @@ void GUI::aboutWindow() {
 			ImGui::CloseCurrentPopup();
 		}
 		ImGui::EndPopup();
+	}
+}
+
+/**
+ * @brief Application closing checker window.
+ * @return The user want to close?
+*/
+void GUI::closeWindow() {
+	ImGui::OpenPopup("Are you sure you want to close?");
+	if (ImGui::BeginPopupModal("Are you sure you want to close?")) {
+		ImGui::Text("Are you sure you want to close?");
+		ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "All unsaved changes will be lost.");
+
+		ImGui::Text("");
+		ImGui::Separator();
+		ImGui::Text("");
+
+		ImGui::Text("The last save time:  %s", windowRender->getMapSaver()->getLastSaveTime().c_str());
+		ImGui::Text("Now:                 %s", Logger::currentDateTime().c_str());
+
+		ImGui::Text("The last saved file: %s", windowRender->getMapSaver()->getLastSave());
+
+		ImGui::Text("");
+		ImGui::Separator();
+		ImGui::Text("");
+
+		if (ImGui::Button("Back")) {
+			closingCheckerWindowStatus = false;
+			ImGui::CloseCurrentPopup();
+		}
+		ImGui::SameLine();
+		if (ImGui::Button("Close")) {
+			closingCheckerWindowStatus = false;
+			ImGui::CloseCurrentPopup();
+			workingWindow->closeNow();
+		}
+		ImGui::EndPopup();
+	}
+}
+
+/**
+ * @brief Window descriptor for the graphic settings window.
+*/
+void GUI::graphicSettingsWindow() {
+	if(ImGui::Begin("Graphic settings", NULL, graphicSettingsWindowStatus)) {
+
+		ImGui::Text("Current running data:");
+		ImGui::Separator();
+
+		fpsGraph();
+
+		ImGui::Text("");
+		ImGui::Text("Graphic settings:");
+		ImGui::Separator();
+		ImGui::Text("");
+
+		static bool fpsLimiterIsOn = false;
+		ImGui::Checkbox("FPS Limiter", &fpsLimiterIsOn);
+		if (fpsLimiterIsOn) {
+			fpsCounter::fpsLimiterOn();
+		} else {
+			fpsCounter::fpsLimiterOff();
+		}
+		ImGui::Text("");
+
+		static int fpsLimit = 60;
+		ImGui::InputInt("FPS Limit", &fpsLimit);
+		ImGui::SameLine(); showHelpMarker("WUT?");
+		fpsCounter::setFpsLimit(fpsLimit);
+		ImGui::Text("");
+
+		static bool vSyncIsOn = true;
+		ImGui::Checkbox("V-Sync", &vSyncIsOn);
+		if (vSyncIsOn) {
+			windowRender->vsyncOn();
+		}
+		else {
+			windowRender->vsyncOff();
+		}
+		ImGui::Text("");
+
+		static bool multisamplingIsOn = true;
+		ImGui::Checkbox("Multisampling", &multisamplingIsOn);
+		if (multisamplingIsOn) {
+			windowRender->multisamplingOn();
+		}
+		else {
+			windowRender->multisamplingOff();
+		}
+
+		/*ImGui::Text("");
+		ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "---");
+		ImGui::Separator();
+		ImGui::Text("---");
+		ImGui::SameLine();*/
+
+		ImGui::Text("");
+		ImGui::Separator();
+		if (ImGui::Button("Close")) {
+			graphicSettingsWindowStatus = false;
+			ImGui::CloseCurrentPopup();
+		}
+		ImGui::End();
+	}
+}
+
+/**
+ * @brief Window for the debug options.
+*/
+void GUI::debugOptionsWindow() {
+	if (ImGui::Begin("Special debug options.", NULL, debugOptionsWindowStatus)) {
+	ImGui::Text("");
+	ImGui::Text("Special debug options:");
+	ImGui::Separator();
+	ImGui::Text("");
+
+	static bool photoModeIsOn = false;
+	ImGui::Checkbox("Object Photo Mode", &photoModeIsOn);
+	if (photoModeIsOn) {
+		windowRender->photoModeOn();
+	}
+	else {
+		windowRender->photoModeOff();
+	}
+
+	ImGui::Text("");
+	ImGui::Checkbox("Show Road Hit Sharpe", &windowRender->roadHhitSphare);
+	ImGui::Separator();
+	ImGui::Indent();
+		ImGui::Text("");
+		ImGui::Checkbox("Show roads Hit Sharpe", &windowRender->showRoadHitSphereMiddle);
+
+		ImGui::Text("");
+		ImGui::Checkbox("Show roads side 1 markers", &windowRender->showRoadSide01);
+
+		ImGui::Text("");
+		ImGui::Checkbox("Show roads side 2 markers", &windowRender->showRoadSide02);
+
+		ImGui::Text("");
+		ImGui::Checkbox("Show roads track 1 markers", &windowRender->showRoadTrack01);
+
+		ImGui::Text("");
+		ImGui::Checkbox("Show roads track 2 markers", &windowRender->showRoadTrack02);
+	ImGui::Unindent();
+
+	ImGui::Text("");
+	ImGui::Checkbox("Show Hit Sharpe", &windowRender->hitSphare);
+
+	ImGui::Text("");
+	ImGui::Checkbox("Show Objects Wire frame", &windowRender->objectsWireframe);
+	ImGui::Text("");
+	ImGui::Checkbox("Show Roads Wire frame", &windowRender->roadWireframe);
+	ImGui::Text("");
+
+
+	/*ImGui::Text("");
+	ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "---");
+	ImGui::Separator();
+	ImGui::Text("---");
+	ImGui::SameLine();*/
+
+	ImGui::Text("");
+	ImGui::Separator();
+	if (ImGui::Button("Close")) {
+		debugOptionsWindowStatus = false;
+		ImGui::CloseCurrentPopup();
+	}
+	ImGui::End();
+	}
+}
+
+
+/**
+ * @brief Window descriptor for the graphic settings window.
+*/
+void GUI::runningStatisticsWindow() {
+	if (ImGui::Begin("Current Running statistics:", NULL, runningStatisticsWindowStatus)) {
+
+		ImGui::Text("Current Running statistics:");
+		ImGui::Separator();
+		ImGui::Text("");
+
+		fpsGraph();
+		ImGui::Separator();
+
+		ImGui::Text("");
+		ImGui::Text("The current save:");
+		ImGui::Text(windowRender->getMapSaver()->getLastSave().c_str());
+
+		ImGui::Text("");
+		ImGui::Text("The last save time:");
+		ImGui::Text(windowRender->getMapSaver()->getLastSaveTime().c_str());
+
+		ImGui::Text("");
+		ImGui::Text("The current system time:");
+		ImGui::Text(Logger::currentDateTime().c_str());
+
+		ImGui::Text("");
+		ImGui::Text("The objects count on the scene:");
+		ImGui::SameLine();
+		ImGui::Text(std::to_string(windowRender->getObjectsNumber()).c_str());
+		
+		ImGui::Text("");
+		ImGui::Text("The roads count on the scene:");
+		ImGui::SameLine();
+		ImGui::Text(std::to_string(windowRender->getDynamicObjectsNumber()).c_str());
+
+		ImGui::Text("");
+		ImGui::Separator();
+		if (ImGui::Button("Close")) {
+			runningStatisticsWindowStatus = false;
+			ImGui::CloseCurrentPopup();
+		}
+		ImGui::End();
 	}
 }

@@ -43,9 +43,16 @@ public:
 	int open();
 
 	/**
-	 * @brief Stop the render and start the closeing procedure.
+	 * @brief Start the closeing procedure.
 	*/
 	void close() {
+		gui.close();
+	};
+
+	/**
+	 * @brief Stop the render and start the closeing procedure.
+	*/
+	void closeNow() {
 		exit = true;
 	};
 

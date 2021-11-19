@@ -78,6 +78,11 @@ public:
 	*/
 	bool isMouseCaptured();
 
+	/**
+	 * @brief Application closing checker window.
+	*/
+	void close();
+
 private:
 	ImGuiWindowFlags trafficSimulationWindowFlag = 0;
 	ImGuiWindowFlags mapEditorWindowFlag = 0;
@@ -88,6 +93,10 @@ private:
 	bool newMapConfirmWindowStatus = false;
 	bool controlsWindowStatus = false;
 	bool aboutWindowStatus = false;
+	bool closingCheckerWindowStatus = false;
+	bool graphicSettingsWindowStatus = false;
+	bool debugOptionsWindowStatus = false;
+	bool runningStatisticsWindowStatus = false;
 
 	/**
 	 * @brief The current binded working window.
@@ -163,4 +172,30 @@ private:
 	 * @brief Window for the about tab.
 	*/
 	void aboutWindow();
+
+	/**
+	 * @brief Application closing checker window.
+	*/
+	void closeWindow();
+
+	/**
+	 * @brief Window descriptor for the graphic settings window.
+	*/
+	void graphicSettingsWindow();
+
+	/**
+	 * @brief Window for the debug options.
+	*/
+	void debugOptionsWindow();
+
+	/**
+	 * @brief Window for the running statistics.
+	*/
+	void runningStatisticsWindow();
+
+	/**
+	 * @brief Show a help when howered.
+	 * @param desc The help text.
+	*/
+	void showHelpMarker(const char* desc);
 };

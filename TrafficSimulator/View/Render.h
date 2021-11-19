@@ -47,62 +47,9 @@ public:
 	void bind(WorkWindow* window);
 
 	/**
-	 * @brief Set the texture for the object rendering.
-	 * @param texture The usable texture.
-	*/
-	void setTexture(Texture2D& texture);
-
-	/**
 	 * @brief Remder the next frame. Use the shaders, update the camera and the gui. Render the objects and the curent scene.
 	*/
 	void render();
-
-	/**
-	 * @brief Upload the shader datas before rendering an object.
-	 * @param worldMatrix The world matrix for the shader.
-	 * @param color The rendering RGBA color.
-	*/
-	void shaderPreDrawingUpdate(glm::mat4 worldMatrix, glm::vec4 color);
-
-	/**
-	 * @brief Drawing a file preloaded mesh.
-	 * @param mesh The preloaded mesh for drawing.
-	*/
-	void drawMesh(std::unique_ptr<Mesh>& mesh);
-
-	/**
-	 * @brief Draving a dynamicly generated object.
-	 * @param vao The dynamicly generated object for drawing.
-	 * @param trianglesNumber The drawable object triangle number.
-	*/
-	void drawVao(VertexArrayObject& vao, int trianglesNumber);
-
-	/**
-	 * @brief Swapping the OpenGL drawing and showed image buffers. This is the true drawing.
-	*/
-	void rendering();
-
-	/**
-	 * @brief Windowe title text setter.
-	 * @param title The new window title.
-	*/
-	void setWindowTitle(std::string title);
-
-	/**
-	 * @brief Set the window icon.
-	 * @param windowIcon The new window icon.
-	*/
-	void setWindowIcon(SDL_Surface* windowIcon);
-
-	/**
-	 * @brief Render mode configurator - Face test on.
-	*/
-	void faceTestOn();
-
-	/**
-	* @brief Render mode configurator - Face test off.
-	*/
-	void faceTestOff();
 
 	/**
 	 * @brief Render mode configurator - Vsync on.
@@ -123,16 +70,6 @@ public:
 	 * @brief Render mode configurator - Multisampling off.
 	*/
 	void multisamplingOff();
-
-	/**
-	 * @brief Render mode configurator - Wireframe object drawing on.
-	*/
-	void wireframeOn();
-
-	/**
-	* @brief Render mode configurator - Wireframe object drawing off.
-	*/
-	void wireframeOff();
 
 	/**
 	* @brief Clearing the scene.
@@ -196,6 +133,12 @@ public:
 	MapSaver* getMapSaver();
 
 	/**
+	 * @brief Getter for the GUI.
+	 * @return The current GUI.
+	*/
+	GUI* getGui();
+
+	/**
 	 * @brief Get scene preloaded object from the scene render storage.
 	 * @param id renderID
 	 * @return The scene object.
@@ -221,62 +164,15 @@ public:
 	*/
 	size_t getDynamicObjectsNumber();
 
-private:
 	/**
-	 * @brief List of the renderable scene objets. (Preloaded meshes)
+	 * @brief Hide the desk for object photo mode. Function on.(Debug function)
 	*/
-	std::vector<Object3D> renderableObjects;
+	void photoModeOn();
 
 	/**
-	 * @brief List of the renderable scene roads. (Dynamicly generated shapes)
+	 * @brief Hide the desk for object photo mode. Function off. (Debug function)
 	*/
-	std::vector<Object3Droad*> renderableRoads;
-
-
-	/**
-	 * @brief Camera position updating in the shadervariable.
-	*/
-	void shaderCameraUpdate();
-
-	/**
-	 * @brief Composing the renderable scene from the renderableObjects and the renderableRoads storages.
-	*/
-	void renderScrean();
-
-	/**
-	 * @brief Initialise the scene. Render the first objects.
-	*/
-	void sceneInit();
-
-	/**
-	 * @brief Render the hit sphares for each scene objets. (Debug function)
-	 * @param renderID The actual object render ID.
-	*/
-	void showHitSphere(int renderID);
-
-	/**
-	 * @brief Render the hit sphares for each scene road objets. (Debug function)
-	 * @param roadPoints The drawable points
-	 * @param size the marker size
-	 * @param vec3 the marker colors
-	*/
-	void showRoadHitSphere(std::vector<glm::vec3>& roadPoints, float size, glm::vec3 color);
-
-	/**
-	 * @brief Render the hit sphares for each scene road objets. (Debug function)
-	*/
-	void showAllRoadHitSpheres();
-
-	/**
-	 * @brief Flagvariable for the first scene configs. 
-	 * /attention Default value is TRUE.
-	*/
-	bool firstScreen = true;
-
-	/**
-	 * @brief Hide the desk for object photo mode. (Debug function)
-	*/
-	bool objectPhotoMode = false;
+	void photoModeOff();
 
 	/**
 	 * @brief Active the hit sphare drawing. (DebugFunction)
@@ -289,6 +185,31 @@ private:
 	bool roadHhitSphare = false;
 
 	/**
+	 * @brief Show the road hit spheres. (DebugFunction)
+	*/
+	bool showRoadHitSphereMiddle = true;
+
+	/**
+	 * @brief Show road side 1 markers. (DebugFunction)
+	*/
+	bool showRoadSide01 = false;
+
+	/**
+	 * @brief Show road side 2 markers. (DebugFunction)
+	*/
+	bool showRoadSide02 = false;
+
+	/**
+	 * @brief Show road track 1 markers. (DebugFunction)
+	*/
+	bool showRoadTrack01 = false;
+
+	/**
+	 * @brief Show road track 2 markers. (DebugFunction)
+	*/
+	bool showRoadTrack02 = false;
+
+	/**
 	 * @brief Active the wireframe function for the objets. (DebugFunction)
 	*/
 	bool objectsWireframe = false;
@@ -297,6 +218,23 @@ private:
 	 * @brief Active the wireframe function for the roads. (DebugFunction)
 	*/
 	bool roadWireframe = false;
+
+private:
+	/**
+	 * @brief List of the renderable scene objets. (Preloaded meshes)
+	*/
+	std::vector<Object3D> renderableObjects;
+
+	/**
+	 * @brief List of the renderable scene roads. (Dynamicly generated shapes)
+	*/
+	std::vector<Object3Droad*> renderableRoads;
+
+	/**
+	 * @brief Flagvariable for the first scene configs. 
+	 * /attention Default value is TRUE.
+	*/
+	bool firstScreen = true;
 
 	/**
 	 * @brief The access pointer for the current working window object.
@@ -337,4 +275,101 @@ private:
 	 * @brief The map saver class.
 	*/
 	MapSaver mapSaver;
+
+	/**
+ * @brief Set the texture for the object rendering.
+ * @param texture The usable texture.
+*/
+	void setTexture(Texture2D& texture);
+
+	/**
+	 * @brief Upload the shader datas before rendering an object.
+	 * @param worldMatrix The world matrix for the shader.
+	 * @param color The rendering RGBA color.
+	*/
+	void shaderPreDrawingUpdate(glm::mat4 worldMatrix, glm::vec4 color);
+
+	/**
+	 * @brief Drawing a file preloaded mesh.
+	 * @param mesh The preloaded mesh for drawing.
+	*/
+	void drawMesh(std::unique_ptr<Mesh>& mesh);
+
+	/**
+	 * @brief Draving a dynamicly generated object.
+	 * @param vao The dynamicly generated object for drawing.
+	 * @param trianglesNumber The drawable object triangle number.
+	*/
+	void drawVao(VertexArrayObject& vao, int trianglesNumber);
+
+	/**
+	 * @brief Swapping the OpenGL drawing and showed image buffers. This is the true drawing.
+	*/
+	void rendering();
+
+	/**
+	 * @brief Windowe title text setter.
+	 * @param title The new window title.
+	*/
+	void setWindowTitle(std::string title);
+
+	/**
+	 * @brief Set the window icon.
+	 * @param windowIcon The new window icon.
+	*/
+	void setWindowIcon(SDL_Surface* windowIcon);
+
+	/**
+	 * @brief Render mode configurator - Face test on.
+	*/
+	void faceTestOn();
+
+	/**
+	* @brief Render mode configurator - Face test off.
+	*/
+	void faceTestOff();
+
+	/**
+	 * @brief Camera position updating in the shadervariable.
+	*/
+	void shaderCameraUpdate();
+
+	/**
+	 * @brief Composing the renderable scene from the renderableObjects and the renderableRoads storages.
+	*/
+	void renderScrean();
+
+	/**
+	 * @brief Initialise the scene. Render the first objects.
+	*/
+	void sceneInit();
+
+	/**
+	 * @brief Render mode configurator - Wireframe object drawing on.
+	*/
+	void wireframeOn();
+
+	/**
+	* @brief Render mode configurator - Wireframe object drawing off.
+	*/
+	void wireframeOff();
+
+	/**
+	 * @brief Render the hit sphares for each scene objets. (Debug function)
+	 * @param renderID The actual object render ID.
+	*/
+	void showHitSphere(int renderID);
+
+	/**
+	 * @brief Render the hit sphares for each scene road objets. (Debug function)
+	 * @param roadPoints The drawable points
+	 * @param size the marker size
+	 * @param vec3 the marker colors
+	*/
+	void showRoadHitSphere(std::vector<glm::vec3>& roadPoints, float size, glm::vec3 color);
+
+	/**
+	 * @brief Render the hit sphares for each scene road objets. (Debug function)
+	*/
+	void showAllRoadHitSpheres();
 };
