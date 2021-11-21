@@ -26,11 +26,12 @@ public:
 	Edge* getEdge(size_t edge);
 	void deletePoint(size_t point);
 	void generateMatrix();
-
+	std::vector<size_t> getPath();
 private:
 	Render* render;
 	std::vector<Edge*> edges;
 	std::vector<Point*> points;
+	std::vector<size_t> path;
 	void initialise();
 	void join();
 	void rebind();

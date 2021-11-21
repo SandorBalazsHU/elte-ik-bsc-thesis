@@ -49,3 +49,7 @@ size_t Edge::getEndpointB() {
 float Edge::getCoast() {
 	return this->coast;
 }
+
+bool Edge::match(size_t endpointA, size_t endpointB) {
+	return ((endpointA == this->endpointA) && (endpointB == this->endpointB)) || ((endpointA == this->endpointB) && (endpointB == this->endpointA));
+}

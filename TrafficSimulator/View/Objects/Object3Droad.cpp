@@ -105,10 +105,13 @@ bool Object3Droad::isClicked(glm::vec3 cameraPosition, glm::vec3 ray) {
 void Object3Droad::setRGBAcolor(glm::vec4 RGBAcolor) {
 	color = RGBAcolor;
 }
+//TODO A lemezekre is átvinni a változásokat
 void Object3Droad::setRGBcolor(glm::vec3 RGBcolor) {
 	color.x = RGBcolor.x;
 	color.y = RGBcolor.y;
 	color.z = RGBcolor.z;
+	render->getObject(roadEndCircles[0])->setRGBcolor(RGBcolor);
+	render->getObject(roadEndCircles[1])->setRGBcolor(RGBcolor);
 }
 void Object3Droad::setOpacity(float opacity) {
 	color.w = opacity;

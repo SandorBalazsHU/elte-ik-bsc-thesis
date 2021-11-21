@@ -22,6 +22,7 @@ public:
 	size_t getEndpointA();
 	size_t getEndpointB();
 	float getCoast();
+	bool match(size_t endpointA, size_t endpointB);
 private:
 	size_t id = -1;
 	size_t road3DiD = -1;

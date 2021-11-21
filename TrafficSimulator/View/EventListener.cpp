@@ -99,6 +99,10 @@ void EventListener::keyboardUp(SDL_KeyboardEvent& key) {
 	if (key.keysym.sym == SDLK_INSERT) {
 		Graph* g = new Graph(render);
 		g->generateMatrix();
+		std::vector<size_t> path = g->getPath();
+		for (size_t i = 0; i < path.size(); i++) {
+			render->getDynamicObject(path[i])->setRGBcolor(glm::vec3(1,0,0));
+		}
 	}
 
 
