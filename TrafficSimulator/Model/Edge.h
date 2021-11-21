@@ -14,16 +14,18 @@
 */
 class Edge {
 public:
-	Edge(size_t id, size_t road3DiD, size_t endpointA, size_t endpointB);
+	Edge(size_t id, size_t road3DiD, size_t endpointA, size_t endpointB, float coast);
 	~Edge();
 	void changePoint(size_t originalPoint, size_t newPoint);
 	size_t getID();
 	size_t getRoad3DiD();
 	size_t getEndpointA();
 	size_t getEndpointB();
+	float getCoast();
 private:
 	size_t id = -1;
 	size_t road3DiD = -1;
 	size_t endpointA = -1;
 	size_t endpointB = -1;
+	float coast = 0.0f;
 };

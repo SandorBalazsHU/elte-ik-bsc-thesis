@@ -13,11 +13,12 @@
 #include <set>
 
 
-Edge::Edge(size_t id, size_t road3DiD, size_t endpointA, size_t endpointB) {
+Edge::Edge(size_t id, size_t road3DiD, size_t endpointA, size_t endpointB, float coast) {
 	this->id = id;
 	this->road3DiD = road3DiD;
 	this->endpointA = endpointA;
 	this->endpointB = endpointB;
+	this->coast = coast;
 }
 
 Edge::~Edge() {
@@ -43,4 +44,8 @@ size_t Edge::getEndpointA() {
 
 size_t Edge::getEndpointB() {
 	return this->endpointB;
+}
+
+float Edge::getCoast() {
+	return this->coast;
 }

@@ -40,7 +40,7 @@ void Graph::deletePoint(size_t point) {
 void Graph::generateMatrix() {
 	initialise();
 	join();
-	//rebind();
+	rebind();
 	generate();
 }
 
@@ -56,7 +56,7 @@ void Graph::initialise() {
 		Point* newPointB = new Point(j, i, this, 'B');
 		j++;
 		this->points.push_back(newPointB);
-		Edge* newEdge = new Edge(i, i, newPointA->getID(), newPointB->getID());
+		Edge* newEdge = new Edge(i, i, newPointA->getID(), newPointB->getID(), render->getDynamicObject(i)->getRoadLength());
 		edges.push_back(newEdge);
 	}
 }
@@ -81,7 +81,7 @@ void Graph::join() {
 void Graph::rebind() {
 	size_t j = 0;
 	for (size_t i = 0; i < points.size(); i++) {
-		if (points[i] != NULL) {
+		if (!points[i]->isErased()) {
 			points[i]->reID(j);
 			j++;
 		}
@@ -92,7 +92,7 @@ void Graph::rebind() {
 void Graph::generate() {
 	std::cout << std::endl;
 	for (size_t i = 0; i < edges.size(); i++) {
-		std::cout << "Edge ID: " << edges[i]->getID() << " Endpoint A: " << edges[i]->getEndpointA() << " Endpoint B: " << edges[i]->getEndpointB() << std::endl;
+		std::cout << "Edge ID: " << edges[i]->getID() << " Coast: " << edges[i]->getCoast() << " Endpoint A: " << edges[i]->getEndpointA() << " Endpoint B: " << edges[i]->getEndpointB() << std::endl;
 	}
 	std::cout << std::endl;
 	for (size_t i = 0; i < points.size(); i++) {

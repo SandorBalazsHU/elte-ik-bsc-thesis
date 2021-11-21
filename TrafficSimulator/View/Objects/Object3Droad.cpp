@@ -134,6 +134,14 @@ bool Object3Droad::isSelected() {
 	return selected;
 }
 
+float Object3Droad::getRoadLength() {
+	float length = 0.0f;
+	for (size_t i = 1; i < points.size(); i++) {
+		length += glm::distance(points[i-1], points[i]);
+	}
+	return length;
+}
+
 glm::vec3 Object3Droad::getEndpointA() {
 	//Törlés utáni endpoint mozgatás index hibát okoz.
 	return basepoints[0];

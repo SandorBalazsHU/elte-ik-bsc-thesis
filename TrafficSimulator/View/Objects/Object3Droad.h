@@ -67,6 +67,8 @@ public:
 
 	size_t markerA = -1;
 	size_t markerB = -1;
+ 
+	float getRoadLength();
 
 private:
 	void generateRoadpoints();

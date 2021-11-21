@@ -62,6 +62,7 @@ void Point::reID(size_t id) {
 	for (size_t edge : connectedEdges) {
 		myGraph->getEdge(edge)->changePoint(this->id, id);
 	}
+	this->id = id;
 }
 
 /**
