@@ -115,9 +115,10 @@ void Graph::generate() {
 	std::cout << std::endl;
 
 	//TODO: 4-1 PARA/////////////////////////////////////////////
-
+	int start = 1;
+	int target = 3;
 	//---------------------------------------------------------------
-	Dijkstra dijkstra(pointCount, 0);
+	Dijkstra dijkstra(pointCount, start);
 	for (size_t i = 0; i < edges.size(); i++) {
 		if(edges[i]->getID() != -1) dijkstra.addDoubleEdge(edges[i]->getEndpointA(), edges[i]->getEndpointB(), edges[i]->getCoast());
 	}
@@ -133,14 +134,15 @@ void Graph::generate() {
 	std::cout << std::endl;
 	//---------------------------------------------------
 
-	size_t index = 3;
-	size_t value = 3;
+	size_t index = target;
+	size_t value = -1;
 	do {
 		std::cout << "index: " << index << " value: " << dijkstra.from[index] << std::endl;
 		for (size_t j = 0; j < edges.size(); j++) {
 			if (edges[j]->match(index, dijkstra.from[index])) path.push_back(edges[j]->getRoad3DiD());
 		}
-	} while ((index = dijkstra.from[index]) != 0);
+		if (index == value) break;
+	} while ((index = dijkstra.from[index]) != start);
 
 	//Párhuzamos él gondok.????????????????????????????????????????????????????????
 	/*for (size_t i = 0; i < pointCount; i++) {
