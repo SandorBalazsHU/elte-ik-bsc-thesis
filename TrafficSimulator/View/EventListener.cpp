@@ -73,6 +73,25 @@ void EventListener::keyboardUp(SDL_KeyboardEvent& key) {
 	if (key.keysym.sym == SDLK_LCTRL) keepSelect = false;
 	if (key.keysym.sym == SDLK_RCTRL) keepSelect = false;
 	if (key.keysym.sym == SDLK_DELETE) deleteSelectedItems();
+	if (key.keysym.sym == SDLK_HOME) {
+		std::cout << std::endl;
+		for (size_t i = 0; i < render->getDynamicObjectsNumber(); i++) {
+			if (render->getDynamicObject(i) != NULL) {
+				std::cout << " RoadID: " << render->getDynamicObject(i)->getRenderID()
+					<< " Stick A: " << render->getDynamicObject(i)->stickA << " StickMark A: " << render->getDynamicObject(i)->stickMarkA
+					<< " Stick B: " << render->getDynamicObject(i)->stickB << " StickMark B: " << render->getDynamicObject(i)->stickMarkB
+					<< " Marker A: " << render->getDynamicObject(i)->markerA << " Marker B: " << render->getDynamicObject(i)->markerB << std::endl;
+			}
+		}
+		std::cout << std::endl;
+	}
+	if (key.keysym.sym == SDLK_END) {
+		for (size_t i = 0; i < render->getDynamicObjectsNumber(); i++) {
+			if (render->getDynamicObject(i) != NULL) {
+				render->updateDynamicObject(i);
+			}
+		}
+	}
 	if (key.keysym.sym == SDLK_f) {
 		for (size_t i = 0; i < selectedRoads.size(); i++) {
 			render->getDynamicObject(selectedRoads[i])->setEndpointLock(true);

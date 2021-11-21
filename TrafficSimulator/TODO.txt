@@ -9,6 +9,14 @@ Javaslatok:
 - ImGui::SameLine(); ShowHelpMarker(""); használata
 - Ahol lehet referencia szerinti átadás és konstansok.
 
+-stick A = -1 sizeT probléma.
+
+- felesleges include-ok
+
+- referencia szeritni átadás?
+- warning elimináció
+- this
+
 Ötletek:
 - Törlés gomb mûködése
 - Úthossz számítás

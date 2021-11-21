@@ -35,6 +35,7 @@ public:
 		return basepoints;
 	};
 
+
 	size_t 					getRenderID();
 	void					setRGBAcolor(glm::vec4 RGBAcolor);
 	void					setRGBcolor(glm::vec3 RGBcolor);
@@ -59,6 +60,14 @@ public:
 	std::vector<glm::vec3> trackOne;
 	std::vector<glm::vec3> trackTwo;
 
+	size_t stickA = -1;
+	char stickMarkA = 'Q';
+	size_t stickB = -1;
+	char stickMarkB = 'Q';
+
+	size_t markerA = -1;
+	size_t markerB = -1;
+
 private:
 	void generateRoadpoints();
 	glm::vec3 bezierpoint(float u);
@@ -80,13 +89,13 @@ private:
 	
 	glm::vec4 color;
 
-	size_t stickA = -1;
+	/*size_t stickA = -1;
 	char stickMarkA = 'Q';
 	size_t stickB = -1;
 	char stickMarkB = 'Q';
 
 	size_t markerA = -1;
-	size_t markerB = -1;
+	size_t markerB = -1;*/
 
 
 	float shift = 2.0f;

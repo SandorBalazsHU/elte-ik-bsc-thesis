@@ -156,6 +156,9 @@
     <ClCompile Include="Control\MapLoader.cpp" />
     <ClCompile Include="Control\MapSaver.cpp" />
     <ClCompile Include="Model\Dijkstra.cpp" />
+    <ClCompile Include="Model\Edge.cpp" />
+    <ClCompile Include="Model\Graph.cpp" />
+    <ClCompile Include="Model\Point.cpp" />
     <ClCompile Include="Model\reverseMap.cpp" />
     <ClCompile Include="T:\OGLPack\include\imgui\imgui.cpp" />
     <ClCompile Include="T:\OGLPack\include\imgui\imgui_demo.cpp" />
@@ -186,6 +189,9 @@
     <ClInclude Include="Control\MapLoader.h" />
     <ClInclude Include="Control\MapSaver.h" />
     <ClInclude Include="Model\Dijkstra.h" />
+    <ClInclude Include="Model\Edge.h" />
+    <ClInclude Include="Model\Graph.h" />
+    <ClInclude Include="Model\Point.h" />
     <ClInclude Include="Model\reverseMap.h" />
     <ClInclude Include="T:\OGLPack\include\imgui\imconfig.h" />
     <ClInclude Include="T:\OGLPack\include\imgui\imgui.h" />

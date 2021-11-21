@@ -123,6 +123,15 @@
     <ClCompile Include="View\GUIWindows.cpp">
       <Filter>Source Files\View</Filter>
     </ClCompile>
+    <ClCompile Include="Model\Point.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\Edge.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\Graph.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="View\WorkWindow.h">
@@ -214,6 +223,15 @@
     </ClInclude>
     <ClInclude Include="View\EventListener.h">
       <Filter>Source Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\Point.h">
+      <Filter>Source Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\Edge.h">
+      <Filter>Source Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\Graph.h">
+      <Filter>Source Files\Model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
