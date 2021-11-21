@@ -5,6 +5,7 @@
 #include "EventListener.h"
 #include "WorkWindow.h"
 #include "Render.h"
+#include "../Model/Graph.h"
 #include "GUI.h"
 #include <glm/gtx/transform2.hpp>
 #include <iostream>
@@ -73,6 +74,8 @@ void EventListener::keyboardUp(SDL_KeyboardEvent& key) {
 	if (key.keysym.sym == SDLK_LCTRL) keepSelect = false;
 	if (key.keysym.sym == SDLK_RCTRL) keepSelect = false;
 	if (key.keysym.sym == SDLK_DELETE) deleteSelectedItems();
+
+
 	if (key.keysym.sym == SDLK_HOME) {
 		std::cout << std::endl;
 		for (size_t i = 0; i < render->getDynamicObjectsNumber(); i++) {
@@ -92,6 +95,14 @@ void EventListener::keyboardUp(SDL_KeyboardEvent& key) {
 			}
 		}
 	}
+
+	if (key.keysym.sym == SDLK_INSERT) {
+		Graph* g = new Graph(render);
+		g->generateMatrix();
+	}
+
+
+
 	if (key.keysym.sym == SDLK_f) {
 		for (size_t i = 0; i < selectedRoads.size(); i++) {
 			render->getDynamicObject(selectedRoads[i])->setEndpointLock(true);

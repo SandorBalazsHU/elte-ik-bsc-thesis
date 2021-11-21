@@ -22,8 +22,8 @@ public:
 	size_t getEndpointA();
 	size_t getEndpointB();
 private:
-	size_t id;
-	size_t road3DiD;
-	size_t endpointA;
-	size_t endpointB;
+	size_t id = -1;
+	size_t road3DiD = -1;
+	size_t endpointA = -1;
+	size_t endpointB = -1;
 };

@@ -65,23 +65,39 @@ public:
 	 * @brief geter for the connected edges.
 	*/
 	std::set<size_t> getEdges();
+	
+	/**
+	 * @brief Logical deleting
+	*/
+	void erase();
+
+	/**
+	 * @brief Is deleted?
+	 * @return Return true if it is deleted.
+	*/
+	bool isErased();
 
 private:
 
 	/**
 	 * @brief The point id. This is an unique ID.
 	*/
-	size_t id;
+	size_t id = -1;
 
 	/**
 	 * @brief This point belongs to this edge.
 	*/
-	size_t edge;
+	size_t edge = -1;
 
 	/**
 	 * @brief This point belongs to this side of the edge.
 	*/
-	char side;
+	char side = 'Q';
+
+	/**
+	 * @brief Marker for logic delete
+	*/
+	bool erased = false;
 
 	/**
 	 * @brief My graph object.
