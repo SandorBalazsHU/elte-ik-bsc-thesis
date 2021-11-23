@@ -26,3 +26,21 @@ Object3Dvehicle Object3Dvehicle::copy(int renderID) {
 	newObject.setRenderID(renderID);
 	return newObject;
 }
+
+float Object3Dvehicle::getMoveRtation(glm::vec3 pointA, glm::vec3 pointB) {
+	glm::vec3 carDirection = glm::vec3(2, 0, 0);
+	glm::vec3 roadDirection = pointB - pointA;
+	bool flip;
+	if (roadDirection.z > 0) {
+		roadDirection = pointA - pointA;
+		flip = true;
+	}
+	else {
+		flip = false;
+	}
+	float angle = 0;
+	//https://onlinemschool.com/math/library/vector/angl/
+	angle = acos((glm::dot(carDirection, roadDirection)) / (glm::length(carDirection) * glm::length(roadDirection)));
+	if (flip) angle -= M_PI;
+	return angle;
+}
