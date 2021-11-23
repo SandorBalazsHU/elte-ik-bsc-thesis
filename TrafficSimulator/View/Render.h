@@ -22,6 +22,7 @@ class GUI;
 #include "Utilities/VertexArrayObject.h"
 #include "Objects/ObjectStorage.h"
 #include "Objects/Object3Droad.h"
+#include "Objects/object3Dvehicle.h"
 #include "../Control/MapLoader.h"
 #include "../Control/MapSaver.h"
 
@@ -89,13 +90,6 @@ public:
 	int addObject(int objectStorageID);
 
 	/**
-	 * @brief Add dynamicly generated road to the scene.
-	 * /attention The road objects have 4 marker and 2 filler object for dependencies.
-	 * @return The new road dynamicRenderID.
-	*/
-	int addRoad();
-
-	/**
 	 * @brief Delete a scene object by renderID.
 	 * /attention This cause pointer invalidation in the vector. Use the updateRenderIDs and rebindRoads for repairing pointers.
 	 * @param renderID renderID
@@ -103,11 +97,31 @@ public:
 	void deleteObject(int renderID);
 
 	/**
+	 * @brief Add dynamicly generated road to the scene.
+	 * /attention The road objects have 4 marker and 2 filler object for dependencies.
+	 * @return The new road dynamicRenderID.
+	*/
+	int addRoad();
+
+	/**
 	 * @brief Delete a scene road object by dynamicRenderID.
 	 * /attention This cause pointer invalidation in the vector. Use the updateRenderIDs and rebindRoads for repairing pointers.
 	 * @param dynamicRenderID dynamicRenderID for the renderable roads.
 	*/
 	void deleteRoad(int dynamicRenderID);
+
+	/**
+	 * @brief Add a new vehicle to the scene, from the objectStorage.
+	 * @param objectStorageID The addable vehicle object storage ID.
+	 * @return The added vehicle renderID.
+	*/
+	size_t addVehicle(int objectStorageID);
+
+	/**
+	 * @brief Delete a vehicle by renderID.
+	 * @param renderableVehicleID The deletable vehicle renderID.
+	*/
+	void deleteVehicle(size_t renderableVehicleID);
 
 	/**
 	 * @brief Exit program.
@@ -163,6 +177,19 @@ public:
 	 * @return The renderableRoads size.
 	*/
 	size_t getDynamicObjectsNumber();
+
+	/**
+	 * @brief Getter for the renderableVehicles;
+	 * @param renderableVehicleID The needed vehicle's id.
+	 * @return The needed vehicle.
+	*/
+	Object3Dvehicle* getrenderableVehicle(size_t renderableVehicleID);
+
+	/**
+	 * @brief Getter for the renderableVehicles size.
+	 * @return The renderableVehicles size.
+	*/
+	size_t getRenderableVehiclesNumber();
 
 	/**
 	 * @brief Hide the desk for object photo mode. Function on.(Debug function)
@@ -229,6 +256,11 @@ private:
 	 * @brief List of the renderable scene roads. (Dynamicly generated shapes)
 	*/
 	std::vector<Object3Droad*> renderableRoads;
+
+	/**
+	 * @brief The lost of renderable vehicle.
+	*/
+	std::vector<Object3Dvehicle> renderableVehicles;
 
 	/**
 	 * @brief Flagvariable for the first scene configs. 

@@ -105,6 +105,15 @@ void EventListener::keyboardUp(SDL_KeyboardEvent& key) {
 		}
 	}
 
+	if (key.keysym.sym == SDLK_PAGEUP) {
+		size_t car01 = render->addVehicle(5);
+		size_t car02 = render->addVehicle(11);
+		/*if (render->getDynamicObjectsNumber() > 0) {
+			size_t i = SDL_GetTicks() % 100;
+			render->getObject(car01)->setPosition(render->getDynamicObject(0)->trackOne[i]);
+			render->getObject(car02)->setPosition(render->getDynamicObject(0)->trackTwo[i]);
+		}*/
+	}
 
 
 	if (key.keysym.sym == SDLK_f) {

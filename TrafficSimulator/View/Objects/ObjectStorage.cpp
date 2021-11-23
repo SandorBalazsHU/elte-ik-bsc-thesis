@@ -38,14 +38,13 @@ void ObjectStorage::load() {
             fileName = parsedCSV[i][5];
             if (!isThisTextureLoaded(fileName)) threads.push_back(loadTextureParallel(fileName));
 
-            addToObjects(i);
+            store(i);
             
             std::string isInTheFirstScene = parsedCSV[i][32];
             if (isInTheFirstScene == "1") firstSceneElements.push_back(std::stof(parsedCSV[i][0]));
         }
 
         if (currentType == "vehicle") {
-
             std::string fileName = parsedCSV[i][3];
             if (!isThisObjectLoaded(fileName)) threads.push_back(loadObjectParallel(fileName));
 
@@ -56,12 +55,14 @@ void ObjectStorage::load() {
                 std::string fileName = parsedCSV[i][j];
                 if (!isThisTextureLoaded(fileName)) threads.push_back(loadTextureParallel(fileName));
             }
+
+            store(i);
         }
     }
     loadingStateMax = threads.size();
 }
 
-void ObjectStorage::addToObjects(int csvID) {
+void ObjectStorage::store(int csvID) {
     int id                       = std::stof(parsedCSV[csvID][0]);
     std::string name             = parsedCSV[csvID][1];
     std::string type             = parsedCSV[csvID][2];
@@ -82,6 +83,11 @@ void ObjectStorage::addToObjects(int csvID) {
     if ((type == "object") || (type == "desk") || (type == "mark")) {
         Object3D newObject3D(id, name, type, meshID, textureID, iconID, initPosition, initScale, initRotation, color, hitSphere, moveSphere, objectStorage);
         object3Ds.insert(std::pair<int, Object3D>(id, newObject3D));
+    }
+    if ((type == "vehicle")) {
+        Object3Dvehicle newObject3Dvehicle(id, name, type, meshID, textureID, lightTexture, breakTexture, rightTexture, leftTexture,
+        iconID, initPosition, initScale, initRotation, color, hitSphere, moveSphere, objectStorage);
+        object3Dvehicles.insert(std::pair<int, Object3Dvehicle>(id, newObject3Dvehicle));
     }
 }
 

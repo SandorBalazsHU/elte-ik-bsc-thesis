@@ -298,6 +298,27 @@ int Render::addRoad() {
 }
 
 /**
+ * @brief Add a new vehicle to the scene, from the objectStorage.
+ * @param objectStorageID The addable vehicle object storage ID.
+ * @return The added vehicle renderID.
+*/
+size_t Render::addVehicle(int objectStorageID) {
+	size_t newRenderID = renderableObjects.size();
+	renderableVehicles.push_back(objectStorage->getObject3Dvehicle(objectStorageID, newRenderID));
+	return newRenderID;
+}
+
+/**
+ * @brief Delete a vehicle by renderID.
+ * @param renderableVehicleID The deletable vehicle renderID.
+*/
+void Render::deleteVehicle(size_t renderableVehicleID) {
+	if (!renderableVehicles[renderableVehicleID].isProtected()) {
+		renderableVehicles[renderableVehicleID].erase();
+	}
+}
+
+/**
  * @brief Get scene preloaded object from the scene render storage.
  * @param id renderID
  * @return The scene object.
@@ -340,6 +361,23 @@ Object3Droad* Render::getDynamicObject(size_t dynamicRenderID) {
 */
 size_t Render::getDynamicObjectsNumber() {
 	return renderableRoads.size();
+}
+
+/**
+ * @brief Getter for the renderableVehicles;
+ * @param renderableVehicleID The needed vehicle's id.
+ * @return The needed vehicle.
+*/
+Object3Dvehicle* Render::getrenderableVehicle(size_t renderableVehicleID) {
+	return &this->renderableVehicles[renderableVehicleID];
+}
+
+/**
+ * @brief Getter for the renderableVehicles size.
+ * @return The renderableVehicles size.
+*/
+size_t Render::getRenderableVehiclesNumber() {
+	return this->renderableVehicles.size();
 }
 
 /**
@@ -445,6 +483,17 @@ void Render::renderScrean() {
 			}
 		}
 	}
+
+	for (size_t i = 0; i < renderableVehicles.size(); i++) {
+		if (!renderableVehicles[i].isDeleted()) {
+			if (!renderableVehicles[i].isHidden()) {
+				setTexture(renderableVehicles[i].getTexture());
+				shaderPreDrawingUpdate(renderableVehicles[i].getWorldMatrix(), renderableVehicles[i].getRGBAcolor());
+				drawMesh(renderableVehicles[i].getMesh());
+				if (hitSphare) showHitSphere(i);
+			}
+		}
+	}
 	if (objectsWireframe) wireframeOff();
 
 	if(roadWireframe) wireframeOn();
@@ -469,6 +518,7 @@ void Render::render() {
 
 	if (objectStorage->isLoaded()) {
 		renderScrean();
+		//std::cout << ((SDL_GetTicks()/100) % 100) << std::endl;
 	}
 
 	shader->Unuse();

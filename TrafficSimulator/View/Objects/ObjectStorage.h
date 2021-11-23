@@ -8,6 +8,7 @@
 #include "../Utilities/Mesh_OGL3.h"
 #include "../Utilities/VertexArrayObject.h"
 #include "Object3D.h"
+#include "Object3Dvehicle.h"
 #include <SDL.h>
 
 class ObjectStorage {
@@ -68,11 +69,32 @@ public:
 		auto object3D = object3Ds.find(object3Did);
 		if (object3D == object3Ds.end()) {
 			std::cout << "AJJJAJJJ!" << std::endl;
-		}
-		else {
+		} else {
 
 		}
 		return object3D->second.copy(renderID);
+	}
+
+	//TODO error handling
+	Object3Dvehicle getObject3Dvehicle(int object3Did) {
+		auto object3Dvehicle = object3Dvehicles.find(object3Did);
+		if (object3Dvehicle == object3Dvehicles.end()) {
+			std::cout << "AJJJAJJJ!" << std::endl;
+		} else {
+
+		}
+		return object3Dvehicle->second.copy();
+	}
+
+	//TODO error handling
+	Object3Dvehicle getObject3Dvehicle(int object3Did, int renderID) {
+		auto object3Dvehicle = object3Dvehicles.find(object3Did);
+		if (object3Dvehicle == object3Dvehicles.end()) {
+			std::cout << "AJJJAJJJ!" << std::endl;
+		} else {
+
+		}
+		return object3Dvehicle->second.copy(renderID);
 	}
 
 	std::vector<int>& getFirstSceneElements() {
@@ -80,6 +102,8 @@ public:
 	}
 
 	std::map<int, Object3D> object3Ds;
+
+	std::map<int, Object3Dvehicle> object3Dvehicles;
 
 private:
 	const std::string defaultTexture = "default.png";
@@ -123,6 +147,5 @@ private:
 
 	std::map<std::string, VertexArrayObject> generatedObjects;
 
-	void addToObjects(int csvID);
-
+	void store(int csvID);
 };

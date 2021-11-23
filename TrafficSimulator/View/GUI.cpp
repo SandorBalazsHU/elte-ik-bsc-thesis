@@ -137,7 +137,9 @@ void GUI::itemList() {
 			} else {
 				size = ImVec2(100, 100);
 			}
+		//std::cout << it->first << std::endl;
 		if (it->second.getType() == "object") {
+		//if (true) {
 			if (ImGui::ImageButton((void*)(intptr_t)it->second.getIcon(), size)) {
 				int renderableObjectID = windowRender->addObject(it->first);
 			}
