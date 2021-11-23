@@ -131,6 +131,13 @@ void EventListener::keyboardUp(SDL_KeyboardEvent& key) {
 		tmpCounter++;
 	}
 
+	if (key.keysym.sym == SDLK_UP) {
+		render->animator.start();
+	}
+	if (key.keysym.sym == SDLK_DOWN) {
+		render->animator.stop();
+	}
+
 
 	if (key.keysym.sym == SDLK_f) {
 		for (size_t i = 0; i < selectedRoads.size(); i++) {

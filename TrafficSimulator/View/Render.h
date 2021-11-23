@@ -16,6 +16,7 @@ class WorkWindow;
 class GUI;
 
 #include "Camera.h"
+#include "Animator.h"
 #include "Utilities/ProgramObject.h"
 #include "Utilities/TextureObject.h"
 #include "Utilities/Mesh_OGL3.h"
@@ -246,6 +247,12 @@ public:
 	*/
 	bool roadWireframe = false;
 
+	/**
+	 * @brief The render's animator instance.
+	*/
+	Animator animator;
+
+
 private:
 	/**
 	 * @brief List of the renderable scene objets. (Preloaded meshes)
@@ -309,9 +316,9 @@ private:
 	MapSaver mapSaver;
 
 	/**
- * @brief Set the texture for the object rendering.
- * @param texture The usable texture.
-*/
+	 * @brief Set the texture for the object rendering.
+	 * @param texture The usable texture.
+	*/
 	void setTexture(Texture2D& texture);
 
 	/**

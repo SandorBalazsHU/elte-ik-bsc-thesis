@@ -49,6 +49,7 @@ void Render::bind(WorkWindow* currentWindow) {
 	fpsCounter::bind();
 	mapLoader.bind(this);
 	mapSaver.bind(this);
+	animator.bind(this);
 	//TODO GUI Graphical settings
 	//fpsCounter::fpsLimiterOn();
 	//fpsCounter::setFpsLimit(45);
@@ -471,6 +472,8 @@ void Render::renderScrean() {
 		sceneInit();
 		firstScreen = false;
 	}
+
+	this->animator.update();
 
 	if (objectsWireframe) wireframeOn();
 	for (size_t i = 0; i < renderableObjects.size(); i++) {
