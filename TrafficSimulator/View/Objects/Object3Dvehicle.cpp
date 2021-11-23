@@ -32,7 +32,7 @@ float Object3Dvehicle::getMoveRtation(glm::vec3 pointA, glm::vec3 pointB) {
 	glm::vec3 roadDirection = pointB - pointA;
 	bool flip;
 	if (roadDirection.z > 0) {
-		roadDirection = pointA - pointA;
+		roadDirection = pointA - pointB;
 		flip = true;
 	}
 	else {
@@ -42,5 +42,5 @@ float Object3Dvehicle::getMoveRtation(glm::vec3 pointA, glm::vec3 pointB) {
 	//https://onlinemschool.com/math/library/vector/angl/
 	angle = acos((glm::dot(carDirection, roadDirection)) / (glm::length(carDirection) * glm::length(roadDirection)));
 	if (flip) angle -= M_PI;
-	return angle;
+	return  glm::degrees(angle);
 }

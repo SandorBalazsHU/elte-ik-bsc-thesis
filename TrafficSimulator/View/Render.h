@@ -183,13 +183,13 @@ public:
 	 * @param renderableVehicleID The needed vehicle's id.
 	 * @return The needed vehicle.
 	*/
-	Object3Dvehicle* getrenderableVehicle(size_t renderableVehicleID);
+	Object3Dvehicle* getVehicle(size_t renderableVehicleID);
 
 	/**
 	 * @brief Getter for the renderableVehicles size.
 	 * @return The renderableVehicles size.
 	*/
-	size_t getRenderableVehiclesNumber();
+	size_t getVehiclesNumber();
 
 	/**
 	 * @brief Hide the desk for object photo mode. Function on.(Debug function)

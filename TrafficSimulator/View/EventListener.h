@@ -29,6 +29,8 @@ private:
 	GUI* gui;
 	Render* render;
 
+	size_t tmpCounter = 0;
+
 	std::set<int> pressedKeys;
 	std::set<int> moseButtonPressed;
 

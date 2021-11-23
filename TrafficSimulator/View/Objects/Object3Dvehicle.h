@@ -23,7 +23,7 @@ public:
 
 	Object3Dvehicle copy();
 	Object3Dvehicle copy(int renderID);
-	float getMoveRtation(glm::vec3 pointA, glm::vec3 pointB);
+	static float getMoveRtation(glm::vec3 pointA, glm::vec3 pointB);
 
 protected:
 	std::string lightTexture;

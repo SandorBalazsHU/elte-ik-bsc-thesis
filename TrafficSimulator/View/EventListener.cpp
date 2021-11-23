@@ -107,12 +107,28 @@ void EventListener::keyboardUp(SDL_KeyboardEvent& key) {
 
 	if (key.keysym.sym == SDLK_PAGEUP) {
 		size_t car01 = render->addVehicle(5);
-		size_t car02 = render->addVehicle(11);
+		size_t car02 = render->addVehicle(11); 
+		if (render->getDynamicObjectsNumber() > 0) {
+			render->getVehicle(0)->setPosition(render->getDynamicObject(0)->trackOne[tmpCounter]);
+			render->getVehicle(1)->setPosition(render->getDynamicObject(0)->trackTwo[tmpCounter]);
+			render->getVehicle(0)->setRotation(glm::vec4(Object3Dvehicle::getMoveRtation(render->getDynamicObject(0)->trackOne[tmpCounter], render->getDynamicObject(0)->trackOne[tmpCounter + 1]), 0, 1, 0));
+			render->getVehicle(1)->setRotation(glm::vec4(Object3Dvehicle::getMoveRtation(render->getDynamicObject(0)->trackTwo[tmpCounter], render->getDynamicObject(0)->trackTwo[tmpCounter + 1]), 0, 1, 0));
+		}
 		/*if (render->getDynamicObjectsNumber() > 0) {
 			size_t i = SDL_GetTicks() % 100;
 			render->getObject(car01)->setPosition(render->getDynamicObject(0)->trackOne[i]);
 			render->getObject(car02)->setPosition(render->getDynamicObject(0)->trackTwo[i]);
 		}*/
+	}
+
+	if (key.keysym.sym == SDLK_PAGEDOWN) { 
+		if (render->getDynamicObjectsNumber() > 0) {
+			render->getVehicle(0)->setPosition(render->getDynamicObject(0)->trackOne[tmpCounter]);
+			render->getVehicle(1)->setPosition(render->getDynamicObject(0)->trackTwo[tmpCounter]);
+			render->getVehicle(0)->setRotation(glm::vec4(Object3Dvehicle::getMoveRtation(render->getDynamicObject(0)->trackOne[tmpCounter], render->getDynamicObject(0)->trackOne[tmpCounter + 1]), 0, 1, 0));
+			render->getVehicle(1)->setRotation(glm::vec4(Object3Dvehicle::getMoveRtation(render->getDynamicObject(0)->trackTwo[tmpCounter], render->getDynamicObject(0)->trackTwo[tmpCounter + 1]), 0, 1, 0));
+		}
+		tmpCounter++;
 	}
 
 

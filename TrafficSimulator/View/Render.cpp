@@ -368,7 +368,7 @@ size_t Render::getDynamicObjectsNumber() {
  * @param renderableVehicleID The needed vehicle's id.
  * @return The needed vehicle.
 */
-Object3Dvehicle* Render::getrenderableVehicle(size_t renderableVehicleID) {
+Object3Dvehicle* Render::getVehicle(size_t renderableVehicleID) {
 	return &this->renderableVehicles[renderableVehicleID];
 }
 
@@ -376,7 +376,7 @@ Object3Dvehicle* Render::getrenderableVehicle(size_t renderableVehicleID) {
  * @brief Getter for the renderableVehicles size.
  * @return The renderableVehicles size.
 */
-size_t Render::getRenderableVehiclesNumber() {
+size_t Render::getVehiclesNumber() {
 	return this->renderableVehicles.size();
 }
 
