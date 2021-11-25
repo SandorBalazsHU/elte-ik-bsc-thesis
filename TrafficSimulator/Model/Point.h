@@ -77,6 +77,28 @@ public:
 	*/
 	bool isErased();
 
+	/**
+	 * @brief Set the point as a start point.
+	*/
+	void setAsStartPoint();
+
+	/**
+	 * @brief Set the point as an endpoint.
+	*/
+	void setAsEndpoint();
+
+	/**
+	 * @brief Is a start point?
+	 * @return True is this is a start point.
+	*/
+	bool isStartPoint();
+
+	/**
+	 * @brief Is an endpoint?
+	 * @return True id this is an endpoint.
+	*/
+	bool isEndPoint();
+
 private:
 
 	/**
@@ -98,6 +120,16 @@ private:
 	 * @brief Marker for logic delete
 	*/
 	bool erased = false;
+
+	/**
+	 * @brief Mark for start points.
+	*/
+	bool startPoint = false;
+
+	/**
+	 * @brief mark for endpoints.
+	*/
+	bool endPoint = false;
 
 	/**
 	 * @brief My graph object.

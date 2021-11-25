@@ -1,3 +1,4 @@
+//SU-30SM
 #include "Animator.h"
 #include "Render.h"
 
@@ -36,8 +37,10 @@ void Animator::timerUpdate() {
 
 void Animator::start() {
 	this->isAnimationRunning = true;
+	currentIndex = 0;
 }
 
 void Animator::stop() {
 	this->isAnimationRunning = false;
+	currentIndex = 0;
 }

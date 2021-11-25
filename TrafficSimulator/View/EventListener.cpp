@@ -97,11 +97,18 @@ void EventListener::keyboardUp(SDL_KeyboardEvent& key) {
 	}
 
 	if (key.keysym.sym == SDLK_INSERT) {
+		for (size_t i = 0; i < render->getDynamicObjectsNumber(); i++) {
+			if (render->getDynamicObject(i) != NULL) {
+				render->getDynamicObject(i)->setRGBcolor(glm::vec3(1, 1, 1));
+			}
+		}
 		Graph* g = new Graph(render);
 		g->generateMatrix();
 		std::vector<size_t> path = g->getPath();
 		for (size_t i = 0; i < path.size(); i++) {
-			render->getDynamicObject(path[i])->setRGBcolor(glm::vec3(1,0,0));
+			if (render->getDynamicObject(path[i]) != NULL) {
+				render->getDynamicObject(path[i])->setRGBcolor(glm::vec3(0.929f, 0.109f, 0.141f));
+			}
 		}
 	}
 

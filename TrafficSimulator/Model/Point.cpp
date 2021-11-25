@@ -49,6 +49,8 @@ void Point::join(Point* point) {
 		for (size_t edge : pointEdges) {
 			myGraph->getEdge(edge)->changePoint(point->getID(), this->id);
 		}
+		if (point->isStartPoint()) this->setAsStartPoint();
+		if (point->isEndPoint()) this->setAsEndpoint();
 		size_t pointID = point->getID();
 		myGraph->deletePoint(pointID);
 	}
@@ -106,4 +108,34 @@ void Point::erase() {
 */
 bool Point::isErased() {
 	return this->erased;
+}
+
+/**
+ * @brief Set the point as a start point.
+*/
+void Point::setAsStartPoint() {
+	this->startPoint = true;
+}
+
+/**
+ * @brief Set the point as an endpoint.
+*/
+void Point::setAsEndpoint() {
+	this->endPoint = true;
+}
+
+/**
+ * @brief Is a start point?
+ * @return True is this is a start point.
+*/
+bool Point::isStartPoint() {
+	return this->startPoint;
+}
+
+/**
+ * @brief Is an endpoint?
+ * @return True id this is an endpoint.
+*/
+bool Point::isEndPoint() {
+	return this->endPoint;
 }

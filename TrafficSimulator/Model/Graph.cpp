@@ -45,9 +45,6 @@ void Graph::generateMatrix() {
 	generate();
 }
 
-//TODO A törlés korruptálhatja az ID-ket.
-//Úgy gondolom, hogy a törölt éleket is felveszem, de nem olvasom a null védelem miatt.
-
 void Graph::initialise() {
 	size_t j = 0;
 	for (size_t i = 0; i < render->getDynamicObjectsNumber(); i++) {
@@ -72,6 +69,14 @@ void Graph::join() {
 		if (render->getDynamicObject(i) != NULL) {
 			Edge* currentEdge = edges[i];
 			Object3Droad* currentRoad = render->getDynamicObject(i);
+			if (currentRoad->markerA != -1) {
+				if (render->getObject(currentRoad->markerA)->getName() == "Start sign")  points[currentEdge->getEndpointA()]->setAsStartPoint();
+				if (render->getObject(currentRoad->markerA)->getName() == "Stop sign")   points[currentEdge->getEndpointA()]->setAsEndpoint();
+			}
+			if (currentRoad->markerB != -1) {
+				if (render->getObject(currentRoad->markerB)->getName() == "Start sign") points[currentEdge->getEndpointB()]->setAsStartPoint();
+				if (render->getObject(currentRoad->markerB)->getName() == "Stop sign")  points[currentEdge->getEndpointB()]->setAsEndpoint();
+			}
 			if (currentRoad->stickMarkA != 'Q') {
 				if (currentRoad->stickMarkA == 'A') points[currentEdge->getEndpointA()]->join(points[edges[currentRoad->stickA]->getEndpointA()]);
 				if (currentRoad->stickMarkA == 'B') points[currentEdge->getEndpointA()]->join(points[edges[currentRoad->stickA]->getEndpointB()]);
@@ -94,7 +99,6 @@ void Graph::rebind() {
 	}
 }
 
-//Hogy lehetnek ismétlõdõ point ID-k?
 void Graph::generate() {
 	std::cout << std::endl;
 	for (size_t i = 0; i < edges.size(); i++) {
@@ -108,15 +112,29 @@ void Graph::generate() {
 			for (size_t edge : points[i]->getEdges()) {
 				std::cout << " - " << edge;
 			}
+			if(points[i]->isStartPoint()) std::cout << " START POINT ";
+			if(points[i]->isEndPoint()) std::cout << " END POINT ";
 			std::cout << std::endl;
 			pointCount++;
 		}
 	}
 	std::cout << std::endl;
 
-	//TODO: 4-1 PARA/////////////////////////////////////////////
+
 	int start = 1;
 	int target = 3;
+
+
+	for (size_t i = 0; i < points.size(); i++) {
+		if (!points[i]->isErased()) {
+			if (points[i]->isStartPoint()) start = points[i]->getID();
+			if (points[i]->isEndPoint()) target = points[i]->getID();
+		}
+	}
+
+	std::cout << "Start: " << start << " Target: " << target << std::endl;
+	std::cout << std::endl;
+
 	//---------------------------------------------------------------
 	Dijkstra dijkstra(pointCount, start);
 	for (size_t i = 0; i < edges.size(); i++) {
