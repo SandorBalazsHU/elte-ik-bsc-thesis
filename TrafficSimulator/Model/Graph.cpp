@@ -21,6 +21,7 @@ Graph::Graph(Render* render) {
 	this->render = render;
 }
 
+//TODO Máshol nem érdemes már korábban törölni õket?
 Graph::~Graph() {
 	for (size_t i = 0; i < points.size(); i++)	{
 		delete points[i];
@@ -28,21 +29,67 @@ Graph::~Graph() {
 	for (size_t i = 0; i < edges.size(); i++)	{
 		delete edges[i];
 	}
+	for (size_t i = 0; i < dijkstras.size(); i++) {
+		delete dijkstras[i];
+	}
+}
+
+size_t Graph::getEdgesNumber() {
+	return this->edges.size();
 }
 
 Edge* Graph::getEdge(size_t edge) {
-	return edges[edge];
+	return this->edges[edge];
+}
+
+
+size_t Graph::getPointsNumber() {
+	return this->points.size();
+}
+
+Point* Graph::getPoint(size_t point) {
+	return this->points[point];
 }
 
 void Graph::deletePoint(size_t point) {
 	points[point]->erase();
 }
 
-void Graph::generateMatrix() {
+void Graph::generateGraph() {
+	lockRoads();
 	initialise();
 	join();
 	rebind();
-	generate();
+}
+
+Dijkstra* Graph::generateDijkstra(size_t startPoint) {
+	Dijkstra* dijkstra = new Dijkstra(this->pointCount, startPoint);
+	for (size_t i = 0; i < this->edges.size(); i++) {
+		if (this->edges[i]->getID() != -1) dijkstra->addDoubleEdge(this->edges[i]->getEndpointA(), this->edges[i]->getEndpointB(), this->edges[i]->getCoast());
+	}
+	dijkstra->run();
+	return dijkstra;
+}
+
+std::vector<size_t> Graph::getPath(Dijkstra* dijkstra, size_t target) {
+	std::vector<size_t> path;
+	size_t index = target;
+	size_t value = -1;
+	do {
+		for (size_t j = 0; j < this->edges.size(); j++) {
+			if (this->edges[j]->match(index, dijkstra->from[index])) path.push_back(this->edges[j]->getRoad3DiD());
+		}
+		if (index == value) break;
+	} while ((index = dijkstra->from[index]) != dijkstra->getStartNode());
+	return path;
+}
+
+void Graph::lockRoads() {
+	for (size_t i = 0; i < render->getDynamicObjectsNumber(); i++) {
+		if (render->getDynamicObject(i) != NULL) {
+			render->updateDynamicObject(i);
+		}
+	}
 }
 
 void Graph::initialise() {
@@ -97,79 +144,25 @@ void Graph::rebind() {
 			j++;
 		}
 	}
+	this->pointCount = j;
 }
 
-void Graph::generate() {
-	std::cout << std::endl;
-	for (size_t i = 0; i < edges.size(); i++) {
-		std::cout << "Edge ID: " << edges[i]->getID() << " Coast: " << edges[i]->getCoast() << " Endpoint A: " << edges[i]->getEndpointA() << " Endpoint B: " << edges[i]->getEndpointB() << std::endl;
-	}
-	std::cout << std::endl;
-	size_t pointCount = 0;
+std::vector<size_t> Graph::getStartPoints() {
+	std::vector<size_t> startPoints;
 	for (size_t i = 0; i < points.size(); i++) {
 		if (!points[i]->isErased()) {
-			std::cout << "Point ID: " << points[i]->getID() << " Edges count: " << points[i]->getEdges().size() << " Connected edges: ";
-			for (size_t edge : points[i]->getEdges()) {
-				std::cout << " - " << edge;
-			}
-			if(points[i]->isStartPoint()) std::cout << " START POINT ";
-			if(points[i]->isEndPoint()) std::cout << " END POINT ";
-			std::cout << std::endl;
-			pointCount++;
+			if (points[i]->isStartPoint()) startPoints.push_back(this->points[i]->getID());
 		}
 	}
-	std::cout << std::endl;
-
-
-	int start = 1;
-	int target = 3;
-
-
-	for (size_t i = 0; i < points.size(); i++) {
-		if (!points[i]->isErased()) {
-			if (points[i]->isStartPoint()) start = points[i]->getID();
-			if (points[i]->isEndPoint()) target = points[i]->getID();
-		}
-	}
-
-	std::cout << "Start: " << start << " Target: " << target << std::endl;
-	std::cout << std::endl;
-
-	//---------------------------------------------------------------
-	Dijkstra dijkstra(pointCount, start);
-	for (size_t i = 0; i < edges.size(); i++) {
-		if(edges[i]->getID() != -1) dijkstra.addDoubleEdge(edges[i]->getEndpointA(), edges[i]->getEndpointB(), edges[i]->getCoast());
-	}
-
-	dijkstra.run();
-	for (size_t i = 0; i < dijkstra.from.size(); i++) {
-		std::cout << i << " ";
-	}
-	std::cout << std::endl;
-	for (size_t i = 0; i < dijkstra.from.size(); i++) {
-		std::cout << dijkstra.from[i] << " ";
-	}
-	std::cout << std::endl;
-	//---------------------------------------------------
-
-	size_t index = target;
-	size_t value = -1;
-	do {
-		std::cout << "index: " << index << " value: " << dijkstra.from[index] << std::endl;
-		for (size_t j = 0; j < edges.size(); j++) {
-			if (edges[j]->match(index, dijkstra.from[index])) path.push_back(edges[j]->getRoad3DiD());
-		}
-		if (index == value) break;
-	} while ((index = dijkstra.from[index]) != start);
-
-	//Párhuzamos él gondok.????????????????????????????????????????????????????????
-	/*for (size_t i = 0; i < pointCount; i++) {
-		for (size_t j = 0; j < edges.size(); j++) {
-			if (edges[j]->match(i, dijkstra.from[i])) path.push_back(edges[j]->getRoad3DiD());
-		}
-	}*/
+	return startPoints;
 }
 
-std::vector<size_t> Graph::getPath() {
-	return path;
+std::vector<size_t> Graph::getEndPoints() {
+	std::vector<size_t> endPoints;
+	for (size_t i = 0; i < points.size(); i++) {
+		if (!points[i]->isErased()) {
+			if (points[i]->isEndPoint()) endPoints.push_back(this->points[i]->getID());
+		}
+	}
+	return endPoints;
 }

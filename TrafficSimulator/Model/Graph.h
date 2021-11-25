@@ -13,6 +13,7 @@ class Render;
 
 #include "Edge.h"
 #include "Point.h"
+#include "Dijkstra.h"
 #include <vector>
 #include <set>
 
@@ -23,17 +24,26 @@ class Graph {
 public:
 	Graph(Render* render);
 	~Graph();
+	size_t getEdgesNumber();
 	Edge* getEdge(size_t edge);
+	size_t getPointsNumber();
+	Point* getPoint(size_t point);
 	void deletePoint(size_t point);
-	void generateMatrix();
-	std::vector<size_t> getPath();
-private:
+	void generateGraph();
+	Dijkstra* generateDijkstra(size_t startPoint);
+	std::vector<size_t> getPath(Dijkstra* dijkstra, size_t target);
+	std::vector<size_t> getStartPoints();
+	std::vector<size_t> getEndPoints();
+
+	private:
 	Render* render;
 	std::vector<Edge*> edges;
 	std::vector<Point*> points;
-	std::vector<size_t> path;
+	//TODO Delete
+	std::vector<Dijkstra*> dijkstras;
+	size_t pointCount = 0;
+	void lockRoads();
 	void initialise();
 	void join();
 	void rebind();
-	void generate();
 };

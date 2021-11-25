@@ -12,11 +12,13 @@
 #include <algorithm>
 #include <vector>
 #include <string>
+#include <sstream>
 #include "GUI.h"
 #include "fpsCounter.h"
 #include "Render.h"
 #include "WorkWindow.h"
 #include "../Control/Logger.h"
+#include "../Model/Graph.h"
 
 void GUI::openWindow() {
 	ImGui::SetNextWindowSize(ImVec2(400, 300));
@@ -418,7 +420,6 @@ void GUI::debugOptionsWindow() {
 	ImGui::Checkbox("Show Roads Wire frame", &windowRender->roadWireframe);
 	ImGui::Text("");
 
-
 	/*ImGui::Text("");
 	ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "---");
 	ImGui::Separator();
@@ -477,6 +478,152 @@ void GUI::runningStatisticsWindow() {
 			runningStatisticsWindowStatus = false;
 			ImGui::CloseCurrentPopup();
 		}
+		ImGui::End();
+	}
+}
+
+/**
+ * @brief Pathfinder test window.
+*/
+//&pathFinderTestWindowStatus
+void GUI::pathFinderTestWindow() {
+	pathFinderTestWindowFlag |= ImGuiWindowFlags_NoMove;
+	//pathFinderTestWindowFlag |= ImGuiWindowFlags_NoResize;
+	//pathFinderTestWindowFlag |= ImGuiWindowFlags_NoCollapse;
+	if (ImGui::Begin("Pathfinder algorithm test.", &pathFinderTestWindowStatus, pathFinderTestWindowFlag)) {
+		static ImGuiTextBuffer logger;
+		std::stringstream log;
+
+		if (ImGui::Button("Pathfinder algorithm test.")) {
+			logger.clear();
+			//Logging roads
+			for (size_t i = 0; i < windowRender->getDynamicObjectsNumber(); i++) {
+				if (windowRender->getDynamicObject(i) != NULL) {
+					log << "RoadID: " << windowRender->getDynamicObject(i)->getRenderID();
+					log << " Stick A: ";
+					if (windowRender->getDynamicObject(i)->stickA != -1) {
+						log << windowRender->getDynamicObject(i)->stickA;
+					}
+					else {
+						log << -1;
+					}
+					log << " StickMark A: " << windowRender->getDynamicObject(i)->stickMarkA;
+					log << " Stick B: ";
+					if (windowRender->getDynamicObject(i)->stickB != -1) {
+						log << windowRender->getDynamicObject(i)->stickB;
+					}
+					else {
+						log << -1;
+					}
+					log << " StickMark B: " << windowRender->getDynamicObject(i)->stickMarkB;
+					log << " Marker A: ";
+					if (windowRender->getDynamicObject(i)->stickB != -1) {
+						log << windowRender->getDynamicObject(i)->stickB;
+					}
+					else {
+						log << -1;
+					}
+					log << " Marker A: ";
+					if (windowRender->getDynamicObject(i)->markerA != -1) {
+						log << windowRender->getDynamicObject(i)->markerA;
+					}
+					else {
+						log << -1;
+					}
+					log << " Marker B: ";
+					if (windowRender->getDynamicObject(i)->markerB != -1) {
+						log << windowRender->getDynamicObject(i)->markerB;;
+					}
+					else {
+						log << -1;
+					}
+					log << std::endl;
+				}
+			}
+			log << std::endl;
+
+			//Clean colors
+			for (size_t i = 0; i < windowRender->getDynamicObjectsNumber(); i++) {
+				if (windowRender->getDynamicObject(i) != NULL) {
+					windowRender->getDynamicObject(i)->setRGBcolor(glm::vec3(1, 1, 1));
+				}
+			}
+
+			//Generate graph.
+			Graph graph(windowRender);
+			graph.generateGraph();
+
+			//Get start point from the graph.
+			std::vector<size_t> startPoints = graph.getStartPoints();
+			size_t startPoint = 0;
+			if (startPoints.size() != 0) startPoint = startPoints[0];
+
+			//Run Dijkstra.
+			Dijkstra* dijkstra = graph.generateDijkstra(startPoint);
+
+			//Get endpoint
+			std::vector<size_t> endpoints = graph.getEndPoints();
+			size_t endpoint = windowRender->getDynamicObjectsNumber();
+			if(endpoints.size() != 0) endpoint = endpoints[0];
+
+			//Get path
+			std::vector<size_t> path = graph.getPath(dijkstra, endpoint);
+
+			//Path coloring
+			for (size_t i = 0; i < path.size(); i++) {
+				if (windowRender->getDynamicObject(path[i]) != NULL) {
+					windowRender->getDynamicObject(path[i])->setRGBcolor(glm::vec3(0.929f, 0.109f, 0.141f));
+				}
+			}
+
+			//Graph edges logging.
+			for (size_t i = 0; i < graph.getEdgesNumber(); i++) {
+				if(graph.getEdge(i)->getID() != -1) log << "Edge ID: " << graph.getEdge(i)->getID() << " Coast: " << graph.getEdge(i)->getCoast() << " Endpoint A: " << graph.getEdge(i)->getEndpointA() << " Endpoint B: " << graph.getEdge(i)->getEndpointB() << std::endl;
+			}
+			log << std::endl;
+
+			//Gaph points log.
+			for (size_t i = 0; i < graph.getPointsNumber(); i++) {
+				if (!graph.getPoint(i)->isErased()) {
+					log << "Point ID: " << graph.getPoint(i)->getID() << " Edges count: " << graph.getPoint(i)->getEdges().size() << " Connected edges: ";
+					for (size_t edge : graph.getPoint(i)->getEdges()) {
+						log << " - " << edge;
+					}
+					if (graph.getPoint(i)->isStartPoint()) log << " START POINT ";
+					if (graph.getPoint(i)->isEndPoint()) log << " END POINT ";
+					log << std::endl;
+				}
+			}
+			log << std::endl;
+
+			//Log start and endpoints
+			log << "Start: " << startPoint << " Target: " << endpoint << std::endl;
+			log << std::endl;
+
+			//Log dijkstra result
+			for (size_t i = 0; i < dijkstra->from.size(); i++) {
+				log << i << " ";
+			}
+			log << std::endl;
+			for (size_t i = 0; i < dijkstra->from.size(); i++) {
+				log << dijkstra->from[i] << " ";
+			}
+			log << std::endl;
+
+			logger.append(log.str().c_str());
+		}
+
+		ImGui::SameLine();
+		if (ImGui::Button("Close")) {
+			pathFinderTestWindowStatus = false;
+			ImGui::CloseCurrentPopup();
+		}
+		ImGui::Separator();
+
+		ImGui::BeginChild("Log");
+		ImGui::TextUnformatted(logger.begin(), logger.end());
+		ImGui::EndChild();
+
 		ImGui::End();
 	}
 }

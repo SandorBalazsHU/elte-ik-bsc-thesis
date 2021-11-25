@@ -76,6 +76,7 @@ void GUI::mainMenuBar() {
 			ImGui::Separator();
 			if (ImGui::MenuItem("Running statistics", "CTRL+R", &runningStatisticsWindowStatus)) {}
 			if (ImGui::MenuItem("Debug options", "CTRL+D", &debugOptionsWindowStatus)) {}
+			if (ImGui::MenuItem("Pathfinder algorithm test.", "CTRL+P", &pathFinderTestWindowStatus)) {}
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("Simulation"))
@@ -111,6 +112,7 @@ void GUI::windowHandler() {
 	if (graphicSettingsWindowStatus) graphicSettingsWindow();
 	if (debugOptionsWindowStatus) debugOptionsWindow();
 	if (runningStatisticsWindowStatus) runningStatisticsWindow();
+	if (pathFinderTestWindowStatus) pathFinderTestWindow();
 	if (ImGuiSettingsWindowStatus) { ImGui::Begin("ImGui Style Editor", &ImGuiSettingsWindowStatus); ImGui::ShowStyleEditor(); ImGui::End(); }
 }
 

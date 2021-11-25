@@ -13,7 +13,8 @@ public:
     ~Dijkstra() {}
     void addEdge(int fromNode, int toNode, int weight);
     void addDoubleEdge(int node1, int node2, int weight);
-    std::vector<std::vector<int>> getMatrix();
+    int getStartNode();
+    //std::vector<std::vector<int>> getMatrix();
     void run();
     std::vector<int> from;
     std::vector<std::vector<int>> matrix;

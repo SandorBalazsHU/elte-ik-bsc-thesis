@@ -75,43 +75,6 @@ void EventListener::keyboardUp(SDL_KeyboardEvent& key) {
 	if (key.keysym.sym == SDLK_RCTRL) keepSelect = false;
 	if (key.keysym.sym == SDLK_DELETE) deleteSelectedItems();
 
-
-	if (key.keysym.sym == SDLK_HOME) {
-		std::cout << std::endl;
-		for (size_t i = 0; i < render->getDynamicObjectsNumber(); i++) {
-			if (render->getDynamicObject(i) != NULL) {
-				std::cout << " RoadID: " << render->getDynamicObject(i)->getRenderID()
-					<< " Stick A: " << render->getDynamicObject(i)->stickA << " StickMark A: " << render->getDynamicObject(i)->stickMarkA
-					<< " Stick B: " << render->getDynamicObject(i)->stickB << " StickMark B: " << render->getDynamicObject(i)->stickMarkB
-					<< " Marker A: " << render->getDynamicObject(i)->markerA << " Marker B: " << render->getDynamicObject(i)->markerB << std::endl;
-			}
-		}
-		std::cout << std::endl;
-	}
-	if (key.keysym.sym == SDLK_END) {
-		for (size_t i = 0; i < render->getDynamicObjectsNumber(); i++) {
-			if (render->getDynamicObject(i) != NULL) {
-				render->updateDynamicObject(i);
-			}
-		}
-	}
-
-	if (key.keysym.sym == SDLK_INSERT) {
-		for (size_t i = 0; i < render->getDynamicObjectsNumber(); i++) {
-			if (render->getDynamicObject(i) != NULL) {
-				render->getDynamicObject(i)->setRGBcolor(glm::vec3(1, 1, 1));
-			}
-		}
-		Graph* g = new Graph(render);
-		g->generateMatrix();
-		std::vector<size_t> path = g->getPath();
-		for (size_t i = 0; i < path.size(); i++) {
-			if (render->getDynamicObject(path[i]) != NULL) {
-				render->getDynamicObject(path[i])->setRGBcolor(glm::vec3(0.929f, 0.109f, 0.141f));
-			}
-		}
-	}
-
 	if (key.keysym.sym == SDLK_PAGEUP) {
 		size_t car01 = render->addVehicle(5);
 		size_t car02 = render->addVehicle(11); 

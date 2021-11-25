@@ -76,3 +76,7 @@ void Dijkstra::run() {
         }
     }
 }
+
+int  Dijkstra::getStartNode() {
+    return startNode;
+}

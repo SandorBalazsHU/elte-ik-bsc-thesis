@@ -86,6 +86,7 @@ public:
 private:
 	ImGuiWindowFlags trafficSimulationWindowFlag = 0;
 	ImGuiWindowFlags mapEditorWindowFlag = 0;
+	ImGuiWindowFlags pathFinderTestWindowFlag = 0;
 	bool openWindowStatus = false;
 	bool saveWindowStatus = false;
 	bool saveAsWindowStatus = false;
@@ -97,6 +98,7 @@ private:
 	bool graphicSettingsWindowStatus = false;
 	bool debugOptionsWindowStatus = false;
 	bool runningStatisticsWindowStatus = false;
+	bool pathFinderTestWindowStatus = false;
 
 	/**
 	 * @brief The current binded working window.
@@ -192,6 +194,11 @@ private:
 	 * @brief Window for the running statistics.
 	*/
 	void runningStatisticsWindow();
+
+	/**
+	 * @brief Pathfinder test window. 
+	*/
+	void pathFinderTestWindow();
 
 	/**
 	 * @brief Show a help when howered.

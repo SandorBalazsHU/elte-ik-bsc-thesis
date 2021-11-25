@@ -17,6 +17,8 @@ Javaslatok:
 - warning elimináció
 - this
 
+- REAL OBJECT AND DYN COUNTS! Még hasznos lehet a renderban.
+
 Ötletek:
 - Törlés gomb mûködése
 - Úthossz számítás
