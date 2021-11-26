@@ -1,3 +1,30 @@
+Autó animáció:
+	Az animátor gráfot generál.
+	Az animátor végigmegy a start pontokon és a beállításai szerinti autókat hozáadja a renderhez rejtve. 
+	Minden autának átadja a gráf pointert és random célt ad hozzá, paraméterezi.
+	Az animátor frissítgetni kezdi az összes már kiküldött autót.
+	Az autó minden egyik útról a másikba átlépéskor új útvonalat tervez.
+	Az élek tároljék a rajtuk lévõ autókat és ez alapján állítják a súlyukat. Hossz + telítettségi százalék.
+	Az autóban van aktuális él, aktuális pont, gráf pointer és aktuális útvonal. Ha átlép egy másik útra már onnan tervez utat.
+	Minden ciklusban 1 pontot lép az autó, a várakozási idõ tényezõt az út hosszparamétere adja meg.
+	Ha az út végére ér átlép az útvonalterv szerinti következõre és újra kezdi a lépkedést.
+	Az autó tudja és tárolja, hogy mi a következõ lépés az animátor csak frissíti az összeset.
+	A pontokban counterek vannak és minden x.- körben hozzáad egy új autót és csökkenti a countert.
+	Két dolog dönti el, hogy léphet-e. Van e másik elõtte, letelt-e az idõ.
+	Átlépési sor? Jobbkéz szabály? Melyik léphet egy keresztezõdésnél. Ezt ki kell találni.
+	A csomópontok prioritási listát hoznak létre szögek alapján. Ezek FV-be foglaltak, azonnaliak.
+	Az útvonaltervezések külön szálon futnak.
+	Az átlépési engedélyt a csomóponttól kell kérnie az autónak.
+	(Sorban teszetelünk. Ez gond?) A csomópontnak az összes autót meg kell néznie, hogy melyik menjen elõsször.
+	A frissítésnél az autók beregisztrálnak a csomópontnál átlépésre az animator render update lépésnél.
+	A lépés után végigmegyünk a csomópontokon is és azok adnak engedélyt és update-elnek egyet az autókon amik léphetnek.
+	Az autók update parancsra lépnek. Update() fv.
+	Az animator Update-ját a render hívja. A render update-eli az összes autót, majd az összes csomópontot is.
+	(Az autók feliratkoznak, a csomópontok léptetnek.)
+
+
+
+
 Javaslatok:
 - //Javasolt endpoint is deleted, marker is deleted hozzáadása ami törli a hibás út függõségeket.
 - OBJECT3D ROAD RENDES DESTRUCTOR tag destruktor hívásokkal
@@ -8,15 +35,11 @@ Javaslatok:
 - A headerben csak definíciók legyenek
 - ImGui::SameLine(); ShowHelpMarker(""); használata
 - Ahol lehet referencia szerinti átadás és konstansok.
-
 -stick A = -1 sizeT probléma.
-
 - felesleges include-ok
-
 - referencia szeritni átadás?
 - warning elimináció
 - this
-
 - REAL OBJECT AND DYN COUNTS! Még hasznos lehet a renderban.
 
 Ötletek:
@@ -73,20 +96,3 @@ x Nagyobb asztal, blokkoló keretekkel.
 
 Ha lesz rá idõ:
 * Kattintás gyorsítás.
-
-
-
-
-
-Grafikai beállítások a menübe, beállítási lehetõség a render bind-ben.
-/*
-	// --- Config --- 
-	//faceTestOn();
-	multisamplingOn();
-	vsyncOn();
-	//SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
-	//wireframeOn();
-	//void vsyncOff();
-	fpsCounter::fpsLimiterOn();
-	fpsCounter::setFpsLimit(40);
-	*/
