@@ -14,19 +14,19 @@
 */
 class Edge {
 public:
-	Edge(size_t id, size_t road3DiD, size_t endpointA, size_t endpointB, float coast);
+	Edge(size_t id, size_t road3DiD, size_t endpointA, size_t endpointB, int coast);
 	~Edge();
 	void changePoint(size_t originalPoint, size_t newPoint);
 	size_t getID();
 	size_t getRoad3DiD();
 	size_t getEndpointA();
 	size_t getEndpointB();
-	float getCoast();
+	int getCoast();
 	bool match(size_t endpointA, size_t endpointB);
 private:
 	size_t id = -1;
 	size_t road3DiD = -1;
 	size_t endpointA = -1;
 	size_t endpointB = -1;
-	float coast = 0.0f;
+	int coast = 0;
 };

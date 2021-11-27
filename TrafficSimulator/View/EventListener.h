@@ -16,8 +16,8 @@ class WorkWindow;
 
 class EventListener {
 public:
-	EventListener();
-	~EventListener(void);
+	/*EventListener();
+	~EventListener(void);*/
 	void bind(WorkWindow* currentWindow);
 	void eventProcessor();
 	void select(size_t objectID);

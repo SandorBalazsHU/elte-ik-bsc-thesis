@@ -7,12 +7,12 @@
  * @brief The abstract graph Edge class.
  * Contact: sandorbalazs9402@gmail.com
 */
-#include "Edge.h";
+#include "Edge.h"
 #include <vector>
 #include <set>
 
 
-Edge::Edge(size_t id, size_t road3DiD, size_t endpointA, size_t endpointB, float coast) {
+Edge::Edge(size_t id, size_t road3DiD, size_t endpointA, size_t endpointB, int coast) {
 	this->id = id;
 	this->road3DiD = road3DiD;
 	this->endpointA = endpointA;
@@ -45,7 +45,7 @@ size_t Edge::getEndpointB() {
 	return this->endpointB;
 }
 
-float Edge::getCoast() {
+int Edge::getCoast() {
 	return this->coast;
 }
 

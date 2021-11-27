@@ -103,7 +103,7 @@ void Graph::initialise() {
 			Point* newPointB = new Point(j, i, this, 'B');
 			j++;
 			this->points.push_back(newPointB);
-			newEdge = new Edge(i, i, newPointA->getID(), newPointB->getID(), render->getDynamicObject(i)->getRoadLength());
+			newEdge = new Edge(i, i, newPointA->getID(), newPointB->getID(), (int) render->getDynamicObject(i)->getRoadLength());
 		} else {
 			newEdge = new Edge(-1, -1, -1, -1, -1);
 		}

@@ -10,11 +10,11 @@
 #include <glm/gtx/transform2.hpp>
 #include <iostream>
 
-EventListener::EventListener(void) {
+/*EventListener::EventListener(void) {
 }
 
 EventListener::~EventListener(void) {
-}
+}*/
 
 void EventListener::bind(WorkWindow* currentWindow) {
 	workingWindow = currentWindow;

@@ -41,6 +41,7 @@ Javaslatok:
 - warning elimináció
 - this
 - REAL OBJECT AND DYN COUNTS! Még hasznos lehet a renderban.
+- A pathfinder-t ne lehessen elindítani min 1 kijelölt cél és start nélkül. A szimulációt se.
 
 Ötletek:
 - Törlés gomb mûködése
