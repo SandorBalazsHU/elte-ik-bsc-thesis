@@ -30,14 +30,11 @@ Javaslatok:
 - OBJECT3D ROAD RENDES DESTRUCTOR tag destruktor hívásokkal
 - renderableobject pointeresre alakítása. object3d-k destruktora
 - INT -> SIZE_T
-- Object* elimináció helyette renderID
-- renderableObjects.size() elimináció
 - A headerben csak definíciók legyenek
 - ImGui::SameLine(); ShowHelpMarker(""); használata
 - Ahol lehet referencia szerinti átadás és konstansok.
--stick A = -1 sizeT probléma.
+- stick A = -1 sizeT probléma.
 - felesleges include-ok
-- referencia szeritni átadás?
 - warning elimináció
 - this
 - REAL OBJECT AND DYN COUNTS! Még hasznos lehet a renderban.
@@ -45,16 +42,7 @@ Javaslatok:
 
 Ötletek:
 - Törlés gomb mûködése
-- Úthossz számítás
 - Út jobbgombos menü
-
-- Gráf generálás
-- Útvonal generálás
-- Útvonal jelölés
-- Útvonal kiemelés
-- Autó végighaladás.
-- Színváltozással jelezze a végpont, ha kapcsolódott.
-- katalógusfájlba téma kategória oszlop beillesztése
 - logaritmikus mozgatás
 - 4-es asztal kiemelése globális változóba
 
@@ -86,6 +74,14 @@ Elkészült ötletek:
 + Nagy BUG teszt 1e
 + Kezdõpont hozzáadás
 + Controls menü!
++ Úthossz számítás
++ Gráf generálás
++ Útvonal generálás
++ Útvonal jelölés
++ Útvonal kiemelés
++ Autó végighaladás.
++ Object* elimináció helyette renderID
++ renderableObjects.size() elimináció
 
 Elvetett ötletek:
 x sorszám fügetlenítés. A cím legyen az elsõdleges kulcs.
@@ -94,6 +90,8 @@ x A jelölt út végpontra más út már ne ragadhasson.
 x Összekapcsolt útvég mozgatása
 x kategóriák
 x Nagyobb asztal, blokkoló keretekkel.
+x Színváltozással jelezze a végpont, ha kapcsolódott.
+x katalógusfájlba téma kategória oszlop beillesztése
 
 Ha lesz rá idõ:
 * Kattintás gyorsítás.
