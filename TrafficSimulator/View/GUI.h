@@ -100,6 +100,8 @@ private:
 	bool runningStatisticsWindowStatus = false;
 	bool pathFinderTestWindowStatus = false;
 
+	bool editorLock = false;
+
 	/**
 	 * @brief The current binded working window.
 	*/

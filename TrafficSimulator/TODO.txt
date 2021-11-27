@@ -21,11 +21,13 @@ Autó animáció:
 	Az autók update parancsra lépnek. Update() fv.
 	Az animator Update-ját a render hívja. A render update-eli az összes autót, majd az összes csomópontot is.
 	(Az autók feliratkoznak, a csomópontok léptetnek.)
-
-
-
+	Összességében egy ablakban lehet beállítani a start paramétereket: Autó lista, indítások száma.
 
 Javaslatok:
+- Zárolt szerkesztõ esetén a jobb gomb elengedése ne oldja fel az objektum kijelölést, csak a bal klikk
+- Zárolt szerkesztõ esetén csak egy út legyen kijelölhetõ
+
+
 - //Javasolt endpoint is deleted, marker is deleted hozzáadása ami törli a hibás út függõségeket.
 - OBJECT3D ROAD RENDES DESTRUCTOR tag destruktor hívásokkal
 - renderableobject pointeresre alakítása. object3d-k destruktora

@@ -23,6 +23,8 @@ public:
 	void select(size_t objectID);
 	void deselect();
 	void roadDeselect();
+	void lockEditor();
+	void freeEditor();
 private:
 	WorkWindow* workingWindow;
 	Camera* camera;
@@ -37,6 +39,8 @@ private:
 	std::vector<size_t> selectedItems;
 	std::vector<size_t> selectedRoads;
 	bool keepSelect = false;
+
+	bool editorLock = false;
 
 	glm::vec3 ray;
 

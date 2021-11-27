@@ -252,6 +252,20 @@ public:
 	*/
 	Animator animator;
 
+	/**
+	 * @brief Lock the editor functions
+	*/
+	void lockEditor();
+
+	/**
+	 * @brief Free the editor functions.
+	*/
+	void freeEditor();
+
+	/**
+	 * @brief Return true if the editor locked.
+	*/
+	bool isEditorLoced();
 
 private:
 	/**
@@ -274,6 +288,11 @@ private:
 	 * /attention Default value is TRUE.
 	*/
 	bool firstScreen = true;
+
+	/**
+	 * @brief Flag for editor locking.
+	*/
+	bool editorLock = false;
 
 	/**
 	 * @brief The access pointer for the current working window object.

@@ -62,8 +62,8 @@ void GUI::mainMenuBar() {
 	{
 		if (ImGui::BeginMenu("File"))
 		{
-			if (ImGui::MenuItem("New", "Ctrl+N", &newMapConfirmWindowStatus)) {}
-			if (ImGui::MenuItem("Open", "Ctrl+O", &openWindowStatus)) {}
+			if (ImGui::MenuItem("New", "Ctrl+N", &newMapConfirmWindowStatus, !editorLock)) {}
+			if (ImGui::MenuItem("Open", "Ctrl+O", &openWindowStatus, !editorLock)) {}
 			ImGui::Separator();
 			if (ImGui::MenuItem("Save", "Ctrl+S", &saveWindowStatus)) {}
 			if (ImGui::MenuItem("Save As..", "Ctrl+A", &saveAsWindowStatus)) {}
@@ -76,17 +76,18 @@ void GUI::mainMenuBar() {
 			ImGui::Separator();
 			if (ImGui::MenuItem("Running statistics", "CTRL+R", &runningStatisticsWindowStatus)) {}
 			if (ImGui::MenuItem("Debug options", "CTRL+D", &debugOptionsWindowStatus)) {}
-			if (ImGui::MenuItem("Pathfinder algorithm test.", "CTRL+P", &pathFinderTestWindowStatus)) {}
+			if (ImGui::MenuItem("Pathfinder algorithm test.", "CTRL+P", &pathFinderTestWindowStatus, !editorLock)) {}
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("Simulation"))
 		{
-			if (ImGui::MenuItem("START Simulation", "CTRL+Q")) {}
-			if (ImGui::MenuItem("STOP Simulation", "CTRL+W")) {}
+			if (ImGui::MenuItem("Finalizing", "CTRL+Q")) {}
+			if (ImGui::MenuItem("START Simulation", "CTRL+Q", editorLock, editorLock)) {}
+			if (ImGui::MenuItem("STOP Simulation", "CTRL+W", editorLock, editorLock)) {}
 			ImGui::Separator();
 			if (ImGui::MenuItem("Simulation settings", "CTRL+E")) {}
 			ImGui::Separator();
-			if (ImGui::MenuItem("Simulation statistics", "CTRL+f")) {}
+			if (ImGui::MenuItem("Simulation statistics", "CTRL+f", editorLock, editorLock)) {}
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("Help"))
@@ -171,7 +172,15 @@ void GUI::draw() {
 		ImGui::SameLine();
 		ImGui::Text("Traffic Simulation \nBy: Sandor Balazs \nAZA6NL");
 
-		if (ImGui::Button("- Finalizing map and start! -")) {}
+		if (ImGui::Button("- Finalizing map and start! -")) {
+			if (editorLock) {
+				editorLock = false;
+				windowRender->freeEditor();
+			} else {
+				editorLock = true;
+				windowRender->lockEditor();
+			}
+		}
 	}
 	ImGui::End();
 

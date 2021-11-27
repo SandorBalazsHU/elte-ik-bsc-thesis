@@ -50,9 +50,6 @@ void Render::bind(WorkWindow* currentWindow) {
 	mapLoader.bind(this);
 	mapSaver.bind(this);
 	animator.bind(this);
-	//TODO GUI Graphical settings
-	//fpsCounter::fpsLimiterOn();
-	//fpsCounter::setFpsLimit(45);
 	multisamplingOn();
 	vsyncOn();
 }
@@ -462,6 +459,29 @@ void Render::showAllRoadHitSpheres() {
 			if (showRoadTrack02) showRoadHitSphere(renderableRoads[i]->trackTwo, 0.3f, glm::vec3(1, 1, 0));
 		}
 	}
+}
+
+/**
+ * @brief Lock the editor functions
+*/
+void Render::lockEditor() {
+	this->editorLock = true;
+	this->workingWindow->getEventListener()->lockEditor();
+}
+
+/**
+ * @brief Free the editor functions.
+*/
+void Render::freeEditor() {
+	this->editorLock = false;
+	this->workingWindow->getEventListener()->freeEditor();
+}
+
+/**
+ * @brief Return true if the editor locked.
+*/
+bool Render::isEditorLoced() {
+	return this->editorLock;
 }
 
 /**

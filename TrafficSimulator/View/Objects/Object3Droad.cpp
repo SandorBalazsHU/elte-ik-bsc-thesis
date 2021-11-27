@@ -217,7 +217,7 @@ char  Object3Droad::markerTest(size_t marker) {
 void Object3Droad::select() {
 	setOpacity(0.5f);
 	for (size_t i = 0; i < 2; i++) render->getObject(roadEndCircles[i])->setOpacity(0.5f);
-	for (size_t i = 0; i < 4; i++) render->getObject(trackBalls[i])->show();
+	if(!render->isEditorLoced()) for (size_t i = 0; i < 4; i++) render->getObject(trackBalls[i])->show();
 	selected = true;
 }
 

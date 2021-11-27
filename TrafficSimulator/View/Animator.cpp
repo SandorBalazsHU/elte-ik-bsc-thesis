@@ -37,9 +37,10 @@ void Animator::timerUpdate() {
 
 void Animator::start() {
 	this->isAnimationRunning = true;
-	currentIndex = 0;
 	this->graph = new Graph(this->render);
 	graph->generateGraph();
+	/*startableCarsNumber = 0;
+	std::vector<size_t> startableCars;*/
 }
 
 void Animator::stop() {

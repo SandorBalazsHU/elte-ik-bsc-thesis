@@ -25,4 +25,7 @@ private:
 	Uint32 prevouseTime = 0;
 	bool isAnimationRunning = false;
 	size_t currentIndex = 0;
+
+	int startableCarsNumber = 40;
+	std::vector<size_t> startableCars;
 };

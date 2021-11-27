@@ -48,9 +48,9 @@ void EventListener::keyboardDown(SDL_KeyboardEvent& key) {
 	pressedKeys.insert(key.keysym.sym);
 	camera->keyboardDown(key);
 	if (key.keysym.sym == SDLK_ESCAPE) exit();
-	if (key.keysym.sym == SDLK_LCTRL) keepSelect = true;
-	if (key.keysym.sym == SDLK_RCTRL) keepSelect = true;
-	if (key.keysym.sym == SDLK_f) {
+	if (key.keysym.sym == SDLK_LCTRL && !editorLock) keepSelect = true;
+	if (key.keysym.sym == SDLK_RCTRL && !editorLock) keepSelect = true;
+	if (key.keysym.sym == SDLK_f && !editorLock) {
 		for (size_t i = 0; i < selectedRoads.size(); i++) {
 			render->getDynamicObject(selectedRoads[i])->setEndpointLock(false);
 		}
@@ -71,10 +71,18 @@ void EventListener::deleteSelectedItems() {
 void EventListener::keyboardUp(SDL_KeyboardEvent& key) {
 	pressedKeys.erase(key.keysym.sym);
 	camera->keyboardUp(key);
-	if (key.keysym.sym == SDLK_LCTRL) keepSelect = false;
-	if (key.keysym.sym == SDLK_RCTRL) keepSelect = false;
-	if (key.keysym.sym == SDLK_DELETE) deleteSelectedItems();
+	if (key.keysym.sym == SDLK_LCTRL) {
+		deselect();
+		keepSelect = false;
+	}
+	if (key.keysym.sym == SDLK_RCTRL) {
+		deselect();
+		keepSelect = false;
+	}
+	if (key.keysym.sym == SDLK_DELETE && !editorLock) deleteSelectedItems();
 
+
+	//-------------------------------------------------------------------------------------------
 	if (key.keysym.sym == SDLK_PAGEUP) {
 		size_t car01 = render->addVehicle(5);
 		size_t car02 = render->addVehicle(11); 
@@ -107,9 +115,9 @@ void EventListener::keyboardUp(SDL_KeyboardEvent& key) {
 	if (key.keysym.sym == SDLK_DOWN) {
 		render->animator.stop();
 	}
+	//-------------------------------------------------------------------------------------------
 
-
-	if (key.keysym.sym == SDLK_f) {
+	if (key.keysym.sym == SDLK_f && !editorLock) {
 		for (size_t i = 0; i < selectedRoads.size(); i++) {
 			render->getDynamicObject(selectedRoads[i])->setEndpointLock(true);
 		}
@@ -119,7 +127,7 @@ void EventListener::keyboardUp(SDL_KeyboardEvent& key) {
 //https://en.wikipedia.org/wiki/Rotation_of_axes
 void EventListener::mouseMove(SDL_MouseMotionEvent& mouse) {
 	camera->mouseMove(mouse);
-	if (mouse.state & SDL_BUTTON_RMASK) {
+	if ((mouse.state & SDL_BUTTON_RMASK) && !editorLock) {
 
 		glm::vec2 shift2D = glm::vec2(mouse.xrel / 4.0f, mouse.yrel / 4.0f);
 		float azimuth = camera->getAzimuth();
@@ -164,11 +172,13 @@ void EventListener::mouseDown(SDL_MouseButtonEvent& mouse) {
 	if (mouse.button == SDL_BUTTON_RIGHT) {
 		int selectedObjectId = getClickedObjectId(mouse);
 		if (selectedObjectId != -1) {
+			if (editorLock) deselect();
 			select(selectedObjectId);
 		}else{
 			for (size_t i = 0; i < render->getDynamicObjectsNumber(); i++)	{
 				if (render->getDynamicObject(i) != NULL) {
 					if (render->getDynamicObject(i)->isClicked(camera->getCameraPosition(), ray)) {
+						if (editorLock) roadDeselect();
 						render->getDynamicObject(i)->select();
 						selectedRoads.push_back(i);
 					}
@@ -178,19 +188,20 @@ void EventListener::mouseDown(SDL_MouseButtonEvent& mouse) {
 	}
 	if (mouse.button == SDL_BUTTON_LEFT) {
 		if(pressedKeys.find(SDLK_f) == pressedKeys.end()) roadDeselect();
+		if (editorLock) deselect();
 	}
 }
 
 void EventListener::mouseUp(SDL_MouseButtonEvent& mouse) {
 	moseButtonPressed.erase(mouse.button);
-	if (mouse.button == SDL_BUTTON_RIGHT) {
+	if (mouse.button == SDL_BUTTON_RIGHT && !editorLock) {
 		if(!keepSelect) deselect();
 	}
 }
 
 void EventListener::mouseWheel(SDL_MouseWheelEvent& wheel) {
 	if(moseButtonPressed.find(SDL_BUTTON_RIGHT) == moseButtonPressed.end()) camera->mouseWheel(wheel);
-	if (selectedItems.size() > 0) {
+	if (selectedItems.size() > 0 && !editorLock) {
 		for (size_t i = 0; i < selectedItems.size(); i++) {
 			if (wheel.y>0) render->getObject(selectedItems[i])->rotateLeft(10.0f);
 			if (wheel.y<0) render->getObject(selectedItems[i])->rotateRight(10.0f);
@@ -205,6 +216,13 @@ void EventListener::resize(SDL_WindowEvent& window) {
 	camera->resize(with, height);
 }
 
+void EventListener::lockEditor() {
+	this->editorLock = true;
+}
+
+void EventListener::freeEditor() {
+	this->editorLock = false;
+}
 
 void EventListener::exit() {
 	workingWindow->close();
