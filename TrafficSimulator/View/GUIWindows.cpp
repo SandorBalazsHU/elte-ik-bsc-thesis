@@ -485,11 +485,9 @@ void GUI::runningStatisticsWindow() {
 /**
  * @brief Pathfinder test window.
 */
-//&pathFinderTestWindowStatus
 void GUI::pathFinderTestWindow() {
 	pathFinderTestWindowFlag |= ImGuiWindowFlags_NoMove;
-	//pathFinderTestWindowFlag |= ImGuiWindowFlags_NoResize;
-	//pathFinderTestWindowFlag |= ImGuiWindowFlags_NoCollapse;
+	pathFinderTestWindowFlag |= ImGuiWindowFlags_NoCollapse;
 	if (ImGui::Begin("Pathfinder algorithm test.", &pathFinderTestWindowStatus, pathFinderTestWindowFlag)) {
 		static ImGuiTextBuffer logger;
 		std::stringstream log;

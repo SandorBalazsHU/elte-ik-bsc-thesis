@@ -3,7 +3,6 @@
 
 class Object3Dvehicle: public Object3D {
 public:
-	Object3Dvehicle(void);
 	Object3Dvehicle(ObjectStorage* objectStorage);
 	Object3Dvehicle(int id, std::string name, std::string type, std::string meshID, std::string textureID, std::string lightTexture, std::string breakTexture,
 	std::string rightTexture, std::string leftTexture, std::string iconID,

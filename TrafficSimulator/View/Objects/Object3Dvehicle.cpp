@@ -1,6 +1,5 @@
 #include "Object3Dvehicle.h"
 
-Object3Dvehicle::Object3Dvehicle() {};
 Object3Dvehicle::Object3Dvehicle(ObjectStorage* objectStorage) : Object3D(objectStorage) {};
 Object3Dvehicle::Object3Dvehicle(int id, std::string name, std::string type, std::string meshID, std::string textureID, std::string lightTexture, std::string breakTexture,
 	std::string rightTexture, std::string leftTexture, std::string iconID,

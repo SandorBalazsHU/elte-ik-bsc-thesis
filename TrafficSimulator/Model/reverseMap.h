@@ -7,21 +7,21 @@ class reverseMap {
 public:
     reverseMap() {}
     ~reverseMap() {}
-    int getValueByNode(int node);
-    void setValueByNode(int node, int newValue);
+    int getValueByNode(size_t node);
+    void setValueByNode(size_t node, int newValue);
     /**
      * @brief Remove the minimum value element and return it
      * @return std::pair<node,value>
     */
-    std::pair<int, int> removeMinimumValueElement();
-    void insert(int node, int value);
+    std::pair<size_t, int> removeMinimumValueElement();
+    void insert(size_t node, int value);
     bool empty();
-    bool isIn(int node);
-    std::map<int, int> nodeIndexedStore;
-    std::multimap<int, int> valueIndexedStore;
+    bool isIn(size_t node);
+    std::map<size_t, int> nodeIndexedStore;
+    std::multimap<int, size_t> valueIndexedStore;
 private:
     //std::map<int, int> nodeIndexedStore;
     //std::multimap<int, int> valueIndexedStore;
-    void changeElementIndex(const int oldIndex, const int newIndex, const int element);
-    void safeErase(int node, int value);
+    void changeElementIndex(const size_t oldIndex, const size_t newIndex, const int element);
+    void safeErase(size_t node, int value);
 };

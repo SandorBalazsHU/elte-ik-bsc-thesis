@@ -38,6 +38,8 @@ void Animator::timerUpdate() {
 void Animator::start() {
 	this->isAnimationRunning = true;
 	currentIndex = 0;
+	this->graph = new Graph(this->render);
+	graph->generateGraph();
 }
 
 void Animator::stop() {

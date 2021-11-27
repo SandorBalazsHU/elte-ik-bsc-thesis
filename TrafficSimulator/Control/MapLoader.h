@@ -7,8 +7,8 @@ class Render;
 
 class MapLoader {
 public:
-	MapLoader(void);
-	~MapLoader(void);
+	/*MapLoader(void);
+	~MapLoader(void);*/
 	void bind(Render* render);
 	void loadMap(std::string fileName);
 	std::vector<std::string> listFiles();
@@ -16,7 +16,7 @@ public:
 private:
 	const std::string fileType = ".csv";
 	std::string saveFolder = "Saves\\";
-	Render* render;
+	Render* render = NULL;
 	std::vector<std::vector<std::string>> parsedCSV;
 	void readCSV(std::string fileName);
 };

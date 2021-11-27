@@ -1,10 +1,10 @@
 #include "Dijkstra.h"
 
-void Dijkstra::addEdge(int fromNode, int toNode, int weight) {
+void Dijkstra::addEdge(size_t fromNode, size_t toNode, int weight) {
     matrix[fromNode][toNode] = weight;
 }
 
-void Dijkstra::addDoubleEdge(int node1, int node2, int weight) {
+void Dijkstra::addDoubleEdge(size_t node1, size_t node2, int weight) {
     matrix[node1][node2] = weight;
     matrix[node2][node1] = weight;
 }
@@ -34,7 +34,7 @@ void Dijkstra::prep() {
     from[startNode] = startNode;
 }
 
-void Dijkstra::initNext(int startNode) {
+void Dijkstra::initNext(size_t startNode) {
     for (size_t node = 0; node < nodesCount; node++) {
         if (matrix[startNode][node] != empty) {
             next.insert(node, matrix[startNode][node]);
@@ -42,21 +42,21 @@ void Dijkstra::initNext(int startNode) {
     }
 }
 
-void Dijkstra::initFrom(int startNode) {
+void Dijkstra::initFrom(size_t startNode) {
     for (size_t i = 0; i < nodesCount; i++) {
         if (matrix[startNode][i] != empty) from[i] = startNode;
     }
 }
 
-bool Dijkstra::isReady(int node) {
+bool Dijkstra::isReady(size_t node) {
     return ready.find(node) != ready.end();
 }
 
 void Dijkstra::run() {
     prep();
     while (!next.empty()) {
-        const std::pair<int, int> minNext = next.removeMinimumValueElement();
-        const int minNextNode = minNext.first;
+        const std::pair<size_t, int> minNext = next.removeMinimumValueElement();
+        const size_t minNextNode = minNext.first;
         const int minNextValue = minNext.second;
         ready.insert(minNextNode);
         distance[minNextNode] = minNextValue;
@@ -77,6 +77,6 @@ void Dijkstra::run() {
     }
 }
 
-int  Dijkstra::getStartNode() {
+size_t  Dijkstra::getStartNode() {
     return startNode;
 }

@@ -1,5 +1,5 @@
 Autó animáció:
-	Az animátor gráfot generál.
++	Az animátor gráfot generál.
 	Az animátor végigmegy a start pontokon és a beállításai szerinti autókat hozáadja a renderhez rejtve. 
 	Minden autának átadja a gráf pointert és random célt ad hozzá, paraméterezi.
 	Az animátor frissítgetni kezdi az összes már kiküldött autót.

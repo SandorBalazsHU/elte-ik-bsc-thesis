@@ -1,15 +1,15 @@
 #include "reverseMap.h"
 
-int reverseMap::getValueByNode(int node) {
+int reverseMap::getValueByNode(size_t node) {
     return nodeIndexedStore[node];
 }
-void reverseMap::setValueByNode(int node, int newValue) {
+void reverseMap::setValueByNode(size_t node, int newValue) {
     int oldValue = nodeIndexedStore[node];
     nodeIndexedStore[node] = newValue;
     changeElementIndex(oldValue, newValue, node);
 }
 
-void reverseMap::changeElementIndex(const int oldIndex, const int newIndex, const int element) {
+void reverseMap::changeElementIndex(const size_t oldIndex, const size_t newIndex, const int element) {
     std::vector<int> findedElements;
     auto it = valueIndexedStore.find(oldIndex);
     while (it != valueIndexedStore.end() && it->first == oldIndex) {
@@ -26,7 +26,7 @@ void reverseMap::changeElementIndex(const int oldIndex, const int newIndex, cons
     }
 }
 
-void reverseMap::safeErase(int node, int value) {
+void reverseMap::safeErase(size_t node, int value) {
     std::vector<int> findedElements;
     auto it = valueIndexedStore.find(value);
     while (it != valueIndexedStore.end() && it->first == value) {
@@ -43,23 +43,23 @@ void reverseMap::safeErase(int node, int value) {
  * @brief Remove the minimum value element and return it
  * @return std::pair<node,value>
 */
-std::pair<int, int> reverseMap::removeMinimumValueElement() {
-    const int minimumNode = valueIndexedStore.begin()->second;
+std::pair<size_t, int> reverseMap::removeMinimumValueElement() {
+    const size_t minimumNode = valueIndexedStore.begin()->second;
     const int minimumValue = valueIndexedStore.begin()->first;
     safeErase(minimumNode, minimumValue);
     nodeIndexedStore.erase(minimumNode);
-    return std::pair<int, int>(minimumNode, minimumValue);
+    return std::pair<size_t, int>(minimumNode, minimumValue);
 }
 
-void reverseMap::insert(int node, int value) {
-    nodeIndexedStore.insert(std::pair<int, int>(node, value));
-    valueIndexedStore.insert(std::pair<int, int>(value, node));
+void reverseMap::insert(size_t node, int value) {
+    nodeIndexedStore.insert(std::pair<size_t, int>(node, value));
+    valueIndexedStore.insert(std::pair<int, size_t>(value, node));
 }
 
 bool reverseMap::empty() {
     return nodeIndexedStore.empty() && valueIndexedStore.empty();
 }
 
-bool reverseMap::isIn(int node) {
+bool reverseMap::isIn(size_t node) {
     return nodeIndexedStore.find(node) != nodeIndexedStore.end();
 }

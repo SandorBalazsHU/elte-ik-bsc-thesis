@@ -4,20 +4,6 @@
 #include <iostream>
 
 Object3D::Object3D(ObjectStorage* objectStorage) {
-	this->id = -1;
-	this->renderID = -1;
-	this->dependencyID = -1;
-	this->name = "";
-	this->type = "";
-	this->meshID = "";
-	this->textureID = "white.png";
-	this->iconID = "sphere_mark_mini.png";
-	this->position = glm::vec3(0.0f, 0.0f, 0.0f);
-	this->scale = glm::vec3(1.0f, 1.0f, 1.0f);
-	this->rotation = glm::vec4(0.0f, 0.0f,	1.0f, 0.0f);
-	this->color = glm::vec4(1.0f, 0.0f, 0.0f, 0.0f);
-	this->hitSphere = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f);
-	this->moveSphere = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
 	this->objectStorage = objectStorage;
 }
 
@@ -40,6 +26,8 @@ Object3D::Object3D(int id, std::string name, std::string type, std::string meshI
 	this->moveSphere = moveSphere;
 	this->objectStorage = objectStorage;
 }
+
+Object3D::~Object3D(void) {};
 
 void Object3D::setRenderID(int newRenderID) {
 	this->renderID = newRenderID;

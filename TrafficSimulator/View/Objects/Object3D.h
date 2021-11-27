@@ -8,12 +8,11 @@ class ObjectStorage;
 
 class Object3D {
 	public:
-		Object3D() {};
 		Object3D(ObjectStorage* objectStorage);
 		Object3D(int id, std::string name, std::string type, std::string meshID, std::string textureID, std::string iconID,
 			glm::vec3 initPosition, glm::vec3 initScale, glm::vec4 initRotation,
 			glm::vec4 color, glm::vec4	hitSphere, glm::vec4 moveSphere, ObjectStorage* objectStorage);
-		~Object3D(void) {}
+		~Object3D(void);
 		void					setDependencyID(int dependencyID);
 		void					setMeshID(std::string meshID);
 		void					setTextureID(std::string textureID);
@@ -65,21 +64,21 @@ class Object3D {
 
 	protected:
 		ObjectStorage*			objectStorage;
-		int 					id;
-		int 					renderID;
-		int						dependencyID;
-		std::string				name;
-		std::string				type;
-		std::string				meshID;
-		std::string				textureID;
-		std::string				iconID;
-		glm::vec4				color;
-		glm::vec3				position;
-		glm::vec3				scale;
-		glm::vec4				rotation;
-		glm::vec4				worldMatrix;
-		glm::vec4				hitSphere;
-		glm::vec4				moveSphere;
+		int 					id = -1;
+		int 					renderID = -1;
+		int						dependencyID = -1;
+		std::string				name = "";
+		std::string				type = "";
+		std::string				meshID = "";
+		std::string				textureID = "white.png";
+		std::string				iconID = "sphere_mark_mini.png";
+		glm::vec4				color = glm::vec4(1.0f, 0.0f, 0.0f, 0.0f);
+		glm::vec3				position = glm::vec3(0.0f, 0.0f, 0.0f);
+		glm::vec3				scale = glm::vec3(1.0f, 1.0f, 1.0f);
+		glm::vec4				rotation = glm::vec4(0.0f, 0.0f, 1.0f, 0.0f);
+		glm::vec4				worldMatrix = glm::vec4(1.0f);
+		glm::vec4				hitSphere = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f);
+		glm::vec4				moveSphere = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
 		bool					hidden = false;
 		bool					protection = false;
 		bool					selectable = true;

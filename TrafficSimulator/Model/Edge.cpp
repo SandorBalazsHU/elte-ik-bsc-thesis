@@ -8,7 +8,6 @@
  * Contact: sandorbalazs9402@gmail.com
 */
 #include "Edge.h";
-
 #include <vector>
 #include <set>
 

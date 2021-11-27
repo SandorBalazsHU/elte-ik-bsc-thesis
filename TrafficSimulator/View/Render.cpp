@@ -25,14 +25,14 @@
 /**
  * @brief Render constructor.
 */
-Render::Render(void) {
-}
+/*Render::Render(void) {
+}*/
 
 /**
 * Render destructor.
 */
-Render::~Render(void) {
-}
+/*Render::~Render(void) {
+}*/
 
 /**
  * @brief Binding the render to the window.
@@ -324,7 +324,7 @@ void Render::deleteVehicle(size_t renderableVehicleID) {
  * @param id renderID
  * @return The scene object.
 */
-Object3D* Render::getObject(int id) {
+Object3D* Render::getObject(size_t id) {
 	/*if (renderableObjects.size() <= id) {
 		std::cout << "getObject OVERINDEXING " << renderableObjects.size() << "-" << id << std::endl;
 	}

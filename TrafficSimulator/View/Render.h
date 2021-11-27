@@ -35,12 +35,12 @@ public:
 	/**
 	 * @brief Render constructor.
 	*/
-	Render(void);
+	//Render(void);
 
 	/**
 	* Render destructor.
 	*/
-	~Render(void);
+	//~Render(void);
 
 	/**
 	 * @brief Binding the render to the window.
@@ -158,7 +158,7 @@ public:
 	 * @param id renderID
 	 * @return The scene object.
 	*/
-	Object3D* getObject(int renderID);
+	Object3D* getObject(size_t renderID);
 
 	/**
 	 * @brief Getter for the RenderableRoads size.

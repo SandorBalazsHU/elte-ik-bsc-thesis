@@ -6,6 +6,7 @@ class Render;
 #include<vector>
 #include<set>
 #include<SDL.h>
+#include "../Model/Graph.h"
 
 class Animator {
 public:
@@ -17,10 +18,11 @@ public:
 	void stop();
 
 private:
-	Render* render;
+	Render* render = NULL;
+	Graph* graph = NULL;
 	void timerUpdate();
-	Uint32 currentTime;
-	Uint32 prevouseTime;
+	Uint32 currentTime = 0;
+	Uint32 prevouseTime = 0;
 	bool isAnimationRunning = false;
 	size_t currentIndex = 0;
 };
