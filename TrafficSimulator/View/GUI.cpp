@@ -176,6 +176,7 @@ void GUI::draw() {
 			if (ImGui::Button("-        Finalizing map        -")) {
 				editorLock = true;
 				windowRender->lockEditor();
+				mapEditorWindow = false;
 			}
 		}
 
@@ -183,6 +184,7 @@ void GUI::draw() {
 			if (ImGui::Button("- Back to edit mode -")) {
 				editorLock = false;
 				windowRender->freeEditor();
+				mapEditorWindow = true;
 			}
 			ImGui::SameLine();
 			if (ImGui::Button("- START -")) {
@@ -194,22 +196,25 @@ void GUI::draw() {
 	ImGui::SetNextWindowPos(ImVec2(0, 150), ImGuiSetCond_FirstUseEver);
 	ImGui::SetNextWindowSize(ImVec2(252, 643), ImGuiCond_FirstUseEver);
 	mapEditorWindowFlag |= ImGuiWindowFlags_NoMove;
-	if (ImGui::Begin("Map editor", NULL, mapEditorWindowFlag)) {
-		//fpsGraph();
-		ImGui::Text("Edit map and add new items:");
-		ImGui::Separator();
-		ImGui::Text("");
+	//mapEditorWindowFlag |= ImGuiWindowFlags_;
+	if (mapEditorWindow) {
+		if (ImGui::Begin("Map editor", &mapEditorWindow, mapEditorWindowFlag)) {
+			//fpsGraph();
+			ImGui::Text("Edit map and add new items:");
+			ImGui::Separator();
+			ImGui::Text("");
 
-		if (ImGui::ImageButton((void*)(intptr_t)objectStorage->getTexture("miniatures\\road_mini.png"), ImVec2(42, 42))) {
-			int newRoadID = windowRender->addRoad();
+			if (ImGui::ImageButton((void*)(intptr_t)objectStorage->getTexture("miniatures\\road_mini.png"), ImVec2(42, 42))) {
+				int newRoadID = windowRender->addRoad();
+			}
+			ImGui::SameLine();
+			if (ImGui::ImageButton((void*)(intptr_t)objectStorage->getTexture("miniatures\\delete_mini.png"), ImVec2(42, 42))) {
+				//TODO function
+			}
+			itemList();
 		}
-		ImGui::SameLine();
-		if (ImGui::ImageButton((void*)(intptr_t)objectStorage->getTexture("miniatures\\delete_mini.png"), ImVec2(42, 42))) {
-			//TODO function
-		}
-		itemList();
+		ImGui::End();
 	}
-	ImGui::End();
 }
 
 void GUI::render() {

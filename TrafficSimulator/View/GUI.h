@@ -99,6 +99,7 @@ private:
 	bool debugOptionsWindowStatus = false;
 	bool runningStatisticsWindowStatus = false;
 	bool pathFinderTestWindowStatus = false;
+	bool mapEditorWindow = true;
 
 	bool editorLock = false;
 
