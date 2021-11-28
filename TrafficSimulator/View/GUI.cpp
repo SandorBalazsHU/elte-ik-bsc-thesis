@@ -172,13 +172,20 @@ void GUI::draw() {
 		ImGui::SameLine();
 		ImGui::Text("Traffic Simulation \nBy: Sandor Balazs \nAZA6NL");
 
-		if (ImGui::Button("- Finalizing map and start! -")) {
-			if (editorLock) {
-				editorLock = false;
-				windowRender->freeEditor();
-			} else {
+		if (!editorLock) {
+			if (ImGui::Button("-        Finalizing map        -")) {
 				editorLock = true;
 				windowRender->lockEditor();
+			}
+		}
+
+		if (editorLock) {
+			if (ImGui::Button("- Back to edit mode -")) {
+				editorLock = false;
+				windowRender->freeEditor();
+			}
+			ImGui::SameLine();
+			if (ImGui::Button("- START -")) {
 			}
 		}
 	}
