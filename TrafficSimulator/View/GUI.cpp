@@ -159,8 +159,7 @@ void GUI::itemList() {
 
 void GUI::draw() {
 	ImGui::ShowTestWindow();
-	ImGui::SetNextWindowPos(ImVec2(0, 20), ImGuiSetCond_FirstUseEver);
-	ImGui::SetNextWindowSize(ImVec2(251, 130), ImGuiCond_FirstUseEver);
+
 	trafficSimulationWindowFlag |= ImGuiWindowFlags_NoMove;
 	trafficSimulationWindowFlag |= ImGuiWindowFlags_NoResize;
 	trafficSimulationWindowFlag |= ImGuiWindowFlags_NoCollapse;
@@ -177,6 +176,7 @@ void GUI::draw() {
 				editorLock = true;
 				windowRender->lockEditor();
 				mapEditorWindow = false;
+				simulationWindow = true;
 			}
 		}
 
@@ -185,6 +185,7 @@ void GUI::draw() {
 				editorLock = false;
 				windowRender->freeEditor();
 				mapEditorWindow = true;
+				simulationWindow = false;
 			}
 			ImGui::SameLine();
 			if (ImGui::Button("- START -")) {
@@ -193,13 +194,9 @@ void GUI::draw() {
 	}
 	ImGui::End();
 
-	ImGui::SetNextWindowPos(ImVec2(0, 150), ImGuiSetCond_FirstUseEver);
-	ImGui::SetNextWindowSize(ImVec2(252, 643), ImGuiCond_FirstUseEver);
-	mapEditorWindowFlag |= ImGuiWindowFlags_NoMove;
-	//mapEditorWindowFlag |= ImGuiWindowFlags_;
 	if (mapEditorWindow) {
-		if (ImGui::Begin("Map editor", &mapEditorWindow, mapEditorWindowFlag)) {
-			//fpsGraph();
+		mapEditorWindowFlag |= ImGuiWindowFlags_NoMove;
+		if (ImGui::Begin("Map editor", NULL, mapEditorWindowFlag)) {
 			ImGui::Text("Edit map and add new items:");
 			ImGui::Separator();
 			ImGui::Text("");
@@ -212,6 +209,18 @@ void GUI::draw() {
 				//TODO function
 			}
 			itemList();
+		}
+		ImGui::End();
+	}
+
+	if (simulationWindow) {
+		simulationWindowFlag |= ImGuiWindowFlags_NoMove;
+		if (ImGui::Begin("Simulation", NULL, simulationWindowFlag)) {
+
+			ImGui::Text("TEST");
+			ImGui::Separator();
+			ImGui::Text("");
+
 		}
 		ImGui::End();
 	}

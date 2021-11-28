@@ -87,6 +87,7 @@ private:
 	ImGuiWindowFlags trafficSimulationWindowFlag = 0;
 	ImGuiWindowFlags mapEditorWindowFlag = 0;
 	ImGuiWindowFlags pathFinderTestWindowFlag = 0;
+	ImGuiWindowFlags simulationWindowFlag = 0;
 	bool openWindowStatus = false;
 	bool saveWindowStatus = false;
 	bool saveAsWindowStatus = false;
@@ -100,6 +101,7 @@ private:
 	bool runningStatisticsWindowStatus = false;
 	bool pathFinderTestWindowStatus = false;
 	bool mapEditorWindow = true;
+	bool simulationWindow = false;
 
 	bool editorLock = false;
 
