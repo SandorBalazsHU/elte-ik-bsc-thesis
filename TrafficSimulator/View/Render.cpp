@@ -301,7 +301,7 @@ int Render::addRoad() {
  * @return The added vehicle renderID.
 */
 size_t Render::addVehicle(int objectStorageID) {
-	size_t newRenderID = renderableObjects.size();
+	size_t newRenderID = renderableVehicles.size();
 	renderableVehicles.push_back(objectStorage->getObject3Dvehicle(objectStorageID, newRenderID));
 	return newRenderID;
 }

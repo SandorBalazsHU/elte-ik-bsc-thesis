@@ -25,6 +25,7 @@ public:
 	void roadDeselect();
 	void lockEditor();
 	void freeEditor();
+	void deleteSelectedItems();
 private:
 	WorkWindow* workingWindow;
 	Camera* camera;
@@ -43,8 +44,6 @@ private:
 	bool editorLock = false;
 
 	glm::vec3 ray;
-
-	void deleteSelectedItems();
 
 	void keyboardDown(SDL_KeyboardEvent&);
 	void keyboardUp(SDL_KeyboardEvent&);

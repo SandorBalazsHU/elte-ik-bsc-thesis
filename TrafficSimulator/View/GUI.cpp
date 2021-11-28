@@ -7,6 +7,8 @@
  * @brief GUI Descriptor class.
  * Contact: sandorbalazs9402@gmail.com
  * KSP
+ * alarm 1202
+ * sce to aux
 */
 
 #include "GUI.h"
@@ -157,6 +159,24 @@ void GUI::itemList() {
 	}
 }
 
+/**
+ * @brief Car list.
+*/
+void GUI::carList() {
+	int i = 0;
+	std::map<int, Object3Dvehicle>::iterator it = objectStorage->object3Dvehicles.begin();
+	while (it != objectStorage->object3Dvehicles.end()) {
+		if (it->second.getType() == "vehicle") {
+			if (ImGui::ImageButton((void*)(intptr_t)it->second.getIcon(), ImVec2(100, 100), ImVec2(0, 0), ImVec2(1, 1), -1, ImColor(255, 255, 255, 100))) {
+				//int renderableObjectID = windowRender->addObject(it->first);
+				int renderableObjectID = windowRender->addVehicle(it->first);
+			}
+			if (i++ % 2 == 0) ImGui::SameLine();
+		}
+		it++;
+	}
+}
+
 void GUI::draw() {
 	ImGui::ShowTestWindow();
 
@@ -206,7 +226,7 @@ void GUI::draw() {
 			}
 			ImGui::SameLine();
 			if (ImGui::ImageButton((void*)(intptr_t)objectStorage->getTexture("miniatures\\delete_mini.png"), ImVec2(42, 42))) {
-				//TODO function
+				workingWindow->getEventListener()->deleteSelectedItems();
 			}
 			itemList();
 		}
@@ -220,6 +240,8 @@ void GUI::draw() {
 			ImGui::Text("TEST");
 			ImGui::Separator();
 			ImGui::Text("");
+
+			carList();
 
 		}
 		ImGui::End();

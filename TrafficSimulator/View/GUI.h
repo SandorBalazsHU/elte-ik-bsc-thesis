@@ -105,6 +105,10 @@ private:
 
 	bool editorLock = false;
 
+	size_t coloringCounter = 0;
+
+	std::vector<size_t> path;
+
 	/**
 	 * @brief The current binded working window.
 	*/
@@ -166,9 +170,14 @@ private:
 	void newMapConfirmWindow();
 
 	/**
-	 * @brief Item list window.
+	 * @brief Item list.
 	*/
 	void itemList();
+
+	/**
+	 * @brief Car list.
+	*/
+	void carList();
 
 	/**
 	 * @brief Window for the controls tutorial.
