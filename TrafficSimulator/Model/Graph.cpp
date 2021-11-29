@@ -71,7 +71,7 @@ Dijkstra* Graph::generateDijkstra(size_t startPoint) {
 	return dijkstra;
 }
 
-/*std::vector<size_t> Graph::getPath(Dijkstra* dijkstra, size_t target) {
+std::vector<size_t> Graph::getPath(Dijkstra* dijkstra, size_t target) {
 	std::vector<size_t> path;
 	size_t index = target;
 	size_t value = -1;
@@ -87,7 +87,7 @@ Dijkstra* Graph::generateDijkstra(size_t startPoint) {
 		std::vector<size_t> repetitions;
 		size_t a = this->edges[path[i]]->getEndpointA();
 		size_t b = this->edges[path[i]]->getEndpointB();
-		for (size_t j = 0; j < path.size(); j++) if (this->edges[path[j]]->match(a, b)) repetitions.push_back(j);
+		for (size_t j = 0; j < path.size(); j++) if (this->edges[path[j]]->match(a, b)) repetitions.push_back(path[j]);
 
 		if (repetitions.size() > 1) {
 			size_t minID = 0;
@@ -104,18 +104,15 @@ Dijkstra* Graph::generateDijkstra(size_t startPoint) {
 			}
 		}
 	}
-	for (size_t d : deletable) {
-		path.erase(path.begin() + d);
-	}
 
 	std::vector<size_t> realPath;
 	for (size_t i = 0; i < path.size(); i++) {
-		realPath.push_back(this->edges[path[i]]->getRoad3DiD());
+		if(deletable.find(path[i]) == deletable.end()) realPath.push_back(this->edges[path[i]]->getRoad3DiD());
 	}
 	return realPath;
-}*/
+}
 
-std::vector<size_t> Graph::getPath(Dijkstra* dijkstra, size_t target) {
+/*std::vector<size_t> Graph::getPath(Dijkstra* dijkstra, size_t target) {
 	std::vector<size_t> path;
 	size_t index = target;
 	size_t value = -1;
@@ -126,7 +123,7 @@ std::vector<size_t> Graph::getPath(Dijkstra* dijkstra, size_t target) {
 		if (index == value) break;
 	} while ((index = dijkstra->from[index]) != dijkstra->getStartNode());
 	return path;
-}
+}*/
 
 void Graph::lockRoads() {
 	for (size_t i = 0; i < render->getDynamicObjectsNumber(); i++) {
