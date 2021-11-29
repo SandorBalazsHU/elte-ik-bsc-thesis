@@ -568,14 +568,6 @@ void GUI::pathFinderTestWindow() {
 			path = graph.getPath(dijkstra, endpoint);
 			coloringCounter = path.size() - 1;
 
-			//Path coloring
-			/*for (size_t i = 0; i < path.size(); i++) {
-				if (windowRender->getDynamicObject(path[i]) != NULL) {
-					SDL_Delay(1000);
-					windowRender->getDynamicObject(path[i])->setRGBcolor(glm::vec3(0.929f, 0.109f, 0.141f));
-				}
-			}*/
-
 			//Graph edges logging.
 			for (size_t i = 0; i < graph.getEdgesNumber(); i++) {
 				if(graph.getEdge(i)->getID() != -1) log << "Edge ID: " << graph.getEdge(i)->getID() << " Coast: " << graph.getEdge(i)->getCoast() << " Endpoint A: " << graph.getEdge(i)->getEndpointA() << " Endpoint B: " << graph.getEdge(i)->getEndpointB() << std::endl;
@@ -614,13 +606,31 @@ void GUI::pathFinderTestWindow() {
 
 			logger.append(log.str().c_str());
 		}
+		ImGui::SameLine();
+		if (ImGui::Button("Full path")) {
+			for (size_t i = 0; i < path.size(); i++) {
+				if (windowRender->getDynamicObject(path[i]) != NULL) {
+					windowRender->getDynamicObject(path[i])->setRGBcolor(glm::vec3(0.929f, 0.109f, 0.141f));
+				}
+			}
+		}
 
 		ImGui::SameLine();
-		if (ImGui::Button("Next")) {
+		if (ImGui::Button("Next step -->")) {
 			if (windowRender->getDynamicObject(path[coloringCounter]) != NULL) {
 				windowRender->getDynamicObject(path[coloringCounter])->setRGBcolor(glm::vec3(0.929f, 0.109f, 0.141f));
 			}
 			if (coloringCounter != 0) coloringCounter--;
+		}
+
+		ImGui::SameLine();
+		if (ImGui::Button("Clear")) {
+			for (size_t i = 0; i < windowRender->getDynamicObjectsNumber(); i++) {
+				if (windowRender->getDynamicObject(i) != NULL) {
+					windowRender->getDynamicObject(i)->setRGBcolor(glm::vec3(1, 1, 1));
+				}
+			}
+			coloringCounter = path.size() - 1;
 		}
 
 		ImGui::SameLine();
