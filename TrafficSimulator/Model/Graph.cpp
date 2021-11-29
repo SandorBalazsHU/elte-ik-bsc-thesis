@@ -106,7 +106,7 @@ std::vector<size_t> Graph::getPath(Dijkstra* dijkstra, size_t target) {
 	}
 
 	std::vector<size_t> realPath;
-	for (size_t i = 0; i < path.size(); i++) {
+	for (int i = path.size()-1; i >= 0 ; i--) {
 		if(deletable.find(path[i]) == deletable.end()) realPath.push_back(this->edges[path[i]]->getRoad3DiD());
 	}
 	return realPath;

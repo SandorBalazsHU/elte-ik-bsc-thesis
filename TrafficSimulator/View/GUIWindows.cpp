@@ -566,7 +566,7 @@ void GUI::pathFinderTestWindow() {
 
 			//Get path
 			path = graph.getPath(dijkstra, endpoint);
-			coloringCounter = path.size() - 1;
+			coloringCounter = 0;
 
 			//Graph edges logging.
 			for (size_t i = 0; i < graph.getEdgesNumber(); i++) {
@@ -602,7 +602,12 @@ void GUI::pathFinderTestWindow() {
 			}
 			log << std::endl;
 
+			log << std::endl;
 			//LOG PATH
+			for (size_t i = 0; i < path.size(); i++) {
+				log << path[i] << " ";
+			}
+			log << std::endl;
 
 			logger.append(log.str().c_str());
 		}
@@ -620,7 +625,7 @@ void GUI::pathFinderTestWindow() {
 			if (windowRender->getDynamicObject(path[coloringCounter]) != NULL) {
 				windowRender->getDynamicObject(path[coloringCounter])->setRGBcolor(glm::vec3(0.929f, 0.109f, 0.141f));
 			}
-			if (coloringCounter != 0) coloringCounter--;
+			if (coloringCounter < path.size()) coloringCounter++;
 		}
 
 		ImGui::SameLine();
