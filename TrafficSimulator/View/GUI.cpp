@@ -45,6 +45,7 @@ void GUI::bind(WorkWindow* currentWindow) {
 	objectStorage = workingWindow->getObjectStorage();
 	windowRender = currentWindow->getRender();
 	eventListener = currentWindow->getEventListener();
+	animator = windowRender->getAnimator();
 }
 
 void GUI::eventHandler(SDL_Event* event) {
@@ -193,10 +194,27 @@ void GUI::draw() {
 
 		if (!editorLock) {
 			if (ImGui::Button("-        Finalizing map        -")) {
-				editorLock = true;
-				windowRender->lockEditor();
-				mapEditorWindow = false;
-				simulationWindow = true;
+				animator->finalize();
+				if (animator->getGraph()->getEndPoints().size() > 0 && animator->getGraph()->getStartPoints().size() > 0) {
+					editorLock = true;
+					windowRender->lockEditor();
+					mapEditorWindow = false;
+					simulationWindow = true;
+					animator->finalize();
+				} else {
+					finalisingErrorWindow = true;
+				}
+			}
+			if (finalisingErrorWindow) {
+				ImGui::OpenPopup("Not enough start or endpoint.");
+				if (ImGui::BeginPopupModal("Not enough start or endpoint.")) {
+					ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "You must place one or more start and endpoint \nand stick thees to the roads.");
+					if (ImGui::Button("Close")) {
+						finalisingErrorWindow = false;
+						ImGui::CloseCurrentPopup();
+					}
+					ImGui::EndPopup();
+				}
 			}
 		}
 
@@ -208,6 +226,7 @@ void GUI::draw() {
 				simulationWindow = false;
 			}
 			ImGui::SameLine();
+			//TODO Pause and stop 
 			if (ImGui::Button("- START -")) {
 			}
 		}
@@ -275,4 +294,28 @@ void GUI::showHelpMarker(const char* desc) {
 		ImGui::PopTextWrapPos();
 		ImGui::EndTooltip();
 	}
+}
+
+/**
+ * @brief Show the selected endpoint info.
+ * @param pointModelID The selected point. (Model object!)
+*/
+void GUI::showEndpointInfo(size_t pointModelID) {
+	std::cout << "ENDPOINT INFO: " << pointModelID << std::endl;
+}
+
+/**
+ * @brief Show the selected road info.
+ * @param edgeModelID The selected edge. (Model object!)
+*/
+void GUI::showRoadInfo(size_t edgeModelID) {
+	std::cout << "EDGE INFO: " << edgeModelID << std::endl;
+}
+
+/**
+ * @brief Show the selected vehicle datas.
+ * @param vehicleModelID The selected vehicle. (Model object!)
+*/
+void GUI::showVehicleInfo(size_t vehicleModelID) {
+	std::cout << "VEHICLE INFO: " << vehicleModelID << std::endl;
 }

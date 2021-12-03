@@ -213,6 +213,11 @@ public:
 	bool roadHhitSphare = false;
 
 	/**
+	 * @brief Active the vehicle hit sphare drawing. (DebugFunction)
+	*/
+	bool vehicleHitSphare = false;
+
+	/**
 	 * @brief Show the road hit spheres. (DebugFunction)
 	*/
 	bool showRoadHitSphereMiddle = true;
@@ -246,11 +251,11 @@ public:
 	 * @brief Active the wireframe function for the roads. (DebugFunction)
 	*/
 	bool roadWireframe = false;
-
+	
 	/**
-	 * @brief The render's animator instance.
+	 * @brief Getter for Animator.
 	*/
-	Animator animator;
+	Animator* getAnimator();
 
 	/**
 	 * @brief Lock the editor functions
@@ -335,6 +340,11 @@ private:
 	MapSaver mapSaver;
 
 	/**
+	 * @brief The render's animator instance.
+	*/
+	Animator animator;
+
+	/**
 	 * @brief Set the texture for the object rendering.
 	 * @param texture The usable texture.
 	*/
@@ -416,7 +426,12 @@ private:
 	 * @brief Render the hit sphares for each scene objets. (Debug function)
 	 * @param renderID The actual object render ID.
 	*/
-	void showHitSphere(int renderID);
+	void showHitSphere(size_t renderID);
+
+	/**
+	 * @brief Render the hit sphares for each scene vehicle objets. (Debug function)
+	*/
+	void showVehicleHitSphere(size_t vehicleRenderID);
 
 	/**
 	 * @brief Render the hit sphares for each scene road objets. (Debug function)

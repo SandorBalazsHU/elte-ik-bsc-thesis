@@ -150,6 +150,13 @@ void Render::setWindowTitle(std::string title) {
 }
 
 /**
+ * @brief Getter for Animator.
+*/
+Animator* Render::getAnimator() {
+	return &animator;
+}
+
+/**
  * @brief Getter for the map loader program.
  * @return pointer for the map loader instance.
 */
@@ -225,7 +232,8 @@ void Render::rendering() {
 void Render::sceneInit() {
 	std::vector<int>& firstSceneElements = objectStorage->getFirstSceneElements();
 	for (size_t i = 0; i < firstSceneElements.size(); i++) {
-		addObject(firstSceneElements[i]);
+		size_t objectID = addObject(firstSceneElements[i]);
+		getObject(objectID)->setSelectable(false);
 	}
 }
 
@@ -236,6 +244,7 @@ void Render::clear() {
 	mapSaver.reset();
 	renderableObjects.clear();
 	renderableRoads.clear();
+	renderableVehicles.clear();
 	sceneInit();
 }
 
@@ -367,7 +376,7 @@ size_t Render::getDynamicObjectsNumber() {
  * @return The needed vehicle.
 */
 Object3Dvehicle* Render::getVehicle(size_t renderableVehicleID) {
-	return &this->renderableVehicles[renderableVehicleID];
+	return &renderableVehicles[renderableVehicleID];
 }
 
 /**
@@ -401,7 +410,7 @@ void Render::updateDynamicObject(size_t dynamicRenderID) {
 /**
  * @brief Render the hit sphares for each scene objets. (Debug function)
 */
-void Render::showHitSphere(int renderID) {
+void Render::showHitSphere(size_t renderID) {
 	Object3D hitSphere = objectStorage->getObject3D(1);
 	hitSphere.setPosition(glm::vec3(renderableObjects[renderID].getHitSphere().x,
 		renderableObjects[renderID].getHitSphere().y,
@@ -409,6 +418,24 @@ void Render::showHitSphere(int renderID) {
 	hitSphere.setScale(glm::vec3(renderableObjects[renderID].getHitSphere().w,
 		renderableObjects[renderID].getHitSphere().w,
 		renderableObjects[renderID].getHitSphere().w));
+	hitSphere.setOpacity(0.2f);
+
+	setTexture(hitSphere.getTexture());
+	shaderPreDrawingUpdate(hitSphere.getWorldMatrix(), hitSphere.getRGBAcolor());
+	drawMesh(hitSphere.getMesh());
+}
+
+/**
+ * @brief Render the hit sphares for each scene vehicle objets. (Debug function)
+*/
+void  Render::showVehicleHitSphere(size_t vehicleRenderID) {
+	Object3D hitSphere = objectStorage->getObject3D(1);
+	hitSphere.setPosition(glm::vec3(renderableVehicles[vehicleRenderID].getHitSphere().x,
+		renderableVehicles[vehicleRenderID].getHitSphere().y,
+		renderableVehicles[vehicleRenderID].getHitSphere().z));
+	hitSphere.setScale(glm::vec3(renderableVehicles[vehicleRenderID].getHitSphere().w,
+		renderableVehicles[vehicleRenderID].getHitSphere().w,
+		renderableVehicles[vehicleRenderID].getHitSphere().w));
 	hitSphere.setOpacity(0.2f);
 
 	setTexture(hitSphere.getTexture());
@@ -467,6 +494,9 @@ void Render::showAllRoadHitSpheres() {
 void Render::lockEditor() {
 	this->editorLock = true;
 	this->workingWindow->getEventListener()->lockEditor();
+	for (size_t i = 0; i < this->getDynamicObjectsNumber(); i++) {
+		this->getDynamicObject(i)->lockEditor();
+	}
 }
 
 /**
@@ -475,6 +505,9 @@ void Render::lockEditor() {
 void Render::freeEditor() {
 	this->editorLock = false;
 	this->workingWindow->getEventListener()->freeEditor();
+	for (size_t i = 0; i < this->getDynamicObjectsNumber(); i++) {
+		this->getDynamicObject(i)->freeEditor();
+	}
 }
 
 /**
@@ -513,7 +546,7 @@ void Render::renderScrean() {
 				setTexture(renderableVehicles[i].getTexture());
 				shaderPreDrawingUpdate(renderableVehicles[i].getWorldMatrix(), renderableVehicles[i].getRGBAcolor());
 				drawMesh(renderableVehicles[i].getMesh());
-				if (hitSphare) showHitSphere(i);
+				if (vehicleHitSphare) showVehicleHitSphere(i);
 			}
 		}
 	}

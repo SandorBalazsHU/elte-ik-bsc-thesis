@@ -28,6 +28,8 @@ Javaslatok:
 - Zárolt szerkesztõ esetén csak egy út legyen kijelölhetõ
 
 
+//TODO Nem old fel F-el az endpoint
+
 - //Javasolt endpoint is deleted, marker is deleted hozzáadása ami törli a hibás út függõségeket.
 - OBJECT3D ROAD RENDES DESTRUCTOR tag destruktor hívásokkal
 - renderableobject pointeresre alakítása. object3d-k destruktora
@@ -84,6 +86,8 @@ Elkészült ötletek:
 + Autó végighaladás.
 + Object* elimináció helyette renderID
 + renderableObjects.size() elimináció
++ OBJET3D SELECT, DESELECT function
++ car selection in eventlistener
 
 Elvetett ötletek:
 x sorszám fügetlenítés. A cím legyen az elsõdleges kulcs.

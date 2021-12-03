@@ -251,7 +251,7 @@ int WorkWindow::renderStart() {
 void WorkWindow::cleanup() {
 	GUI::clean();
 	SDL_GL_DeleteContext(context);
-	SDL_DestroyWindow(window);
+	//SDL_DestroyWindow(window);
 }
 
 /**

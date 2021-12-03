@@ -14,8 +14,12 @@ public:
 	~Animator(void);
 	void bind(Render* render);
 	void update();
+	void finalize();
 	void start();
+	void pause();
 	void stop();
+	size_t addVehicle(size_t type);
+	Graph* getGraph();
 
 private:
 	Render* render = NULL;

@@ -415,6 +415,9 @@ void GUI::debugOptionsWindow() {
 	ImGui::Checkbox("Show Hit Sharpe", &windowRender->hitSphare);
 
 	ImGui::Text("");
+	ImGui::Checkbox("Show Vehicle Hit Sharpe", &windowRender->vehicleHitSphare);
+
+	ImGui::Text("");
 	ImGui::Checkbox("Show Objects Wire frame", &windowRender->objectsWireframe);
 	ImGui::Text("");
 	ImGui::Checkbox("Show Roads Wire frame", &windowRender->roadWireframe);

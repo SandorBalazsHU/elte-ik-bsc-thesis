@@ -1,5 +1,7 @@
 /**
 * LRSSG
+* alarm 1202
+* sce to aux
 */
 
 #include "EventListener.h"
@@ -23,16 +25,44 @@ void EventListener::bind(WorkWindow* currentWindow) {
 	render = workingWindow->getRender();
 }
 
+//TODO car selection in eventlistener
 void EventListener::select(size_t objectID) {
-	selectedItems.push_back(objectID);
-	render->getObject(objectID)->setOpacity(0.5);
+	if (!editorLock) {
+		selectedItems.push_back(objectID);
+		render->getObject(objectID)->select();
+	}
+	if ((render->getObject(objectID)->getName() == "Start sign" || render->getObject(objectID)->getName() == "Stop sign") && editorLock) {
+		deselect();
+		roadDeselect();
+		vehicleDeselect();
+		selectedItems.push_back(objectID);
+		render->getObject(objectID)->select();
+		gui->showEndpointInfo(render->getObject(objectID)->getModelID());
+	}
 }
 
 void EventListener::deselect() {
 	for (size_t i = 0; i < selectedItems.size(); i++) {
-		render->getObject(selectedItems[i])->setOpacity(1.0);
+		render->getObject(selectedItems[i])->deSelect();
 	}
 	selectedItems.clear();
+}
+
+void EventListener::roadSelect() {
+	for (size_t i = 0; i < render->getDynamicObjectsNumber(); i++) {
+		if (render->getDynamicObject(i) != NULL) {
+			if (render->getDynamicObject(i)->isClicked(camera->getCameraPosition(), ray)) {
+				if (editorLock) {
+					deselect();
+					roadDeselect();
+					vehicleDeselect();
+				}
+				render->getDynamicObject(i)->select();
+				selectedRoads.push_back(i);
+				if (editorLock) gui->showRoadInfo(render->getDynamicObject(i)->modelID);
+			}
+		}
+	}
 }
 
 void EventListener::roadDeselect() {
@@ -41,6 +71,25 @@ void EventListener::roadDeselect() {
 			render->getDynamicObject(selectedRoads[i])->deselect();
 		}
 		selectedRoads.clear();
+	}
+}
+
+void EventListener::vehicleSelect(size_t vehicleID) {
+	render->getVehicle(vehicleID)->select();
+	if (editorLock) {
+		deselect();
+		roadDeselect();
+		vehicleDeselect();
+		gui->showVehicleInfo(render->getVehicle(vehicleID)->getModelID());
+	}
+	this->selectedVehicle = vehicleID;
+}
+
+void EventListener::vehicleDeselect() {
+	if (this->selectedVehicle != -1) {
+		render->getVehicle(selectedVehicle)->deSelect();
+		//TODO Clear vehicle info in GUI
+		this->selectedVehicle = -1;
 	}
 }
 
@@ -85,37 +134,11 @@ void EventListener::keyboardUp(SDL_KeyboardEvent& key) {
 	//-------------------------------------------------------------------------------------------
 	if (key.keysym.sym == SDLK_PAGEUP) {
 		size_t car01 = render->addVehicle(5);
-		size_t car02 = render->addVehicle(11); 
-		if (render->getDynamicObjectsNumber() > 0) {
-			render->getVehicle(0)->setPosition(render->getDynamicObject(0)->trackOne[tmpCounter]);
-			render->getVehicle(1)->setPosition(render->getDynamicObject(0)->trackTwo[tmpCounter]);
-			render->getVehicle(0)->setRotation(glm::vec4(Object3Dvehicle::getMoveRtation(render->getDynamicObject(0)->trackOne[tmpCounter], render->getDynamicObject(0)->trackOne[tmpCounter + 1]), 0, 1, 0));
-			render->getVehicle(1)->setRotation(glm::vec4(Object3Dvehicle::getMoveRtation(render->getDynamicObject(0)->trackTwo[tmpCounter], render->getDynamicObject(0)->trackTwo[tmpCounter + 1]), 0, 1, 0));
-		}
-		/*if (render->getDynamicObjectsNumber() > 0) {
-			size_t i = SDL_GetTicks() % 100;
-			render->getObject(car01)->setPosition(render->getDynamicObject(0)->trackOne[i]);
-			render->getObject(car02)->setPosition(render->getDynamicObject(0)->trackTwo[i]);
-		}*/
+		size_t car02 = render->addVehicle(11);
+		render->getVehicle(car01)->move(glm::vec3(5, 0, 5));
+		render->getVehicle(car02)->move(glm::vec3(-5, 0, -5));
 	}
-
-	if (key.keysym.sym == SDLK_PAGEDOWN) { 
-		if (render->getDynamicObjectsNumber() > 0) {
-			render->getVehicle(0)->setPosition(render->getDynamicObject(0)->trackOne[tmpCounter]);
-			render->getVehicle(1)->setPosition(render->getDynamicObject(0)->trackTwo[tmpCounter]);
-			render->getVehicle(0)->setRotation(glm::vec4(Object3Dvehicle::getMoveRtation(render->getDynamicObject(0)->trackOne[tmpCounter], render->getDynamicObject(0)->trackOne[tmpCounter + 1]), 0, 1, 0));
-			render->getVehicle(1)->setRotation(glm::vec4(Object3Dvehicle::getMoveRtation(render->getDynamicObject(0)->trackTwo[tmpCounter], render->getDynamicObject(0)->trackTwo[tmpCounter + 1]), 0, 1, 0));
-		}
-		tmpCounter++;
-	}
-
-	if (key.keysym.sym == SDLK_UP) {
-		render->animator.start();
-	}
-	if (key.keysym.sym == SDLK_DOWN) {
-		render->animator.stop();
-	}
-	//-------------------------------------------------------------------------------------------
+	//---------------------------------------------------------------------------------------
 
 	if (key.keysym.sym == SDLK_f && !editorLock) {
 		for (size_t i = 0; i < selectedRoads.size(); i++) {
@@ -170,25 +193,26 @@ void EventListener::mouseMove(SDL_MouseMotionEvent& mouse) {
 void EventListener::mouseDown(SDL_MouseButtonEvent& mouse) {
 	moseButtonPressed.insert(mouse.button);
 	if (mouse.button == SDL_BUTTON_RIGHT) {
-		int selectedObjectId = getClickedObjectId(mouse);
+		size_t selectedObjectId = getClickedObjectId(mouse);
 		if (selectedObjectId != -1) {
-			if (editorLock) deselect();
+			//if (editorLock) deselect();
 			select(selectedObjectId);
-		}else{
-			for (size_t i = 0; i < render->getDynamicObjectsNumber(); i++)	{
-				if (render->getDynamicObject(i) != NULL) {
-					if (render->getDynamicObject(i)->isClicked(camera->getCameraPosition(), ray)) {
-						if (editorLock) roadDeselect();
-						render->getDynamicObject(i)->select();
-						selectedRoads.push_back(i);
-					}
-				}
-			}
+		}
+		size_t selectedVehicleId = getClickedObjectId(mouse, true);
+		if (selectedObjectId == -1 && selectedVehicleId != -1 && editorLock) {
+			vehicleSelect(selectedObjectId);
+		}
+		if (selectedObjectId == -1 && selectedVehicleId == -1) {
+			roadSelect();
 		}
 	}
 	if (mouse.button == SDL_BUTTON_LEFT) {
 		if(pressedKeys.find(SDLK_f) == pressedKeys.end()) roadDeselect();
-		if (editorLock) deselect();
+		if (editorLock) {
+			deselect();
+			roadDeselect();
+			vehicleDeselect();
+		}
 	}
 }
 

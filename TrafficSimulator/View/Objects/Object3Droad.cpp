@@ -202,13 +202,13 @@ char  Object3Droad::markerTest(size_t marker) {
 	if ((glm::distance(getEndpointA(), render->getObject(marker)->getPosition()) < shift + 1) && endpointLock) {
 		result = 'A';
 		markerA = marker;
-		render->getObject(marker)->setSelectable(false);
+		if (!editorLock) render->getObject(marker)->setSelectable(false);
 		render->getObject(marker)->setPosition(getEndpointA());
 	}
 	if ((glm::distance(getEndpointB(), render->getObject(marker)->getPosition()) < shift + 1) && endpointLock) {
 		result = 'B';
 		markerB = marker;
-		render->getObject(marker)->setSelectable(false);
+		if (!editorLock) render->getObject(marker)->setSelectable(false);
 		render->getObject(marker)->setPosition(getEndpointB());
 	}
 	return result;
@@ -358,4 +358,16 @@ void Object3Droad::setEndpointLock(bool lock) {
 	if (markerB != -1) render->getObject(markerB)->setSelectable(true);
 	markerA = -1;
 	markerB = -1;
+}
+
+void Object3Droad::lockEditor() {
+	this->editorLock = true;
+	if (this->markerA != -1) this->render->getObject(this->markerA)->setSelectable(true);
+	if (this->markerB != -1) this->render->getObject(this->markerB)->setSelectable(true);
+}
+
+void Object3Droad::freeEditor() {
+	this->editorLock = false;
+	//if (this->markerA != -1) this->render->getObject(this->markerA)->setSelectable(false);
+	//if (this->markerB != -1) this->render->getObject(this->markerB)->setSelectable(false);
 }

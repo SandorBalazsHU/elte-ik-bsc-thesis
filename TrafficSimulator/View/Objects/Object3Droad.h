@@ -53,6 +53,8 @@ public:
 	void					stuckTest(size_t road);
 	char					markerTest(size_t marker);
 	void					setEndpointLock(bool lock);
+	void					lockEditor();
+	void					freeEditor();
 
 	std::vector<glm::vec3> points;
 	std::vector<glm::vec3> shiftedpoints_1;
@@ -67,6 +69,8 @@ public:
 
 	size_t markerA = -1;
 	size_t markerB = -1;
+
+	size_t modelID = -1;
  
 	float getRoadLength();
 
@@ -99,6 +103,7 @@ private:
 	size_t markerA = -1;
 	size_t markerB = -1;*/
 
+	bool editorLock = false;
 
 	float shift = 2.0f;
 	size_t trackBalls[4];

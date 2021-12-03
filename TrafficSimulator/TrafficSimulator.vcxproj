@@ -160,6 +160,7 @@
     <ClCompile Include="Model\Graph.cpp" />
     <ClCompile Include="Model\Point.cpp" />
     <ClCompile Include="Model\reverseMap.cpp" />
+    <ClCompile Include="Model\Vehicle.cpp" />
     <ClCompile Include="T:\OGLPack\include\imgui\imgui.cpp" />
     <ClCompile Include="T:\OGLPack\include\imgui\imgui_demo.cpp" />
     <ClCompile Include="T:\OGLPack\include\imgui\imgui_draw.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="Model\Graph.h" />
     <ClInclude Include="Model\Point.h" />
     <ClInclude Include="Model\reverseMap.h" />
+    <ClInclude Include="Model\Vehicle.h" />
     <ClInclude Include="T:\OGLPack\include\imgui\imconfig.h" />
     <ClInclude Include="T:\OGLPack\include\imgui\imgui.h" />
     <ClInclude Include="T:\OGLPack\include\imgui\imgui_impl_sdl_gl3.h" />

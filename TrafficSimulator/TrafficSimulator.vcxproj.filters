@@ -135,6 +135,9 @@
     <ClCompile Include="View\Animator.cpp">
       <Filter>Source Files\View</Filter>
     </ClCompile>
+    <ClCompile Include="Model\Vehicle.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="View\WorkWindow.h">
@@ -238,6 +241,9 @@
     </ClInclude>
     <ClInclude Include="View\Animator.h">
       <Filter>Source Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\Vehicle.h">
+      <Filter>Source Files\Model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

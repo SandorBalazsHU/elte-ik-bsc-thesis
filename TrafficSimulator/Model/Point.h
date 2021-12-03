@@ -99,6 +99,18 @@ public:
 	*/
 	bool isEndPoint();
 
+	/**
+	 * @brief Getter for the renderID. If it not have it is -1.
+	 * @return The renderID. If it not have it is -1.
+	*/
+	size_t getRenderID();
+
+	/**
+	 * @brief Setter for the renderID. If it not have it is -1. This is the default.
+	*/
+	void setRenderID(size_t id);
+
+
 private:
 
 	/**
@@ -110,6 +122,11 @@ private:
 	 * @brief This point belongs to this edge.
 	*/
 	size_t edge = -1;
+
+	/**
+	 * @brief The renderable object ID if it exist. If not exist -1.
+	*/
+	size_t renderID = -1;
 
 	/**
 	 * @brief This point belongs to this side of the edge.

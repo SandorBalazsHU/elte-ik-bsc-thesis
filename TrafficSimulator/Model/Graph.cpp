@@ -6,6 +6,7 @@
  * @date 2021.11.20.
  * @brief The abstract graph class.
  * Contact: sandorbalazs9402@gmail.com
+ * Spirit In The Sky
 */
 #pragma once
 
@@ -28,9 +29,6 @@ Graph::~Graph() {
 	}
 	for (size_t i = 0; i < edges.size(); i++)	{
 		delete edges[i];
-	}
-	for (size_t i = 0; i < dijkstras.size(); i++) {
-		delete dijkstras[i];
 	}
 }
 
@@ -158,12 +156,24 @@ void Graph::join() {
 			Edge* currentEdge = edges[i];
 			Object3Droad* currentRoad = render->getDynamicObject(i);
 			if (currentRoad->markerA != -1) {
-				if (render->getObject(currentRoad->markerA)->getName() == "Start sign")  points[currentEdge->getEndpointA()]->setAsStartPoint();
-				if (render->getObject(currentRoad->markerA)->getName() == "Stop sign")   points[currentEdge->getEndpointA()]->setAsEndpoint();
+				if (render->getObject(currentRoad->markerA)->getName() == "Start sign") {
+					points[currentEdge->getEndpointA()]->setAsStartPoint();
+					points[currentEdge->getEndpointA()]->setRenderID(currentRoad->markerA);
+				}
+				if (render->getObject(currentRoad->markerA)->getName() == "Stop sign") {
+					points[currentEdge->getEndpointA()]->setAsEndpoint();
+					points[currentEdge->getEndpointA()]->setRenderID(currentRoad->markerA);
+				}
 			}
 			if (currentRoad->markerB != -1) {
-				if (render->getObject(currentRoad->markerB)->getName() == "Start sign") points[currentEdge->getEndpointB()]->setAsStartPoint();
-				if (render->getObject(currentRoad->markerB)->getName() == "Stop sign")  points[currentEdge->getEndpointB()]->setAsEndpoint();
+				if (render->getObject(currentRoad->markerB)->getName() == "Start sign") {
+					points[currentEdge->getEndpointB()]->setAsStartPoint();
+					points[currentEdge->getEndpointB()]->setRenderID(currentRoad->markerB);
+				}
+				if (render->getObject(currentRoad->markerB)->getName() == "Stop sign") {
+					points[currentEdge->getEndpointB()]->setAsEndpoint();
+					points[currentEdge->getEndpointB()]->setRenderID(currentRoad->markerB);
+				}
 			}
 			if (currentRoad->stickMarkA != 'Q') {
 				if (currentRoad->stickMarkA == 'A') points[currentEdge->getEndpointA()]->join(points[edges[currentRoad->stickA]->getEndpointA()]);
@@ -186,6 +196,13 @@ void Graph::rebind() {
 		}
 	}
 	this->pointCount = j;
+
+	for (size_t i = 0; i < points.size(); i++) {
+		if (!points[i]->isErased() && (points[i]->isEndPoint() || points[i]->isStartPoint())) render->getObject(points[i]->getRenderID())->setModelID(points[i]->getID());
+	}
+	for (size_t i = 0; i < edges.size(); i++) {
+		if (edges[i]->getID() != -1) render->getDynamicObject(edges[i]->getRoad3DiD())->modelID = edges[i]->getID();
+	}
 }
 
 std::vector<size_t> Graph::getStartPoints() {

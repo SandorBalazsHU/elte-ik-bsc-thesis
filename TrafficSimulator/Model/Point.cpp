@@ -139,3 +139,18 @@ bool Point::isStartPoint() {
 bool Point::isEndPoint() {
 	return this->endPoint;
 }
+
+/**
+ * @brief Getter for the renderID. If it not have it is -1.
+ * @return The renderID. If it not have it is -1.
+*/
+size_t Point::getRenderID() {
+	return this->renderID;
+}
+
+/**
+ * @brief Setter for the renderID. If it not have it is -1. This is the default.
+*/
+void Point::setRenderID(size_t id) {
+	this->renderID = id;
+}

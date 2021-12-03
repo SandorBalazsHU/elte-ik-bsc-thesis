@@ -35,15 +35,35 @@ void Animator::timerUpdate() {
 	}
 }
 
+void Animator::finalize() {
+	delete this->graph;
+	this->graph = new Graph(this->render);
+	this->graph->generateGraph();
+}
+
 void Animator::start() {
 	this->isAnimationRunning = true;
-	this->graph = new Graph(this->render);
-	graph->generateGraph();
+
 	/*startableCarsNumber = 0;
 	std::vector<size_t> startableCars;*/
 }
 
+void Animator::pause() {
+
+}
+
 void Animator::stop() {
+	delete this->graph;
 	this->isAnimationRunning = false;
 	currentIndex = 0;
+}
+
+size_t Animator::addVehicle(size_t type) {
+	size_t vehicle = render->addVehicle(type);
+
+	return vehicle;
+}
+
+Graph* Animator::getGraph() {
+	return this->graph;
 }

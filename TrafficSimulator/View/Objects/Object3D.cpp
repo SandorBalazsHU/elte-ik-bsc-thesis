@@ -230,3 +230,26 @@ void Object3D::erase() {
 bool Object3D::isDeleted() {
 	return deleted;
 }
+
+size_t Object3D::getModelID() {
+	return this->modelID;
+}
+
+void Object3D::setModelID(size_t id) {
+	this->modelID = id;
+}
+
+void Object3D::select() {
+	this->setOpacity(0.5);
+	this->selected = true;
+	std::cout << "SELECTED" << std::endl;
+}
+
+void Object3D::deSelect() {
+	this->setOpacity(1.0);
+	this->selected = false;
+}
+
+bool Object3D::isSelected() {
+	this->selected;
+}

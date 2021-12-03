@@ -60,7 +60,11 @@ class Object3D {
 		void					show();
 		void					erase();
 		bool					isDeleted();
-
+		size_t					getModelID();
+		void					setModelID(size_t id);
+		void					select();
+		void					deSelect();
+		bool					isSelected();
 
 	protected:
 		ObjectStorage*			objectStorage;
@@ -83,4 +87,6 @@ class Object3D {
 		bool					protection = false;
 		bool					selectable = true;
 		bool					deleted = false;
+		size_t					modelID = -1;
+		bool					selected = true;
 	};

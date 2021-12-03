@@ -18,6 +18,7 @@ class EventListener;
 #include "imgui\imgui.h"
 #include "imgui\imgui_impl_sdl_gl3.h"
 #include "Objects/ObjectStorage.h"
+#include "Animator.h"
 
 class GUI {
 public:
@@ -83,6 +84,24 @@ public:
 	*/
 	void close();
 
+	/**
+	 * @brief Show the selected endpoint info.
+	 * @param pointModelID The selected point. (Model object!)
+	*/
+	void showEndpointInfo(size_t pointModelID);
+
+	/**
+	 * @brief Show the selected road info.
+	 * @param edgeModelID The selected edge. (Model object!)
+	*/
+	void showRoadInfo(size_t edgeModelID);
+
+	/**
+	 * @brief Show the selected vehicle datas.
+	 * @param vehicleModelID The selected vehicle. (Model object!)
+	*/
+	void showVehicleInfo(size_t vehicleModelID);
+
 private:
 	ImGuiWindowFlags trafficSimulationWindowFlag = 0;
 	ImGuiWindowFlags mapEditorWindowFlag = 0;
@@ -102,6 +121,8 @@ private:
 	bool pathFinderTestWindowStatus = false;
 	bool mapEditorWindow = true;
 	bool simulationWindow = false;
+
+	bool finalisingErrorWindow = false;
 
 	bool editorLock = false;
 
@@ -133,6 +154,11 @@ private:
 	 * @brief The current working event listener.
 	*/
 	EventListener* eventListener;
+
+	/**
+	 * @brief The actual animator class.
+	*/
+	Animator* animator;
 
 	/**
 	 * @brief The main menu bar description.
