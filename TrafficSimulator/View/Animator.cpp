@@ -51,7 +51,7 @@ void Animator::finalize() {
 			}
 		}
 	}
-	std::vector<size_t> endpoints = graph->getStartPoints();
+	std::vector<size_t> endpoints = graph->getEndPoints();
 	for (size_t i = 0; i < graph->getPointsNumber(); i++) {
 		if (graph->getPoint(i)->isStartPoint()) {
 			for (size_t j = 0; j < endpoints.size(); j++) {

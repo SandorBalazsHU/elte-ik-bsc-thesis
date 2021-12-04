@@ -195,10 +195,10 @@ void GUI::carList(size_t startPointModelID) {
 */
 void GUI::endpointSelector(size_t startPointID) {
 	Point* point = animator->getGraph()->getPoint(startPointID);
-	std::vector<size_t> endpoints = animator->getGraph()->getStartPoints();
+	std::vector<size_t> endpoints = animator->getGraph()->getEndPoints();
 	std::string labelText = "Endpoint: ";
 	for (size_t i = 0; i < endpoints.size(); i++)	{
-		std::string s = std::to_string(i);
+		std::string s = std::to_string(endpoints[i]);
 		bool currentCheckBox = point->endpointsList[i];
 		ImGui::Checkbox((labelText + s).c_str(), &currentCheckBox);
 		point->endpointsList[i] = currentCheckBox;
@@ -283,8 +283,13 @@ void GUI::draw() {
 		simulationWindowFlag |= ImGuiWindowFlags_NoMove;
 		if (ImGui::Begin("Simulation", NULL, simulationWindowFlag)) {
 
-			ImGui::Text("Select the start points for configuration.");
-			ImGui::Text("");
+			if (selectedStartPoint == -1 && selectedEndPoint == -1 && selectedRoad == -1 && selectedVehicle == -1) {
+				ImGui::Separator();
+				ImGui::Text("");
+				ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "Select the start points \nfor configuration. \nWhen you ready \nclick to START.");
+				ImGui::Text("");
+				ImGui::Separator();
+			}
 
 			if (this->selectedEndPoint != -1) {
 				ImGui::Separator();
@@ -295,7 +300,10 @@ void GUI::draw() {
 			}
 
 			if (this->selectedStartPoint != -1) {
-				ImGui::Text("The selected startpoint: %i", animator->getGraph()->getPoint(this->selectedStartPoint)->getID());
+				ImGui::Separator();
+				ImGui::Text("");
+				ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "The selected startpoint: %i", animator->getGraph()->getPoint(this->selectedStartPoint)->getID());
+				ImGui::Text("");
 				ImGui::Separator();
 				ImGui::Text("Select the target endpoints \nfrom this startpoint:");
 				endpointSelector(selectedStartPoint);
@@ -317,10 +325,10 @@ void GUI::draw() {
 			if (this->selectedRoad == -1) ImGui::Text("-1 selectedRoad");
 			if (this->selectedVehicle == -1) ImGui::Text("-1 selectedVehicle");*/
 
-			ImGui::Text("selectedStartPoint: %i", selectedStartPoint);
+			/*ImGui::Text("selectedStartPoint: %i", selectedStartPoint);
 			ImGui::Text("selectedEndPoint:   %i", selectedEndPoint);
 			ImGui::Text("selectedRoad:       %i", selectedRoad);
-			ImGui::Text("selectedVehicle:    %i", selectedVehicle);
+			ImGui::Text("selectedVehicle:    %i", selectedVehicle);*/
 
 		}
 		ImGui::End();
