@@ -163,18 +163,45 @@ void GUI::itemList() {
 /**
  * @brief Car list.
 */
-void GUI::carList() {
-	int i = 0;
+void GUI::carList(size_t startPointModelID) {
+	Point* point = animator->getGraph()->getPoint(startPointModelID);
+	size_t i = 0;
 	std::map<int, Object3Dvehicle>::iterator it = objectStorage->object3Dvehicles.begin();
 	while (it != objectStorage->object3Dvehicles.end()) {
 		if (it->second.getType() == "vehicle") {
-			if (ImGui::ImageButton((void*)(intptr_t)it->second.getIcon(), ImVec2(100, 100), ImVec2(0, 0), ImVec2(1, 1), -1, ImColor(255, 255, 255, 100))) {
-				//int renderableObjectID = windowRender->addObject(it->first);
-				int renderableObjectID = windowRender->addVehicle(it->first);
+			ImColor color(255, 255, 255, 255);
+			bool selected = true;
+			if (point->startConfiguration[i] != it->first) {
+				color = ImColor(255, 255, 255, 100);
+				selected = false;
+			}
+			if (ImGui::ImageButton((void*)(intptr_t)it->second.getIcon(), ImVec2(100, 100), ImVec2(0, 0), ImVec2(1, 1), -1, color)) {
+				//int renderableObjectID = windowRender->addVehicle(it->first);
+				if (selected) {
+					point->startConfiguration[i] = -1;
+				} else {
+					point->startConfiguration[i] = it->first;
+				}
 			}
 			if (i++ % 2 == 0) ImGui::SameLine();
 		}
 		it++;
+	}
+}
+
+/**
+ * @brief Endpoint selector generator for startpoint properties.
+ * @param startPointID The current startpoint.
+*/
+void GUI::endpointSelector(size_t startPointID) {
+	Point* point = animator->getGraph()->getPoint(startPointID);
+	std::vector<size_t> endpoints = animator->getGraph()->getStartPoints();
+	std::string labelText = "Endpoint: ";
+	for (size_t i = 0; i < endpoints.size(); i++)	{
+		std::string s = std::to_string(i);
+		bool currentCheckBox = point->endpointsList[i];
+		ImGui::Checkbox((labelText + s).c_str(), &currentCheckBox);
+		point->endpointsList[i] = currentCheckBox;
 	}
 }
 
@@ -256,11 +283,44 @@ void GUI::draw() {
 		simulationWindowFlag |= ImGuiWindowFlags_NoMove;
 		if (ImGui::Begin("Simulation", NULL, simulationWindowFlag)) {
 
-			ImGui::Text("TEST");
-			ImGui::Separator();
+			ImGui::Text("Select the start points for configuration.");
 			ImGui::Text("");
 
-			carList();
+			if (this->selectedEndPoint != -1) {
+				ImGui::Separator();
+				ImGui::Text("");
+				ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "Selected endpoint ID: %i", animator->getGraph()->getPoint(this->selectedEndPoint)->getID());
+				ImGui::Text("");
+				ImGui::Separator();
+			}
+
+			if (this->selectedStartPoint != -1) {
+				ImGui::Text("The selected startpoint: %i", animator->getGraph()->getPoint(this->selectedStartPoint)->getID());
+				ImGui::Separator();
+				ImGui::Text("Select the target endpoints \nfrom this startpoint:");
+				endpointSelector(selectedStartPoint);
+				ImGui::Text("");
+				ImGui::Separator();
+				ImGui::Text("Select the startable vehicle types \n from this startpoint:");
+				carList(selectedStartPoint);
+				ImGui::Text("");
+				ImGui::Separator();
+			}
+
+			/*if (this->selectedStartPoint != -1) carList();
+			if(this->selectedEndPoint !=-1) ImGui::Text("selectedEndPoint");
+			if(this->selectedRoad !=-1) ImGui::Text("selectedRoad");
+			if(this->selectedVehicle !=-1) ImGui::Text("selectedVehicle");
+
+			if (this->selectedStartPoint == -1) ImGui::Text("-1 selectedEndPoint");
+			if (this->selectedEndPoint == -1) ImGui::Text("-1 selectedEndPoint");
+			if (this->selectedRoad == -1) ImGui::Text("-1 selectedRoad");
+			if (this->selectedVehicle == -1) ImGui::Text("-1 selectedVehicle");*/
+
+			ImGui::Text("selectedStartPoint: %i", selectedStartPoint);
+			ImGui::Text("selectedEndPoint:   %i", selectedEndPoint);
+			ImGui::Text("selectedRoad:       %i", selectedRoad);
+			ImGui::Text("selectedVehicle:    %i", selectedVehicle);
 
 		}
 		ImGui::End();
@@ -301,7 +361,11 @@ void GUI::showHelpMarker(const char* desc) {
  * @param pointModelID The selected point. (Model object!)
 */
 void GUI::showEndpointInfo(size_t pointModelID) {
-	std::cout << "ENDPOINT INFO: " << pointModelID << std::endl;
+	if (this->windowRender->getAnimator()->getGraph()->getPoint(pointModelID)->isStartPoint()) this->selectedStartPoint = pointModelID;
+	if (this->windowRender->getAnimator()->getGraph()->getPoint(pointModelID)->isEndPoint()) this->selectedEndPoint = pointModelID;
+	//selectedStartPoint = pointModelID;
+	//selectedEndPoint = pointModelID;
+	//std::cout << pointModelID << std::endl;
 }
 
 /**
@@ -309,7 +373,7 @@ void GUI::showEndpointInfo(size_t pointModelID) {
  * @param edgeModelID The selected edge. (Model object!)
 */
 void GUI::showRoadInfo(size_t edgeModelID) {
-	std::cout << "EDGE INFO: " << edgeModelID << std::endl;
+	this->selectedRoad = edgeModelID;
 }
 
 /**
@@ -317,5 +381,12 @@ void GUI::showRoadInfo(size_t edgeModelID) {
  * @param vehicleModelID The selected vehicle. (Model object!)
 */
 void GUI::showVehicleInfo(size_t vehicleModelID) {
-	std::cout << "VEHICLE INFO: " << vehicleModelID << std::endl;
+	this->selectedVehicle = vehicleModelID;
+}
+
+void GUI::resetInfoWindow() {
+	this->selectedStartPoint = -1;
+	this->selectedEndPoint = -1;
+	this->selectedRoad = -1;
+	this->selectedVehicle = -1;
 }

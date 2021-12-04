@@ -154,6 +154,12 @@ public:
 	GUI* getGui();
 
 	/**
+	 * @brief Getter for the working window pointer.
+	 * @return Pointer for the current working window.
+	*/
+	WorkWindow* getWorkingWindow();
+
+	/**
 	 * @brief Get scene preloaded object from the scene render storage.
 	 * @param id renderID
 	 * @return The scene object.

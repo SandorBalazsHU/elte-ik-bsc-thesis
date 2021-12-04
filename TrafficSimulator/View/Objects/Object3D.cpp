@@ -18,6 +18,7 @@ Object3D::Object3D(int id, std::string name, std::string type, std::string meshI
 	this->meshID = meshID;
 	this->textureID = textureID;
 	this->iconID = iconID;
+	this->defaultPosition = initPosition;
 	this->position = initPosition;
 	this->scale = initScale;
 	this->rotation = initRotation;
@@ -242,7 +243,6 @@ void Object3D::setModelID(size_t id) {
 void Object3D::select() {
 	this->setOpacity(0.5);
 	this->selected = true;
-	std::cout << "SELECTED" << std::endl;
 }
 
 void Object3D::deSelect() {

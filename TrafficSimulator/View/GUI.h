@@ -102,6 +102,11 @@ public:
 	*/
 	void showVehicleInfo(size_t vehicleModelID);
 
+	/**
+	 * @brief Reset the selected item info window content.
+	*/
+	void resetInfoWindow();
+
 private:
 	ImGuiWindowFlags trafficSimulationWindowFlag = 0;
 	ImGuiWindowFlags mapEditorWindowFlag = 0;
@@ -124,10 +129,24 @@ private:
 
 	bool finalisingErrorWindow = false;
 
+	size_t selectedStartPoint = -1;
+	size_t selectedEndPoint = -1;
+	size_t selectedRoad = -1;
+	size_t selectedVehicle = -1;
+
+	/**
+	 * @brief The marker for the editor locking.
+	*/
 	bool editorLock = false;
 
+	/**
+	 * @brief The road path coloring counter. For pathfinder debugger window.
+	*/
 	size_t coloringCounter = 0;
 
+	/**
+	 * @brief The current path for pathfinder debugger window.
+	*/
 	std::vector<size_t> path;
 
 	/**
@@ -203,7 +222,7 @@ private:
 	/**
 	 * @brief Car list.
 	*/
-	void carList();
+	void carList(size_t startPointModelID);
 
 	/**
 	 * @brief Window for the controls tutorial.
@@ -245,4 +264,10 @@ private:
 	 * @param desc The help text.
 	*/
 	void showHelpMarker(const char* desc);
+
+	/**
+	 * @brief Endpoint selector generator for startpoint properties.
+	 * @param startPointID The current startpoint.
+	*/
+	void endpointSelector(size_t startPointID);
 };

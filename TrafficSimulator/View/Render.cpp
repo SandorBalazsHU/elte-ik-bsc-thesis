@@ -157,6 +157,14 @@ Animator* Render::getAnimator() {
 }
 
 /**
+ * @brief Getter for the working window pointer.
+ * @return Pointer for the current working window.
+*/
+WorkWindow* Render::getWorkingWindow() {
+	return workingWindow;
+}
+
+/**
  * @brief Getter for the map loader program.
  * @return pointer for the map loader instance.
 */
@@ -545,6 +553,7 @@ void Render::renderScrean() {
 			if (!renderableVehicles[i].isHidden()) {
 				setTexture(renderableVehicles[i].getTexture());
 				shaderPreDrawingUpdate(renderableVehicles[i].getWorldMatrix(), renderableVehicles[i].getRGBAcolor());
+				//shaderPreDrawingUpdate(renderableVehicles[i].getWorldMatrix(), glm::vec4(1.0f, 1.0f, 1.0f, 0.5f));
 				drawMesh(renderableVehicles[i].getMesh());
 				if (vehicleHitSphare) showVehicleHitSphere(i);
 			}

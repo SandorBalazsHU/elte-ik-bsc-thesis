@@ -27,8 +27,10 @@ public:
 	~Graph();
 	size_t getEdgesNumber();
 	Edge* getEdge(size_t edge);
+	Edge* getEdgeByID(size_t edge);
 	size_t getPointsNumber();
 	Point* getPoint(size_t point);
+	Point* getPointByID(size_t point);
 	void deletePoint(size_t point);
 	void generateGraph();
 	Dijkstra* generateDijkstra(size_t startPoint);

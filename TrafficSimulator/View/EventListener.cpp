@@ -42,6 +42,7 @@ void EventListener::select(size_t objectID) {
 }
 
 void EventListener::deselect() {
+	if (editorLock) gui->resetInfoWindow();
 	for (size_t i = 0; i < selectedItems.size(); i++) {
 		render->getObject(selectedItems[i])->deSelect();
 	}
@@ -66,6 +67,7 @@ void EventListener::roadSelect() {
 }
 
 void EventListener::roadDeselect() {
+	if (editorLock) gui->resetInfoWindow();
 	if(selectedRoads.size() > 0) {
 		for (size_t i = 0; i < selectedRoads.size(); i++) {
 			render->getDynamicObject(selectedRoads[i])->deselect();
@@ -80,12 +82,14 @@ void EventListener::vehicleSelect(size_t vehicleID) {
 		deselect();
 		roadDeselect();
 		vehicleDeselect();
-		gui->showVehicleInfo(render->getVehicle(vehicleID)->getModelID());
+		//gui->showVehicleInfo(render->getVehicle(vehicleID)->getModelID());
+		gui->showVehicleInfo(vehicleID);
 	}
 	this->selectedVehicle = vehicleID;
 }
 
 void EventListener::vehicleDeselect() {
+	if (editorLock) gui->resetInfoWindow();
 	if (this->selectedVehicle != -1) {
 		render->getVehicle(selectedVehicle)->deSelect();
 		//TODO Clear vehicle info in GUI
@@ -133,10 +137,11 @@ void EventListener::keyboardUp(SDL_KeyboardEvent& key) {
 
 	//-------------------------------------------------------------------------------------------
 	if (key.keysym.sym == SDLK_PAGEUP) {
-		size_t car01 = render->addVehicle(5);
-		size_t car02 = render->addVehicle(11);
-		render->getVehicle(car01)->move(glm::vec3(5, 0, 5));
-		render->getVehicle(car02)->move(glm::vec3(-5, 0, -5));
+		int shift = -10;
+		for (size_t i = 5; i < 17; i++) {
+			render->getVehicle(render->addVehicle(i))->move(glm::vec3(shift, 0, shift));
+			shift += 3;
+		}
 	}
 	//---------------------------------------------------------------------------------------
 
@@ -200,7 +205,7 @@ void EventListener::mouseDown(SDL_MouseButtonEvent& mouse) {
 		}
 		size_t selectedVehicleId = getClickedObjectId(mouse, true);
 		if (selectedObjectId == -1 && selectedVehicleId != -1 && editorLock) {
-			vehicleSelect(selectedObjectId);
+			vehicleSelect(selectedVehicleId);
 		}
 		if (selectedObjectId == -1 && selectedVehicleId == -1) {
 			roadSelect();

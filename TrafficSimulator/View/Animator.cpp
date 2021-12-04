@@ -1,6 +1,7 @@
 //SU-30SM
 #include "Animator.h"
 #include "Render.h"
+#include "WorkWindow.h"
 
 Animator::Animator(void) {
 
@@ -39,6 +40,25 @@ void Animator::finalize() {
 	delete this->graph;
 	this->graph = new Graph(this->render);
 	this->graph->generateGraph();
+	for (size_t i = 0; i < graph->getPointsNumber(); i++) {
+		if (graph->getPoint(i)->isStartPoint()) {
+			std::map<int, Object3Dvehicle>::iterator it = render->getWorkingWindow()->getObjectStorage()->object3Dvehicles.begin();
+			while (it != render->getWorkingWindow()->getObjectStorage()->object3Dvehicles.end()) {
+				if (it->second.getType() == "vehicle") {
+					graph->getPoint(i)->startConfiguration.push_back(it->first);
+				}
+				it++;
+			}
+		}
+	}
+	std::vector<size_t> endpoints = graph->getStartPoints();
+	for (size_t i = 0; i < graph->getPointsNumber(); i++) {
+		if (graph->getPoint(i)->isStartPoint()) {
+			for (size_t j = 0; j < endpoints.size(); j++) {
+				graph->getPoint(i)->endpointsList.push_back(true);
+			}
+		}
+	}
 }
 
 void Animator::start() {

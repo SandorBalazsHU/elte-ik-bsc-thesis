@@ -110,6 +110,15 @@ public:
 	*/
 	void setRenderID(size_t id);
 
+	/**
+	 * @brief Startable cars if this is a startpoint.
+	*/
+	std::vector<size_t> startConfiguration;
+
+	/**
+	 * @brief Target endpoints if this is a startpoint.
+	*/
+	std::vector<bool> endpointsList;
 
 private:
 

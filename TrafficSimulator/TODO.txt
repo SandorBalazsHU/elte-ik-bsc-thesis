@@ -23,12 +23,13 @@ Autó animáció:
 	(Az autók feliratkoznak, a csomópontok léptetnek.)
 	Összességében egy ablakban lehet beállítani a start paramétereket: Autó lista, indítások száma.
 
+BUG:
+- jÁRMÛ KIJELÖLÉS NEM MINDIG MÛKÖDIK.
+
+ÍRASSUK KI AZ ÉLMÁTRIXOT
+
 Javaslatok:
-- Zárolt szerkesztõ esetén a jobb gomb elengedése ne oldja fel az objektum kijelölést, csak a bal klikk
-- Zárolt szerkesztõ esetén csak egy út legyen kijelölhetõ
-
-
-//TODO Nem old fel F-el az endpoint
+- BIZTOSAN TÖRÖLNI AKAROD ABLAK???
 
 - //Javasolt endpoint is deleted, marker is deleted hozzáadása ami törli a hibás út függõségeket.
 - OBJECT3D ROAD RENDES DESTRUCTOR tag destruktor hívásokkal
@@ -88,6 +89,9 @@ Elkészült ötletek:
 + renderableObjects.size() elimináció
 + OBJET3D SELECT, DESELECT function
 + car selection in eventlistener
++ Nem old fel F-el az endpoint
++ Zárolt szerkesztõ esetén a jobb gomb elengedése ne oldja fel az objektum kijelölést, csak a bal klikk
++ Zárolt szerkesztõ esetén csak egy út legyen kijelölhetõ
 
 Elvetett ötletek:
 x sorszám fügetlenítés. A cím legyen az elsõdleges kulcs.

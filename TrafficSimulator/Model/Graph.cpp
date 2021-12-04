@@ -40,6 +40,12 @@ Edge* Graph::getEdge(size_t edge) {
 	return this->edges[edge];
 }
 
+Edge* Graph::getEdgeByID(size_t edge) {
+	for (size_t i = 0; i < this->edges.size(); i++) {
+		if (this->edges[i]->getID() == edge) return this->edges[i];
+	}
+	return NULL;
+}
 
 size_t Graph::getPointsNumber() {
 	return this->points.size();
@@ -47,6 +53,14 @@ size_t Graph::getPointsNumber() {
 
 Point* Graph::getPoint(size_t point) {
 	return this->points[point];
+}
+
+
+Point* Graph::getPointByID(size_t point) {
+	for (size_t i = 0; i < this->points.size(); i++) {
+		if (this->points[i]->getID() == point) return this->points[i];
+	}
+	return NULL;
 }
 
 void Graph::deletePoint(size_t point) {
@@ -198,10 +212,10 @@ void Graph::rebind() {
 	this->pointCount = j;
 
 	for (size_t i = 0; i < points.size(); i++) {
-		if (!points[i]->isErased() && (points[i]->isEndPoint() || points[i]->isStartPoint())) render->getObject(points[i]->getRenderID())->setModelID(points[i]->getID());
+		if (!points[i]->isErased() && (points[i]->isEndPoint() || points[i]->isStartPoint())) render->getObject(points[i]->getRenderID())->setModelID(i);
 	}
 	for (size_t i = 0; i < edges.size(); i++) {
-		if (edges[i]->getID() != -1) render->getDynamicObject(edges[i]->getRoad3DiD())->modelID = edges[i]->getID();
+		if (edges[i]->getID() != -1) render->getDynamicObject(edges[i]->getRoad3DiD())->modelID = i;
 	}
 }
 
