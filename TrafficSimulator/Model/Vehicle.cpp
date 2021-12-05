@@ -19,7 +19,7 @@ size_t Vehicle::getID() {
 }
 
 size_t Vehicle::getObject3DiD() {
-	this->object3DiD;
+	return this->object3DiD;
 }
 
 void Vehicle::update() {
@@ -53,4 +53,17 @@ void Vehicle::nextStep() {
 			if (repath) this->graph->getEdge(this->render->getDynamicObject(this->currentRoad)->modelID)->addVehicleCoast(this->vehicleWeight);
 		}
 	}
+	if (this->currentEdgeOnThePath >= path.size()) this->finished = true;
+}
+
+bool Vehicle::isFinished() {
+	return this->finished;
+}
+
+void Vehicle::erase() {
+	this->deleted = true;
+}
+
+bool Vehicle::isDeleted() {
+	return this->deleted;
 }

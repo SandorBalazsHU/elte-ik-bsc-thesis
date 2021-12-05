@@ -25,7 +25,6 @@ public:
 private:
 	Render* render = NULL;
 	Graph* graph = NULL;
-	void timerUpdate();
 	Uint32 currentTime = 0;
 	Uint32 prevouseTime = 0;
 	bool isAnimationRunning = false;
@@ -35,4 +34,7 @@ private:
 	std::vector<Vehicle> vehicles;
 	std::vector<size_t> startPoints;
 	std::vector<size_t> endPoints;
+
+	void timerUpdate();
+	void deleteFinishedVehicles();
 };

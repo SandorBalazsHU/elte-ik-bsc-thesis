@@ -22,9 +22,12 @@ void Animator::update() {
 	timerUpdate();
 	if (this->isAnimationRunning) {
 		for (size_t i = 0; i < vehicles.size(); i++) {
-			vehicles[i].update();
+			if (!vehicles[i].isDeleted()) {
+				vehicles[i].update();
+			}
 		}
 	}
+	deleteFinishedVehicles();
 }
 
 void Animator::timerUpdate() {
@@ -98,4 +101,13 @@ size_t Animator::addVehicle(size_t type) {
 
 Graph* Animator::getGraph() {
 	return this->graph;
+}
+
+void Animator::deleteFinishedVehicles() {
+	for (size_t i = 0; i < this->vehicles.size(); i++) {
+		if (vehicles[i].isFinished()) {
+			this->vehicles[i].erase();
+			render->deleteVehicle(this->vehicles[i].getObject3DiD());
+		}
+	}
 }

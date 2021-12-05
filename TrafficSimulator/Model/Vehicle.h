@@ -11,6 +11,9 @@ public:
 	size_t getID();
 	size_t getObject3DiD();
 	void update();
+	bool isFinished();
+	void erase();
+	bool isDeleted();
 private:
 	size_t object3DiD = 0;
 	size_t ID = 0;
@@ -25,6 +28,7 @@ private:
 	bool repath = true;
 	const int vehicleWeight = 100;
 	bool finished = false;
+	bool deleted = false;
 
 	Graph* graph;
 	Render* render;
