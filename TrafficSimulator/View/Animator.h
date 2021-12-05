@@ -2,6 +2,7 @@
 #pragma once
 
 class Render;
+class Vehicle;
 
 #include<vector>
 #include<set>
@@ -31,5 +32,5 @@ private:
 	size_t currentIndex = 0;
 
 	int startableCarsNumber = 40;
-	std::vector<size_t> startableCars;
+	std::vector<Vehicle> vehicles;
 };

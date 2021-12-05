@@ -13,7 +13,6 @@ class Render;
 
 #include "Edge.h"
 #include "Point.h"
-#include "Vehicle.h"
 #include "Dijkstra.h"
 #include <vector>
 #include <set>
@@ -42,7 +41,6 @@ public:
 	Render* render;
 	std::vector<Edge*> edges;
 	std::vector<Point*> points;
-	std::vector<Vehicle*> vehicles;
 
 	size_t pointCount = 0;
 	void lockRoads();

@@ -143,6 +143,10 @@ void EventListener::keyboardUp(SDL_KeyboardEvent& key) {
 			shift += 3;
 		}
 	}
+
+	if (key.keysym.sym == SDLK_INSERT) {
+		render->getAnimator()->start();
+	}
 	//---------------------------------------------------------------------------------------
 
 	if (key.keysym.sym == SDLK_f && !editorLock) {

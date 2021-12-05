@@ -1,7 +1,10 @@
 //SU-30SM
+#include <stdlib.h>
+#include <time.h>
 #include "Animator.h"
 #include "Render.h"
 #include "WorkWindow.h"
+#include "../Model/Vehicle.h"
 
 Animator::Animator(void) {
 
@@ -17,11 +20,10 @@ void Animator::bind(Render* render) {
 
 void Animator::update() {
 	timerUpdate();
-	if (render->getDynamicObjectsNumber() > 0 && this->isAnimationRunning) {
-		render->getVehicle(0)->setPosition(render->getDynamicObject(0)->trackOne[currentIndex]);
-		render->getVehicle(1)->setPosition(render->getDynamicObject(0)->trackTwo[currentIndex]);
-		render->getVehicle(0)->setRotation(glm::vec4(Object3Dvehicle::getMoveRtation(render->getDynamicObject(0)->trackOne[currentIndex], render->getDynamicObject(0)->trackOne[currentIndex + 1]), 0, 1, 0));
-		render->getVehicle(1)->setRotation(glm::vec4(Object3Dvehicle::getMoveRtation(render->getDynamicObject(0)->trackTwo[currentIndex], render->getDynamicObject(0)->trackTwo[currentIndex + 1]), 0, 1, 0));
+	if (this->isAnimationRunning) {
+		for (size_t i = 0; i < vehicles.size(); i++) {
+			vehicles[i].update();
+		}
 	}
 }
 
@@ -30,7 +32,7 @@ void Animator::timerUpdate() {
 	if (currentTime - prevouseTime >= 20 && this->isAnimationRunning) {
 		if (currentIndex < 100 - 2 && this->isAnimationRunning) {
 			currentIndex++;
-			std::cout << currentIndex << std::endl;
+			//std::cout << currentIndex << std::endl;
 			prevouseTime = SDL_GetTicks();
 		}
 	}
@@ -62,7 +64,15 @@ void Animator::finalize() {
 }
 
 void Animator::start() {
-	//this->isAnimationRunning = true;
+	int min = 5;
+	int max = 16;
+	srand(time(NULL));
+	int type = rand() % (max - min + 1) + min;
+	std::cout << type << std::endl;
+	size_t newVehicleID = render->addVehicle(type);
+	size_t id = this->vehicles.size();
+	this->vehicles.push_back(Vehicle(this->graph, this->render, 0, 3, newVehicleID, id));
+	this->isAnimationRunning = true;
 
 	/*startableCarsNumber = 0;
 	std::vector<size_t> startableCars;*/

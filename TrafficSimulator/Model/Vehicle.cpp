@@ -1,8 +1,16 @@
 #include "Vehicle.h"
+#include "../View/Objects/Object3Dvehicle.h"
 
-Vehicle::Vehicle(size_t object3DiD, size_t ID) {
+Vehicle::Vehicle(Graph* graph, Render* render, size_t startID, size_t destinationID, size_t object3DiD, size_t ID) {
+	this->graph = graph;
+	this->render = render;
 	this->object3DiD = object3DiD;
 	this->ID = ID;
+	this->startID = startID;
+	this->destinationID = destinationID;
+	this->dijkstra = this->graph->generateDijkstra(startID);
+	this->path = this->graph->getPath(this->dijkstra, this->destinationID);
+	this->currentRoad = this->path[currentEdgeOnThePath];
 }
 
 size_t Vehicle::getID() {
@@ -11,4 +19,36 @@ size_t Vehicle::getID() {
 
 size_t Vehicle::getObject3DiD() {
 	this->object3DiD;
+}
+
+void Vehicle::update() {
+	Object3Dvehicle* vehicle = render->getVehicle(this->object3DiD);
+	nextStep();
+	if (this->track == '1') {
+		vehicle->setPosition(render->getDynamicObject(currentRoad)->trackOne[this->currentPointOnTheRoad]);
+		if (this->direction == 'a') vehicle->setRotation(glm::vec4(Object3Dvehicle::getMoveRtation(render->getDynamicObject(currentRoad)->trackOne[this->currentPointOnTheRoad],
+			render->getDynamicObject(currentRoad)->trackOne[this->currentPointOnTheRoad + 1]), 0, 1, 0));
+		if (this->direction == 'b') vehicle->setRotation(glm::vec4(Object3Dvehicle::getMoveRtation(render->getDynamicObject(currentRoad)->trackOne[this->currentPointOnTheRoad],
+			render->getDynamicObject(currentRoad)->trackOne[this->currentPointOnTheRoad - 1]), 0, 1, 0));
+	}
+	if (this->track == '2') {
+		vehicle->setPosition(render->getDynamicObject(currentRoad)->trackTwo[this->currentPointOnTheRoad]);
+		if (this->direction == 'a') vehicle->setRotation(glm::vec4(Object3Dvehicle::getMoveRtation(render->getDynamicObject(currentRoad)->trackTwo[this->currentPointOnTheRoad],
+			render->getDynamicObject(currentRoad)->trackOne[this->currentPointOnTheRoad + 1]), 0, 1, 0));
+		if (this->direction == 'b') vehicle->setRotation(glm::vec4(Object3Dvehicle::getMoveRtation(render->getDynamicObject(currentRoad)->trackTwo[this->currentPointOnTheRoad],
+			render->getDynamicObject(currentRoad)->trackOne[this->currentPointOnTheRoad - 1]), 0, 1, 0));
+	}
+}
+
+void Vehicle::nextStep() {
+	//this->graph->getEdge(currentEdge)->getRoad3DiD()
+	if (this->direction == 'a' && this->currentPointOnTheRoad < this->standardRoadLenght - 2) {
+		this->currentPointOnTheRoad++;
+	} else {
+		this->currentEdgeOnThePath++;
+		if (this->currentEdgeOnThePath < path.size()) {
+			this->currentPointOnTheRoad = 0;
+			this->currentRoad = this->path[currentEdgeOnThePath];
+		}
+	}
 }
