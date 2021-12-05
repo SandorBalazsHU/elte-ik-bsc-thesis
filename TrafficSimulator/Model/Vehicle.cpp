@@ -12,6 +12,8 @@ Vehicle::Vehicle(Graph* graph, Render* render, size_t startID, size_t destinatio
 	this->path = this->graph->getPath(this->dijkstra, this->destinationID);
 	this->currentRoad = this->path[currentEdgeOnThePath];
 	if (repath) this->graph->getEdge(this->render->getDynamicObject(this->currentRoad)->modelID)->addVehicleCoast(this->vehicleWeight);
+	//????????????????????????????
+	//directionCheck();
 }
 
 size_t Vehicle::getID() {
@@ -37,22 +39,65 @@ void Vehicle::update() {
 		if (this->direction == 'a') vehicle->setRotation(glm::vec4(Object3Dvehicle::getMoveRtation(render->getDynamicObject(currentRoad)->trackTwo[this->currentPointOnTheRoad],
 			render->getDynamicObject(currentRoad)->trackOne[this->currentPointOnTheRoad + 1]), 0, 1, 0));
 		if (this->direction == 'b') vehicle->setRotation(glm::vec4(Object3Dvehicle::getMoveRtation(render->getDynamicObject(currentRoad)->trackTwo[this->currentPointOnTheRoad],
-			render->getDynamicObject(currentRoad)->trackOne[this->currentPointOnTheRoad - 1]), 0, 1, 0));
+			render->getDynamicObject(currentRoad)->trackTwo[this->currentPointOnTheRoad - 1]), 0, 1, 0));
 	}
 }
 
-void Vehicle::nextStep() {
-	if (this->currentPointOnTheRoad < this->standardRoadLenght - 1) {
-		currentPointOnTheRoad++;
-	} else {
-		this->currentEdgeOnThePath++;
-		if (this->currentEdgeOnThePath < path.size()) {
-			this->currentPointOnTheRoad = 0;
-			if (repath) this->graph->getEdge(this->render->getDynamicObject(this->currentRoad)->modelID)->removeVehicleCoast(this->vehicleWeight);
-			this->currentRoad = this->path[currentEdgeOnThePath];
-			if (repath) this->graph->getEdge(this->render->getDynamicObject(this->currentRoad)->modelID)->addVehicleCoast(this->vehicleWeight);
+void Vehicle::directionCheck() {
+	if (currentEdgeOnThePath + 1 != path.size()) {
+		if (this->direction == 'a') {
+			size_t currentEndpoint = this->graph->getEdge(this->render->getDynamicObject(this->path[currentEdgeOnThePath])->modelID)->getEndpointB();
+			size_t nextStartPoint = this->graph->getEdge(this->render->getDynamicObject(this->path[currentEdgeOnThePath + 1])->modelID)->getEndpointA();
+			if (currentEndpoint != nextStartPoint) {
+				this->direction = 'b';
+				this->track = '2';
+			}
+		} else {
+			size_t currentEndpoint = this->graph->getEdge(this->render->getDynamicObject(this->path[currentEdgeOnThePath])->modelID)->getEndpointA();
+			size_t nextStartPoint = this->graph->getEdge(this->render->getDynamicObject(this->path[currentEdgeOnThePath + 1])->modelID)->getEndpointB();
+			if (currentEndpoint != nextStartPoint) {
+				this->direction = 'a';
+				this->track = '1';
+			}
 		}
 	}
+}
+
+//TODO: Kezdeti irány vizsgálat.
+//TODO: Glich?
+//TODO Új és megnyitás esetén törölni a jármû tárat mindkét helyen.
+void Vehicle::nextStep() {
+	if (this->direction == 'a') {
+		//2???
+		if (this->currentPointOnTheRoad < this->standardRoadLenght - 2) {
+			currentPointOnTheRoad++;
+		} else {
+			switchToNextRoad();
+		}
+	} else {
+		if (this->currentPointOnTheRoad > 1) {
+			currentPointOnTheRoad--;
+		}else{
+			switchToNextRoad();
+		}
+	}
+	checkFinish();
+}
+
+void Vehicle::switchToNextRoad() {
+	directionCheck();
+	std::cout << "Direction:" << direction << "Track:" << track << std::endl;
+	this->currentEdgeOnThePath++;
+	if (this->currentEdgeOnThePath < path.size()) {
+		if (this->direction == 'a') this->currentPointOnTheRoad = 0;
+		if (this->direction == 'b') this->currentPointOnTheRoad = this->standardRoadLenght-1;
+		if (repath) this->graph->getEdge(this->render->getDynamicObject(this->currentRoad)->modelID)->removeVehicleCoast(this->vehicleWeight);
+		this->currentRoad = this->path[currentEdgeOnThePath];
+		if (repath) this->graph->getEdge(this->render->getDynamicObject(this->currentRoad)->modelID)->addVehicleCoast(this->vehicleWeight);
+	}
+}
+
+void Vehicle::checkFinish() {
 	if (this->currentEdgeOnThePath >= path.size()) this->finished = true;
 }
 

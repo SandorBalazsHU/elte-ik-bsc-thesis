@@ -224,6 +224,7 @@ void GUI::draw() {
 				animator->finalize();
 				if (animator->getGraph()->getEndPoints().size() > 0 && animator->getGraph()->getStartPoints().size() > 0) {
 					editorLock = true;
+					//TODO: Save as után elszáll pointer hibával.
 					windowRender->lockEditor();
 					mapEditorWindow = false;
 					simulationWindow = true;

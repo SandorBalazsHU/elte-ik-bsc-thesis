@@ -25,6 +25,10 @@ Autó animáció:
 
 BUG:
 - jÁRMÛ KIJELÖLÉS NEM MINDIG MÛKÖDIK.
+- TODO: Kezdeti irány vizsgálat.
+- TODO: Glich? FIVE_C -bal felül jól látható. Néha más pozícióban is megjelnnek jármûvek. Törlési glich?
+- TODO Új és megnyitás esetén törölni a jármû tárat mindkét helyen.
+- //TODO: Save as után elszáll pointer hibával. GUI 227
 
 ÍRASSUK KI AZ ÉLMÁTRIXOT
 

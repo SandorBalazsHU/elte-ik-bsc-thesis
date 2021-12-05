@@ -73,7 +73,7 @@ void Animator::start() {
 	int max = 16;
 	srand(time(NULL));
 	int type = rand() % (max - min + 1) + min;
-	std::cout << type << std::endl;
+	//std::cout << type << std::endl;
 	size_t newVehicleID = render->addVehicle(type);
 	size_t id = this->vehicles.size();
 	this->vehicles.push_back(Vehicle(this->graph, this->render, startPoints[0], endPoints[0], newVehicleID, id));

@@ -36,4 +36,7 @@ private:
 	std::vector<size_t> path;
 
 	void nextStep();
+	void directionCheck();
+	void checkFinish();
+	void switchToNextRoad();
 };
