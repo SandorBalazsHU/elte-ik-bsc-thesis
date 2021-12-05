@@ -62,7 +62,7 @@ void Animator::finalize() {
 }
 
 void Animator::start() {
-	this->isAnimationRunning = true;
+	//this->isAnimationRunning = true;
 
 	/*startableCarsNumber = 0;
 	std::vector<size_t> startableCars;*/
@@ -73,9 +73,9 @@ void Animator::pause() {
 }
 
 void Animator::stop() {
-	delete this->graph;
+	/*delete this->graph;
 	this->isAnimationRunning = false;
-	currentIndex = 0;
+	currentIndex = 0;*/
 }
 
 size_t Animator::addVehicle(size_t type) {

@@ -135,6 +135,11 @@ private:
 	size_t selectedVehicle = -1;
 
 	/**
+	 * @brief Marker for simulation starting.
+	*/
+	bool simulationStart = false;
+
+	/**
 	 * @brief The marker for the editor locking.
 	*/
 	bool editorLock = false;

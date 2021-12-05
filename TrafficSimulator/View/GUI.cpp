@@ -246,15 +246,30 @@ void GUI::draw() {
 		}
 
 		if (editorLock) {
-			if (ImGui::Button("- Back to edit mode -")) {
-				editorLock = false;
-				windowRender->freeEditor();
-				mapEditorWindow = true;
-				simulationWindow = false;
+			if (!simulationStart) {
+				if (ImGui::Button("-   Edit mode   -")) {
+					editorLock = false;
+					windowRender->freeEditor();
+					mapEditorWindow = true;
+					simulationWindow = false;
+				}
+				ImGui::SameLine();
 			}
-			ImGui::SameLine();
-			//TODO Pause and stop 
-			if (ImGui::Button("- START -")) {
+			if (!simulationStart) {
+				if (ImGui::Button("-   Start   -")) {
+					animator->start();
+					simulationStart = true;
+				}
+			} 
+			if (simulationStart) {
+				if (ImGui::Button("-   Pause    -")) {
+					animator->pause();
+				}
+				ImGui::SameLine();
+				if (ImGui::Button("-     STOP     -")) {
+					animator->stop();
+					simulationStart = false;
+				}
 			}
 		}
 	}
@@ -286,7 +301,7 @@ void GUI::draw() {
 			if (selectedStartPoint == -1 && selectedEndPoint == -1 && selectedRoad == -1 && selectedVehicle == -1) {
 				ImGui::Separator();
 				ImGui::Text("");
-				ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "Select the start points \nfor configuration. \nWhen you ready \nclick to START.");
+				ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "Select the start points \nfor configuration. \n\nWhen you ready \nclick to START.");
 				ImGui::Text("");
 				ImGui::Separator();
 			}
