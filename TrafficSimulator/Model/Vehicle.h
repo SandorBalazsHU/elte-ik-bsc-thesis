@@ -39,4 +39,5 @@ private:
 	void directionCheck();
 	void checkFinish();
 	void switchToNextRoad();
+	void firstDirectionCheck();
 };

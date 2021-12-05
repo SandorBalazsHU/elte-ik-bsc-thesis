@@ -13,7 +13,7 @@ Vehicle::Vehicle(Graph* graph, Render* render, size_t startID, size_t destinatio
 	this->currentRoad = this->path[currentEdgeOnThePath];
 	if (repath) this->graph->getEdge(this->render->getDynamicObject(this->currentRoad)->modelID)->addVehicleCoast(this->vehicleWeight);
 	//????????????????????????????
-	//directionCheck();
+	firstDirectionCheck();
 }
 
 size_t Vehicle::getID() {
@@ -43,6 +43,19 @@ void Vehicle::update() {
 	}
 }
 
+void Vehicle::firstDirectionCheck() {
+	size_t firstEdgeEndpointA = this->graph->getPoint(this->graph->getEdge(this->render->getDynamicObject(this->path[currentEdgeOnThePath])->modelID)->getEndpointA())->getID();
+	//size_t firstEdgeEndpointB = this->graph->getEdge(this->render->getDynamicObject(this->path[currentEdgeOnThePath])->modelID)->getEndpointB();
+	if (this->startID ==  firstEdgeEndpointA) {
+		this->direction = 'a';
+		this->track = '1';
+	}else{
+		this->direction = 'b';
+		this->track = '2';
+	}
+	if (this->direction == 'b') this->currentPointOnTheRoad = this->standardRoadLenght - 1;
+}
+
 void Vehicle::directionCheck() {
 	if (currentEdgeOnThePath + 1 != path.size()) {
 		if (this->direction == 'a') {
@@ -64,7 +77,6 @@ void Vehicle::directionCheck() {
 }
 
 //TODO: Kezdeti irány vizsgálat.
-//TODO: Glich?
 //TODO Új és megnyitás esetén törölni a jármû tárat mindkét helyen.
 void Vehicle::nextStep() {
 	if (this->direction == 'a') {
