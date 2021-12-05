@@ -11,6 +11,7 @@ Vehicle::Vehicle(Graph* graph, Render* render, size_t startID, size_t destinatio
 	this->dijkstra = this->graph->generateDijkstra(startID);
 	this->path = this->graph->getPath(this->dijkstra, this->destinationID);
 	this->currentRoad = this->path[currentEdgeOnThePath];
+	if (repath) this->graph->getEdge(this->render->getDynamicObject(this->currentRoad)->modelID)->addVehicleCoast(this->vehicleWeight);
 }
 
 size_t Vehicle::getID() {
@@ -41,14 +42,15 @@ void Vehicle::update() {
 }
 
 void Vehicle::nextStep() {
-	//this->graph->getEdge(currentEdge)->getRoad3DiD()
-	if (this->direction == 'a' && this->currentPointOnTheRoad < this->standardRoadLenght - 2) {
-		this->currentPointOnTheRoad++;
+	if (this->currentPointOnTheRoad < this->standardRoadLenght - 1) {
+		currentPointOnTheRoad++;
 	} else {
 		this->currentEdgeOnThePath++;
 		if (this->currentEdgeOnThePath < path.size()) {
 			this->currentPointOnTheRoad = 0;
+			if (repath) this->graph->getEdge(this->render->getDynamicObject(this->currentRoad)->modelID)->removeVehicleCoast(this->vehicleWeight);
 			this->currentRoad = this->path[currentEdgeOnThePath];
+			if (repath) this->graph->getEdge(this->render->getDynamicObject(this->currentRoad)->modelID)->addVehicleCoast(this->vehicleWeight);
 		}
 	}
 }

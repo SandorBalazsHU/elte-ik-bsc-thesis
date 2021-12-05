@@ -61,6 +61,8 @@ void Animator::finalize() {
 			}
 		}
 	}
+	this->startPoints = graph->getStartPoints();
+	this->endPoints = graph->getEndPoints();
 }
 
 void Animator::start() {
@@ -71,7 +73,7 @@ void Animator::start() {
 	std::cout << type << std::endl;
 	size_t newVehicleID = render->addVehicle(type);
 	size_t id = this->vehicles.size();
-	this->vehicles.push_back(Vehicle(this->graph, this->render, 0, 3, newVehicleID, id));
+	this->vehicles.push_back(Vehicle(this->graph, this->render, startPoints[0], endPoints[0], newVehicleID, id));
 	this->isAnimationRunning = true;
 
 	/*startableCarsNumber = 0;

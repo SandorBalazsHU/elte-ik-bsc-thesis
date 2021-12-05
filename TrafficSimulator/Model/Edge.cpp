@@ -46,7 +46,15 @@ size_t Edge::getEndpointB() {
 }
 
 int Edge::getCoast() {
-	return this->coast;
+	return this->coast + this->vehicleCoast;
+}
+
+void Edge::addVehicleCoast(int c) {
+	this->vehicleCoast += c;
+}
+
+void Edge::removeVehicleCoast(int c) {
+	this->vehicleCoast -= c;
 }
 
 bool Edge::match(size_t endpointA, size_t endpointB) {

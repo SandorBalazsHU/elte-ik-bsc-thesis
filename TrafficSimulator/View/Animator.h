@@ -33,4 +33,6 @@ private:
 
 	int startableCarsNumber = 40;
 	std::vector<Vehicle> vehicles;
+	std::vector<size_t> startPoints;
+	std::vector<size_t> endPoints;
 };

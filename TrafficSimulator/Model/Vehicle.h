@@ -22,6 +22,9 @@ private:
 	char track = '1';
 	char direction = 'a';
 	const size_t standardRoadLenght = 100;
+	bool repath = true;
+	const int vehicleWeight = 100;
+	bool finished = false;
 
 	Graph* graph;
 	Render* render;
