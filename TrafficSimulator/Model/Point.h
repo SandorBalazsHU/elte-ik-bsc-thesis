@@ -120,6 +120,11 @@ public:
 	*/
 	std::vector<bool> endpointsList;
 
+	/**
+	 * @brief The startable cars if this is a startpoint.
+	*/
+	int startableVehicles = 50;
+
 private:
 
 	/**

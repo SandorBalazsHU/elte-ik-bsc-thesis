@@ -253,6 +253,7 @@ void Render::clear() {
 	renderableObjects.clear();
 	renderableRoads.clear();
 	renderableVehicles.clear();
+	animator.clear();
 	sceneInit();
 }
 

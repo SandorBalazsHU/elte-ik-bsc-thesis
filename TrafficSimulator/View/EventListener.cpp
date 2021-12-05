@@ -145,7 +145,7 @@ void EventListener::keyboardUp(SDL_KeyboardEvent& key) {
 	}
 
 	if (key.keysym.sym == SDLK_INSERT) {
-		render->getAnimator()->start();
+		render->getAnimator()->addVehicle();
 	}
 	//---------------------------------------------------------------------------------------
 

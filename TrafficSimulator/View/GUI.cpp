@@ -321,6 +321,21 @@ void GUI::draw() {
 				ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "The selected startpoint: %i", animator->getGraph()->getPoint(this->selectedStartPoint)->getID());
 				ImGui::Text("");
 				ImGui::Separator();
+				ImGui::Text("");
+				if (ImGui::Button(" - Start a vehicle from here - ")) {
+					animator->addVehicle(animator->getGraph()->getPoint(this->selectedStartPoint)->getID());
+				}
+				ImGui::Text("");
+				ImGui::Separator();
+				ImGui::Text("");
+				ImGui::Text("Remain vehicles from here: %i", animator->getGraph()->getPoint(this->selectedStartPoint)->startableVehicles);
+				ImGui::Text("");
+				ImGui::Separator();
+				ImGui::Text("");
+				ImGui::Text("Startable vehicles number:");
+				ImGui::SliderInt("", &animator->getGraph()->getPoint(this->selectedStartPoint)->startableVehicles, 1, 250);
+				ImGui::Text("");
+				ImGui::Separator();
 				ImGui::Text("Select the target endpoints \nfrom this startpoint:");
 				endpointSelector(selectedStartPoint);
 				ImGui::Text("");

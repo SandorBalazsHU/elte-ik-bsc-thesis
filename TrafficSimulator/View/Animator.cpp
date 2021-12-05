@@ -1,4 +1,5 @@
 //SU-30SM
+//Never Fade Away
 #include <stdlib.h>
 #include <time.h>
 #include "Animator.h"
@@ -19,8 +20,10 @@ void Animator::bind(Render* render) {
 }
 
 void Animator::update() {
-	timerUpdate();
-	if (this->isAnimationRunning) {
+	if (this->isAnimationRunning && vehicleStarterTimer()) {
+		autoAdder();
+	}
+	if ((this->isAnimationRunning || this->softRunning) && animationTimer()) {
 		for (size_t i = 0; i < vehicles.size(); i++) {
 			if (!vehicles[i].isDeleted()) {
 				vehicles[i].update();
@@ -30,15 +33,24 @@ void Animator::update() {
 	deleteFinishedVehicles();
 }
 
-void Animator::timerUpdate() {
+bool Animator::animationTimer() {
+	bool isTime = false;
 	currentTime = SDL_GetTicks();
-	if (currentTime - prevouseTime >= 20 && this->isAnimationRunning) {
-		if (currentIndex < 100 - 2 && this->isAnimationRunning) {
-			currentIndex++;
-			//std::cout << currentIndex << std::endl;
-			prevouseTime = SDL_GetTicks();
-		}
+	if (currentTime - prevouseTime >= updateFrequency) {
+		prevouseTime = SDL_GetTicks();
+		isTime = true;
 	}
+	return isTime;
+}
+
+bool Animator::vehicleStarterTimer() {
+	bool isTime = false;
+	vehicleStarterCurrentTime = SDL_GetTicks();
+	if (vehicleStarterCurrentTime - vehicleStarterPrevouseTime >= vehicleStarterUpdateFrequency) {
+		vehicleStarterPrevouseTime = SDL_GetTicks();
+		isTime = true;
+	}
+	return isTime;
 }
 
 void Animator::finalize() {
@@ -69,34 +81,47 @@ void Animator::finalize() {
 }
 
 void Animator::start() {
-	int min = 5;
-	int max = 16;
-	srand(time(NULL));
-	int type = rand() % (max - min + 1) + min;
-	//std::cout << type << std::endl;
-	size_t newVehicleID = render->addVehicle(type);
-	size_t id = this->vehicles.size();
-	this->vehicles.push_back(Vehicle(this->graph, this->render, startPoints[0], endPoints[0], newVehicleID, id));
 	this->isAnimationRunning = true;
-
-	/*startableCarsNumber = 0;
-	std::vector<size_t> startableCars;*/
 }
 
 void Animator::pause() {
-
+	this->isAnimationRunning = false;
 }
 
 void Animator::stop() {
+	this->isAnimationRunning = false;
 	/*delete this->graph;
 	this->isAnimationRunning = false;
 	currentIndex = 0;*/
 }
 
-size_t Animator::addVehicle(size_t type) {
-	size_t vehicle = render->addVehicle(type);
+void Animator::addVehicle(size_t startPoint, size_t endPoint) {
+	if (render->isEditorLoced()) {
+		if (startPoint == -1) {
+			startPoint = startPoints[0];
+		}
+		if (endPoint == -1) {
+			endPoint = endPoints[0];
+		}
+		int min = 5;
+		int max = 16;
+		srand(time(NULL));
+		int type = rand() % (max - min + 1) + min;
+		size_t newVehicleID = render->addVehicle(type);
+		size_t id = this->vehicles.size();
+		this->vehicles.push_back(Vehicle(this->graph, this->render, startPoint, endPoint, newVehicleID, id));
+		this->vehicles[this->vehicles.size() - 1].update();
+		this->softRunning = true;
+	}
+}
 
-	return vehicle;
+void Animator::autoAdder() {
+	for (size_t i = 0; i < this->startPoints.size(); i++) {
+		if (graph->getPointByID(startPoints[i])->startableVehicles > 0) {
+			addVehicle(startPoints[i]);
+			graph->getPointByID(startPoints[i])->startableVehicles -= 1;
+		}
+	}
 }
 
 Graph* Animator::getGraph() {
@@ -110,4 +135,8 @@ void Animator::deleteFinishedVehicles() {
 			render->deleteVehicle(this->vehicles[i].getObject3DiD());
 		}
 	}
+}
+
+void Animator::clear() {
+	this->vehicles.clear();
 }
