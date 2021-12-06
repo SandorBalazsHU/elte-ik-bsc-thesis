@@ -30,8 +30,8 @@ BUG:
 - Mi van ha nincs kiválasztva autó vagy uticél
 - törlés utáni finalise elszáll.
 - Végpont kijelölés törlés után
-
-ÍRASSUK KI AZ ÉLMÁTRIXOT
+- Gyprsabb bill mozfás
+- ÍRASSUK KI AZ ÉLMÁTRIXOT
 
 Javaslatok:
 - BIZTOSAN TÖRÖLNI AKAROD ABLAK???
