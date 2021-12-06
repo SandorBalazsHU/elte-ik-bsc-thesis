@@ -7,6 +7,7 @@
  * @brief GUI Descriptor class.
  * Contact: sandorbalazs9402@gmail.com
  * KSP
+ * Flanker-C
 */
 
 #pragma once
@@ -127,6 +128,7 @@ private:
 	bool pathFinderTestWindowStatus = false;
 	bool mapEditorWindow = true;
 	bool simulationWindow = false;
+	bool simulationSettingsWindowStatus = false;
 
 	bool finalisingErrorWindow = false;
 
@@ -276,4 +278,9 @@ private:
 	 * @param startPointID The current startpoint.
 	*/
 	void endpointSelector(Point* point);
+
+	/**
+	 * @brief The window for the simulation settings.
+	*/
+	void simulationSettingsWindow();
 };

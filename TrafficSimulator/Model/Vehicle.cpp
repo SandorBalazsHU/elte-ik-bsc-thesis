@@ -1,6 +1,9 @@
 #include "Vehicle.h"
 #include "../View/Objects/Object3Dvehicle.h"
 
+bool Vehicle::repath = true;
+int Vehicle::vehicleWeight = 100;
+
 Vehicle::Vehicle(Graph* graph, Render* render, size_t startID, size_t destinationID, size_t object3DiD, size_t ID) {
 	this->graph = graph;
 	this->render = render;
@@ -12,7 +15,6 @@ Vehicle::Vehicle(Graph* graph, Render* render, size_t startID, size_t destinatio
 	this->path = this->graph->getPath(this->dijkstra, this->destinationID);
 	this->currentRoad = this->path[currentEdgeOnThePath];
 	if (repath) this->graph->getEdge(this->render->getDynamicObject(this->currentRoad)->modelID)->addVehicleCoast(this->vehicleWeight);
-	//????????????????????????????
 	firstDirectionCheck();
 }
 

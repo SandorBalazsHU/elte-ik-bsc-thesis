@@ -22,7 +22,8 @@ public:
 	void addVehicle(size_t startPoint = -1, size_t endPoint = -1);
 	Graph* getGraph();
 	void clear();
-
+	static int updateFrequency;
+	static int vehicleStarterUpdateFrequency;
 private:
 	Render* render = NULL;
 	Graph* graph = NULL;
@@ -32,10 +33,8 @@ private:
 	Uint32 vehicleStarterPrevouseTime = 0;
 	bool isAnimationRunning = false;
 	bool softRunning = false;
-	int updateFrequency = 20;
-	int vehicleStarterUpdateFrequency = 1000;
-	int vehicleStarterUpdateDelay = 100;
-	int startableCarsNumber = 40;
+	//int vehicleStarterUpdateDelay = 100;
+	//int startableCarsNumber = 40;
 	std::vector<Vehicle> vehicles;
 	std::vector<size_t> startPoints;
 	std::vector<size_t> endPoints;

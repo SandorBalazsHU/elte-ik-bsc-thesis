@@ -14,6 +14,8 @@ public:
 	bool isFinished();
 	void erase();
 	bool isDeleted();
+	static bool repath;
+	static int vehicleWeight;
 private:
 	size_t object3DiD = 0;
 	size_t ID = 0;
@@ -25,8 +27,6 @@ private:
 	char track = '1';
 	char direction = 'a';
 	const size_t standardRoadLenght = 100;
-	bool repath = true;
-	const int vehicleWeight = 100;
 	bool finished = false;
 	bool deleted = false;
 

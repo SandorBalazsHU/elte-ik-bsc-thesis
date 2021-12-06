@@ -16,6 +16,10 @@ Animator::~Animator(void) {
 
 }
 
+int Animator::updateFrequency = 20;
+
+int Animator::vehicleStarterUpdateFrequency = 1000;
+
 void Animator::bind(Render* render) {
 	this->render = render;
 }

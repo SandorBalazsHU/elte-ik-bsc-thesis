@@ -19,6 +19,8 @@
 #include "WorkWindow.h"
 #include "../Control/Logger.h"
 #include "../Model/Graph.h"
+#include "../Model/Vehicle.h"
+#include "Animator.h"
 
 void GUI::openWindow() {
 	ImGui::SetNextWindowSize(ImVec2(400, 300));
@@ -335,7 +337,6 @@ void GUI::graphicSettingsWindow() {
 		ImGui::InputInt("FPS Limit", &fpsLimit);
 		ImGui::SameLine(); showHelpMarker("WUT?");
 		fpsCounter::setFpsLimit(fpsLimit);
-		ImGui::Text("");
 
 		static bool vSyncIsOn = true;
 		ImGui::Checkbox("V-Sync", &vSyncIsOn);
@@ -345,7 +346,6 @@ void GUI::graphicSettingsWindow() {
 		else {
 			windowRender->vsyncOff();
 		}
-		ImGui::Text("");
 
 		static bool multisamplingIsOn = true;
 		ImGui::Checkbox("Multisampling", &multisamplingIsOn);
@@ -356,11 +356,39 @@ void GUI::graphicSettingsWindow() {
 			windowRender->multisamplingOff();
 		}
 
-		/*ImGui::Text("");
-		ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "---");
+		ImGui::Text("Lighting settings:");
 		ImGui::Separator();
-		ImGui::Text("---");
-		ImGui::SameLine();*/
+		ImGui::Checkbox("Light Camera tracking", &windowRender->lightCameraTracking);
+
+		if (!windowRender->lightCameraTracking) {
+			static float lightPosition[3] = { 0.0f, 0.0f, 0.0f };
+			for (size_t i = 0; i < 3; i++) {
+				lightPosition[i] = windowRender->lightPosition[i];
+			}
+			ImGui::SliderFloat3("Light position", lightPosition, -200.0f, 500.0f);
+			for (size_t i = 0; i < 3; i++) {
+				windowRender->lightPosition[i] = lightPosition[i];
+			}
+		}
+		static bool ambientLightsComponents = false;
+		ImGui::Checkbox("Ambient light components", &ambientLightsComponents);
+		if (!ambientLightsComponents) {
+			static float ambientLightPower = windowRender->ambientLight[0];
+			ImGui::SliderFloat("input float", &ambientLightPower, 0.0f, 1.0f);
+			ImGui::SameLine(); showHelpMarker("CTRL+click to input value.");
+			for (size_t i = 0; i < 3; i++) {
+				windowRender->ambientLight[i] = ambientLightPower;
+			}
+		} else {
+			static float ambientLight[3] = { 0.0f, 0.0f, 0.0f };
+			for (size_t i = 0; i < 3; i++) {
+				ambientLight[i] = windowRender->ambientLight[i];
+			}
+			ImGui::SliderFloat3("Ambient light", ambientLight, 0.0f, 1.0f);
+			for (size_t i = 0; i < 3; i++) {
+				windowRender->ambientLight[i] = ambientLight[i];
+			}
+		}
 
 		ImGui::Text("");
 		ImGui::Separator();
@@ -654,4 +682,29 @@ void GUI::pathFinderTestWindow() {
 
 		ImGui::End();
 	}
+}
+
+/**
+ * @brief The window for the simulation settings.
+*/
+void GUI::simulationSettingsWindow() {
+
+	if (ImGui::Begin("Simulation Settings.", NULL, simulationSettingsWindowStatus)) {
+		ImGui::Text("Simulation Settings:");
+		ImGui::Separator();
+		ImGui::Text("");
+		ImGui::Checkbox("Smart pathfinder", &Vehicle::repath);
+		ImGui::SliderInt("Vehicle weight", &Vehicle::vehicleWeight, 0, 500);
+		ImGui::SliderInt("Animation frequency", &Animator::updateFrequency, 0, 80);
+		ImGui::SliderInt("Start frequency", &Animator::vehicleStarterUpdateFrequency, 100, 3000);
+
+		ImGui::Text("");
+		ImGui::Separator();
+		if (ImGui::Button("Close")) {
+			simulationSettingsWindowStatus = false;
+			ImGui::CloseCurrentPopup();
+		}
+		ImGui::End();
+	}
+
 }

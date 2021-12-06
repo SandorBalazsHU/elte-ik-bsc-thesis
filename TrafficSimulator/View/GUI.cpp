@@ -89,7 +89,7 @@ void GUI::mainMenuBar() {
 			if (ImGui::MenuItem("START Simulation", "CTRL+Q", editorLock, editorLock)) {}
 			if (ImGui::MenuItem("STOP Simulation", "CTRL+W", editorLock, editorLock)) {}
 			ImGui::Separator();
-			if (ImGui::MenuItem("Simulation settings", "CTRL+E")) {}
+			if (ImGui::MenuItem("Simulation settings", "CTRL+E", &simulationSettingsWindowStatus)) {}
 			ImGui::Separator();
 			if (ImGui::MenuItem("Simulation statistics", "CTRL+f", editorLock, editorLock)) {}
 			ImGui::EndMenu();
@@ -118,6 +118,7 @@ void GUI::windowHandler() {
 	if (debugOptionsWindowStatus) debugOptionsWindow();
 	if (runningStatisticsWindowStatus) runningStatisticsWindow();
 	if (pathFinderTestWindowStatus) pathFinderTestWindow();
+	if (simulationSettingsWindowStatus) simulationSettingsWindow();
 	if (ImGuiSettingsWindowStatus) { ImGui::Begin("ImGui Style Editor", &ImGuiSettingsWindowStatus); ImGui::ShowStyleEditor(); ImGui::End(); }
 }
 
