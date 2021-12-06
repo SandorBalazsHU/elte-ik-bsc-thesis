@@ -278,7 +278,55 @@ public:
 	*/
 	bool isEditorLoced();
 
+	/**
+	 * @brief The current light position, if the light position is fixed.
+	*/
+	glm::vec3 lightPosition = glm::vec3(55, 55, 55);
+
+	/**
+	 * @brief If it is true the light position is same with the Camera position.
+	*/
+	bool lightCameraTracking = true;
+
+	/**
+	 * @brief Ambient light
+	*/
+	glm::vec4 ambientLight = glm::vec4(0.1f, 0.1f, 0.1f, 1.0f);
+
+	/**
+	 * @brief Diffuse light
+	*/
+	glm::vec4 diffuseLight = glm::vec4(0.75f, 0.75f, 0.75f, 1.0f);
+
+	/**
+	 * @brief Specular light
+	*/
+	glm::vec4 specularLight = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+
+	/**
+	 * @brief Ambient material properties.
+	*/
+	glm::vec4 ambientMaterial = glm::vec4(1.0f, 1.0f, 1.0f, 0.0f);
+
+	/**
+	 * @brief Diffuse material
+	*/
+	glm::vec4 diffuseMaterial = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+
+	/**
+	 * @brief Specular material
+	*/
+	glm::vec4 specularMaterial = glm::vec4(1.0f, 1.0f, 1.0f, 0.0f);
+
+	float specularPower = 32.0f;
+
 private:
+
+	/**
+	 * @brief Update the light position in the shader.
+	*/
+	void shaderLightUpdate();
+
 	/**
 	 * @brief List of the renderable scene objets. (Preloaded meshes)
 	*/

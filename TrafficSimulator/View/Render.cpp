@@ -140,6 +140,25 @@ void Render::shaderCameraUpdate() {
 }
 
 /**
+ * @brief Update the light position in the shader.
+*/
+void Render::shaderLightUpdate() {
+	if (lightCameraTracking) {
+		shader->SetUniform("lightPosition", camera->getCameraPosition()); 
+	} else {
+		shader->SetUniform("lightPosition", lightPosition);
+	}
+
+	shader->SetUniform("ambientLight",	   this->ambientLight);
+	shader->SetUniform("diffuseLight",	   this->diffuseLight);
+	shader->SetUniform("specularLight",	   this->specularLight);
+
+	shader->SetUniform("ambientMaterial",  this->ambientMaterial);
+	shader->SetUniform("diffuseMaterial",  this->diffuseMaterial);
+	shader->SetUniform("specularMaterial", this->specularMaterial);
+}
+
+/**
  * @brief Windowe title text setter.
  * @param title The new window title.
 */
@@ -554,7 +573,6 @@ void Render::renderScrean() {
 			if (!renderableVehicles[i].isHidden()) {
 				setTexture(renderableVehicles[i].getTexture());
 				shaderPreDrawingUpdate(renderableVehicles[i].getWorldMatrix(), renderableVehicles[i].getRGBAcolor());
-				//shaderPreDrawingUpdate(renderableVehicles[i].getWorldMatrix(), glm::vec4(1.0f, 1.0f, 1.0f, 0.5f));
 				drawMesh(renderableVehicles[i].getMesh());
 				if (vehicleHitSphare) showVehicleHitSphere(i);
 			}
@@ -581,10 +599,10 @@ void Render::render() {
 	fpsCounter::start();
 	shader->Use();
 	shaderCameraUpdate();
+	shaderLightUpdate();
 
 	if (objectStorage->isLoaded()) {
 		renderScrean();
-		//std::cout << ((SDL_GetTicks()/100) % 100) << std::endl;
 	}
 
 	shader->Unuse();
