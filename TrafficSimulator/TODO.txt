@@ -25,9 +25,11 @@ Autó animáció:
 
 BUG:
 - jÁRMÛ KIJELÖLÉS NEM MINDIG MÛKÖDIK.
-- TODO: Kezdeti irány vizsgálat.
 - TODO Új és megnyitás esetén törölni a jármû tárat mindkét helyen.
-- //TODO: Save as után elszáll pointer hibával. GUI 227
+-  Save as után elszáll pointer hibával. GUI 227
+- Mi van ha nincs kiválasztva autó vagy uticél
+- törlés utáni finalise elszáll.
+- Végpont kijelölés törlés után
 
 ÍRASSUK KI AZ ÉLMÁTRIXOT
 
@@ -96,6 +98,7 @@ Elkészült ötletek:
 + Zárolt szerkesztõ esetén a jobb gomb elengedése ne oldja fel az objektum kijelölést, csak a bal klikk
 + Zárolt szerkesztõ esetén csak egy út legyen kijelölhetõ
 + Glich? FIVE_C -bal felül jól látható. Néha más pozícióban is megjelnnek jármûvek. Törlési glich?
++ Kezdeti irány vizsgálat.
 
 Elvetett ötletek:
 x sorszám fügetlenítés. A cím legyen az elsõdleges kulcs.

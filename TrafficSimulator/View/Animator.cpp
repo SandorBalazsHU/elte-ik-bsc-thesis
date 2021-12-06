@@ -92,24 +92,37 @@ void Animator::stop() {
 	currentIndex = 0;*/
 }
 
+//TODO Mi van ha nincs kiválasztva autó vagy uticél
 void Animator::addVehicle(size_t startPoint, size_t endPoint) {
 	if (render->isEditorLoced()) {
-		if (startPoint == -1) {
+		if (startPoint == -1 && endPoint == -1) {
 			startPoint = startPoints[0];
-		}
-		if (endPoint == -1) {
 			endPoint = endPoints[0];
 		}
-		int min = 5;
-		int max = 16;
-		srand(time(NULL));
-		int type = rand() % (max - min + 1) + min;
-		size_t newVehicleID = render->addVehicle(type);
-		size_t id = this->vehicles.size();
+
+			Point* point = graph->getPointByID(startPoint);
+
+			std::vector<size_t> activeVehicles = point->activeVehicles();
+			size_t newVehicleID = render->addVehicle(activeVehicles[getRandomNumber(0, activeVehicles.size() - 1)]);
+			size_t id = this->vehicles.size();
+
+			std::vector<size_t> activeEndpoints = point->activeEndpoints();
+			endPoint = this->endPoints[activeEndpoints[getRandomNumber(0, activeEndpoints.size() - 1)]];
+		
 		this->vehicles.push_back(Vehicle(this->graph, this->render, startPoint, endPoint, newVehicleID, id));
 		this->vehicles[this->vehicles.size() - 1].update();
 		this->softRunning = true;
 	}
+}
+
+int Animator::getRandomNumber(int min, int max) {
+	srand(time(NULL));
+	if(min < max){
+		return rand() % (max - min + 1) + min;
+	} else {
+		return min;
+	}
+	
 }
 
 void Animator::autoAdder() {
@@ -118,10 +131,6 @@ void Animator::autoAdder() {
 		if (point->startableVehicles > 0) {
 			addVehicle(startPoints[i]);
 			point->startableVehicles -= 1;
-			/*std::cout << std::endl;
-			for (size_t i = 0; i < point->startConfiguration.size(); i++) {
-				std::cout << point->startConfiguration[i] << std::endl;
-			}*/
 		}
 	}
 }

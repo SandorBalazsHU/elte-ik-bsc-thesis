@@ -44,4 +44,5 @@ private:
 	bool vehicleStarterTimer();
 	void deleteFinishedVehicles();
 	void autoAdder();
+	int getRandomNumber(int min, int max);
 };

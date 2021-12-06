@@ -125,6 +125,18 @@ public:
 	*/
 	int startableVehicles = 50;
 
+	/**
+	 * @brief Return active vehicles.
+	 * @return Return active vehicles.
+	*/
+	std::vector<size_t> activeVehicles();
+
+	/**
+	 * @brief Return active endpoints.
+	 * @return Return active endpoints.
+	*/
+	std::vector<size_t> activeEndpoints();
+
 private:
 
 	/**

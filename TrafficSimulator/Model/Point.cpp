@@ -154,3 +154,27 @@ size_t Point::getRenderID() {
 void Point::setRenderID(size_t id) {
 	this->renderID = id;
 }
+
+/**
+ * @brief Return active vehicles.
+ * @return Return active vehicles.
+*/
+std::vector<size_t> Point::activeVehicles() {
+	std::vector<size_t> returnActiveVehicles;
+	for (size_t i = 0; i < this->startConfiguration.size(); i++) {
+		if (this->startConfiguration[i] != -1) returnActiveVehicles.push_back(this->startConfiguration[i]);
+	}
+	return returnActiveVehicles;
+}
+
+/**
+ * @brief Return active endpoints.
+ * @return Return active endpoints.
+*/
+std::vector<size_t> Point::activeEndpoints() {
+	std::vector<size_t> returnActiveEndpoints;
+	for (size_t i = 0; i < this->endpointsList.size(); i++) {
+		if (this->endpointsList[i]) returnActiveEndpoints.push_back(i);
+	}
+	return returnActiveEndpoints;
+}

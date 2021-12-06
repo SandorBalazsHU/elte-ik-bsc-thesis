@@ -44,8 +44,7 @@ void Vehicle::update() {
 }
 
 void Vehicle::firstDirectionCheck() {
-	size_t firstEdgeEndpointA = this->graph->getPoint(this->graph->getEdge(this->render->getDynamicObject(this->path[currentEdgeOnThePath])->modelID)->getEndpointA())->getID();
-	//size_t firstEdgeEndpointB = this->graph->getEdge(this->render->getDynamicObject(this->path[currentEdgeOnThePath])->modelID)->getEndpointB();
+	size_t firstEdgeEndpointA = this->graph->getPointByID(this->graph->getEdge(this->render->getDynamicObject(this->path[currentEdgeOnThePath])->modelID)->getEndpointA())->getID();
 	if (this->startID ==  firstEdgeEndpointA) {
 		this->direction = 'a';
 		this->track = '1';
