@@ -18,6 +18,7 @@ class EventListener;
 #include "imgui\imgui.h"
 #include "imgui\imgui_impl_sdl_gl3.h"
 #include "Objects/ObjectStorage.h"
+#include "../Model/Point.h"
 #include "Animator.h"
 
 class GUI {
@@ -227,7 +228,7 @@ private:
 	/**
 	 * @brief Car list.
 	*/
-	void carList(size_t startPointModelID);
+	void carList(Point* point);
 
 	/**
 	 * @brief Window for the controls tutorial.
@@ -274,5 +275,5 @@ private:
 	 * @brief Endpoint selector generator for startpoint properties.
 	 * @param startPointID The current startpoint.
 	*/
-	void endpointSelector(size_t startPointID);
+	void endpointSelector(Point* point);
 };

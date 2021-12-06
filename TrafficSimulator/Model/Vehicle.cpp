@@ -98,7 +98,7 @@ void Vehicle::nextStep() {
 
 void Vehicle::switchToNextRoad() {
 	directionCheck();
-	std::cout << "Direction:" << direction << "Track:" << track << std::endl;
+	//std::cout << "Direction:" << direction << "Track:" << track << std::endl;
 	this->currentEdgeOnThePath++;
 	if (this->currentEdgeOnThePath < path.size()) {
 		if (this->direction == 'a') this->currentPointOnTheRoad = 0;

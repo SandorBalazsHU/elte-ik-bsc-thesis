@@ -6,6 +6,7 @@
 #include "Render.h"
 #include "WorkWindow.h"
 #include "../Model/Vehicle.h"
+#include "../Model/Point.h"
 
 Animator::Animator(void) {
 
@@ -57,27 +58,23 @@ void Animator::finalize() {
 	delete this->graph;
 	this->graph = new Graph(this->render);
 	this->graph->generateGraph();
-	for (size_t i = 0; i < graph->getPointsNumber(); i++) {
-		if (graph->getPoint(i)->isStartPoint()) {
-			std::map<int, Object3Dvehicle>::iterator it = render->getWorkingWindow()->getObjectStorage()->object3Dvehicles.begin();
-			while (it != render->getWorkingWindow()->getObjectStorage()->object3Dvehicles.end()) {
-				if (it->second.getType() == "vehicle") {
-					graph->getPoint(i)->startConfiguration.push_back(it->first);
-				}
-				it++;
-			}
-		}
-	}
-	std::vector<size_t> endpoints = graph->getEndPoints();
-	for (size_t i = 0; i < graph->getPointsNumber(); i++) {
-		if (graph->getPoint(i)->isStartPoint()) {
-			for (size_t j = 0; j < endpoints.size(); j++) {
-				graph->getPoint(i)->endpointsList.push_back(true);
-			}
-		}
-	}
+
 	this->startPoints = graph->getStartPoints();
 	this->endPoints = graph->getEndPoints();
+
+	for (size_t i = 0; i < this->startPoints.size(); i++) {
+		Point* point = this->graph->getPointByID(this->startPoints[i]);
+		std::map<int, Object3Dvehicle>::iterator it = render->getWorkingWindow()->getObjectStorage()->object3Dvehicles.begin();
+		while (it != render->getWorkingWindow()->getObjectStorage()->object3Dvehicles.end()) {
+			if (it->second.getType() == "vehicle") {
+				point->startConfiguration.push_back(it->first);
+			}
+			it++;
+		}
+		for (size_t j = 0; j < this->endPoints.size(); j++) {
+			point->endpointsList.push_back(true);
+		}
+	}
 }
 
 void Animator::start() {
@@ -117,9 +114,14 @@ void Animator::addVehicle(size_t startPoint, size_t endPoint) {
 
 void Animator::autoAdder() {
 	for (size_t i = 0; i < this->startPoints.size(); i++) {
-		if (graph->getPointByID(startPoints[i])->startableVehicles > 0) {
+		Point* point = graph->getPointByID(startPoints[i]);
+		if (point->startableVehicles > 0) {
 			addVehicle(startPoints[i]);
-			graph->getPointByID(startPoints[i])->startableVehicles -= 1;
+			point->startableVehicles -= 1;
+			/*std::cout << std::endl;
+			for (size_t i = 0; i < point->startConfiguration.size(); i++) {
+				std::cout << point->startConfiguration[i] << std::endl;
+			}*/
 		}
 	}
 }

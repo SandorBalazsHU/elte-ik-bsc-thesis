@@ -34,6 +34,7 @@ private:
 	bool softRunning = false;
 	int updateFrequency = 20;
 	int vehicleStarterUpdateFrequency = 1000;
+	int vehicleStarterUpdateDelay = 100;
 	int startableCarsNumber = 40;
 	std::vector<Vehicle> vehicles;
 	std::vector<size_t> startPoints;

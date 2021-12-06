@@ -16,6 +16,7 @@
 #include "Render.h"
 #include "EventListener.h"
 #include "fpsCounter.h"
+#include "../Model/Point.h"
 #include <sstream>
 
 GUI::GUI(void) {
@@ -163,8 +164,7 @@ void GUI::itemList() {
 /**
  * @brief Car list.
 */
-void GUI::carList(size_t startPointModelID) {
-	Point* point = animator->getGraph()->getPoint(startPointModelID);
+void GUI::carList(Point* point) {
 	size_t i = 0;
 	std::map<int, Object3Dvehicle>::iterator it = objectStorage->object3Dvehicles.begin();
 	while (it != objectStorage->object3Dvehicles.end()) {
@@ -193,8 +193,7 @@ void GUI::carList(size_t startPointModelID) {
  * @brief Endpoint selector generator for startpoint properties.
  * @param startPointID The current startpoint.
 */
-void GUI::endpointSelector(size_t startPointID) {
-	Point* point = animator->getGraph()->getPoint(startPointID);
+void GUI::endpointSelector(Point* point) {
 	std::vector<size_t> endpoints = animator->getGraph()->getEndPoints();
 	std::string labelText = "Endpoint: ";
 	for (size_t i = 0; i < endpoints.size(); i++)	{
@@ -316,32 +315,29 @@ void GUI::draw() {
 			}
 
 			if (this->selectedStartPoint != -1) {
+				Point* point = animator->getGraph()->getPointByID(animator->getGraph()->getPoint(this->selectedStartPoint)->getID());
 				ImGui::Separator();
 				ImGui::Text("");
-				ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "The selected startpoint: %i", animator->getGraph()->getPoint(this->selectedStartPoint)->getID());
+				ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "The selected startpoint: %i", point->getID());
 				ImGui::Text("");
 				ImGui::Separator();
 				ImGui::Text("");
 				if (ImGui::Button(" - Start a vehicle from here - ")) {
-					animator->addVehicle(animator->getGraph()->getPoint(this->selectedStartPoint)->getID());
+					animator->addVehicle(point->getID());
 				}
 				ImGui::Text("");
 				ImGui::Separator();
 				ImGui::Text("");
-				ImGui::Text("Remain vehicles from here: %i", animator->getGraph()->getPoint(this->selectedStartPoint)->startableVehicles);
-				ImGui::Text("");
-				ImGui::Separator();
-				ImGui::Text("");
-				ImGui::Text("Startable vehicles number:");
-				ImGui::SliderInt("", &animator->getGraph()->getPoint(this->selectedStartPoint)->startableVehicles, 1, 250);
+					ImGui::Text("Startable vehicles number:");
+				ImGui::SliderInt("", &point->startableVehicles, 1, 250);
 				ImGui::Text("");
 				ImGui::Separator();
 				ImGui::Text("Select the target endpoints \nfrom this startpoint:");
-				endpointSelector(selectedStartPoint);
+				endpointSelector(point);
 				ImGui::Text("");
 				ImGui::Separator();
 				ImGui::Text("Select the startable vehicle types \n from this startpoint:");
-				carList(selectedStartPoint);
+				carList(point);
 				ImGui::Text("");
 				ImGui::Separator();
 			}
