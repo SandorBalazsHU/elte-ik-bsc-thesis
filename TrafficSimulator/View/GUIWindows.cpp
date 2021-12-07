@@ -84,10 +84,20 @@ void GUI::openWindow() {
 
 		ImGui::SameLine();
 		if (ImGui::Button("Delete")) {
-			int status = windowRender->getMapLoader()->deleteSave(items[selection]);
-			if (status == 0) ImGui::OpenPopup("Map deleted");
-			if (status == 1) ImGui::OpenPopup("Map not found");
-			if (status == 2) ImGui::OpenPopup("Map open file system error");
+			ImGui::OpenPopup("Are you sure you want to delete?");
+		}
+		if (ImGui::BeginPopupModal("Are you sure you want to delete?")) {
+			ImGui::Text("Are you sure you want to delete?");
+			if (ImGui::Button("Delete")) {
+				int status = windowRender->getMapLoader()->deleteSave(items[selection]);
+				if (status == 0) ImGui::OpenPopup("Map deleted");
+				if (status == 1) ImGui::OpenPopup("Map not found");
+				if (status == 2) ImGui::OpenPopup("Map open file system error");
+				ImGui::CloseCurrentPopup();
+			}
+			ImGui::SameLine();
+			if (ImGui::Button("Close")) ImGui::CloseCurrentPopup();
+			ImGui::EndPopup();
 		}
 		if (ImGui::BeginPopupModal("Map deleted")) {
 			ImGui::Text("Map deleted.");
@@ -294,15 +304,15 @@ void GUI::closeWindow() {
 		ImGui::Separator();
 		ImGui::Text("");
 
-		if (ImGui::Button("Back")) {
-			closingCheckerWindowStatus = false;
-			ImGui::CloseCurrentPopup();
-		}
-		ImGui::SameLine();
 		if (ImGui::Button("Close")) {
 			closingCheckerWindowStatus = false;
 			ImGui::CloseCurrentPopup();
 			workingWindow->closeNow();
+		}
+		ImGui::SameLine();
+		if (ImGui::Button("Back")) {
+			closingCheckerWindowStatus = false;
+			ImGui::CloseCurrentPopup();
 		}
 		ImGui::EndPopup();
 	}
