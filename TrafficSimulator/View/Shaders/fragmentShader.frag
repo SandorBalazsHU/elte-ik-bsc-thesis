@@ -1,24 +1,33 @@
 #version 460
 
+//Pipeline inputs
 in vec3 fragmentPosition;
 in vec3 fragmentNormal;
 in vec2 fragmentTexture;
+
+//Pipeline output
 out vec4 fragmentColor;
 
-uniform vec3 cameraPosition = vec3( 0.0f, 15.0f, 15.0f );
-uniform vec3 lightPosition = vec3( 55.0f, 55.0f, 55.0f );
+//Shader parameters
+	//Positions
+	uniform vec3 cameraPosition = vec3( 0.0f, 15.0f, 15.0f );
+	uniform vec3 lightPosition = vec3( 55.0f, 55.0f, 55.0f );
 
-uniform vec4 ambientLight  = vec4(0.1f,  0.1f, 0.1f, 1.0f);
-uniform vec4 diffuseLight  = vec4(0.75f, 0.75f, 0.75f, 1.0f);
-uniform vec4 specularLight = vec4(1.0f,  1.0f, 1.0f, 1.0f);
+	//Lights
+	uniform vec4 ambientLight  = vec4(0.1f,  0.1f, 0.1f, 1.0f);
+	uniform vec4 diffuseLight  = vec4(0.75f, 0.75f, 0.75f, 1.0f);
+	uniform vec4 specularLight = vec4(1.0f,  1.0f, 1.0f, 1.0f);
+	uniform float specularPower = 32.0f;
 
-uniform vec4 ambientMaterial  = vec4(1.0f, 1.0f, 1.0f, 0.0f);
-uniform vec4 diffuseMaterial  = vec4(1.0f, 1.0f, 1.0f, 1.0f);
-uniform vec4 specularMaterial = vec4(1.0f, 1.0f, 1.0f, 0.0f);
-uniform float specularPower = 32.0f;
+	//Materials
+	uniform vec4 ambientMaterial  = vec4(1.0f, 1.0f, 1.0f, 0.0f);
+	uniform vec4 diffuseMaterial  = vec4(1.0f, 1.0f, 1.0f, 1.0f);
+	uniform vec4 specularMaterial = vec4(1.0f, 1.0f, 1.0f, 0.0f);
 
-uniform sampler2D currentTexture;
+	//Texture
+	uniform sampler2D currentTexture;
 
+//Shader calculator
 void main() {
 	// Ambient light calculation
 	vec4 ambientColor = ambientLight * ambientMaterial;

@@ -156,6 +156,8 @@ void Render::shaderLightUpdate() {
 	shader->SetUniform("ambientMaterial",  this->ambientMaterial);
 	shader->SetUniform("diffuseMaterial",  this->diffuseMaterial);
 	shader->SetUniform("specularMaterial", this->specularMaterial);
+
+	shader->SetUniform("specularPower", this->specularPower);
 }
 
 /**

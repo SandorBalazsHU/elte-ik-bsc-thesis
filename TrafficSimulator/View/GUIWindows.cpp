@@ -304,16 +304,17 @@ void GUI::closeWindow() {
 		ImGui::Separator();
 		ImGui::Text("");
 
+		if (ImGui::Button("Back")) {
+			closingCheckerWindowStatus = false;
+			ImGui::CloseCurrentPopup();
+		}
+		ImGui::SameLine();
 		if (ImGui::Button("Close")) {
 			closingCheckerWindowStatus = false;
 			ImGui::CloseCurrentPopup();
 			workingWindow->closeNow();
 		}
-		ImGui::SameLine();
-		if (ImGui::Button("Back")) {
-			closingCheckerWindowStatus = false;
-			ImGui::CloseCurrentPopup();
-		}
+
 		ImGui::EndPopup();
 	}
 }
@@ -327,6 +328,7 @@ void GUI::graphicSettingsWindow() {
 		ImGui::Text("Current running data:");
 		ImGui::Separator();
 
+		ImGui::Text("");
 		fpsGraph();
 
 		ImGui::Text("");
@@ -348,6 +350,7 @@ void GUI::graphicSettingsWindow() {
 		ImGui::SameLine(); showHelpMarker("WUT?");
 		fpsCounter::setFpsLimit(fpsLimit);
 
+		ImGui::Text("");
 		static bool vSyncIsOn = true;
 		ImGui::Checkbox("V-Sync", &vSyncIsOn);
 		if (vSyncIsOn) {
@@ -357,6 +360,7 @@ void GUI::graphicSettingsWindow() {
 			windowRender->vsyncOff();
 		}
 
+		ImGui::Text("");
 		static bool multisamplingIsOn = true;
 		ImGui::Checkbox("Multisampling", &multisamplingIsOn);
 		if (multisamplingIsOn) {
@@ -366,8 +370,23 @@ void GUI::graphicSettingsWindow() {
 			windowRender->multisamplingOff();
 		}
 
+		ImGui::Text("");
 		ImGui::Text("Lighting settings:");
 		ImGui::Separator();
+
+		if (ImGui::Button("Reset light settings")) {
+			windowRender->lightPosition = glm::vec3(55, 55, 55);
+			windowRender->lightCameraTracking = true;
+			windowRender->ambientLight = glm::vec4(0.1f, 0.1f, 0.1f, 1.0f);
+			windowRender->diffuseLight = glm::vec4(0.75f, 0.75f, 0.75f, 1.0f);
+			windowRender->specularLight = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+			windowRender->ambientMaterial = glm::vec4(1.0f, 1.0f, 1.0f, 0.0f);
+			windowRender->diffuseMaterial = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+			windowRender->specularMaterial = glm::vec4(1.0f, 1.0f, 1.0f, 0.0f);
+			windowRender->specularPower = 32.0f;
+		}
+
+		ImGui::Text("");
 		ImGui::Checkbox("Light Camera tracking", &windowRender->lightCameraTracking);
 
 		if (!windowRender->lightCameraTracking) {
@@ -380,11 +399,15 @@ void GUI::graphicSettingsWindow() {
 				windowRender->lightPosition[i] = lightPosition[i];
 			}
 		}
-		static bool ambientLightsComponents = false;
-		ImGui::Checkbox("Ambient light components", &ambientLightsComponents);
-		if (!ambientLightsComponents) {
+
+		ImGui::Text("");
+		ImGui::Text("Ambient light");
+		ImGui::Separator();
+		static bool ambientLightComponents = true;
+		ImGui::Checkbox("Ambient light components", &ambientLightComponents);
+		if (!ambientLightComponents) {
 			static float ambientLightPower = windowRender->ambientLight[0];
-			ImGui::SliderFloat("input float", &ambientLightPower, 0.0f, 1.0f);
+			ImGui::SliderFloat("Ambient light", &ambientLightPower, 0.0f, 1.0f);
 			ImGui::SameLine(); showHelpMarker("CTRL+click to input value.");
 			for (size_t i = 0; i < 3; i++) {
 				windowRender->ambientLight[i] = ambientLightPower;
@@ -394,11 +417,63 @@ void GUI::graphicSettingsWindow() {
 			for (size_t i = 0; i < 3; i++) {
 				ambientLight[i] = windowRender->ambientLight[i];
 			}
-			ImGui::SliderFloat3("Ambient light", ambientLight, 0.0f, 1.0f);
+			ImGui::SliderFloat3("Ambient lights", ambientLight, 0.0f, 1.0f);
 			for (size_t i = 0; i < 3; i++) {
 				windowRender->ambientLight[i] = ambientLight[i];
 			}
 		}
+
+		ImGui::Text("");
+		ImGui::Text("Diffuse light");
+		ImGui::Separator();
+		static bool diffuseLightComponents = true;
+		ImGui::Checkbox("Diffuse light components", &diffuseLightComponents);
+		if (!diffuseLightComponents) {
+			static float diffuseLightPower = windowRender->diffuseLight[0];
+			ImGui::SliderFloat("Diffuse light", &diffuseLightPower, 0.0f, 1.0f);
+			ImGui::SameLine(); showHelpMarker("CTRL+click to input value.");
+			for (size_t i = 0; i < 3; i++) {
+				windowRender->diffuseLight[i] = diffuseLightPower;
+			}
+		}
+		else {
+			static float diffuseLight[3] = { 0.0f, 0.0f, 0.0f };
+			for (size_t i = 0; i < 3; i++) {
+				diffuseLight[i] = windowRender->diffuseLight[i];
+			}
+			ImGui::SliderFloat3("Diffuse light", diffuseLight, 0.0f, 1.0f);
+			for (size_t i = 0; i < 3; i++) {
+				windowRender->diffuseLight[i] = diffuseLight[i];
+			}
+		}
+
+		ImGui::Text("");
+		ImGui::Text("Specular light");
+		ImGui::Separator();
+		static bool specularLightComponents = true;
+		ImGui::Checkbox("Specular light components", &specularLightComponents);
+		if (!specularLightComponents) {
+			static float specularLightPower = windowRender->specularLight[0];
+			ImGui::SliderFloat("Specular light", &specularLightPower, 0.0f, 1.0f);
+			ImGui::SameLine(); showHelpMarker("CTRL+click to input value.");
+			for (size_t i = 0; i < 3; i++) {
+				windowRender->specularLight[i] = specularLightPower;
+			}
+		} else {
+			static float specularLight[3] = { 0.0f, 0.0f, 0.0f };
+			for (size_t i = 0; i < 3; i++) {
+				specularLight[i] = windowRender->specularLight[i];
+			}
+			ImGui::SliderFloat3("Specular lights", specularLight, 0.0f, 1.0f);
+			for (size_t i = 0; i < 3; i++) {
+				windowRender->specularLight[i] = specularLight[i];
+			}
+		}
+
+		ImGui::Text("");
+		ImGui::Text("Specular light power: ");
+		ImGui::Separator();
+		ImGui::SliderFloat("Specular Light Power", &windowRender->specularPower, 0.0f, 100.0f);
 
 		ImGui::Text("");
 		ImGui::Separator();
@@ -415,7 +490,6 @@ void GUI::graphicSettingsWindow() {
 */
 void GUI::debugOptionsWindow() {
 	if (ImGui::Begin("Special debug options.", NULL, debugOptionsWindowStatus)) {
-	ImGui::Text("");
 	ImGui::Text("Special debug options:");
 	ImGui::Separator();
 	ImGui::Text("");
