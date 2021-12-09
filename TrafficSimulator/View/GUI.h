@@ -114,6 +114,7 @@ private:
 	ImGuiWindowFlags mapEditorWindowFlag = 0;
 	ImGuiWindowFlags pathFinderTestWindowFlag = 0;
 	ImGuiWindowFlags simulationWindowFlag = 0;
+	ImGuiWindowFlags graphicSettingsWindowFlag = 0;
 	bool openWindowStatus = false;
 	bool saveWindowStatus = false;
 	bool saveAsWindowStatus = false;

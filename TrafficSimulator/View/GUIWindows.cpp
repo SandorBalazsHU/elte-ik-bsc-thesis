@@ -23,18 +23,20 @@
 #include "Animator.h"
 
 void GUI::openWindow() {
-	ImGui::SetNextWindowSize(ImVec2(400, 300));
+	ImGui::SetNextWindowSize(ImVec2(480, 360));
 	ImGui::OpenPopup("Open Map");
-	if (ImGui::BeginPopupModal("Open Map", NULL, ImGuiWindowFlags_AlwaysAutoResize))
+	if (ImGui::BeginPopupModal("Open Map"))
 	{
 		ImGui::Text("Saved maps:");
 
 		ImGui::Separator();
 
 		std::vector<std::string> fileList = windowRender->getMapLoader()->listFiles();
-		const int itemNumber = fileList.size();
+		int itemNumber = fileList.size();
 
-		const char* items[50];
+		const char* items[500];
+
+		if(itemNumber >= 500) itemNumber = 500;
 
 		for (size_t i = 0; i < itemNumber; i++) {
 			items[i] = fileList[i].c_str();
@@ -43,7 +45,7 @@ void GUI::openWindow() {
 		static int selection = 0;
 		ImGui::PushItemWidth(-1);
 		ImGui::PushID(0);
-		ImGui::ListBox("", &selection, items, itemNumber);
+		ImGui::ListBox("", &selection, items, itemNumber, 15);
 		ImGui::PopID();
 
 
@@ -58,7 +60,7 @@ void GUI::openWindow() {
 				openWindowStatus = false;
 			}
 		}
-		if (ImGui::BeginPopupModal("Are you sure?")) {
+		if (ImGui::BeginPopupModal("Are you sure?", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
 			ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "Are you sure overwrite the current map?");
 			ImGui::Separator();
 			if (windowRender->getMapSaver()->getLastSave() == windowRender->getMapSaver()->unsavedMarker) {
@@ -86,7 +88,7 @@ void GUI::openWindow() {
 		if (ImGui::Button("Delete")) {
 			ImGui::OpenPopup("Are you sure you want to delete?");
 		}
-		if (ImGui::BeginPopupModal("Are you sure you want to delete?")) {
+		if (ImGui::BeginPopupModal("Are you sure you want to delete?", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
 			ImGui::Text("Are you sure you want to delete?");
 			if (ImGui::Button("Delete")) {
 				int status = windowRender->getMapLoader()->deleteSave(items[selection]);
@@ -99,17 +101,17 @@ void GUI::openWindow() {
 			if (ImGui::Button("Close")) ImGui::CloseCurrentPopup();
 			ImGui::EndPopup();
 		}
-		if (ImGui::BeginPopupModal("Map deleted")) {
+		if (ImGui::BeginPopupModal("Map deleted"), NULL, ImGuiWindowFlags_AlwaysAutoResize) {
 			ImGui::Text("Map deleted.");
 			if (ImGui::Button("Close")) ImGui::CloseCurrentPopup();
 			ImGui::EndPopup();
 		}
-		if (ImGui::BeginPopupModal("Map not found")) {
+		if (ImGui::BeginPopupModal("Map not found"), NULL, ImGuiWindowFlags_AlwaysAutoResize) {
 			ImGui::Text("Map not found.");
 			if (ImGui::Button("Close")) ImGui::CloseCurrentPopup();
 			ImGui::EndPopup();
 		}
-		if (ImGui::BeginPopupModal("Map open file system error")) {
+		if (ImGui::BeginPopupModal("Map open file system error"), NULL, ImGuiWindowFlags_AlwaysAutoResize) {
 			ImGui::Text("File system error.");
 			if (ImGui::Button("Close")) ImGui::CloseCurrentPopup();
 			ImGui::EndPopup();
@@ -131,10 +133,8 @@ void GUI::saveWindow() {
 		saveAsWindowStatus = true;
 	} else {
 		windowRender->getMapSaver()->saveMap(lastSave);
-		ImGui::SetNextWindowPos(ImVec2(0, 20), ImGuiSetCond_FirstUseEver);
-		ImGui::SetNextWindowSize(ImVec2(251, 130), ImGuiCond_FirstUseEver);
 		ImGui::OpenPopup("Map saved");
-		if (ImGui::BeginPopupModal("Map saved")) {
+		if (ImGui::BeginPopupModal("Map saved", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
 			ImGui::Text("%s map saved!", lastSave);
 			ImGui::Separator();
 			if (ImGui::Button("Close")) {
@@ -147,10 +147,8 @@ void GUI::saveWindow() {
 }
 
 void GUI::saveAsWindow() {
-	ImGui::SetNextWindowPos(ImVec2(0, 20), ImGuiSetCond_FirstUseEver);
-	ImGui::SetNextWindowSize(ImVec2(251, 130), ImGuiCond_FirstUseEver);
 	ImGui::OpenPopup("Save map as");
-	if (ImGui::BeginPopupModal("Save map as")) {
+	if (ImGui::BeginPopupModal("Save map as", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
 
 		ImGui::Text("Saving the new map.");
 
@@ -162,20 +160,20 @@ void GUI::saveAsWindow() {
 		if (ImGui::Button("Save")) {
 			std::vector<std::string> saves = windowRender->getMapLoader()->listFiles();
 			if (std::find(saves.begin(), saves.end(), newFileName) != saves.end()) {
-				ImGui::OpenPopup("overwrite");
+				ImGui::OpenPopup("Overwrite");
 			} else {
 				windowRender->getMapSaver()->saveMap(newFileName);
 				ImGui::OpenPopup("Save map");
 			}
 		}
-		if (ImGui::BeginPopupModal("overwrite")) {
+		if (ImGui::BeginPopupModal("Overwrite"), NULL, ImGuiWindowFlags_AlwaysAutoResize) {
 			ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "This file already exist!");
 			ImGui::Text("Do you want to overwrite: %s ?", newFileName);
 			if (ImGui::Button("Save")) {
 				windowRender->getMapSaver()->saveMap(newFileName);
 				ImGui::OpenPopup("Save map");
 			}
-			if (ImGui::BeginPopupModal("Save map")) {
+			if (ImGui::BeginPopupModal("Save map"), NULL, ImGuiWindowFlags_AlwaysAutoResize) {
 				ImGui::Text("New map saved as: %s", newFileName);
 				if (ImGui::Button("Close")) {
 					saveAsWindowStatus = false;
@@ -187,7 +185,7 @@ void GUI::saveAsWindow() {
 			if (ImGui::Button("Close")) ImGui::CloseCurrentPopup();
 			ImGui::EndPopup();
 		}
-		if (ImGui::BeginPopupModal("Save map")) {
+		if (ImGui::BeginPopupModal("Save map", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
 			ImGui::Text("New map saved as: %s", newFileName);
 			if (ImGui::Button("Close")) {
 				saveAsWindowStatus = false;
@@ -208,7 +206,7 @@ void GUI::saveAsWindow() {
 
 void GUI::newMapConfirmWindow() {
 	ImGui::OpenPopup("New map");
-	if (ImGui::BeginPopupModal("New map")) {
+	if (ImGui::BeginPopupModal("New map", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
 		ImGui::Text("Are you sure you open a new map?");
 		ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "All unsaved changes will be lost.");
 
@@ -228,7 +226,7 @@ void GUI::newMapConfirmWindow() {
 		if (ImGui::Button("New")) {
 			ImGui::OpenPopup("Are you sure?");
 		}
-		if (ImGui::BeginPopupModal("Are you sure?")) {
+		if (ImGui::BeginPopupModal("Are you sure?", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
 			ImGui::Text("Are you sure you open a new map?");
 			ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "All unsaved changes will be lost.");
 			if (ImGui::Button("New")) {
@@ -256,7 +254,7 @@ void GUI::newMapConfirmWindow() {
 
 void GUI::controlsWindow() {
 	ImGui::OpenPopup("Controls");
-	if (ImGui::BeginPopupModal("Controls")) {
+	if (ImGui::BeginPopupModal("Controls", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
 		ImGui::Image((void*)(intptr_t)objectStorage->getTexture("controls.png"), ImVec2(859, 409));
 		if (ImGui::Button("Close")) {
 			controlsWindowStatus = false;
@@ -268,10 +266,11 @@ void GUI::controlsWindow() {
 
 void GUI::aboutWindow() {
 	ImGui::OpenPopup("About");
-	if (ImGui::BeginPopupModal("About")) {
-		ImGui::Text("Traffic Simulation");
+	if (ImGui::BeginPopupModal("About", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
+		ImGui::Text("Traffic Simulation.");
 		ImGui::Text("Created By: Sandor Balazs");
 		ImGui::Text("AZA6NL");
+		ImGui::Text("Thesis for Computer Science BSC in ELTE IK Budapest.");
 		ImGui::Text("sandorbalazs9402@gmail.com");
 		if (ImGui::Button("Close")) {
 			aboutWindowStatus = false;
@@ -287,7 +286,7 @@ void GUI::aboutWindow() {
 */
 void GUI::closeWindow() {
 	ImGui::OpenPopup("Are you sure you want to close?");
-	if (ImGui::BeginPopupModal("Are you sure you want to close?")) {
+	if (ImGui::BeginPopupModal("Are you sure you want to close?", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
 		ImGui::Text("Are you sure you want to close?");
 		ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "All unsaved changes will be lost.");
 
@@ -323,7 +322,7 @@ void GUI::closeWindow() {
  * @brief Window descriptor for the graphic settings window.
 */
 void GUI::graphicSettingsWindow() {
-	if(ImGui::Begin("Graphic settings", NULL, graphicSettingsWindowStatus)) {
+	if(ImGui::Begin("Graphic settings", &graphicSettingsWindowStatus, graphicSettingsWindowFlag)) {
 
 		ImGui::Text("Current running data:");
 		ImGui::Separator();
@@ -489,7 +488,7 @@ void GUI::graphicSettingsWindow() {
  * @brief Window for the debug options.
 */
 void GUI::debugOptionsWindow() {
-	if (ImGui::Begin("Special debug options.", NULL, debugOptionsWindowStatus)) {
+	if (ImGui::Begin("Special debug options.", &debugOptionsWindowStatus, NULL)) {
 	ImGui::Text("Special debug options:");
 	ImGui::Separator();
 	ImGui::Text("");
@@ -556,7 +555,7 @@ void GUI::debugOptionsWindow() {
  * @brief Window descriptor for the graphic settings window.
 */
 void GUI::runningStatisticsWindow() {
-	if (ImGui::Begin("Current Running statistics:", NULL, runningStatisticsWindowStatus)) {
+	if (ImGui::Begin("Current Running statistics:", &runningStatisticsWindowStatus, NULL)) {
 
 		ImGui::Text("Current Running statistics:");
 		ImGui::Separator();
@@ -773,7 +772,7 @@ void GUI::pathFinderTestWindow() {
 */
 void GUI::simulationSettingsWindow() {
 
-	if (ImGui::Begin("Simulation Settings.", NULL, simulationSettingsWindowStatus)) {
+	if (ImGui::Begin("Simulation Settings.", &simulationSettingsWindowStatus, NULL)) {
 		ImGui::Text("Simulation Settings:");
 		ImGui::Separator();
 		ImGui::Text("");
