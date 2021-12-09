@@ -101,17 +101,17 @@ void GUI::openWindow() {
 			if (ImGui::Button("Close")) ImGui::CloseCurrentPopup();
 			ImGui::EndPopup();
 		}
-		if (ImGui::BeginPopupModal("Map deleted"), NULL, ImGuiWindowFlags_AlwaysAutoResize) {
+		if (ImGui::BeginPopupModal("Map deleted", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
 			ImGui::Text("Map deleted.");
 			if (ImGui::Button("Close")) ImGui::CloseCurrentPopup();
 			ImGui::EndPopup();
 		}
-		if (ImGui::BeginPopupModal("Map not found"), NULL, ImGuiWindowFlags_AlwaysAutoResize) {
+		if (ImGui::BeginPopupModal("Map not found", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
 			ImGui::Text("Map not found.");
 			if (ImGui::Button("Close")) ImGui::CloseCurrentPopup();
 			ImGui::EndPopup();
 		}
-		if (ImGui::BeginPopupModal("Map open file system error"), NULL, ImGuiWindowFlags_AlwaysAutoResize) {
+		if (ImGui::BeginPopupModal("Map open file system error", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
 			ImGui::Text("File system error.");
 			if (ImGui::Button("Close")) ImGui::CloseCurrentPopup();
 			ImGui::EndPopup();
@@ -166,14 +166,14 @@ void GUI::saveAsWindow() {
 				ImGui::OpenPopup("Save map");
 			}
 		}
-		if (ImGui::BeginPopupModal("Overwrite"), NULL, ImGuiWindowFlags_AlwaysAutoResize) {
+		if (ImGui::BeginPopupModal("Overwrite", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
 			ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "This file already exist!");
 			ImGui::Text("Do you want to overwrite: %s ?", newFileName);
 			if (ImGui::Button("Save")) {
 				windowRender->getMapSaver()->saveMap(newFileName);
 				ImGui::OpenPopup("Save map");
 			}
-			if (ImGui::BeginPopupModal("Save map"), NULL, ImGuiWindowFlags_AlwaysAutoResize) {
+			if (ImGui::BeginPopupModal("Save map", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
 				ImGui::Text("New map saved as: %s", newFileName);
 				if (ImGui::Button("Close")) {
 					saveAsWindowStatus = false;
