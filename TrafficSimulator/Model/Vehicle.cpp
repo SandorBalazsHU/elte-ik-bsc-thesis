@@ -120,6 +120,7 @@ bool Vehicle::isFinished() {
 
 void Vehicle::erase() {
 	this->deleted = true;
+	delete dijkstra;
 }
 
 bool Vehicle::isDeleted() {

@@ -80,7 +80,7 @@ void GUI::mainMenuBar() {
 			ImGui::Separator();
 			if (ImGui::MenuItem("Running statistics", "CTRL+R", &runningStatisticsWindowStatus)) {}
 			if (ImGui::MenuItem("Debug options", "CTRL+D", &debugOptionsWindowStatus)) {}
-			if (ImGui::MenuItem("Pathfinder algorithm test.", "CTRL+P", &pathFinderTestWindowStatus, !editorLock)) {}
+			if (ImGui::MenuItem("Pathfinder algorithm test.", "CTRL+P", &pathFinderTestWindowStatus, editorLock)) {}
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("Simulation"))

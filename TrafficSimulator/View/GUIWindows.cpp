@@ -81,6 +81,8 @@ void GUI::openWindow() {
 				windowRender->getMapSaver()->setLastSave(items[selection]);
 				openWindowStatus = false;
 			}
+			ImGui::SameLine();
+			if (ImGui::Button("Close")) ImGui::CloseCurrentPopup();
 			ImGui::EndPopup();
 		}
 
@@ -587,6 +589,11 @@ void GUI::runningStatisticsWindow() {
 		ImGui::Text(std::to_string(windowRender->getDynamicObjectsNumber()).c_str());
 
 		ImGui::Text("");
+		ImGui::Text("The vehicles count on the scene:");
+		ImGui::SameLine();
+		ImGui::Text(std::to_string(windowRender->getVehiclesNumber()).c_str());
+
+		ImGui::Text("");
 		ImGui::Separator();
 		if (ImGui::Button("Close")) {
 			runningStatisticsWindowStatus = false;
@@ -600,15 +607,40 @@ void GUI::runningStatisticsWindow() {
  * @brief Pathfinder test window.
 */
 void GUI::pathFinderTestWindow() {
-	pathFinderTestWindowFlag |= ImGuiWindowFlags_NoMove;
+	//pathFinderTestWindowFlag |= ImGuiWindowFlags_NoMove;
 	pathFinderTestWindowFlag |= ImGuiWindowFlags_NoCollapse;
-	if (ImGui::Begin("Pathfinder algorithm test.", &pathFinderTestWindowStatus, pathFinderTestWindowFlag)) {
+	if (ImGui::Begin("Pathfinder algorithm.", &pathFinderTestWindowStatus, pathFinderTestWindowFlag)) {
 		static ImGuiTextBuffer logger;
 		std::stringstream log;
 
-		if (ImGui::Button("Pathfinder algorithm test.")) {
+
+		std::vector<size_t> startPoints = animator->getGraph()->getStartPoints();
+		static int selectedStartPoint = 0;
+		std::string startpoints = "";
+		for (size_t i = 0; i < startPoints.size(); i++) {
+			startpoints = startpoints + std::to_string(startPoints[i]) + '\0';
+		}
+		startpoints = startpoints + '\0' + '\0';
+		ImGui::PushItemWidth(50);
+		ImGui::Combo("Startpoint", &selectedStartPoint, startpoints.c_str());
+		ImGui::SameLine();
+
+		std::vector<size_t> endPoints = animator->getGraph()->getEndPoints();
+		static int selectedEndPoint = 0;
+		std::string endpoints = "";
+		for (size_t i = 0; i < endPoints.size(); i++) {
+			endpoints = endpoints + std::to_string(endPoints[i]) + '\0';
+		}
+		endpoints = endpoints + '\0' + '\0';
+		ImGui::PushItemWidth(50);
+		ImGui::Combo("Endpoint", &selectedEndPoint, endpoints.c_str());
+		ImGui::SameLine();
+		//std::cout << selectedStartPoint  << "   " << selectedEndPoint << std::endl;
+
+		if (ImGui::Button("RUN Pathfinder algorithm.")) {
 			logger.clear();
 			//Logging roads
+			log << "Roads:" << std::endl << "-------------------------------------------------------------------------" << std::endl;
 			for (size_t i = 0; i < windowRender->getDynamicObjectsNumber(); i++) {
 				if (windowRender->getDynamicObject(i) != NULL) {
 					log << "RoadID: " << windowRender->getDynamicObject(i)->getRenderID();
@@ -662,51 +694,79 @@ void GUI::pathFinderTestWindow() {
 			}
 
 			//Generate graph.
-			Graph graph(windowRender);
-			graph.generateGraph();
+			Graph* graph = animator->getGraph();
 
-			//Get start point from the graph.
-			std::vector<size_t> startPoints = graph.getStartPoints();
+			size_t startPoint = startPoints[selectedStartPoint];
+			size_t endPoint = endPoints[selectedEndPoint];
+
+			/*/Get start point from the graph.
+			std::vector<size_t> startPoints = graph->getStartPoints();
 			size_t startPoint = 0;
-			if (startPoints.size() != 0) startPoint = startPoints[0];
+			if (startPoints.size() != 0) startPoint = startPoints[0];*/
 
 			//Run Dijkstra.
-			Dijkstra* dijkstra = graph.generateDijkstra(startPoint);
+			Dijkstra* dijkstra = graph->generateDijkstra(startPoint);
 
-			//Get endpoint
-			std::vector<size_t> endpoints = graph.getEndPoints();
+			/*/Get endpoint
+			std::vector<size_t> endpoints = graph->getEndPoints();
 			size_t endpoint = windowRender->getDynamicObjectsNumber();
-			if(endpoints.size() != 0) endpoint = endpoints[0];
+			if(endpoints.size() != 0) endpoint = endpoints[0];*/
 
 			//Get path
-			path = graph.getPath(dijkstra, endpoint);
+			path = graph->getPath(dijkstra, endPoint);
 			coloringCounter = 0;
 
 			//Graph edges logging.
-			for (size_t i = 0; i < graph.getEdgesNumber(); i++) {
-				if(graph.getEdge(i)->getID() != -1) log << "Edge ID: " << graph.getEdge(i)->getID() << " Coast: " << graph.getEdge(i)->getCoast() << " Endpoint A: " << graph.getEdge(i)->getEndpointA() << " Endpoint B: " << graph.getEdge(i)->getEndpointB() << std::endl;
+			log << "Edges:" << std::endl << "-------------------------------------------------------------------------" << std::endl;
+			for (size_t i = 0; i < graph->getEdgesNumber(); i++) {
+				if(graph->getEdge(i)->getID() != -1) log << "Edge ID: " << graph->getEdge(i)->getID() << " Coast: " << graph->getEdge(i)->getCoast() << " Endpoint A: " << graph->getEdge(i)->getEndpointA() << " Endpoint B: " << graph->getEdge(i)->getEndpointB() << std::endl;
 			}
 			log << std::endl;
 
 			//Gaph points log.
-			for (size_t i = 0; i < graph.getPointsNumber(); i++) {
-				if (!graph.getPoint(i)->isErased()) {
-					log << "Point ID: " << graph.getPoint(i)->getID() << " Edges count: " << graph.getPoint(i)->getEdges().size() << " Connected edges: ";
-					for (size_t edge : graph.getPoint(i)->getEdges()) {
+			log << "Points:" << std::endl << "-------------------------------------------------------------------------" << std::endl;
+			for (size_t i = 0; i < graph->getPointsNumber(); i++) {
+				if (!graph->getPoint(i)->isErased()) {
+					log << "Point ID: " << graph->getPoint(i)->getID() << " Edges count: " << graph->getPoint(i)->getEdges().size() << " Connected edges: ";
+					for (size_t edge : graph->getPoint(i)->getEdges()) {
 						log << " - " << edge;
 					}
-					if (graph.getPoint(i)->isStartPoint()) log << " START POINT ";
-					if (graph.getPoint(i)->isEndPoint()) log << " END POINT ";
+					if (graph->getPoint(i)->isStartPoint()) log << " START POINT ";
+					if (graph->getPoint(i)->isEndPoint()) log << " END POINT ";
 					log << std::endl;
 				}
 			}
 			log << std::endl;
 
 			//Log start and endpoints
-			log << "Start: " << startPoint << " Target: " << endpoint << std::endl;
+			log << "Start and Endpoints:" << std::endl << "-------------------------------------------------------------------------" << std::endl;
+			log << "Start: " << startPoint << " Target: " << endPoint << std::endl;
+			log << std::endl << std::endl;
+
+			log << "Adjacency matrix:" << std::endl << "-------------------------------------------------------------------------" << std::endl;
+			//Log Adjacency matrix
+			for (size_t i = 0; i < dijkstra->matrix.size(); i++) {
+				if (i == 0) {
+					log << "     ";
+					for (size_t j = 0; j < dijkstra->matrix[i].size(); j++) {
+						log << j << "  ";
+					}
+					log << std::endl << "  +  ";
+					for (size_t j = 0; j < dijkstra->matrix[i].size(); j++) {
+						log << "---";
+					}
+					log << std::endl;
+				}
+				log << i << " | ";
+				for (size_t j = 0; j < dijkstra->matrix[i].size(); j++) {
+					log << dijkstra->matrix[i][j] << " ";
+				}
+				log << std::endl;
+			}
 			log << std::endl;
 
 			//Log dijkstra result
+			log << "Calculated path array:" << std::endl << "-------------------------------------------------------------------------" << std::endl;
 			for (size_t i = 0; i < dijkstra->from.size(); i++) {
 				log << i << " ";
 			}
@@ -714,16 +774,17 @@ void GUI::pathFinderTestWindow() {
 			for (size_t i = 0; i < dijkstra->from.size(); i++) {
 				log << dijkstra->from[i] << " ";
 			}
-			log << std::endl;
+			log << std::endl << std::endl;
 
-			log << std::endl;
-			//LOG PATH
+			log << "Physical path:" << std::endl << "-------------------------------------------------------------------------" << std::endl;
+			//Log path
 			for (size_t i = 0; i < path.size(); i++) {
 				log << path[i] << " ";
 			}
 			log << std::endl;
 
 			logger.append(log.str().c_str());
+			delete dijkstra;
 		}
 		ImGui::SameLine();
 		if (ImGui::Button("Full path")) {

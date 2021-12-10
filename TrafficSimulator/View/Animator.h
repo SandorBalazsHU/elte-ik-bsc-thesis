@@ -38,6 +38,10 @@ private:
 	std::vector<Vehicle> vehicles;
 	std::vector<size_t> startPoints;
 	std::vector<size_t> endPoints;
+	/**
+	 * @brief Delay
+	*/
+	size_t startedVehiclesIndex = 0;
 
 	bool animationTimer();
 	bool vehicleStarterTimer();

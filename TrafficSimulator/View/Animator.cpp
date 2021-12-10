@@ -128,15 +128,15 @@ int Animator::getRandomNumber(int min, int max) {
 	}
 	
 }
-
+//--------------------------------------------------------------DELAY-----------------------------------------------------------------
 void Animator::autoAdder() {
-	for (size_t i = 0; i < this->startPoints.size(); i++) {
-		Point* point = graph->getPointByID(startPoints[i]);
-		if (point->startableVehicles > 0) {
-			addVehicle(startPoints[i]);
-			point->startableVehicles -= 1;
-		}
+	Point* point = graph->getPointByID(startPoints[startedVehiclesIndex]);
+	if (point->startableVehicles > 0) {
+		addVehicle(startPoints[startedVehiclesIndex]);
+		point->startableVehicles -= 1;
 	}
+	startedVehiclesIndex++;
+	if (startedVehiclesIndex == this->startPoints.size()) startedVehiclesIndex = 0;
 }
 
 Graph* Animator::getGraph() {
@@ -145,7 +145,7 @@ Graph* Animator::getGraph() {
 
 void Animator::deleteFinishedVehicles() {
 	for (size_t i = 0; i < this->vehicles.size(); i++) {
-		if (vehicles[i].isFinished()) {
+		if (vehicles[i].isFinished() && !vehicles[i].isDeleted()) {
 			this->vehicles[i].erase();
 			render->deleteVehicle(this->vehicles[i].getObject3DiD());
 		}
