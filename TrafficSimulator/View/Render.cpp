@@ -525,7 +525,9 @@ void Render::lockEditor() {
 	this->editorLock = true;
 	this->workingWindow->getEventListener()->lockEditor();
 	for (size_t i = 0; i < this->getDynamicObjectsNumber(); i++) {
-		this->getDynamicObject(i)->lockEditor();
+		if (this->getDynamicObject(i) != NULL) {
+			this->getDynamicObject(i)->lockEditor();
+		}
 	}
 }
 
@@ -536,7 +538,9 @@ void Render::freeEditor() {
 	this->editorLock = false;
 	this->workingWindow->getEventListener()->freeEditor();
 	for (size_t i = 0; i < this->getDynamicObjectsNumber(); i++) {
-		this->getDynamicObject(i)->freeEditor();
+		if (this->getDynamicObject(i) != NULL) {
+			this->getDynamicObject(i)->freeEditor();
+		}
 	}
 }
 
