@@ -1,41 +1,14 @@
-Autó animáció:
-+	Az animátor gráfot generál.
-	Az animátor végigmegy a start pontokon és a beállításai szerinti autókat hozáadja a renderhez rejtve. 
-	Minden autának átadja a gráf pointert és random célt ad hozzá, paraméterezi.
-	Az animátor frissítgetni kezdi az összes már kiküldött autót.
-	Az autó minden egyik útról a másikba átlépéskor új útvonalat tervez.
-	Az élek tároljék a rajtuk lévõ autókat és ez alapján állítják a súlyukat. Hossz + telítettségi százalék.
-	Az autóban van aktuális él, aktuális pont, gráf pointer és aktuális útvonal. Ha átlép egy másik útra már onnan tervez utat.
-	Minden ciklusban 1 pontot lép az autó, a várakozási idõ tényezõt az út hosszparamétere adja meg.
-	Ha az út végére ér átlép az útvonalterv szerinti következõre és újra kezdi a lépkedést.
-	Az autó tudja és tárolja, hogy mi a következõ lépés az animátor csak frissíti az összeset.
-	A pontokban counterek vannak és minden x.- körben hozzáad egy új autót és csökkenti a countert.
-	Két dolog dönti el, hogy léphet-e. Van e másik elõtte, letelt-e az idõ.
-	Átlépési sor? Jobbkéz szabály? Melyik léphet egy keresztezõdésnél. Ezt ki kell találni.
-	A csomópontok prioritási listát hoznak létre szögek alapján. Ezek FV-be foglaltak, azonnaliak.
-	Az útvonaltervezések külön szálon futnak.
-	Az átlépési engedélyt a csomóponttól kell kérnie az autónak.
-	(Sorban teszetelünk. Ez gond?) A csomópontnak az összes autót meg kell néznie, hogy melyik menjen elõsször.
-	A frissítésnél az autók beregisztrálnak a csomópontnál átlépésre az animator render update lépésnél.
-	A lépés után végigmegyünk a csomópontokon is és azok adnak engedélyt és update-elnek egyet az autókon amik léphetnek.
-	Az autók update parancsra lépnek. Update() fv.
-	Az animator Update-ját a render hívja. A render update-eli az összes autót, majd az összes csomópontot is.
-	(Az autók feliratkoznak, a csomópontok léptetnek.)
-	Összességében egy ablakban lehet beállítani a start paramétereket: Autó lista, indítások száma.
-
 BUG:
 - jÁRMÛ KIJELÖLÉS NEM MINDIG MÛKÖDIK.
 - TODO Új és megnyitás esetén törölni a jármû tárat mindkét helyen.
--  Save as után elszáll pointer hibával. GUI 227
+- A stop és a pause funkciók
+- Az autók is álljanak meg stop vagy pause esetén.
 - Mi van ha nincs kiválasztva autó vagy uticél
-- törlés utáni finalise elszáll.
 - Végpont kijelölés törlés után
 - Gyprsabb bill mozfás
-- ÍRASSUK KI AZ ÉLMÁTRIXOT
+
 
 Javaslatok:
-- BIZTOSAN TÖRÖLNI AKAROD ABLAK???
-
 - //Javasolt endpoint is deleted, marker is deleted hozzáadása ami törli a hibás út függõségeket.
 - OBJECT3D ROAD RENDES DESTRUCTOR tag destruktor hívásokkal
 - renderableobject pointeresre alakítása. object3d-k destruktora
@@ -48,11 +21,9 @@ Javaslatok:
 - warning elimináció
 - this
 - REAL OBJECT AND DYN COUNTS! Még hasznos lehet a renderban.
-- A pathfinder-t ne lehessen elindítani min 1 kijelölt cél és start nélkül. A szimulációt se.
+- Pathfinder bolodbiztossá tétele
 
 Ötletek:
-- Törlés gomb mûködése
-- Út jobbgombos menü
 - logaritmikus mozgatás
 - 4-es asztal kiemelése globális változóba
 
@@ -99,6 +70,13 @@ Elkészült ötletek:
 + Zárolt szerkesztõ esetén csak egy út legyen kijelölhetõ
 + Glich? FIVE_C -bal felül jól látható. Néha más pozícióban is megjelnnek jármûvek. Törlési glich?
 + Kezdeti irány vizsgálat.
++ törlés utáni finalise elszáll.
++ Törlés gomb mûködése
++ Út jobbgombos menü
++ ÍRASSUK KI AZ ÉLMÁTRIXOT
++ BIZTOSAN TÖRÖLNI AKAROD ABLAK
++ A pathfinder-t ne lehessen elindítani min 1 kijelölt cél és start nélkül. A szimulációt se.
++ Save as után elszáll pointer hibával. GUI 227
 
 Elvetett ötletek:
 x sorszám fügetlenítés. A cím legyen az elsõdleges kulcs.
@@ -112,3 +90,28 @@ x katalógusfájlba téma kategória oszlop beillesztése
 
 Ha lesz rá idõ:
 * Kattintás gyorsítás.
+
+Autó animáció:
++	Az animátor gráfot generál.
+	Az animátor végigmegy a start pontokon és a beállításai szerinti autókat hozáadja a renderhez rejtve. 
+	Minden autának átadja a gráf pointert és random célt ad hozzá, paraméterezi.
+	Az animátor frissítgetni kezdi az összes már kiküldött autót.
+	Az autó minden egyik útról a másikba átlépéskor új útvonalat tervez.
+	Az élek tároljék a rajtuk lévõ autókat és ez alapján állítják a súlyukat. Hossz + telítettségi százalék.
+	Az autóban van aktuális él, aktuális pont, gráf pointer és aktuális útvonal. Ha átlép egy másik útra már onnan tervez utat.
+	Minden ciklusban 1 pontot lép az autó, a várakozási idõ tényezõt az út hosszparamétere adja meg.
+	Ha az út végére ér átlép az útvonalterv szerinti következõre és újra kezdi a lépkedést.
+	Az autó tudja és tárolja, hogy mi a következõ lépés az animátor csak frissíti az összeset.
+	A pontokban counterek vannak és minden x.- körben hozzáad egy új autót és csökkenti a countert.
+	Két dolog dönti el, hogy léphet-e. Van e másik elõtte, letelt-e az idõ.
+	Átlépési sor? Jobbkéz szabály? Melyik léphet egy keresztezõdésnél. Ezt ki kell találni.
+	A csomópontok prioritási listát hoznak létre szögek alapján. Ezek FV-be foglaltak, azonnaliak.
+	Az útvonaltervezések külön szálon futnak.
+	Az átlépési engedélyt a csomóponttól kell kérnie az autónak.
+	(Sorban teszetelünk. Ez gond?) A csomópontnak az összes autót meg kell néznie, hogy melyik menjen elõsször.
+	A frissítésnél az autók beregisztrálnak a csomópontnál átlépésre az animator render update lépésnél.
+	A lépés után végigmegyünk a csomópontokon is és azok adnak engedélyt és update-elnek egyet az autókon amik léphetnek.
+	Az autók update parancsra lépnek. Update() fv.
+	Az animator Update-ját a render hívja. A render update-eli az összes autót, majd az összes csomópontot is.
+	(Az autók feliratkoznak, a csomópontok léptetnek.)
+	Összességében egy ablakban lehet beállítani a start paramétereket: Autó lista, indítások száma.
