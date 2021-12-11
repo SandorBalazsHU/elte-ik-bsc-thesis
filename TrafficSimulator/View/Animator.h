@@ -19,7 +19,7 @@ public:
 	void start();
 	void pause();
 	void stop();
-	void addVehicle(size_t startPoint = -1, size_t endPoint = -1);
+	void addVehicle(size_t startPoint = -1, size_t endPoint = -1, bool singleVehicle = false);
 	Graph* getGraph();
 	void clear();
 	static int updateFrequency;

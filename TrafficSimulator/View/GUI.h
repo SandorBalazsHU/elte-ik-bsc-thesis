@@ -144,6 +144,11 @@ private:
 	bool simulationStart = false;
 
 	/**
+	 * @brief Marker for paused simulations.
+	*/
+	bool simulationPaused = false;
+
+	/**
 	 * @brief The marker for the editor locking.
 	*/
 	bool editorLock = false;
@@ -284,4 +289,29 @@ private:
 	 * @brief The window for the simulation settings.
 	*/
 	void simulationSettingsWindow();
+
+	/**
+	 * @brief Finalise the map.
+	*/
+	void finalise();
+
+	/**
+	 * @brief Back to the edit mode
+	*/
+	void backToEditMode();
+
+	/**
+	 * @brief Start simulation
+	*/
+	void startSimulation();
+
+	/**
+	 * @brief Stop running simulation.
+	*/
+	void stopSimulation();
+
+	/**
+	 * @brief Pause running simulation.
+	*/
+	void pauseSimulation();
 };

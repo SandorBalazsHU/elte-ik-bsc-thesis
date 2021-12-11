@@ -60,6 +60,7 @@ bool Animator::vehicleStarterTimer() {
 
 void Animator::finalize() {
 	delete this->graph;
+	startedVehiclesIndex = 0;
 	this->graph = new Graph(this->render);
 	this->graph->generateGraph();
 
@@ -91,13 +92,13 @@ void Animator::pause() {
 
 void Animator::stop() {
 	this->isAnimationRunning = false;
-	/*delete this->graph;
-	this->isAnimationRunning = false;
-	currentIndex = 0;*/
+	startedVehiclesIndex = 0;
+	render->clearVehicles();
+	this->vehicles.clear();
 }
 
 //TODO Mi van ha nincs kiválasztva autó vagy uticél
-void Animator::addVehicle(size_t startPoint, size_t endPoint) {
+void Animator::addVehicle(size_t startPoint, size_t endPoint, bool singleVehicle) {
 	if (render->isEditorLoced()) {
 		if (startPoint == -1 && endPoint == -1) {
 			startPoint = startPoints[0];
@@ -115,7 +116,7 @@ void Animator::addVehicle(size_t startPoint, size_t endPoint) {
 		
 		this->vehicles.push_back(Vehicle(this->graph, this->render, startPoint, endPoint, newVehicleID, id));
 		this->vehicles[this->vehicles.size() - 1].update();
-		this->softRunning = true;
+		if(singleVehicle) this->softRunning = true;
 	}
 }
 

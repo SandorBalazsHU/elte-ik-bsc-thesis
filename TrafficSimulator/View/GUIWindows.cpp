@@ -832,7 +832,6 @@ void GUI::pathFinderTestWindow() {
  * @brief The window for the simulation settings.
 */
 void GUI::simulationSettingsWindow() {
-
 	if (ImGui::Begin("Simulation Settings.", &simulationSettingsWindowStatus, NULL)) {
 		ImGui::Text("Simulation Settings:");
 		ImGui::Separator();
@@ -850,5 +849,56 @@ void GUI::simulationSettingsWindow() {
 		}
 		ImGui::End();
 	}
+}
 
+/**
+ * @brief Finalise the map.
+*/
+void GUI::finalise() {
+	animator->finalize();
+	if (animator->getGraph()->getEndPoints().size() > 0 && animator->getGraph()->getStartPoints().size() > 0) {
+		editorLock = true;
+		windowRender->lockEditor();
+		mapEditorWindow = false;
+		simulationWindow = true;
+		animator->finalize();
+	}
+	else {
+		finalisingErrorWindow = true;
+	}
+}
+
+/**
+ * @brief Back to the edit mode
+*/
+void GUI::backToEditMode() {
+	editorLock = false;
+	windowRender->freeEditor();
+	mapEditorWindow = true;
+	simulationWindow = false;
+}
+
+/**
+ * @brief Start simulation
+*/
+void GUI::startSimulation() {
+	animator->start();
+	simulationStart = true;
+	simulationPaused = false;
+}
+
+/**
+ * @brief Stop running simulation.
+*/
+void GUI::stopSimulation() {
+	animator->stop();
+	simulationStart = false;
+}
+
+/**
+ * @brief Pause running simulation.
+*/
+void GUI::pauseSimulation() {
+	animator->pause();
+	simulationPaused = true;
 }

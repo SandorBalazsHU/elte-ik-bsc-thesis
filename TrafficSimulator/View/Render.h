@@ -279,6 +279,11 @@ public:
 	bool isEditorLoced();
 
 	/**
+	 * @brief Delete all active vehicles.
+	*/
+	void clearVehicles();
+
+	/**
 	 * @brief The current light position, if the light position is fixed.
 	*/
 	glm::vec3 lightPosition = glm::vec3(55, 55, 55);
@@ -318,6 +323,9 @@ public:
 	*/
 	glm::vec4 specularMaterial = glm::vec4(1.0f, 1.0f, 1.0f, 0.0f);
 
+	/**
+	 * @brief Specular light poewr
+	*/
 	float specularPower = 32.0f;
 
 private:

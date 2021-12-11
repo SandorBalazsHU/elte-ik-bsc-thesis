@@ -552,6 +552,13 @@ bool Render::isEditorLoced() {
 }
 
 /**
+ * @brief Delete all active vehicles.
+*/
+void Render::clearVehicles() {
+	this->renderableVehicles.clear();
+}
+
+/**
  * @brief Composing the renderable scene from the renderableObjects and the renderableRoads storages.
 */
 void Render::renderScrean() {

@@ -64,8 +64,7 @@ bool GUI::isMouseCaptured() {
 void GUI::mainMenuBar() {
 	if (ImGui::BeginMainMenuBar())
 	{
-		if (ImGui::BeginMenu("File"))
-		{
+		if (ImGui::BeginMenu("File")) {
 			if (ImGui::MenuItem("New", "Ctrl+N", &newMapConfirmWindowStatus, !editorLock)) {}
 			if (ImGui::MenuItem("Open", "Ctrl+O", &openWindowStatus, !editorLock)) {}
 			ImGui::Separator();
@@ -83,19 +82,23 @@ void GUI::mainMenuBar() {
 			if (ImGui::MenuItem("Pathfinder algorithm test.", "CTRL+P", &pathFinderTestWindowStatus, editorLock)) {}
 			ImGui::EndMenu();
 		}
-		if (ImGui::BeginMenu("Simulation"))
-		{
-			if (ImGui::MenuItem("Finalizing", "CTRL+Q")) {}
-			if (ImGui::MenuItem("START Simulation", "CTRL+Q", editorLock, editorLock)) {}
-			if (ImGui::MenuItem("STOP Simulation", "CTRL+W", editorLock, editorLock)) {}
+		if (ImGui::BeginMenu("Simulation")) {
+			if (ImGui::MenuItem("Finalizing", "CTRL+Q", false, !editorLock)) { finalise(); }
+			if (ImGui::MenuItem("Edit mode", "CTRL+Q", false, (editorLock && !simulationStart))) { backToEditMode(); }
+			if (ImGui::MenuItem("START Simulation", "CTRL+Q", false, (!simulationStart && editorLock))) { startSimulation(); }
+			if (!simulationPaused) {
+				if (ImGui::MenuItem("PAUSE Simulation", "CTRL+W", false, (simulationStart && editorLock))) { pauseSimulation(); }
+			} else {
+				if (ImGui::MenuItem("Continue Simulation", "CTRL+W", false, (simulationStart && editorLock))) { startSimulation(); }
+			}
+			if (ImGui::MenuItem("STOP Simulation", "CTRL+W", false, (simulationStart && editorLock))) { stopSimulation(); }
 			ImGui::Separator();
-			if (ImGui::MenuItem("Simulation settings", "CTRL+E", &simulationSettingsWindowStatus)) {}
+			if (ImGui::MenuItem("Simulation settings", "CTRL+E", &simulationSettingsWindowStatus, editorLock)) {}
 			ImGui::Separator();
-			if (ImGui::MenuItem("Simulation statistics", "CTRL+f", editorLock, editorLock)) {}
+			if (ImGui::MenuItem("Simulation statistics", "CTRL+f", false, editorLock)) {}
 			ImGui::EndMenu();
 		}
-		if (ImGui::BeginMenu("Help"))
-		{
+		if (ImGui::BeginMenu("Help")) {
 			if (ImGui::MenuItem("Help", "CTRL+H")) {}
 			if (ImGui::MenuItem("Controls", "CTRL+C", &controlsWindowStatus)) {}
 			ImGui::Separator();
@@ -221,16 +224,7 @@ void GUI::draw() {
 
 		if (!editorLock) {
 			if (ImGui::Button("-        Finalizing map        -")) {
-				animator->finalize();
-				if (animator->getGraph()->getEndPoints().size() > 0 && animator->getGraph()->getStartPoints().size() > 0) {
-					editorLock = true;
-					windowRender->lockEditor();
-					mapEditorWindow = false;
-					simulationWindow = true;
-					animator->finalize();
-				} else {
-					finalisingErrorWindow = true;
-				}
+				finalise();
 			}
 			if (finalisingErrorWindow) {
 				ImGui::OpenPopup("Not enough start or endpoint.");
@@ -248,27 +242,28 @@ void GUI::draw() {
 		if (editorLock) {
 			if (!simulationStart) {
 				if (ImGui::Button("-   Edit mode   -")) {
-					editorLock = false;
-					windowRender->freeEditor();
-					mapEditorWindow = true;
-					simulationWindow = false;
+					backToEditMode();
 				}
 				ImGui::SameLine();
 			}
 			if (!simulationStart) {
 				if (ImGui::Button("-   Start   -")) {
-					animator->start();
-					simulationStart = true;
+					startSimulation();
 				}
 			} 
 			if (simulationStart) {
-				if (ImGui::Button("-   Pause    -")) {
-					animator->pause();
+				if (!simulationPaused) {
+					if (ImGui::Button("-   Pause    -")) {
+						pauseSimulation();
+					}
+				} else {
+					if (ImGui::Button("-  Continue  -")) {
+						startSimulation();
+					}
 				}
 				ImGui::SameLine();
 				if (ImGui::Button("-     STOP     -")) {
-					animator->stop();
-					simulationStart = false;
+					stopSimulation();
 				}
 			}
 		}
@@ -323,7 +318,7 @@ void GUI::draw() {
 				ImGui::Separator();
 				ImGui::Text("");
 				if (ImGui::Button(" - Start a vehicle from here - ")) {
-					animator->addVehicle(point->getID());
+					animator->addVehicle(point->getID(), true);
 				}
 				ImGui::Text("");
 				ImGui::Separator();
