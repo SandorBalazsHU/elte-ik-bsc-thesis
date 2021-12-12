@@ -50,4 +50,5 @@ private:
 	void deleteFinishedVehicles();
 	void autoAdder();
 	int getRandomNumber(int min, int max);
+	void resetStats();
 };

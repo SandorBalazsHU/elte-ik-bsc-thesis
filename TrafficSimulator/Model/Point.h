@@ -111,6 +111,11 @@ public:
 	void setRenderID(size_t id);
 
 	/**
+	 * @brief Resetting the running statistics.
+	*/
+	void resetStats();
+
+	/**
 	 * @brief Startable cars if this is a startpoint.
 	*/
 	std::vector<size_t> startConfiguration;
@@ -121,9 +126,14 @@ public:
 	std::vector<bool> endpointsList;
 
 	/**
+	 * @brief Base startable vehicle count.
+	*/
+	const int baseStartableVehicleCount = 50;
+
+	/**
 	 * @brief The startable cars if this is a startpoint.
 	*/
-	int startableVehicles = 50;
+	int startableVehicles = baseStartableVehicleCount;
 
 	/**
 	 * @brief The received cars if this is a endpoint.

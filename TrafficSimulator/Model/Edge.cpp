@@ -79,3 +79,9 @@ void Edge::removeVehicle(int c, bool repath) {
 bool Edge::match(size_t endpointA, size_t endpointB) {
 	return ((endpointA == this->endpointA) && (endpointB == this->endpointB)) || ((endpointA == this->endpointB) && (endpointB == this->endpointA));
 }
+
+void Edge::resetStats() {
+	vehicleCoast = 0;
+	vehicleCount = 0;
+	allVehicleCount = 0;
+}

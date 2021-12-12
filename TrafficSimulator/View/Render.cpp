@@ -622,7 +622,7 @@ void Render::render() {
 	shader->Unuse();
 	gui->render();
 	rendering();
-	setWindowTitle(workingWindow->getWindowTitle() + "  -  " + mapSaver.getLastSave());
+	setWindowTitle(workingWindow->getWindowTitle() + "  -  Map name: " + mapSaver.getLastSave());
 	setWindowIcon(objectStorage->getWindowIcon());
 	fpsCounter::stop();
 }

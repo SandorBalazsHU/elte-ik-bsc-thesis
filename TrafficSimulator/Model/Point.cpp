@@ -178,3 +178,11 @@ std::vector<size_t> Point::activeEndpoints() {
 	}
 	return returnActiveEndpoints;
 }
+
+/**
+ * @brief Resetting the running statistics.
+*/
+void Point::resetStats() {
+	this->startableVehicles = this->baseStartableVehicleCount;
+	receivedVehicles = 0;
+}

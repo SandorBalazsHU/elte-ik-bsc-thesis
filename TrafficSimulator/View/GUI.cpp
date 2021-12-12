@@ -220,7 +220,13 @@ void GUI::draw() {
 		mainMenuBar();
 		windowHandler();
 
-		ImGui::Image((void*)(intptr_t)objectStorage->getTexture("app_logo.png"), ImVec2(70, 70));
+		static int easterEgg = 0;
+		if (easterEgg < 10) {
+			if (ImGui::ImageButton((void*)(intptr_t)objectStorage->getTexture("app_logo.png"), ImVec2(70, 70), ImVec2(0, 0), ImVec2(1, 1), -1, ImColor(255, 255, 255, 0))) { easterEgg++; }
+		} else {
+			if (ImGui::ImageButton((void*)(intptr_t)objectStorage->getTexture("bundus.png"), ImVec2(70, 70))) { easterEgg = 0; }
+		}
+
 		ImGui::SameLine();
 		ImGui::Text("Traffic Simulation \nBy: Sandor Balazs \nAZA6NL");
 
@@ -297,16 +303,35 @@ void GUI::draw() {
 
 			if (selectedStartPoint == -1 && selectedEndPoint == -1 && selectedRoad == -1 && selectedVehicle == -1) {
 				ImGui::Separator();
+				ImGui::Text("        "); ImGui::SameLine();
+				ImGui::Image((void*)(intptr_t)objectStorage->getTexture("miniatures\\desk_square_mini.png"), ImVec2(100, 100));
+				ImGui::Separator();
 				ImGui::Text("");
-				ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "Select the start points \nfor configuration. \n\nWhen you ready \nclick to START.");
+				ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "Select the start points \nfor configuration.");
+				ImGui::Text("");
+				ImGui::Separator();
+				ImGui::Text("");
+				ImGui::Text("You can select and observe \nthe startpoints, endpoints, \nthe roads and the vehicles \n with right click anytime.");
+				ImGui::Text("");
+				ImGui::Separator();
+				ImGui::Text("");
+				if (!simulationStart) {
+					ImGui::TextColored(ImVec4(1.0f, 0.8f, 0.0f, 1.0f), "When you ready \nclick to START.");
+				} else {
+					ImGui::TextColored(ImVec4(1.0f, 0.8f, 0.0f, 1.0f), "You can STOP or PAUSE \nthe simulation anytime.");
+				}
 				ImGui::Text("");
 				ImGui::Separator();
 			}
 
 			if (this->selectedEndPoint != -1) {
 				ImGui::Separator();
+				ImGui::Image((void*)(intptr_t)objectStorage->getTexture("miniatures\\stop_sign_mini.png"), ImVec2(50, 50));
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "\nSelected endpoint ID: %i.", animator->getGraph()->getPoint(this->selectedEndPoint)->getID());
+				ImGui::Separator();
 				ImGui::Text("");
-				ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "Selected endpoint ID: %i.", animator->getGraph()->getPoint(this->selectedEndPoint)->getID());
+				ImGui::Text("Endpoint statistics:");
 				ImGui::Text("Recived vehicles count: %i.", animator->getGraph()->getPoint(this->selectedEndPoint)->receivedVehicles);
 				ImGui::Text("");
 				ImGui::Separator();
@@ -315,9 +340,9 @@ void GUI::draw() {
 			if (this->selectedStartPoint != -1) {
 				Point* point = animator->getGraph()->getPointByID(animator->getGraph()->getPoint(this->selectedStartPoint)->getID());
 				ImGui::Separator();
-				ImGui::Text("");
-				ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "The selected startpoint: %i.", point->getID());
-				ImGui::Text("");
+				ImGui::Image((void*)(intptr_t)objectStorage->getTexture("miniatures\\start_sign_mini.png"), ImVec2(50, 50));
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "\nThe selected \nstartpoint: %i.", point->getID());
 				ImGui::Separator();
 				ImGui::Text("");
 				if (ImGui::Button(" - Start a vehicle from here - ")) {
@@ -342,12 +367,14 @@ void GUI::draw() {
 
 			if (this->selectedRoad != -1) {
 				ImGui::Separator();
-				ImGui::Text("");
+				ImGui::Text("     "); ImGui::SameLine();
+				ImGui::Image((void*)(intptr_t)objectStorage->getTexture("miniatures\\road_mini.png"), ImVec2(50, 50));
+				ImGui::SameLine();
 				size_t renderID = this->animator->getGraph()->getEdge(this->selectedRoad)->getRoad3DiD();
-				ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "Selected road render ID: %i.\nSelected road model ID:  %i.", renderID, this->selectedRoad);
-				ImGui::Text("");
+				ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "Selected road \nrender ID: %i.\nSelected road \nmodel ID:  %i.", renderID, this->selectedRoad);
 				ImGui::Separator();
 				ImGui::Text("");
+				ImGui::Text("Road statistics:");
 				ImGui::Text("Road coast:...........%i", this->animator->getGraph()->getEdge(this->selectedRoad)->getCoast());
 				ImGui::Text("Road vehicle coast:...%i", this->animator->getGraph()->getEdge(this->selectedRoad)->getVehicleCoast());
 				ImGui::Text("Road length:..........%i", this->animator->getGraph()->getEdge(this->selectedRoad)->getLength());
@@ -360,17 +387,14 @@ void GUI::draw() {
 
 			if (this->selectedVehicle != -1) {
 				ImGui::Separator();
-				ImGui::Text("");
 				size_t renderID = this->selectedVehicle;
 				size_t modelID = this->windowRender->getVehicle(renderID)->getModelID();
-				ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "Selected vehicle render ID: %i.\nSelected vehicle model ID: %i.", renderID, modelID);
-				ImGui::Text("");
+				ImGui::Image((void*)(intptr_t)this->windowRender->getVehicle(renderID)->getIcon(), ImVec2(100, 100));
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "\n\nSelected vehicle \nrender ID: %i.\nSelected vehicle \nmodel ID: %i.", renderID, modelID);
 				ImGui::Separator();
 				ImGui::Text("");
-				ImGui::Text("        "); ImGui::SameLine();
-				//ImGui::SetCursorPos((ImGui::GetWindowSize() - ImVec2(100, 100)) * 0.5f);
-				ImGui::ImageButton((void*)(intptr_t)this->windowRender->getVehicle(renderID)->getIcon(), ImVec2(100, 100));
-				ImGui::Text("");
+				ImGui::Text("Vehicle statistics:");
 				ImGui::Text("Start point:............%i", animator->getVehicleModel(modelID)->startID);
 				ImGui::Text("Destination point:......%i", animator->getVehicleModel(modelID)->destinationID);
 				ImGui::Text("Path count:.............%i", animator->getVehicleModel(modelID)->hopCounter);

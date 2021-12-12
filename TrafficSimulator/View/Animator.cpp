@@ -97,6 +97,16 @@ void Animator::stop() {
 	startedVehiclesIndex = 0;
 	render->clearVehicles();
 	this->vehicles.clear();
+	this->resetStats();
+}
+
+void  Animator::resetStats() {
+	for (size_t i = 0; i < graph->getEdgesNumber(); i++) {
+		graph->getEdge(i)->resetStats();
+	}
+	for (size_t i = 0; i < graph->getPointsNumber(); i++) {
+		graph->getPoint(i)->resetStats();
+	}
 }
 
 //TODO Mi van ha nincs kiválasztva autó vagy uticél

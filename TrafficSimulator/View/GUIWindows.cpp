@@ -270,11 +270,26 @@ void GUI::controlsWindow() {
 void GUI::aboutWindow() {
 	ImGui::OpenPopup("About");
 	if (ImGui::BeginPopupModal("About", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
-		ImGui::Text("Traffic Simulation.");
+		ImGui::Text("");
+		ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "                  Traffic Simulation.");
+		ImGui::Text("");
+		ImGui::Separator();
+		ImGui::Text("");
 		ImGui::Text("Created By: Sandor Balazs");
-		ImGui::Text("AZA6NL");
+		ImGui::Text("            AZA6NL");
+		ImGui::Text("            sandorbalazs9402@gmail.com");
+		ImGui::Text("");
+		ImGui::Separator();
+		ImGui::Text("");
+		ImGui::Text("Github:");
+		ImGui::Text("https://github.com/SandorBalazsHU/elte-ik-bsc-thesis");
+		ImGui::Text("");
+		ImGui::Separator();
+		ImGui::Text("");
 		ImGui::Text("Thesis for Computer Science BSC in ELTE IK Budapest.");
-		ImGui::Text("sandorbalazs9402@gmail.com");
+		ImGui::Text("");
+		ImGui::Text("          "); ImGui::SameLine();
+		ImGui::Image((void*)(intptr_t)objectStorage->getTexture("elte.png"), ImVec2(200, 200));
 		if (ImGui::Button("Close")) {
 			aboutWindowStatus = false;
 			ImGui::CloseCurrentPopup();
@@ -832,10 +847,14 @@ void GUI::simulationSettingsWindow() {
 	if (ImGui::Begin("Simulation Settings.", &simulationSettingsWindowStatus, NULL)) {
 		ImGui::Text("Simulation Settings:");
 		ImGui::Separator();
+
 		ImGui::Text("");
 		ImGui::Checkbox("Smart pathfinder", &Vehicle::repath);
+		ImGui::Text("");
 		ImGui::SliderInt("Vehicle weight", &Vehicle::vehicleWeight, 0, 500);
+		ImGui::Text("");
 		ImGui::SliderInt("Animation frequency", &Animator::updateFrequency, 0, 80);
+		ImGui::Text("");
 		ImGui::SliderInt("Start frequency", &Animator::vehicleStarterUpdateFrequency, 100, 3000);
 
 		ImGui::Text("");
@@ -852,13 +871,13 @@ void GUI::simulationSettingsWindow() {
  * @brief Window for SimulationStatistics.
 */
 void GUI::simulationStatisticsWindow() {
-	if (ImGui::Begin("Simulation Statistics", &simulationStatisticsWindowStatus, NULL)) {
+	if (ImGui::Begin("Simulation Statistics", NULL, NULL)) {
 		ImGui::Text("Simulation Statistics");
 		ImGui::Separator();
 		ImGui::Text("");
 
 		//fpsGraph();
-		ImGui::Separator();
+		//ImGui::Separator();
 
 		std::vector<std::vector<int>> timeStat;
 		std::vector<size_t> startPoints = animator->getGraph()->getStartPoints();
@@ -870,18 +889,84 @@ void GUI::simulationStatisticsWindow() {
 			animator->getVehicleModel(i);
 		}*/
 
-		for (size_t i = 0; i < windowRender->getDynamicObjectsNumber(); i++) {
-			if (windowRender->getDynamicObject(i) != NULL) {
-				float vehicleCount = (float) animator->getGraph()->getEdgeByID(windowRender->getDynamicObject(i)->modelID)->getVehicleCount();
-				if (vehicleCount > 0) {
-					windowRender->getDynamicObject(i)->setRGBcolor(glm::vec3(1.0f-std::log10(vehicleCount), 0.15f, 0.15f));
-				} else {
-					windowRender->getDynamicObject(i)->setRGBcolor(glm::vec3(1, 1, 1));
-				}
-				
+		ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "Road coloring mode:");
+		ImGui::Separator();
+		static int roadColoringMode = 0;
+		static bool roadColoringRun;
+		ImGui::Text("");
+		if (!roadColoringRun) {
+			ImGui::RadioButton("By current vehicle count.", &roadColoringMode, 0);
+			ImGui::RadioButton("By all vehicle count.", &roadColoringMode, 1);
+			ImGui::RadioButton("By road coast.", &roadColoringMode, 2);
+			ImGui::Text("");
+			if (ImGui::Button("Run road coloring.")) {
+				roadColoringRun = true;
+				this->clearRoadColor();
+			}
+		} else {
+			switch (roadColoringMode) {
+			case 0:
+				ImGui::Text("Road coloring by current vehicle count:");
+				break;
+			case 1:
+				ImGui::Text("Road coloring by all vehicle count:");
+				break;
+			case 2:
+				ImGui::Text("Road coloring by current road coast:");
+				break;
+			}
+			ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "RUNNUNG ...");
+			ImGui::Text("");
+			if (ImGui::Button("Stop road coloring.")) {
+				roadColoringRun = false;
+				this->clearRoadColor();
 			}
 		}
 
+		if (roadColoringMode == 0 && roadColoringRun) {
+			for (size_t i = 0; i < windowRender->getDynamicObjectsNumber(); i++) {
+				if (windowRender->getDynamicObject(i) != NULL) {
+					float vehicleCount = (float)animator->getGraph()->getEdgeByID(windowRender->getDynamicObject(i)->modelID)->getVehicleCount();
+					if (vehicleCount > 0) {
+						windowRender->getDynamicObject(i)->setRGBcolor(glm::vec3(1.0f / std::sqrt(vehicleCount), 0.15f, 0.15f));
+					} else {
+						windowRender->getDynamicObject(i)->setRGBcolor(glm::vec3(1, 1, 1));
+					}
+
+				}
+			}
+		}
+
+		if (roadColoringMode == 1 && roadColoringRun) {
+			for (size_t i = 0; i < windowRender->getDynamicObjectsNumber(); i++) {
+				if (windowRender->getDynamicObject(i) != NULL) {
+					float allVehicleCount = (float)animator->getGraph()->getEdgeByID(windowRender->getDynamicObject(i)->modelID)->getAllVehicleCount();
+					if (allVehicleCount > 0) {
+					windowRender->getDynamicObject(i)->setRGBcolor(glm::vec3(0.15f, 1.0f / std::sqrt(allVehicleCount), 0.15f));
+					} else {
+						windowRender->getDynamicObject(i)->setRGBcolor(glm::vec3(1, 1, 1));
+					}
+				}
+			}
+		}
+
+		if (roadColoringMode == 2 && roadColoringRun) {
+			for (size_t i = 0; i < windowRender->getDynamicObjectsNumber(); i++) {
+				if (windowRender->getDynamicObject(i) != NULL) {
+					float roadCoast = (float)animator->getGraph()->getEdgeByID(windowRender->getDynamicObject(i)->modelID)->getCoast();
+					if (roadCoast > 0) {
+						windowRender->getDynamicObject(i)->setRGBcolor(glm::vec3(0.15f, 0.15f, 1.0f / std::sqrt(roadCoast/100.0f)));
+					}
+					else {
+						windowRender->getDynamicObject(i)->setRGBcolor(glm::vec3(1, 1, 1));
+					}
+				}
+			}
+		}
+
+		ImGui::Text("");
+		ImGui::Text("Other simulation statistics:");
+		ImGui::Separator();
 		ImGui::Text("");
 		ImGui::Text("The current save:");
 		ImGui::Text(windowRender->getMapSaver()->getLastSave().c_str());
@@ -914,6 +999,7 @@ void GUI::simulationStatisticsWindow() {
 		if (ImGui::Button("Close")) {
 			simulationStatisticsWindowStatus = false;
 			ImGui::CloseCurrentPopup();
+			this->clearRoadColor();
 		}
 		ImGui::End();
 	}
