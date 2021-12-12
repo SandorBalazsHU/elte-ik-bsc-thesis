@@ -356,10 +356,12 @@ void GUI::draw() {
 				ImGui::Text("");
 				ImGui::Separator();
 				ImGui::Text("Select the target endpoints \nfrom this startpoint:");
+				ImGui::Text("");
 				endpointSelector(point);
 				ImGui::Text("");
 				ImGui::Separator();
 				ImGui::Text("Select the startable vehicle types \n from this startpoint:");
+				ImGui::Text("");
 				carList(point);
 				ImGui::Text("");
 				ImGui::Separator();
@@ -367,14 +369,15 @@ void GUI::draw() {
 
 			if (this->selectedRoad != -1) {
 				ImGui::Separator();
-				ImGui::Text("     "); ImGui::SameLine();
+				ImGui::Text("");
+				ImGui::Text("   "); ImGui::SameLine();
 				ImGui::Image((void*)(intptr_t)objectStorage->getTexture("miniatures\\road_mini.png"), ImVec2(50, 50));
 				ImGui::SameLine();
 				size_t renderID = this->animator->getGraph()->getEdge(this->selectedRoad)->getRoad3DiD();
 				ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "Selected road \nrender ID: %i.\nSelected road \nmodel ID:  %i.", renderID, this->selectedRoad);
-				ImGui::Separator();
 				ImGui::Text("");
 				ImGui::Text("Road statistics:");
+				ImGui::Separator();
 				ImGui::Text("Road coast:...........%i", this->animator->getGraph()->getEdge(this->selectedRoad)->getCoast());
 				ImGui::Text("Road vehicle coast:...%i", this->animator->getGraph()->getEdge(this->selectedRoad)->getVehicleCoast());
 				ImGui::Text("Road length:..........%i", this->animator->getGraph()->getEdge(this->selectedRoad)->getLength());
@@ -392,15 +395,17 @@ void GUI::draw() {
 				ImGui::Image((void*)(intptr_t)this->windowRender->getVehicle(renderID)->getIcon(), ImVec2(100, 100));
 				ImGui::SameLine();
 				ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "\n\nSelected vehicle \nrender ID: %i.\nSelected vehicle \nmodel ID: %i.", renderID, modelID);
-				ImGui::Separator();
-				ImGui::Text("");
 				ImGui::Text("Vehicle statistics:");
+				ImGui::Separator();
 				ImGui::Text("Start point:............%i", animator->getVehicleModel(modelID)->startID);
 				ImGui::Text("Destination point:......%i", animator->getVehicleModel(modelID)->destinationID);
 				ImGui::Text("Path count:.............%i", animator->getVehicleModel(modelID)->hopCounter);
 				ImGui::Text("Vehicle Weight:.........%i", animator->getVehicleModel(modelID)->vehicleWeight);
+				ImGui::Text("All coast:..............%i", animator->getVehicleModel(modelID)->allCoast);
 				ImGui::Text("Start time (sec):.......%i", animator->getVehicleModel(modelID)->startTime / 1000);
 				ImGui::Text("Current time (sec):.....%i", SDL_GetTicks() / 1000);
+				ImGui::Text("");
+				ImGui::Separator();
 			}
 
 			/*if (this->selectedStartPoint != -1) carList();

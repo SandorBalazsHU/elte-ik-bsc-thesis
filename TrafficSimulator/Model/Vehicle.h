@@ -23,6 +23,7 @@ public:
 	Uint32 startTime = 0;
 	Uint32 endTime = 0;
 	size_t hopCounter = 0;
+	int allCoast = 0;
 private:
 	size_t object3DiD = 0;
 	size_t ID = 0;

@@ -100,7 +100,8 @@ void Vehicle::nextStep() {
 void Vehicle::switchToNextRoad() {
 	directionCheck();
 	this->currentEdgeOnThePath++;
-	hopCounter++;
+	this->hopCounter++;
+	this->allCoast += this->graph->getEdge(this->render->getDynamicObject(this->currentRoad)->modelID)->getCoast();
 	this->graph->getEdge(this->render->getDynamicObject(this->currentRoad)->modelID)->removeVehicle(this->vehicleWeight, repath);
 	if (this->currentEdgeOnThePath < path.size()) {
 		if (this->direction == 'a') this->currentPointOnTheRoad = 0;
