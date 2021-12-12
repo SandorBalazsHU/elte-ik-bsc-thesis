@@ -21,6 +21,7 @@ public:
 	void stop();
 	void addVehicle(size_t startPoint, bool singleVehicle);
 	Vehicle* getVehicleModel(size_t modelID);
+	size_t getVehicleModelSize();
 	Graph* getGraph();
 	void clear();
 	static int updateFrequency;

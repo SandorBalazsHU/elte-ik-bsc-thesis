@@ -320,4 +320,9 @@ private:
 	 * @brief Window for SimulationStatistics.
 	*/
 	void simulationStatisticsWindow();
+	
+	/**
+	 * @brief Clear the road colors.
+	*/
+	void clearRoadColor();
 };

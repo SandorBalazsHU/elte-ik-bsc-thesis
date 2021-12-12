@@ -157,3 +157,7 @@ void Animator::clear() {
 Vehicle* Animator::getVehicleModel(size_t modelID) {
 	return &this->vehicles[modelID];
 }
+
+size_t Animator::getVehicleModelSize() {
+	return this->vehicles.size();
+}

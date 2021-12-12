@@ -21,6 +21,7 @@
 #include "../Model/Graph.h"
 #include "../Model/Vehicle.h"
 #include "Animator.h"
+#include <math.h>
 
 void GUI::openWindow() {
 	ImGui::SetNextWindowSize(ImVec2(480, 360));
@@ -686,13 +687,8 @@ void GUI::pathFinderTestWindow() {
 			}
 			log << std::endl;
 
-			//TODO------------------------------ KÜLÖN FÜGGVÉNYBE.
 			//Clean colors
-			for (size_t i = 0; i < windowRender->getDynamicObjectsNumber(); i++) {
-				if (windowRender->getDynamicObject(i) != NULL) {
-					windowRender->getDynamicObject(i)->setRGBcolor(glm::vec3(1, 1, 1));
-				}
-			}
+			clearRoadColor();
 
 			//Generate graph.
 			Graph* graph = animator->getGraph();
@@ -861,8 +857,30 @@ void GUI::simulationStatisticsWindow() {
 		ImGui::Separator();
 		ImGui::Text("");
 
-		fpsGraph();
+		//fpsGraph();
 		ImGui::Separator();
+
+		std::vector<std::vector<int>> timeStat;
+		std::vector<size_t> startPoints = animator->getGraph()->getStartPoints();
+		/*for (size_t i = 0; i < startPoints.size(); i++) {
+			timeStat.push_back()
+		}
+
+		for (size_t i = 0; i < animator->getVehicleModelSize(); i++) {
+			animator->getVehicleModel(i);
+		}*/
+
+		for (size_t i = 0; i < windowRender->getDynamicObjectsNumber(); i++) {
+			if (windowRender->getDynamicObject(i) != NULL) {
+				float vehicleCount = (float) animator->getGraph()->getEdgeByID(windowRender->getDynamicObject(i)->modelID)->getVehicleCount();
+				if (vehicleCount > 0) {
+					windowRender->getDynamicObject(i)->setRGBcolor(glm::vec3(1.0f-std::log10(vehicleCount), 0.15f, 0.15f));
+				} else {
+					windowRender->getDynamicObject(i)->setRGBcolor(glm::vec3(1, 1, 1));
+				}
+				
+			}
+		}
 
 		ImGui::Text("");
 		ImGui::Text("The current save:");
@@ -951,4 +969,15 @@ void GUI::stopSimulation() {
 void GUI::pauseSimulation() {
 	animator->pause();
 	simulationPaused = true;
+}
+
+/**
+ * @brief Clear the road colors.
+*/
+void GUI::clearRoadColor() {
+	for (size_t i = 0; i < windowRender->getDynamicObjectsNumber(); i++) {
+		if (windowRender->getDynamicObject(i) != NULL) {
+			windowRender->getDynamicObject(i)->setRGBcolor(glm::vec3(1, 1, 1));
+		}
+	}
 }
