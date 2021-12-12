@@ -879,15 +879,38 @@ void GUI::simulationStatisticsWindow() {
 		//fpsGraph();
 		//ImGui::Separator();
 
-		std::vector<std::vector<int>> timeStat;
-		std::vector<size_t> startPoints = animator->getGraph()->getStartPoints();
-		/*for (size_t i = 0; i < startPoints.size(); i++) {
-			timeStat.push_back()
+		std::map<int, std::vector<int>> allCost;
+		std::vector<size_t> endPoints = animator->getGraph()->getEndPoints();
+		for (size_t i = 0; i < endPoints.size(); i++) {
+			allCost.insert(std::pair<int, std::vector<int>>(endPoints[i], std::vector<int>()));
 		}
 
 		for (size_t i = 0; i < animator->getVehicleModelSize(); i++) {
-			animator->getVehicleModel(i);
-		}*/
+			if(animator->getVehicleModel(i)->isFinished())
+			allCost[animator->getVehicleModel(i)->destinationID].push_back(animator->getVehicleModel(i)->allCost);
+		}
+
+		std::vector<float> allCostStat;
+		for (const auto& [destinationID, costs] : allCost) {
+			if (costs.size() > 0) {
+				float averageCost = 0;
+				for (size_t i = 0; i < costs.size(); i++) {
+					averageCost += costs[i];
+				}
+				allCostStat.push_back(averageCost / costs.size());
+			}
+		}
+
+		static int graphTop = 1000;
+		ImGui::PlotHistogram("Average cost", &allCostStat[0], (int)allCostStat.size(), 0, "", 0.0f, graphTop, ImVec2(0, 80));
+		ImGui::SliderInt("Graph top limit", &graphTop, 0, 1000);
+		ImGui::InputInt("Graph top limit", &graphTop);
+		
+		ImGui::Text("");
+		for (size_t i = 0; i < allCostStat.size(); i++) {
+			ImGui::Text("Endpoint: %i, recived vehicles: %i, \naverage coast: %f", endPoints[i], this->animator->getGraph()->getPointByID(endPoints[i])->receivedVehicles, allCostStat[i]);
+		}
+		ImGui::Text("");
 
 		ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "Road coloring mode:");
 		ImGui::Separator();

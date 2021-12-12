@@ -7,7 +7,7 @@ BUG:
 - Végpont kijelölés törlés után
 - Gyprsabb bill mozfás
 
-- !!!!!!!! Stop esetén statisztikék törlése.
+- TODO !!!!!!!!!! sELECTED CUCCOK TÖRLÉSE A gui-BAN ÚJ NYITÁSA VAGY ILYENEK ESETÉN!
 
 Javaslatok:
 - //Javasolt endpoint is deleted, marker is deleted hozzáadása ami törli a hibás út függõségeket.
@@ -78,6 +78,7 @@ Elkészült ötletek:
 + BIZTOSAN TÖRÖLNI AKAROD ABLAK
 + A pathfinder-t ne lehessen elindítani min 1 kijelölt cél és start nélkül. A szimulációt se.
 + Save as után elszáll pointer hibával. GUI 227
++ Stop esetén statisztikék törlése.
 
 Elvetett ötletek:
 x sorszám fügetlenítés. A cím legyen az elsõdleges kulcs.

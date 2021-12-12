@@ -401,7 +401,7 @@ void GUI::draw() {
 				ImGui::Text("Destination point:......%i", animator->getVehicleModel(modelID)->destinationID);
 				ImGui::Text("Path count:.............%i", animator->getVehicleModel(modelID)->hopCounter);
 				ImGui::Text("Vehicle Weight:.........%i", animator->getVehicleModel(modelID)->vehicleWeight);
-				ImGui::Text("All coast:..............%i", animator->getVehicleModel(modelID)->allCoast);
+				ImGui::Text("All coast:..............%i", animator->getVehicleModel(modelID)->allCost);
 				ImGui::Text("Start time (sec):.......%i", animator->getVehicleModel(modelID)->startTime / 1000);
 				ImGui::Text("Current time (sec):.....%i", SDL_GetTicks() / 1000);
 				ImGui::Text("");
