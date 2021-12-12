@@ -71,7 +71,7 @@ public:
 	size_t markerB = -1;
 
 	size_t modelID = -1;
- 
+
 	float getRoadLength();
 
 private:

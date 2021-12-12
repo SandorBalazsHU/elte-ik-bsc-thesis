@@ -88,31 +88,28 @@ void Animator::start() {
 
 void Animator::pause() {
 	this->isAnimationRunning = false;
+	this->softRunning = false;
 }
 
 void Animator::stop() {
 	this->isAnimationRunning = false;
+	this->softRunning = true;
 	startedVehiclesIndex = 0;
 	render->clearVehicles();
 	this->vehicles.clear();
 }
 
 //TODO Mi van ha nincs kiválasztva autó vagy uticél
-void Animator::addVehicle(size_t startPoint, size_t endPoint, bool singleVehicle) {
+void Animator::addVehicle(size_t startPoint, bool singleVehicle) {
 	if (render->isEditorLoced()) {
-		if (startPoint == -1 && endPoint == -1) {
-			startPoint = startPoints[0];
-			endPoint = endPoints[0];
-		}
-
 			Point* point = graph->getPointByID(startPoint);
 
 			std::vector<size_t> activeVehicles = point->activeVehicles();
-			size_t newVehicleID = render->addVehicle(activeVehicles[getRandomNumber(0, activeVehicles.size() - 1)]);
+			size_t newVehicleID = render->addVehicle(activeVehicles[getRandomNumber(0, activeVehicles.size() - 1)], this->vehicles.size());
 			size_t id = this->vehicles.size();
 
 			std::vector<size_t> activeEndpoints = point->activeEndpoints();
-			endPoint = this->endPoints[activeEndpoints[getRandomNumber(0, activeEndpoints.size() - 1)]];
+			size_t endPoint = this->endPoints[activeEndpoints[getRandomNumber(0, activeEndpoints.size() - 1)]];
 		
 		this->vehicles.push_back(Vehicle(this->graph, this->render, startPoint, endPoint, newVehicleID, id));
 		this->vehicles[this->vehicles.size() - 1].update();
@@ -133,7 +130,7 @@ int Animator::getRandomNumber(int min, int max) {
 void Animator::autoAdder() {
 	Point* point = graph->getPointByID(startPoints[startedVehiclesIndex]);
 	if (point->startableVehicles > 0) {
-		addVehicle(startPoints[startedVehiclesIndex]);
+		addVehicle(startPoints[startedVehiclesIndex], false);
 		point->startableVehicles -= 1;
 	}
 	startedVehiclesIndex++;
@@ -155,4 +152,8 @@ void Animator::deleteFinishedVehicles() {
 
 void Animator::clear() {
 	this->vehicles.clear();
+}
+
+Vehicle* Animator::getVehicleModel(size_t modelID) {
+	return &this->vehicles[modelID];
 }

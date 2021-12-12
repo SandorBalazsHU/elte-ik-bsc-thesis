@@ -126,6 +126,11 @@ public:
 	int startableVehicles = 50;
 
 	/**
+	 * @brief The received cars if this is a endpoint.
+	*/
+	int receivedVehicles = 0;
+
+	/**
 	 * @brief Return active vehicles.
 	 * @return Return active vehicles.
 	*/

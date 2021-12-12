@@ -22,8 +22,12 @@ public:
 	size_t getEndpointA();
 	size_t getEndpointB();
 	int getCoast();
-	void addVehicleCoast(int c);
-	void removeVehicleCoast(int c);
+	int getLength();
+	int getVehicleCoast();
+	size_t getVehicleCount();
+	size_t getAllVehicleCount();
+	void addVehicle(int c, bool repath);
+	void removeVehicle(int c, bool repath);
 	bool match(size_t endpointA, size_t endpointB);
 private:
 	size_t id = -1;
@@ -32,4 +36,6 @@ private:
 	size_t endpointB = -1;
 	int coast = 0;
 	int vehicleCoast = 0;
+	size_t vehicleCount = 0;
+	size_t allVehicleCount = 0;
 };

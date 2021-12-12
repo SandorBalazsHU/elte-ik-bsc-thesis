@@ -4,6 +4,7 @@
 #include "Dijkstra.h"
 #include "../View/Render.h"
 #include <vector>
+#include <SDL.h>
 
 class Vehicle {
 public:
@@ -16,11 +17,15 @@ public:
 	bool isDeleted();
 	static bool repath;
 	static int vehicleWeight;
+
+	size_t destinationID = 0;
+	size_t startID = 0;
+	Uint32 startTime = 0;
+	Uint32 endTime = 0;
+	size_t hopCounter = 0;
 private:
 	size_t object3DiD = 0;
 	size_t ID = 0;
-	size_t destinationID = 0;
-	size_t startID = 0;
 	size_t currentEdgeOnThePath = 0;
 	size_t currentRoad = 0;
 	size_t currentPointOnTheRoad = 0;

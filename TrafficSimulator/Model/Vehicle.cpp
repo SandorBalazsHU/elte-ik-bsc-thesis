@@ -1,3 +1,4 @@
+#include <SDL.h>
 #include "Vehicle.h"
 #include "../View/Objects/Object3Dvehicle.h"
 
@@ -14,8 +15,9 @@ Vehicle::Vehicle(Graph* graph, Render* render, size_t startID, size_t destinatio
 	this->dijkstra = this->graph->generateDijkstra(startID);
 	this->path = this->graph->getPath(this->dijkstra, this->destinationID);
 	this->currentRoad = this->path[currentEdgeOnThePath];
-	if (repath) this->graph->getEdge(this->render->getDynamicObject(this->currentRoad)->modelID)->addVehicleCoast(this->vehicleWeight);
-	firstDirectionCheck();
+	this->graph->getEdge(this->render->getDynamicObject(this->currentRoad)->modelID)->addVehicle(this->vehicleWeight, repath);
+	this->firstDirectionCheck();
+	this->startTime = SDL_GetTicks();
 }
 
 size_t Vehicle::getID() {
@@ -77,8 +79,6 @@ void Vehicle::directionCheck() {
 	}
 }
 
-//TODO: Kezdeti irány vizsgálat.
-//TODO Új és megnyitás esetén törölni a jármû tárat mindkét helyen.
 void Vehicle::nextStep() {
 	if (this->direction == 'a') {
 		//2???
@@ -99,19 +99,22 @@ void Vehicle::nextStep() {
 
 void Vehicle::switchToNextRoad() {
 	directionCheck();
-	//std::cout << "Direction:" << direction << "Track:" << track << std::endl;
 	this->currentEdgeOnThePath++;
+	hopCounter++;
+	this->graph->getEdge(this->render->getDynamicObject(this->currentRoad)->modelID)->removeVehicle(this->vehicleWeight, repath);
 	if (this->currentEdgeOnThePath < path.size()) {
 		if (this->direction == 'a') this->currentPointOnTheRoad = 0;
 		if (this->direction == 'b') this->currentPointOnTheRoad = this->standardRoadLenght-1;
-		if (repath) this->graph->getEdge(this->render->getDynamicObject(this->currentRoad)->modelID)->removeVehicleCoast(this->vehicleWeight);
 		this->currentRoad = this->path[currentEdgeOnThePath];
-		if (repath) this->graph->getEdge(this->render->getDynamicObject(this->currentRoad)->modelID)->addVehicleCoast(this->vehicleWeight);
+		this->graph->getEdge(this->render->getDynamicObject(this->currentRoad)->modelID)->addVehicle(this->vehicleWeight, repath);
 	}
 }
 
 void Vehicle::checkFinish() {
-	if (this->currentEdgeOnThePath >= path.size()) this->finished = true;
+	if (this->currentEdgeOnThePath >= path.size()) {
+		this->finished = true;
+		this->endTime = SDL_GetTicks();
+	}
 }
 
 bool Vehicle::isFinished() {
@@ -121,6 +124,7 @@ bool Vehicle::isFinished() {
 void Vehicle::erase() {
 	this->deleted = true;
 	delete dijkstra;
+	graph->getPointByID(this->destinationID)->receivedVehicles++;
 }
 
 bool Vehicle::isDeleted() {

@@ -139,13 +139,9 @@ void EventListener::keyboardUp(SDL_KeyboardEvent& key) {
 	if (key.keysym.sym == SDLK_PAGEUP) {
 		int shift = -10;
 		for (size_t i = 5; i < 17; i++) {
-			render->getVehicle(render->addVehicle(i))->move(glm::vec3(shift, 0, shift));
+			render->getVehicle(render->addVehicle(i,-1))->move(glm::vec3(shift, 0, shift));
 			shift += 3;
 		}
-	}
-
-	if (key.keysym.sym == SDLK_INSERT) {
-		render->getAnimator()->addVehicle();
 	}
 	//---------------------------------------------------------------------------------------
 

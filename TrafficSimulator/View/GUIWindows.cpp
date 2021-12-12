@@ -686,6 +686,7 @@ void GUI::pathFinderTestWindow() {
 			}
 			log << std::endl;
 
+			//TODO------------------------------ KÜLÖN FÜGGVÉNYBE.
 			//Clean colors
 			for (size_t i = 0; i < windowRender->getDynamicObjectsNumber(); i++) {
 				if (windowRender->getDynamicObject(i) != NULL) {
@@ -845,6 +846,55 @@ void GUI::simulationSettingsWindow() {
 		ImGui::Separator();
 		if (ImGui::Button("Close")) {
 			simulationSettingsWindowStatus = false;
+			ImGui::CloseCurrentPopup();
+		}
+		ImGui::End();
+	}
+}
+
+/**
+ * @brief Window for SimulationStatistics.
+*/
+void GUI::simulationStatisticsWindow() {
+	if (ImGui::Begin("Simulation Statistics", &simulationStatisticsWindowStatus, NULL)) {
+		ImGui::Text("Simulation Statistics");
+		ImGui::Separator();
+		ImGui::Text("");
+
+		fpsGraph();
+		ImGui::Separator();
+
+		ImGui::Text("");
+		ImGui::Text("The current save:");
+		ImGui::Text(windowRender->getMapSaver()->getLastSave().c_str());
+
+		ImGui::Text("");
+		ImGui::Text("The last save time:");
+		ImGui::Text(windowRender->getMapSaver()->getLastSaveTime().c_str());
+
+		ImGui::Text("");
+		ImGui::Text("The current system time:");
+		ImGui::Text(Logger::currentDateTime().c_str());
+
+		ImGui::Text("");
+		ImGui::Text("The objects count on the scene:");
+		ImGui::SameLine();
+		ImGui::Text(std::to_string(windowRender->getObjectsNumber()).c_str());
+
+		ImGui::Text("");
+		ImGui::Text("The roads count on the scene:");
+		ImGui::SameLine();
+		ImGui::Text(std::to_string(windowRender->getDynamicObjectsNumber()).c_str());
+
+		ImGui::Text("");
+		ImGui::Text("The vehicles count on the scene:");
+		ImGui::SameLine();
+		ImGui::Text(std::to_string(windowRender->getVehiclesNumber()).c_str());
+
+		ImGui::Text("");
+		ImGui::Separator();
+		if (ImGui::Button("Close")) {
+			simulationStatisticsWindowStatus = false;
 			ImGui::CloseCurrentPopup();
 		}
 		ImGui::End();

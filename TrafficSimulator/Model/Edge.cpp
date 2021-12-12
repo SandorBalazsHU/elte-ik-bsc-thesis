@@ -49,12 +49,31 @@ int Edge::getCoast() {
 	return this->coast + this->vehicleCoast;
 }
 
-void Edge::addVehicleCoast(int c) {
-	this->vehicleCoast += c;
+int Edge::getLength() {
+	return this->coast;
 }
 
-void Edge::removeVehicleCoast(int c) {
-	this->vehicleCoast -= c;
+int Edge::getVehicleCoast() {
+	return this->vehicleCoast;
+}
+
+size_t Edge::getVehicleCount() {
+	return this->vehicleCount;
+}
+
+size_t Edge::getAllVehicleCount() {
+	return this->allVehicleCount;
+}
+
+void Edge::addVehicle(int c, bool repath) {
+	if(repath) this->vehicleCoast += c;
+	this->vehicleCount++;
+	this->allVehicleCount++;
+}
+
+void Edge::removeVehicle(int c, bool repath) {
+	if(repath) this->vehicleCoast = this->vehicleCoast - c;
+	this->vehicleCount--;
 }
 
 bool Edge::match(size_t endpointA, size_t endpointB) {

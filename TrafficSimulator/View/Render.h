@@ -114,9 +114,10 @@ public:
 	/**
 	 * @brief Add a new vehicle to the scene, from the objectStorage.
 	 * @param objectStorageID The addable vehicle object storage ID.
+	 * @param modelID The addable vehicle object model ID.
 	 * @return The added vehicle renderID.
 	*/
-	size_t addVehicle(int objectStorageID);
+	size_t addVehicle(int objectStorageID, size_t modelID);
 
 	/**
 	 * @brief Delete a vehicle by renderID.

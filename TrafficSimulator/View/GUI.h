@@ -130,6 +130,7 @@ private:
 	bool mapEditorWindow = true;
 	bool simulationWindow = false;
 	bool simulationSettingsWindowStatus = false;
+	bool simulationStatisticsWindowStatus = false;
 
 	bool finalisingErrorWindow = false;
 
@@ -314,4 +315,9 @@ private:
 	 * @brief Pause running simulation.
 	*/
 	void pauseSimulation();
+
+	/**
+	 * @brief Window for SimulationStatistics.
+	*/
+	void simulationStatisticsWindow();
 };

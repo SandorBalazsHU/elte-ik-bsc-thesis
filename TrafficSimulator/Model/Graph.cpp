@@ -58,7 +58,7 @@ Point* Graph::getPoint(size_t point) {
 
 Point* Graph::getPointByID(size_t point) {
 	for (size_t i = 0; i < this->points.size(); i++) {
-		if (this->points[i]->getID() == point) return this->points[i];
+		if (this->points[i]->getID() == point  && !this->points[i]->isErased()) return this->points[i];
 	}
 	return NULL;
 }
