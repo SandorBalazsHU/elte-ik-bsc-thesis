@@ -902,13 +902,47 @@ void GUI::simulationStatisticsWindow() {
 		}
 
 		static int graphTop = 1000;
-		ImGui::PlotHistogram("Average cost", &allCostStat[0], (int)allCostStat.size(), 0, "", 0.0f, graphTop, ImVec2(0, 80));
-		ImGui::SliderInt("Graph top limit", &graphTop, 0, 1000);
-		ImGui::InputInt("Graph top limit", &graphTop);
+		ImGui::PlotHistogram("AVG Cost", &allCostStat[0], (int)allCostStat.size(), 0, "Average cost", 0.0f, graphTop, ImVec2(0, 80));
+		ImGui::SliderInt("AVG Cost", &graphTop, 0, 1000);
+		ImGui::InputInt("AVG Cost ", &graphTop);
 		
 		ImGui::Text("");
 		for (size_t i = 0; i < allCostStat.size(); i++) {
-			ImGui::Text("Endpoint: %i, recived vehicles: %i, \naverage coast: %f", endPoints[i], this->animator->getGraph()->getPointByID(endPoints[i])->receivedVehicles, allCostStat[i]);
+			ImGui::Text("%i#, rec.: %i, avg coast: %f", endPoints[i], this->animator->getGraph()->getPointByID(endPoints[i])->receivedVehicles, allCostStat[i]);
+		}
+		ImGui::Text("");
+
+		//------------------------------------------------------------------
+
+		std::map<int, std::vector<int>> hops;
+		for (size_t i = 0; i < endPoints.size(); i++) {
+			hops.insert(std::pair<int, std::vector<int>>(endPoints[i], std::vector<int>()));
+		}
+
+		for (size_t i = 0; i < animator->getVehicleModelSize(); i++) {
+			if (animator->getVehicleModel(i)->isFinished())
+				hops[animator->getVehicleModel(i)->destinationID].push_back(animator->getVehicleModel(i)->hopCounter);
+		}
+
+		std::vector<float> hopsStat;
+		for (const auto& [destinationID, allHop] : hops) {
+			if (allHop.size() > 0) {
+				float averageHops = 0;
+				for (size_t i = 0; i < allHop.size(); i++) {
+					averageHops += allHop[i];
+				}
+				hopsStat.push_back(averageHops / allHop.size());
+			}
+		}
+
+		static int graphTop2 = 10;
+		ImGui::PlotHistogram("AVG hop", &hopsStat[0], (int)hopsStat.size(), 0, "Average hop", 0.0f, graphTop2, ImVec2(0, 80));
+		ImGui::SliderInt("AVG hop", &graphTop2, 0, 1000);
+		ImGui::InputInt("AVG hop ", &graphTop2);
+
+		ImGui::Text("");
+		for (size_t i = 0; i < hopsStat.size(); i++) {
+			ImGui::Text("%i#, rec.: %i, avg hop: %f", endPoints[i], this->animator->getGraph()->getPointByID(endPoints[i])->receivedVehicles, hopsStat[i]);
 		}
 		ImGui::Text("");
 
@@ -1053,6 +1087,26 @@ void GUI::backToEditMode() {
 	windowRender->freeEditor();
 	mapEditorWindow = true;
 	simulationWindow = false;
+	selectedStartPoint = -1;
+	selectedEndPoint = -1;
+	selectedRoad = -1;
+	selectedVehicle = -1;
+
+	openWindowStatus = false;
+	saveWindowStatus = false;
+	saveAsWindowStatus = false;
+	ImGuiSettingsWindowStatus = false;
+	newMapConfirmWindowStatus = false;
+	controlsWindowStatus = false;
+	aboutWindowStatus = false;
+	closingCheckerWindowStatus = false;
+	graphicSettingsWindowStatus = false;
+	debugOptionsWindowStatus = false;
+	runningStatisticsWindowStatus = false;
+	pathFinderTestWindowStatus = false;
+	simulationSettingsWindowStatus = false;
+	simulationStatisticsWindowStatus = false;
+	finalisingErrorWindow = false;
 }
 
 /**

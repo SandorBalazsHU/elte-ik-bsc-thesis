@@ -7,8 +7,6 @@ BUG:
 - Végpont kijelölés törlés után
 - Gyprsabb bill mozfás
 
-- TODO !!!!!!!!!! sELECTED CUCCOK TÖRLÉSE A gui-BAN ÚJ NYITÁSA VAGY ILYENEK ESETÉN!
-
 Javaslatok:
 - //Javasolt endpoint is deleted, marker is deleted hozzáadása ami törli a hibás út függõségeket.
 - OBJECT3D ROAD RENDES DESTRUCTOR tag destruktor hívásokkal
@@ -79,6 +77,7 @@ Elkészült ötletek:
 + A pathfinder-t ne lehessen elindítani min 1 kijelölt cél és start nélkül. A szimulációt se.
 + Save as után elszáll pointer hibával. GUI 227
 + Stop esetén statisztikék törlése.
++ sELECTED CUCCOK TÖRLÉSE A gui-BAN ÚJ NYITÁSA VAGY ILYENEK ESETÉN!
 
 Elvetett ötletek:
 x sorszám fügetlenítés. A cím legyen az elsõdleges kulcs.
