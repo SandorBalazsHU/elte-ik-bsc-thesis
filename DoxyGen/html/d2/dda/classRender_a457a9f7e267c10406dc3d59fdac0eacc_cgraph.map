@@ -1,0 +1,9 @@
+<map id="Render::sceneInit" name="Render::sceneInit">
+<area shape="rect" id="node1" title="Initialise the scene." alt="" coords="5,85,148,115"/>
+<area shape="rect" id="node2" href="$d2/dda/classRender.html#a4ccbfe15c6075248daf93085b0628b71" title="Add new renderable object from the preloaded object storage to the scene." alt="" coords="267,5,420,35"/>
+<area shape="rect" id="node4" href="$db/d2d/classObjectStorage.html#ac017bb83517ad3c95bd6b3bef9af1406" title=" " alt="" coords="196,59,491,88"/>
+<area shape="rect" id="node5" href="$d2/dda/classRender.html#ac0679c37e0376133a5c26d3728a3f28c" title="Get scene preloaded object from the scene render storage." alt="" coords="269,112,417,141"/>
+<area shape="rect" id="node6" href="$d8/d1b/classObject3D.html#ab4ac04d381ed34ad82263dac4a759d9c" title=" " alt="" coords="248,165,439,195"/>
+<area shape="rect" id="node3" href="$db/d2d/classObjectStorage.html#ab22906dd1d14d3899122e56a57d97a08" title=" " alt="" coords="539,5,757,35"/>
+<area shape="rect" id="node7" href="$d8/d1b/classObject3D.html#a35a0a30f2f4db7de497667fa164970c7" title=" " alt="" coords="557,165,739,195"/>
+</map>

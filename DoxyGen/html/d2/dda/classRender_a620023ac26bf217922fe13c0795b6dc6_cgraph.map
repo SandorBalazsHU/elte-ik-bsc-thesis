@@ -1,0 +1,4 @@
+<map id="Render::addVehicle" name="Render::addVehicle">
+<area shape="rect" id="node1" title="Add a new vehicle to the scene, from the objectStorage." alt="" coords="5,5,165,35"/>
+<area shape="rect" id="node2" href="$db/d2d/classObjectStorage.html#ac3411dc979b0e6ffe46ee06832786bf4" title=" " alt="" coords="213,5,480,35"/>
+</map>

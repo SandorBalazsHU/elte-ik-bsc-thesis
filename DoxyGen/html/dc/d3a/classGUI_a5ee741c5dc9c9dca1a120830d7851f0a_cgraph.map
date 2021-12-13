@@ -1,0 +1,5 @@
+<map id="GUI::controlsWindow" name="GUI::controlsWindow">
+<area shape="rect" id="node1" title="Window for the controls tutorial." alt="" coords="5,5,172,35"/>
+<area shape="rect" id="node2" href="$db/d2d/classObjectStorage.html#acaec627a0ef8499bc59bcb4078299a3d" title=" " alt="" coords="220,5,424,35"/>
+<area shape="rect" id="node3" href="$db/d2d/classObjectStorage.html#af4963be037ebd58d003e99886d5b4ff8" title=" " alt="" coords="472,5,749,35"/>
+</map>

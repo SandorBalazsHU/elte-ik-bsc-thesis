@@ -1,0 +1,9 @@
+<map id="ObjectStorage::getWindowIcon" name="ObjectStorage::getWindowIcon">
+<area shape="rect" id="node1" title=" " alt="" coords="773,32,1011,61"/>
+<area shape="rect" id="node2" href="$d2/dda/classRender.html#a146f649814554dafa5999dc2b3f7e62f" title="Render constructor." alt="" coords="607,5,717,35"/>
+<area shape="rect" id="node6" href="$d2/dda/classRender.html#af30d499dd0f75d71d5f65f6f4bd4e102" title="Remder the next frame." alt="" coords="599,59,725,88"/>
+<area shape="rect" id="node3" href="$d1/d76/classWorkWindow.html#aa749c366f50a6fe841819d5c7c0b3af7" title="Render variable setting." alt="" coords="316,5,551,35"/>
+<area shape="rect" id="node4" href="$d1/d76/classWorkWindow.html#a3eb2d3857bd1e4888a92aa3e4c49b0b6" title="Open and show the window." alt="" coords="109,32,268,61"/>
+<area shape="rect" id="node5" href="$d1/dc4/TrafficSimulator_8cpp.html#a700a0caa5b70a06d1064e576f9f3cf65" title="Program main function." alt="" coords="5,32,61,61"/>
+<area shape="rect" id="node7" href="$d1/d76/classWorkWindow.html#a6a6ee764eea5d1f5a81f7ecce80a0874" title="Render Start!" alt="" coords="333,59,534,88"/>
+</map>

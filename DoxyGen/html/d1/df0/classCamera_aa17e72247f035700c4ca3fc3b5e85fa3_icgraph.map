@@ -1,0 +1,13 @@
+<map id="Camera::getProjectionViewMatrix" name="Camera::getProjectionViewMatrix">
+<area shape="rect" id="node1" title="The View * Projection matrix used for the camera transformation in the render." alt="" coords="1860,62,2116,91"/>
+<area shape="rect" id="node2" href="$d2/dda/classRender.html#a83368e0c7e30b3d323092b82b2261aab" title="Upload the shader datas before rendering an object." alt="" coords="1549,62,1812,91"/>
+<area shape="rect" id="node3" href="$d2/dda/classRender.html#a795f223a5fe016f5976a6c984082cb0b" title="Composing the renderable scene from the renderableObjects and the renderableRoads storages." alt="" coords="740,62,916,91"/>
+<area shape="rect" id="node8" href="$d2/dda/classRender.html#a15cb317fe3c5084b471fa2585c1e00a8" title="Render the hit sphares for each scene objets." alt="" coords="996,35,1183,64"/>
+<area shape="rect" id="node9" href="$d2/dda/classRender.html#a0d77292187e580cfe4e32129a29c48b0" title="Render the hit sphares for each scene road objets." alt="" coords="1269,87,1495,116"/>
+<area shape="rect" id="node11" href="$d2/dda/classRender.html#a93015bc85c0a9727305b6ae8f0a3c819" title="Render the hit sphares for each scene vehicle objets." alt="" coords="1263,140,1501,170"/>
+<area shape="rect" id="node4" href="$d2/dda/classRender.html#af30d499dd0f75d71d5f65f6f4bd4e102" title="Remder the next frame." alt="" coords="565,62,692,91"/>
+<area shape="rect" id="node5" href="$d1/d76/classWorkWindow.html#a6a6ee764eea5d1f5a81f7ecce80a0874" title="Render Start!" alt="" coords="316,62,517,91"/>
+<area shape="rect" id="node6" href="$d1/d76/classWorkWindow.html#a3eb2d3857bd1e4888a92aa3e4c49b0b6" title="Open and show the window." alt="" coords="109,62,268,91"/>
+<area shape="rect" id="node7" href="$d1/dc4/TrafficSimulator_8cpp.html#a700a0caa5b70a06d1064e576f9f3cf65" title="Program main function." alt="" coords="5,62,61,91"/>
+<area shape="rect" id="node10" href="$d2/dda/classRender.html#a96481f1fa33bc227bd5164d371f1667c" title="Render the hit sphares for each scene road objets." alt="" coords="964,88,1215,118"/>
+</map>

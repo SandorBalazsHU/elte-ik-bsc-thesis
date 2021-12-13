@@ -1,0 +1,13 @@
+<map id="Render::multisamplingOn" name="Render::multisamplingOn">
+<area shape="rect" id="node1" title="Render mode configurator &#45; Multisampling on." alt="" coords="1652,32,1848,61"/>
+<area shape="rect" id="node2" href="$d2/dda/classRender.html#a146f649814554dafa5999dc2b3f7e62f" title="Render constructor." alt="" coords="1438,5,1549,35"/>
+<area shape="rect" id="node6" href="$dc/d3a/classGUI.html#a19778d5b0ee49a7a71b11492c36cabab" title="Window descriptor for the graphic settings window." alt="" coords="1383,59,1604,88"/>
+<area shape="rect" id="node3" href="$d1/d76/classWorkWindow.html#aa749c366f50a6fe841819d5c7c0b3af7" title="Render variable setting." alt="" coords="889,5,1124,35"/>
+<area shape="rect" id="node4" href="$d1/d76/classWorkWindow.html#a3eb2d3857bd1e4888a92aa3e4c49b0b6" title="Open and show the window." alt="" coords="109,33,268,63"/>
+<area shape="rect" id="node5" href="$d1/dc4/TrafficSimulator_8cpp.html#a700a0caa5b70a06d1064e576f9f3cf65" title="Program main function." alt="" coords="5,33,61,63"/>
+<area shape="rect" id="node7" href="$dc/d3a/classGUI.html#a00ce3e5923599d1b2355915c4ced4bb3" title="The widows opening and closing system." alt="" coords="1172,59,1335,88"/>
+<area shape="rect" id="node8" href="$dc/d3a/classGUI.html#a9dace388dbf579b96d875f4a051d1174" title="The main GUI function." alt="" coords="961,59,1052,88"/>
+<area shape="rect" id="node9" href="$dc/d3a/classGUI.html#ae63efaa6d38814299c42540a5d4ea00b" title="Render the GUI graphics in the render cycle." alt="" coords="740,59,841,88"/>
+<area shape="rect" id="node10" href="$d2/dda/classRender.html#af30d499dd0f75d71d5f65f6f4bd4e102" title="Remder the next frame." alt="" coords="565,59,692,88"/>
+<area shape="rect" id="node11" href="$d1/d76/classWorkWindow.html#a6a6ee764eea5d1f5a81f7ecce80a0874" title="Render Start!" alt="" coords="316,59,517,88"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="GUI::backToEditMode" name="GUI::backToEditMode">
+<area shape="rect" id="node1" title="Back to the edit mode." alt="" coords="5,112,181,141"/>
+<area shape="rect" id="node2" href="$d2/dda/classRender.html#ac1bb8f5a1c7afe58aee091fb79b31d72" title="Free the editor functions." alt="" coords="229,112,380,141"/>
+<area shape="rect" id="node3" href="$dc/d36/classEventListener.html#a8fca510f74e188906fe36f8ca92a4be3" title=" " alt="" coords="467,5,661,35"/>
+<area shape="rect" id="node4" href="$d9/dd9/classObject3Droad.html#af633daa6a73ecb9951c32b3278dcab34" title=" " alt="" coords="465,59,663,88"/>
+<area shape="rect" id="node5" href="$d2/dda/classRender.html#a112bb5215d1830cc128b143ca311a581" title="Getter for the RenderableRoads." alt="" coords="459,112,669,141"/>
+<area shape="rect" id="node6" href="$d2/dda/classRender.html#a96812a57fba2dc97089021cc23a01baa" title="Getter for the renderableRoads size." alt="" coords="428,165,700,195"/>
+<area shape="rect" id="node7" href="$d1/d76/classWorkWindow.html#ab9894e65381a9dff7b3dde269f691130" title="Getter for the event listener." alt="" coords="444,219,684,248"/>
+</map>

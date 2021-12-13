@@ -1,0 +1,11 @@
+<map id="Vehicle::switchToNextRoad" name="Vehicle::switchToNextRoad">
+<area shape="rect" id="node1" title=" " alt="" coords="5,136,217,165"/>
+<area shape="rect" id="node2" href="$d8/d8c/classEdge.html#af405622c3451b8635061d3fc14ee7b25" title=" " alt="" coords="285,5,432,35"/>
+<area shape="rect" id="node3" href="$dc/d23/classVehicle.html#a5d99d008bae082751afffb0ad41266e8" title=" " alt="" coords="265,109,452,139"/>
+<area shape="rect" id="node4" href="$d2/dda/classRender.html#a112bb5215d1830cc128b143ca311a581" title="Getter for the RenderableRoads." alt="" coords="500,29,709,59"/>
+<area shape="rect" id="node5" href="$d2/d62/classGraph.html#ab2b4254c0e1aacd820a400db1ef7fc65" title=" " alt="" coords="538,189,671,219"/>
+<area shape="rect" id="node8" href="$d8/d8c/classEdge.html#ad35462bd734e72c7c5271da664f075fd" title=" " alt="" coords="293,213,425,243"/>
+<area shape="rect" id="node9" href="$d8/d8c/classEdge.html#ab437eec8bedc718e1815df362f410009" title=" " alt="" coords="273,267,445,296"/>
+<area shape="rect" id="node6" href="$d8/d8c/classEdge.html#a1e60d436c381fd999e2a26402936ee50" title=" " alt="" coords="523,83,686,112"/>
+<area shape="rect" id="node7" href="$d8/d8c/classEdge.html#a1a054503d051669070d8dae325dcca49" title=" " alt="" coords="523,136,686,165"/>
+</map>

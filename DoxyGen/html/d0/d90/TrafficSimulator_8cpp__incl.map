@@ -1,0 +1,52 @@
+<map id="C:/Users/sandorbalazs/Desktop/elte&#45;ik&#45;bsc&#45;thesis/TrafficSimulator/TrafficSimulator.cpp" name="C:/Users/sandorbalazs/Desktop/elte&#45;ik&#45;bsc&#45;thesis/TrafficSimulator/TrafficSimulator.cpp">
+<area shape="rect" id="node1" title=" " alt="" coords="5,5,484,52"/>
+<area shape="rect" id="node2" title=" " alt="" coords="325,641,407,671"/>
+<area shape="rect" id="node3" href="$dc/d02/WorkWindow_8h.html" title=" " alt="" coords="2692,100,2859,129"/>
+<area shape="rect" id="node50" href="$dd/da4/Logger_8h.html" title=" " alt="" coords="69,100,207,129"/>
+<area shape="rect" id="node4" title=" " alt="" coords="3181,641,3247,671"/>
+<area shape="rect" id="node5" href="$dd/de4/Camera_8h.html" title=" " alt="" coords="3149,332,3239,361"/>
+<area shape="rect" id="node8" href="$dd/d9a/Render_8h.html" title=" " alt="" coords="2046,177,2131,207"/>
+<area shape="rect" id="node13" href="$d1/d55/ProgramObject_8h.html" title=" " alt="" coords="891,409,1086,439"/>
+<area shape="rect" id="node26" href="$d8/dd2/TextureObject_8h.html" title=" " alt="" coords="1760,487,1945,516"/>
+<area shape="rect" id="node29" href="$d9/dd3/Mesh__OGL3_8h.html" title=" " alt="" coords="2719,487,2898,516"/>
+<area shape="rect" id="node34" href="$d8/d9a/ObjectStorage_8h.html" title=" " alt="" coords="2355,255,2547,284"/>
+<area shape="rect" id="node46" href="$d3/da7/EventListener_8h.html" title=" " alt="" coords="2997,255,3127,284"/>
+<area shape="rect" id="node47" href="$dc/d20/GUI_8h.html" title=" " alt="" coords="3508,177,3568,207"/>
+<area shape="rect" id="node6" title=" " alt="" coords="2621,564,2727,593"/>
+<area shape="rect" id="node7" title=" " alt="" coords="3327,487,3370,516"/>
+<area shape="rect" id="node9" href="$d4/d10/Animator_8h.html" title=" " alt="" coords="3368,255,3465,284"/>
+<area shape="rect" id="node31" href="$d1/d92/VertexArrayObject_8h.html" title=" " alt="" coords="1278,409,1494,439"/>
+<area shape="rect" id="node42" href="$d5/d4f/Object3Droad_8h.html" title=" " alt="" coords="1925,332,2114,361"/>
+<area shape="rect" id="node43" title=" " alt="" coords="2057,255,2259,284"/>
+<area shape="rect" id="node44" href="$de/d03/MapLoader_8h.html" title=" " alt="" coords="1933,564,2114,593"/>
+<area shape="rect" id="node45" href="$da/daf/MapSaver_8h.html" title=" " alt="" coords="1875,409,2047,439"/>
+<area shape="rect" id="node10" title=" " alt="" coords="2411,641,2475,671"/>
+<area shape="rect" id="node11" href="$d7/d16/Graph_8h.html" title=" " alt="" coords="3314,332,3450,361"/>
+<area shape="rect" id="node12" href="$d4/de5/Point_8h.html" title=" " alt="" coords="3480,409,3551,439"/>
+<area shape="rect" id="node14" title=" " alt="" coords="955,641,1046,671"/>
+<area shape="rect" id="node15" title=" " alt="" coords="1211,641,1291,671"/>
+<area shape="rect" id="node16" href="$da/dac/ShaderObject_8h.html" title=" " alt="" coords="655,487,786,516"/>
+<area shape="rect" id="node17" title=" " alt="" coords="1815,641,1875,671"/>
+<area shape="rect" id="node18" title=" " alt="" coords="461,641,517,671"/>
+<area shape="rect" id="node20" title=" " alt="" coords="691,641,748,671"/>
+<area shape="rect" id="node21" title=" " alt="" coords="810,487,943,516"/>
+<area shape="rect" id="node22" title=" " alt="" coords="968,487,1009,516"/>
+<area shape="rect" id="node23" title=" " alt="" coords="1136,487,1247,516"/>
+<area shape="rect" id="node24" href="$d0/d5e/ProgramObject_8inl.html" title=" " alt="" coords="485,487,631,516"/>
+<area shape="rect" id="node19" href="$d5/d42/GLconversions_8hpp.html" title=" " alt="" coords="981,564,1137,593"/>
+<area shape="rect" id="node25" title=" " alt="" coords="596,564,672,593"/>
+<area shape="rect" id="node27" title=" " alt="" coords="1555,641,1673,671"/>
+<area shape="rect" id="node28" href="$d5/dcf/TextureObject_8inl.html" title=" " alt="" coords="1467,564,1604,593"/>
+<area shape="rect" id="node30" title=" " alt="" coords="2802,564,2893,593"/>
+<area shape="rect" id="node32" href="$db/d7a/BufferObject_8h.html" title=" " alt="" coords="1615,487,1735,516"/>
+<area shape="rect" id="node33" href="$d2/db1/VertexArrayObject_8inl.html" title=" " alt="" coords="1423,487,1591,516"/>
+<area shape="rect" id="node35" title=" " alt="" coords="2442,487,2495,516"/>
+<area shape="rect" id="node36" title=" " alt="" coords="2515,332,2577,361"/>
+<area shape="rect" id="node37" title=" " alt="" coords="2602,332,2669,361"/>
+<area shape="rect" id="node38" href="$dd/d4c/ObjParser__OGL3_8h.html" title=" " alt="" coords="2455,409,2677,439"/>
+<area shape="rect" id="node40" href="$df/d4a/Object3D_8h.html" title=" " alt="" coords="2228,409,2328,439"/>
+<area shape="rect" id="node41" href="$d4/db9/Object3Dvehicle_8h.html" title=" " alt="" coords="2189,332,2337,361"/>
+<area shape="rect" id="node39" title=" " alt="" coords="2621,487,2695,516"/>
+<area shape="rect" id="node48" title=" " alt="" coords="3911,255,4026,284"/>
+<area shape="rect" id="node49" title=" " alt="" coords="3677,255,3887,284"/>
+</map>

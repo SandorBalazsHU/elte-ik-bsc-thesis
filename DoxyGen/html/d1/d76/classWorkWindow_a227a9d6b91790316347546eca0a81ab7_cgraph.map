@@ -1,0 +1,8 @@
+<map id="WorkWindow::openGLpostConfig" name="WorkWindow::openGLpostConfig">
+<area shape="rect" id="node1" title="OpenGL Variables setting." alt="" coords="5,59,260,88"/>
+<area shape="rect" id="node2" href="$d1/d76/classWorkWindow.html#a8ff63071e5cda61d322758023fb69073" title="Cleanup before closing." alt="" coords="308,5,485,35"/>
+<area shape="rect" id="node4" href="$db/d67/classLogger.html#ade9e0898dc8cefe41ca72fa20f1a1706" title=" " alt="" coords="340,59,453,88"/>
+<area shape="rect" id="node6" href="$db/d67/classLogger.html#a0697a189b6921c9c22ef7f0702ae14f7" title=" " alt="" coords="346,112,447,141"/>
+<area shape="rect" id="node3" href="$dc/d3a/classGUI.html#a2ee64e85935b957145bafe2f2f708654" title="Stop the IMgui system." alt="" coords="585,5,678,35"/>
+<area shape="rect" id="node5" href="$db/d67/classLogger.html#a9797db48ffb0b05ec9bf89bd323a36c8" title=" " alt="" coords="533,85,729,115"/>
+</map>

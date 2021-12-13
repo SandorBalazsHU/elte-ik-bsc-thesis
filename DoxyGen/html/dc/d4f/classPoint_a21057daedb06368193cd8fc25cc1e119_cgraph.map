@@ -1,0 +1,12 @@
+<map id="Point::join" name="Point::join">
+<area shape="rect" id="node1" title="Join this point to an other." alt="" coords="5,219,96,248"/>
+<area shape="rect" id="node2" href="$d8/d8c/classEdge.html#a31ffc49bfa947612679ab1233934e1c5" title=" " alt="" coords="154,5,309,35"/>
+<area shape="rect" id="node3" href="$d2/d62/classGraph.html#a857da4407977b0fa2681137761e7132d" title=" " alt="" coords="155,59,307,88"/>
+<area shape="rect" id="node4" href="$d2/d62/classGraph.html#ab2b4254c0e1aacd820a400db1ef7fc65" title=" " alt="" coords="165,112,298,141"/>
+<area shape="rect" id="node5" href="$dc/d4f/classPoint.html#a9e07154a0dfa769d6613fa6c1b683271" title="geter for the connected edges." alt="" coords="164,165,299,195"/>
+<area shape="rect" id="node6" href="$dc/d4f/classPoint.html#a2e45c045d624d85fb10d923953f3cc88" title="Getter for the point id." alt="" coords="180,219,283,248"/>
+<area shape="rect" id="node7" href="$dc/d4f/classPoint.html#a44b839820ed4a901d16fe33d9eac1608" title="Is an endpoint?" alt="" coords="160,272,303,301"/>
+<area shape="rect" id="node8" href="$dc/d4f/classPoint.html#ae41c9ad2d572d47f64f1388e495efdbe" title="Is a start point?" alt="" coords="158,325,305,355"/>
+<area shape="rect" id="node9" href="$dc/d4f/classPoint.html#ada6e62c8b344347ed6b6887c71f52207" title="Set the point as an endpoint." alt="" coords="147,379,315,408"/>
+<area shape="rect" id="node10" href="$dc/d4f/classPoint.html#a7472eafc905e11a3416cadf2fb9c2278" title="Set the point as a start point." alt="" coords="144,432,319,461"/>
+</map>

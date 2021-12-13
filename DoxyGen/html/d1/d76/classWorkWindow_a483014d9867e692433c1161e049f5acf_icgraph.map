@@ -1,0 +1,8 @@
+<map id="WorkWindow::getRender" name="WorkWindow::getRender">
+<area shape="rect" id="node1" title="Getter for the render object." alt="" coords="801,32,997,61"/>
+<area shape="rect" id="node2" href="$dc/d36/classEventListener.html#a5a33e97a2ac2f0a84f4c0d02bbdf9f8a" title="LRSSG alarm 1202 sce to aux." alt="" coords="599,5,753,35"/>
+<area shape="rect" id="node6" href="$dc/d3a/classGUI.html#a4052bbc52f1420db046e90cf96319f96" title="Bind the gui system to the current working window." alt="" coords="633,59,719,88"/>
+<area shape="rect" id="node3" href="$d1/d76/classWorkWindow.html#aa749c366f50a6fe841819d5c7c0b3af7" title="Render variable setting." alt="" coords="316,32,551,61"/>
+<area shape="rect" id="node4" href="$d1/d76/classWorkWindow.html#a3eb2d3857bd1e4888a92aa3e4c49b0b6" title="Open and show the window." alt="" coords="109,32,268,61"/>
+<area shape="rect" id="node5" href="$d1/dc4/TrafficSimulator_8cpp.html#a700a0caa5b70a06d1064e576f9f3cf65" title="Program main function." alt="" coords="5,32,61,61"/>
+</map>

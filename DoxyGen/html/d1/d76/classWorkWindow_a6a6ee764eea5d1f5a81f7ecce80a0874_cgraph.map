@@ -1,0 +1,52 @@
+<map id="WorkWindow::renderStart" name="WorkWindow::renderStart">
+<area shape="rect" id="node1" title="Render Start!" alt="" coords="5,693,207,723"/>
+<area shape="rect" id="node2" href="$d1/d76/classWorkWindow.html#a8ff63071e5cda61d322758023fb69073" title="Cleanup before closing." alt="" coords="285,160,462,189"/>
+<area shape="rect" id="node4" href="$d1/d76/classWorkWindow.html#a170f947b7dc494507389598da695e063" title="Clear the screen." alt="" coords="270,345,477,375"/>
+<area shape="rect" id="node5" href="$dc/d36/classEventListener.html#a2d305d2053b76fc08b76a76f4d0a35f7" title=" " alt="" coords="256,399,491,428"/>
+<area shape="rect" id="node29" href="$db/d2d/classObjectStorage.html#a0a4c920bef024736b84627b33cc06d29" title=" " alt="" coords="255,667,492,696"/>
+<area shape="rect" id="node32" href="$db/d2d/classObjectStorage.html#aebb076e5ece52bd347fab50675892d8e" title=" " alt="" coords="560,772,757,801"/>
+<area shape="rect" id="node33" href="$db/d2d/classObjectStorage.html#a6f0855fd1a5edcf4539222190dcc7780" title=" " alt="" coords="260,771,487,800"/>
+<area shape="rect" id="node34" href="$db/d67/classLogger.html#a0697a189b6921c9c22ef7f0702ae14f7" title=" " alt="" coords="323,824,424,853"/>
+<area shape="rect" id="node36" href="$d2/dda/classRender.html#af30d499dd0f75d71d5f65f6f4bd4e102" title="Remder the next frame." alt="" coords="310,1172,437,1201"/>
+<area shape="rect" id="node3" href="$dc/d3a/classGUI.html#a2ee64e85935b957145bafe2f2f708654" title="Stop the IMgui system." alt="" coords="612,28,705,57"/>
+<area shape="rect" id="node6" href="$dc/d3a/classGUI.html#ae5512d69c964bce85b253ef6c756c18b" title="GUI event listener." alt="" coords="585,81,732,111"/>
+<area shape="rect" id="node7" href="$dc/d36/classEventListener.html#a939e2f89d47cb2479f42f33ee1e3e320" title=" " alt="" coords="884,5,1033,35"/>
+<area shape="rect" id="node9" href="$dc/d3a/classGUI.html#ab0aeebaa214411bb4c5ddd06cff97319" title="The GUI want to use the keyboard events?" alt="" coords="558,185,759,215"/>
+<area shape="rect" id="node10" href="$dc/d3a/classGUI.html#af657ec0e318aecfaff098d271d252e4f" title="The GUI want to use the mouse events?" alt="" coords="569,239,749,268"/>
+<area shape="rect" id="node11" href="$dc/d36/classEventListener.html#a19abd7dfe42727804e730b38a7d6764c" title=" " alt="" coords="543,292,774,321"/>
+<area shape="rect" id="node15" href="$dc/d36/classEventListener.html#abcab532f51f008f5856d4b53e61fa591" title=" " alt="" coords="553,345,764,375"/>
+<area shape="rect" id="node22" href="$dc/d36/classEventListener.html#a1a7f685ee84dd0ca91a45b94a8c123c7" title=" " alt="" coords="553,452,765,481"/>
+<area shape="rect" id="node25" href="$dc/d36/classEventListener.html#af556644049a42aa3137fca87e1f12c43" title=" " alt="" coords="553,505,764,535"/>
+<area shape="rect" id="node26" href="$dc/d36/classEventListener.html#aec2696b5ad2361be1b9408825ef2b376" title=" " alt="" coords="563,399,755,428"/>
+<area shape="rect" id="node27" href="$dc/d36/classEventListener.html#a3dc980984b4cb37693917c18e9809ca9" title=" " alt="" coords="551,559,767,588"/>
+<area shape="rect" id="node28" href="$dc/d36/classEventListener.html#aecef05961c0663a74b2c6bc4e561d425" title=" " alt="" coords="575,612,742,641"/>
+<area shape="rect" id="node8" href="$d1/d76/classWorkWindow.html#abb50083f8c552da166cb5c0589816779" title="Start the closeing procedure." alt="" coords="1165,5,1325,35"/>
+<area shape="rect" id="node12" href="$d2/dda/classRender.html#a112bb5215d1830cc128b143ca311a581" title="Getter for the RenderableRoads." alt="" coords="1140,411,1349,440"/>
+<area shape="rect" id="node13" href="$d1/df0/classCamera.html#ac14dd17934f0d33da007eee25292fb08" title="Event handler function for the key down event." alt="" coords="863,109,1055,139"/>
+<area shape="rect" id="node14" href="$d9/dd9/classObject3Droad.html#ac842ec65b396d8c23c1cfbb8fc6810f8" title=" " alt="" coords="836,163,1081,192"/>
+<area shape="rect" id="node16" href="$d2/dda/classRender.html#a620023ac26bf217922fe13c0795b6dc6" title="Add a new vehicle to the scene, from the objectStorage." alt="" coords="879,267,1039,296"/>
+<area shape="rect" id="node17" href="$dc/d36/classEventListener.html#a19958c0aa0a42e06335cf5ffc89e314f" title=" " alt="" coords="825,320,1092,349"/>
+<area shape="rect" id="node18" href="$dc/d36/classEventListener.html#a7d285be7f54586d28f4853b33536a9bc" title=" " alt="" coords="867,477,1051,507"/>
+<area shape="rect" id="node19" href="$d2/dda/classRender.html#a18d564fc732e2ee29698ff67b0b0c712" title="Getter for the renderableVehicles;." alt="" coords="1167,563,1322,592"/>
+<area shape="rect" id="node20" href="$d1/df0/classCamera.html#a470d9fb6dd4189c80b06e94797d2d733" title="Event handler function for the key up event." alt="" coords="873,424,1045,453"/>
+<area shape="rect" id="node21" href="$d8/d1b/classObject3D.html#aef322b24842d0575886e379af8fb5562" title=" " alt="" coords="891,555,1026,584"/>
+<area shape="rect" id="node23" href="$dc/d36/classEventListener.html#a428cd28b29c1e1db07bfe29f981f1165" title="Ray tracing mouse picking implementation." alt="" coords="830,661,1087,691"/>
+<area shape="rect" id="node24" href="$dc/d36/classEventListener.html#a077549140ebbaa3cbeb1843b0e765d84" title=" " alt="" coords="849,608,1068,637"/>
+<area shape="rect" id="node30" href="$db/d2d/classObjectStorage.html#a7603146af5ebf571d51ac2636521bc8a" title=" " alt="" coords="551,665,766,695"/>
+<area shape="rect" id="node31" href="$db/d2d/classObjectStorage.html#a8b7f23f6c3c39ddcc1f7e07e0c0f50ce" title=" " alt="" coords="549,719,769,748"/>
+<area shape="rect" id="node35" href="$db/d67/classLogger.html#a9797db48ffb0b05ec9bf89bd323a36c8" title=" " alt="" coords="561,825,757,855"/>
+<area shape="rect" id="node37" href="$d8/d66/classMapSaver.html#aaabafaf0c0162218b69673731cf49da4" title=" " alt="" coords="563,879,754,908"/>
+<area shape="rect" id="node38" href="$db/d2d/classObjectStorage.html#af67388c459510c49e6284bc8281b2b29" title=" " alt="" coords="540,932,777,961"/>
+<area shape="rect" id="node39" href="$d1/d76/classWorkWindow.html#a6c0e8a49f57b48a1da5b0f997100c2aa" title="Getter for the window title." alt="" coords="543,985,774,1015"/>
+<area shape="rect" id="node40" href="$dc/d3a/classGUI.html#ae63efaa6d38814299c42540a5d4ea00b" title="Render the GUI graphics in the render cycle." alt="" coords="608,1039,709,1068"/>
+<area shape="rect" id="node41" href="$d2/dda/classRender.html#a6cb6bab6d8d713ad0f6ada9f308cf7a4" title="Swapping the OpenGL drawing and showed image buffers." alt="" coords="585,1092,732,1121"/>
+<area shape="rect" id="node42" href="$d2/dda/classRender.html#a795f223a5fe016f5976a6c984082cb0b" title="Composing the renderable scene from the renderableObjects and the renderableRoads storages." alt="" coords="571,1145,747,1175"/>
+<area shape="rect" id="node43" href="$d2/dda/classRender.html#ab65dd6bdae895a9c7ddabc96a95c7091" title="Set the window icon." alt="" coords="565,1199,752,1228"/>
+<area shape="rect" id="node44" href="$d2/dda/classRender.html#a3bda60a00cba53701137c601c016f115" title="Windowe title text setter." alt="" coords="565,1252,752,1281"/>
+<area shape="rect" id="node45" href="$d2/dda/classRender.html#af6d56924a98ff087b74fc18342622ad3" title="Camera position updating in the shadervariable." alt="" coords="540,1305,777,1335"/>
+<area shape="rect" id="node46" href="$d2/dda/classRender.html#aa9639ee575a27aeabdb1c31ab633206f" title="Update the light position in the shader." alt="" coords="551,1359,766,1388"/>
+<area shape="rect" id="node47" href="$da/d67/classfpsCounter.html#aad004c063f16cc0b88dc047a3a5b0326" title=" " alt="" coords="591,1412,727,1441"/>
+<area shape="rect" id="node48" href="$da/d67/classfpsCounter.html#a3e23a7ffe91a6070005fab63bf535019" title=" " alt="" coords="591,1465,727,1495"/>
+<area shape="rect" id="node49" href="$d5/d1b/classProgramObject.html#a3a71c23b077a7b2228fe8966f9f4f883" title=" " alt="" coords="569,1519,749,1548"/>
+<area shape="rect" id="node50" href="$d5/d1b/classProgramObject.html#a1226807fbf267dad893716cbcedb2137" title=" " alt="" coords="577,1572,741,1601"/>
+</map>

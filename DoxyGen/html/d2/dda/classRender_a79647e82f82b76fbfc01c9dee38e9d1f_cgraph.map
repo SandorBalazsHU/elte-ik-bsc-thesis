@@ -1,0 +1,12 @@
+<map id="Render::clear" name="Render::clear">
+<area shape="rect" id="node1" title="Clean and renew the map editor." alt="" coords="5,59,120,88"/>
+<area shape="rect" id="node2" href="$da/d23/classAnimator.html#a5716dfb88fc9b17737c20da588f56700" title=" " alt="" coords="176,5,303,35"/>
+<area shape="rect" id="node3" href="$d8/d66/classMapSaver.html#a6ed4a126240df4d1c4abb4f27b3c2585" title=" " alt="" coords="171,59,308,88"/>
+<area shape="rect" id="node4" href="$d2/dda/classRender.html#a457a9f7e267c10406dc3d59fdac0eacc" title="Initialise the scene." alt="" coords="168,112,311,141"/>
+<area shape="rect" id="node5" href="$d2/dda/classRender.html#a4ccbfe15c6075248daf93085b0628b71" title="Add new renderable object from the preloaded object storage to the scene." alt="" coords="429,32,583,61"/>
+<area shape="rect" id="node7" href="$db/d2d/classObjectStorage.html#ac017bb83517ad3c95bd6b3bef9af1406" title=" " alt="" coords="359,85,653,115"/>
+<area shape="rect" id="node8" href="$d2/dda/classRender.html#ac0679c37e0376133a5c26d3728a3f28c" title="Get scene preloaded object from the scene render storage." alt="" coords="432,139,580,168"/>
+<area shape="rect" id="node9" href="$d8/d1b/classObject3D.html#ab4ac04d381ed34ad82263dac4a759d9c" title=" " alt="" coords="411,192,601,221"/>
+<area shape="rect" id="node6" href="$db/d2d/classObjectStorage.html#ab22906dd1d14d3899122e56a57d97a08" title=" " alt="" coords="701,32,920,61"/>
+<area shape="rect" id="node10" href="$d8/d1b/classObject3D.html#a35a0a30f2f4db7de497667fa164970c7" title=" " alt="" coords="719,192,902,221"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="Animator::deleteFinishedVehicles" name="Animator::deleteFinishedVehicles">
+<area shape="rect" id="node1" title=" " alt="" coords="5,5,261,35"/>
+<area shape="rect" id="node2" href="$d2/dda/classRender.html#a94ea2db00af10ff43efbb91214cdc169" title="Delete a vehicle by renderID." alt="" coords="309,5,485,35"/>
+</map>

@@ -1,0 +1,15 @@
+<map id="EventListener::getClickedObjectId" name="EventListener::getClickedObjectId">
+<area shape="rect" id="node1" title="Ray tracing mouse picking implementation." alt="" coords="5,299,263,328"/>
+<area shape="rect" id="node2" href="$d1/df0/classCamera.html#a4fafd54232cf9e6ed67b26fd5b63ba12" title="Getter for the camera position." alt="" coords="311,5,533,35"/>
+<area shape="rect" id="node3" href="$d8/d1b/classObject3D.html#a8bee2ed36c0d5c86e3c3a2f857684430" title=" " alt="" coords="328,59,516,88"/>
+<area shape="rect" id="node4" href="$d2/dda/classRender.html#ac0679c37e0376133a5c26d3728a3f28c" title="Get scene preloaded object from the scene render storage." alt="" coords="348,112,496,141"/>
+<area shape="rect" id="node5" href="$d2/dda/classRender.html#a046286e90a0d079378dd928031d05272" title="Getter for the RenderableRoads size." alt="" coords="317,165,527,195"/>
+<area shape="rect" id="node6" href="$d1/df0/classCamera.html#adf09522521723786b9f405c99d6594c7" title="Getter for the projection matrix." alt="" coords="311,219,533,248"/>
+<area shape="rect" id="node7" href="$d2/dda/classRender.html#a18d564fc732e2ee29698ff67b0b0c712" title="Getter for the renderableVehicles;." alt="" coords="345,272,499,301"/>
+<area shape="rect" id="node8" href="$d2/dda/classRender.html#a1339ec43286fd53477040702472ad9f9" title="Getter for the renderableVehicles size." alt="" coords="313,325,531,355"/>
+<area shape="rect" id="node9" href="$d1/df0/classCamera.html#a5569ca5967e01d3344fbf6aba36d9820" title="Getter for the view matrix." alt="" coords="329,379,515,408"/>
+<area shape="rect" id="node10" href="$dc/d36/classEventListener.html#ae8c6775899939ef6ecbac6b592f8697b" title=" " alt="" coords="319,432,525,461"/>
+<area shape="rect" id="node11" href="$d8/d1b/classObject3D.html#a06b85dde4bba3b6e94691fa472dd8bed" title=" " alt="" coords="341,485,503,515"/>
+<area shape="rect" id="node12" href="$d8/d1b/classObject3D.html#ab5a2d4ac2eb91f7762d6dba350301da9" title=" " alt="" coords="343,539,501,568"/>
+<area shape="rect" id="node13" href="$d8/d1b/classObject3D.html#a35a0a30f2f4db7de497667fa164970c7" title=" " alt="" coords="331,592,513,621"/>
+</map>

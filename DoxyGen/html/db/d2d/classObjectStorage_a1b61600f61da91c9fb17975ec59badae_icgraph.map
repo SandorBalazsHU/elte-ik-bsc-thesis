@@ -1,0 +1,13 @@
+<map id="ObjectStorage::getMesh" name="ObjectStorage::getMesh">
+<area shape="rect" id="node1" title=" " alt="" coords="1753,57,1944,87"/>
+<area shape="rect" id="node2" href="$d8/d1b/classObject3D.html#a1288e6677a54800cd309c46f4a5900fb" title=" " alt="" coords="1549,57,1705,87"/>
+<area shape="rect" id="node3" href="$d2/dda/classRender.html#a15cb317fe3c5084b471fa2585c1e00a8" title="Render the hit sphares for each scene objets." alt="" coords="996,5,1183,35"/>
+<area shape="rect" id="node9" href="$d2/dda/classRender.html#a0d77292187e580cfe4e32129a29c48b0" title="Render the hit sphares for each scene road objets." alt="" coords="1269,57,1495,87"/>
+<area shape="rect" id="node11" href="$d2/dda/classRender.html#a93015bc85c0a9727305b6ae8f0a3c819" title="Render the hit sphares for each scene vehicle objets." alt="" coords="1263,111,1501,140"/>
+<area shape="rect" id="node4" href="$d2/dda/classRender.html#a795f223a5fe016f5976a6c984082cb0b" title="Composing the renderable scene from the renderableObjects and the renderableRoads storages." alt="" coords="740,59,916,88"/>
+<area shape="rect" id="node5" href="$d2/dda/classRender.html#af30d499dd0f75d71d5f65f6f4bd4e102" title="Remder the next frame." alt="" coords="565,59,692,88"/>
+<area shape="rect" id="node6" href="$d1/d76/classWorkWindow.html#a6a6ee764eea5d1f5a81f7ecce80a0874" title="Render Start!" alt="" coords="316,59,517,88"/>
+<area shape="rect" id="node7" href="$d1/d76/classWorkWindow.html#a3eb2d3857bd1e4888a92aa3e4c49b0b6" title="Open and show the window." alt="" coords="109,59,268,88"/>
+<area shape="rect" id="node8" href="$d1/dc4/TrafficSimulator_8cpp.html#a700a0caa5b70a06d1064e576f9f3cf65" title="Program main function." alt="" coords="5,59,61,88"/>
+<area shape="rect" id="node10" href="$d2/dda/classRender.html#a96481f1fa33bc227bd5164d371f1667c" title="Render the hit sphares for each scene road objets." alt="" coords="964,59,1215,88"/>
+</map>

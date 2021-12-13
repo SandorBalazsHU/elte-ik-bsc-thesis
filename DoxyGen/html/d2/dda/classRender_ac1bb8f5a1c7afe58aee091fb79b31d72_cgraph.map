@@ -1,0 +1,8 @@
+<map id="Render::freeEditor" name="Render::freeEditor">
+<area shape="rect" id="node1" title="Free the editor functions." alt="" coords="5,112,156,141"/>
+<area shape="rect" id="node2" href="$dc/d36/classEventListener.html#a8fca510f74e188906fe36f8ca92a4be3" title=" " alt="" coords="243,5,437,35"/>
+<area shape="rect" id="node3" href="$d9/dd9/classObject3Droad.html#af633daa6a73ecb9951c32b3278dcab34" title=" " alt="" coords="241,59,439,88"/>
+<area shape="rect" id="node4" href="$d2/dda/classRender.html#a112bb5215d1830cc128b143ca311a581" title="Getter for the RenderableRoads." alt="" coords="235,112,445,141"/>
+<area shape="rect" id="node5" href="$d2/dda/classRender.html#a96812a57fba2dc97089021cc23a01baa" title="Getter for the renderableRoads size." alt="" coords="204,165,476,195"/>
+<area shape="rect" id="node6" href="$d1/d76/classWorkWindow.html#ab9894e65381a9dff7b3dde269f691130" title="Getter for the event listener." alt="" coords="220,219,460,248"/>
+</map>

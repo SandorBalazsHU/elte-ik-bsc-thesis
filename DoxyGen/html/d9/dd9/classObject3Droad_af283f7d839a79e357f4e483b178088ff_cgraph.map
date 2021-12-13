@@ -1,0 +1,11 @@
+<map id="Object3Droad::updateBasepoints" name="Object3Droad::updateBasepoints">
+<area shape="rect" id="node1" title=" " alt="" coords="5,189,260,219"/>
+<area shape="rect" id="node2" href="$d9/dd9/classObject3Droad.html#ac38e7f19511b604dcac9eccad6f6d498" title=" " alt="" coords="308,5,568,35"/>
+<area shape="rect" id="node3" href="$d2/dda/classRender.html#a112bb5215d1830cc128b143ca311a581" title="Getter for the RenderableRoads." alt="" coords="616,57,825,87"/>
+<area shape="rect" id="node4" href="$d9/dd9/classObject3Droad.html#a0e5bd9570260b136cc607702ceb6972c" title=" " alt="" coords="327,109,549,139"/>
+<area shape="rect" id="node5" href="$d9/dd9/classObject3Droad.html#ad40082d0f7b0ee82aeafc4af8da95ad6" title=" " alt="" coords="327,163,549,192"/>
+<area shape="rect" id="node6" href="$d2/dda/classRender.html#ac0679c37e0376133a5c26d3728a3f28c" title="Get scene preloaded object from the scene render storage." alt="" coords="364,216,512,245"/>
+<area shape="rect" id="node7" href="$d8/d1b/classObject3D.html#a7ad3699373d6366da9ac97e332bdd122" title=" " alt="" coords="351,269,525,299"/>
+<area shape="rect" id="node8" href="$d9/dd9/classObject3Droad.html#a4948fb6b58e7878a1930c938919c2943" title=" " alt="" coords="313,323,563,352"/>
+<area shape="rect" id="node9" href="$d8/d1b/classObject3D.html#aede0386d3941b0b6c01a497b5a7c921a" title=" " alt="" coords="351,376,525,405"/>
+</map>

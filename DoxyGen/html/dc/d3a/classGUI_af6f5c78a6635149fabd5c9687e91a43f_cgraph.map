@@ -1,0 +1,8 @@
+<map id="GUI::closeWindow" name="GUI::closeWindow">
+<area shape="rect" id="node1" title="Application closing checker window." alt="" coords="5,112,155,141"/>
+<area shape="rect" id="node2" href="$d1/d76/classWorkWindow.html#a71e5395c20476a0858a78ec7fc14b05c" title="Stop the render and start the closeing procedure." alt="" coords="220,5,411,35"/>
+<area shape="rect" id="node3" href="$db/d67/classLogger.html#a9797db48ffb0b05ec9bf89bd323a36c8" title=" " alt="" coords="217,59,413,88"/>
+<area shape="rect" id="node4" href="$d8/d66/classMapSaver.html#aaabafaf0c0162218b69673731cf49da4" title=" " alt="" coords="220,112,411,141"/>
+<area shape="rect" id="node5" href="$d8/d66/classMapSaver.html#a5ac1532c47f3a1e534f9adb3c6aa8dce" title=" " alt="" coords="203,165,428,195"/>
+<area shape="rect" id="node6" href="$d2/dda/classRender.html#a9ce06c847c20344c5d52fcc2fd59680b" title="Getter for the map saver program." alt="" coords="228,219,403,248"/>
+</map>

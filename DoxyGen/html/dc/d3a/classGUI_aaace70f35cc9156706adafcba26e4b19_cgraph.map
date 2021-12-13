@@ -1,0 +1,8 @@
+<map id="GUI::debugOptionsWindow" name="GUI::debugOptionsWindow">
+<area shape="rect" id="node1" title="Window for the debug options." alt="" coords="5,59,216,88"/>
+<area shape="rect" id="node2" href="$d2/dda/classRender.html#a771aedbfcf6cc32a50b5280af5ce29de" title="Hide the desk for object photo mode." alt="" coords="264,32,444,61"/>
+<area shape="rect" id="node5" href="$d2/dda/classRender.html#aa9d36585372a823f5047a75711eb0284" title="Hide the desk for object photo mode." alt="" coords="264,85,444,115"/>
+<area shape="rect" id="node3" href="$d2/dda/classRender.html#ac0679c37e0376133a5c26d3728a3f28c" title="Get scene preloaded object from the scene render storage." alt="" coords="492,59,640,88"/>
+<area shape="rect" id="node4" href="$d8/d1b/classObject3D.html#aa098b99bf68f8a5fb47368eed75380d5" title=" " alt="" coords="500,5,632,35"/>
+<area shape="rect" id="node6" href="$d8/d1b/classObject3D.html#aa5c7b1076e2764bdf2932474a10251dc" title=" " alt="" coords="503,112,629,141"/>
+</map>

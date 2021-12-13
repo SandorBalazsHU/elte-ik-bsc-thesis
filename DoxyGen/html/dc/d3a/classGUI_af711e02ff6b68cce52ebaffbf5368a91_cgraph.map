@@ -1,0 +1,22 @@
+<map id="GUI::simulationStatisticsWindow" name="GUI::simulationStatisticsWindow">
+<area shape="rect" id="node1" title="Window for SimulationStatistics." alt="" coords="5,434,252,464"/>
+<area shape="rect" id="node2" href="$dc/d3a/classGUI.html#ac3fa71209ed88bdfc1fbd4a41db852d8" title="Clear the road colors." alt="" coords="337,117,504,146"/>
+<area shape="rect" id="node3" href="$d2/dda/classRender.html#a112bb5215d1830cc128b143ca311a581" title="Getter for the RenderableRoads." alt="" coords="621,21,830,50"/>
+<area shape="rect" id="node4" href="$d2/dda/classRender.html#a96812a57fba2dc97089021cc23a01baa" title="Getter for the renderableRoads size." alt="" coords="589,80,861,109"/>
+<area shape="rect" id="node5" href="$d9/dd9/classObject3Droad.html#a00529f0b327310c21651d295faac8732" title=" " alt="" coords="617,145,834,174"/>
+<area shape="rect" id="node8" href="$db/d67/classLogger.html#a9797db48ffb0b05ec9bf89bd323a36c8" title=" " alt="" coords="323,221,519,250"/>
+<area shape="rect" id="node9" href="$d2/d62/classGraph.html#a2331e68848db2517fec0a9f35dbef722" title=" " alt="" coords="337,274,504,304"/>
+<area shape="rect" id="node10" href="$d2/d62/classGraph.html#a5146fb373513f099fd6a84ff9c00f18f" title=" " alt="" coords="337,328,504,357"/>
+<area shape="rect" id="node11" href="$da/d23/classAnimator.html#a39f74c6abaf3b0b243389f14cfc139a0" title=" " alt="" coords="341,381,500,410"/>
+<area shape="rect" id="node12" href="$d8/d66/classMapSaver.html#aaabafaf0c0162218b69673731cf49da4" title=" " alt="" coords="325,434,516,464"/>
+<area shape="rect" id="node13" href="$d8/d66/classMapSaver.html#a5ac1532c47f3a1e534f9adb3c6aa8dce" title=" " alt="" coords="308,488,533,517"/>
+<area shape="rect" id="node14" href="$d2/dda/classRender.html#a9ce06c847c20344c5d52fcc2fd59680b" title="Getter for the map saver program." alt="" coords="333,541,508,570"/>
+<area shape="rect" id="node15" href="$d2/dda/classRender.html#a046286e90a0d079378dd928031d05272" title="Getter for the RenderableRoads size." alt="" coords="315,594,526,624"/>
+<area shape="rect" id="node16" href="$d2/d62/classGraph.html#ac1a8aaab47e491b4598b0a1d5229168e" title=" " alt="" coords="339,648,503,677"/>
+<area shape="rect" id="node17" href="$da/d23/classAnimator.html#af1564e96fb2389601fb94c90b49abc46" title=" " alt="" coords="315,701,526,730"/>
+<area shape="rect" id="node18" href="$da/d23/classAnimator.html#aac87d556e334e168a99bdaf4647dfcbc" title=" " alt="" coords="300,754,541,784"/>
+<area shape="rect" id="node19" href="$d2/dda/classRender.html#a1339ec43286fd53477040702472ad9f9" title="Getter for the renderableVehicles size." alt="" coords="311,808,530,837"/>
+<area shape="rect" id="node20" href="$dc/d23/classVehicle.html#a666fd62e63e58d26373f1b0964d54d61" title=" " alt="" coords="343,861,498,890"/>
+<area shape="rect" id="node6" href="$d2/dda/classRender.html#ac0679c37e0376133a5c26d3728a3f28c" title="Get scene preloaded object from the scene render storage." alt="" coords="928,118,1076,148"/>
+<area shape="rect" id="node7" href="$d8/d1b/classObject3D.html#a8b1d7d253153e65dce9bbd07524a2f45" title=" " alt="" coords="909,172,1095,201"/>
+</map>

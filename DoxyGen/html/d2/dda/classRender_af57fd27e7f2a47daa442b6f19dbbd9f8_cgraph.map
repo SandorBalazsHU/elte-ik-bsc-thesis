@@ -1,0 +1,11 @@
+<map id="Render::lockEditor" name="Render::lockEditor">
+<area shape="rect" id="node1" title="Lock the editor functions." alt="" coords="5,112,156,141"/>
+<area shape="rect" id="node2" href="$d2/dda/classRender.html#a112bb5215d1830cc128b143ca311a581" title="Getter for the RenderableRoads." alt="" coords="235,5,445,35"/>
+<area shape="rect" id="node3" href="$d2/dda/classRender.html#a96812a57fba2dc97089021cc23a01baa" title="Getter for the renderableRoads size." alt="" coords="204,59,476,88"/>
+<area shape="rect" id="node4" href="$d1/d76/classWorkWindow.html#ab9894e65381a9dff7b3dde269f691130" title="Getter for the event listener." alt="" coords="220,112,460,141"/>
+<area shape="rect" id="node5" href="$dc/d36/classEventListener.html#ae30ec2f0fafeb13fcc2f73b0e0af1b1a" title=" " alt="" coords="243,165,437,195"/>
+<area shape="rect" id="node6" href="$d9/dd9/classObject3Droad.html#a0f132e0e887d1a0631443d5c1ea39d10" title=" " alt="" coords="241,219,439,248"/>
+<area shape="rect" id="node7" href="$d2/dda/classRender.html#ac0679c37e0376133a5c26d3728a3f28c" title="Get scene preloaded object from the scene render storage." alt="" coords="545,192,693,221"/>
+<area shape="rect" id="node8" href="$d8/d1b/classObject3D.html#ab4ac04d381ed34ad82263dac4a759d9c" title=" " alt="" coords="524,245,715,275"/>
+<area shape="rect" id="node9" href="$d8/d1b/classObject3D.html#a35a0a30f2f4db7de497667fa164970c7" title=" " alt="" coords="763,245,945,275"/>
+</map>

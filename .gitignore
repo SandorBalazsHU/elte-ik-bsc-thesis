@@ -1,7 +1,6 @@
 ##Build
 ./x64/*.*
 ./x86/*.*
-./DoxyGen/html/*.*
 
 ##gtest
 ./packages/*.*
@@ -295,4 +294,3 @@ TSWLatexianTemp*
 /TrafficSimulatorTest/x64
 /x64
 /TrafficSimulator/3Dobjects/~$3d_object_library.xlsx
-/DoxyGen/html

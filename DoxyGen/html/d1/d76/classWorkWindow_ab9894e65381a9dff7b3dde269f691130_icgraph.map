@@ -1,0 +1,16 @@
+<map id="WorkWindow::getEventListener" name="WorkWindow::getEventListener">
+<area shape="rect" id="node1" title="Getter for the event listener." alt="" coords="1733,84,1973,113"/>
+<area shape="rect" id="node2" href="$dc/d3a/classGUI.html#a4052bbc52f1420db046e90cf96319f96" title="Bind the gui system to the current working window." alt="" coords="1567,5,1653,35"/>
+<area shape="rect" id="node6" href="$dc/d3a/classGUI.html#a9dace388dbf579b96d875f4a051d1174" title="The main GUI function." alt="" coords="889,108,980,137"/>
+<area shape="rect" id="node10" href="$d2/dda/classRender.html#ac1bb8f5a1c7afe58aee091fb79b31d72" title="Free the editor functions." alt="" coords="1535,109,1685,139"/>
+<area shape="rect" id="node13" href="$d2/dda/classRender.html#af57fd27e7f2a47daa442b6f19dbbd9f8" title="Lock the editor functions." alt="" coords="1535,163,1685,192"/>
+<area shape="rect" id="node3" href="$d1/d76/classWorkWindow.html#aa749c366f50a6fe841819d5c7c0b3af7" title="Render variable setting." alt="" coords="1028,5,1263,35"/>
+<area shape="rect" id="node4" href="$d1/d76/classWorkWindow.html#a3eb2d3857bd1e4888a92aa3e4c49b0b6" title="Open and show the window." alt="" coords="109,39,268,68"/>
+<area shape="rect" id="node5" href="$d1/dc4/TrafficSimulator_8cpp.html#a700a0caa5b70a06d1064e576f9f3cf65" title="Program main function." alt="" coords="5,39,61,68"/>
+<area shape="rect" id="node7" href="$dc/d3a/classGUI.html#ae63efaa6d38814299c42540a5d4ea00b" title="Render the GUI graphics in the render cycle." alt="" coords="740,83,841,112"/>
+<area shape="rect" id="node8" href="$d2/dda/classRender.html#af30d499dd0f75d71d5f65f6f4bd4e102" title="Remder the next frame." alt="" coords="565,71,692,100"/>
+<area shape="rect" id="node9" href="$d1/d76/classWorkWindow.html#a6a6ee764eea5d1f5a81f7ecce80a0874" title="Render Start!" alt="" coords="316,64,517,93"/>
+<area shape="rect" id="node11" href="$dc/d3a/classGUI.html#a820a3bf8d210b8f5ff9c4ff6eb6a265c" title="Back to the edit mode." alt="" coords="1311,109,1487,139"/>
+<area shape="rect" id="node12" href="$dc/d3a/classGUI.html#aad1347098431debe24d1d888729742b8" title="The main menu bar description." alt="" coords="1069,160,1222,189"/>
+<area shape="rect" id="node14" href="$dc/d3a/classGUI.html#a5309b90470a63798d88b4d26ac6ce559" title="Finalise the map." alt="" coords="1346,163,1451,192"/>
+</map>

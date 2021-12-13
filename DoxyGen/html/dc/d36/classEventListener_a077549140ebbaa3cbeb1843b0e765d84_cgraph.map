@@ -1,0 +1,10 @@
+<map id="EventListener::roadDeselect" name="EventListener::roadDeselect">
+<area shape="rect" id="node1" title=" " alt="" coords="5,139,224,168"/>
+<area shape="rect" id="node2" href="$d9/dd9/classObject3Droad.html#a4a5f86aa2bde6b615f42e36c4d772f8f" title=" " alt="" coords="283,85,470,115"/>
+<area shape="rect" id="node7" href="$d2/dda/classRender.html#a112bb5215d1830cc128b143ca311a581" title="Getter for the RenderableRoads." alt="" coords="272,139,481,168"/>
+<area shape="rect" id="node8" href="$dc/d3a/classGUI.html#a7e3488a18e80495bfebff471d41e3c5a" title="Reset the selected item info window content." alt="" coords="291,192,462,221"/>
+<area shape="rect" id="node3" href="$d2/dda/classRender.html#ac0679c37e0376133a5c26d3728a3f28c" title="Get scene preloaded object from the scene render storage." alt="" coords="557,5,705,35"/>
+<area shape="rect" id="node4" href="$d8/d1b/classObject3D.html#aa5c7b1076e2764bdf2932474a10251dc" title=" " alt="" coords="567,59,694,88"/>
+<area shape="rect" id="node5" href="$d8/d1b/classObject3D.html#ab4bcd843aebe3b377738eeb1e5e90c80" title=" " alt="" coords="545,112,716,141"/>
+<area shape="rect" id="node6" href="$d9/dd9/classObject3Droad.html#a54a644703be6a440adf61a7e91828c94" title=" " alt="" coords="529,165,732,195"/>
+</map>

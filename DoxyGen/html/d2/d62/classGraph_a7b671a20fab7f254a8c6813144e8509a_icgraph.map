@@ -1,0 +1,12 @@
+<map id="Graph::generateGraph" name="Graph::generateGraph">
+<area shape="rect" id="node1" title=" " alt="" coords="1572,5,1751,35"/>
+<area shape="rect" id="node2" href="$da/d23/classAnimator.html#a6283fd000297631fd23c046809ab2a6e" title=" " alt="" coords="1383,5,1524,35"/>
+<area shape="rect" id="node3" href="$dc/d3a/classGUI.html#a5309b90470a63798d88b4d26ac6ce559" title="Finalise the map." alt="" coords="1229,5,1335,35"/>
+<area shape="rect" id="node4" href="$dc/d3a/classGUI.html#a9dace388dbf579b96d875f4a051d1174" title="The main GUI function." alt="" coords="889,5,980,35"/>
+<area shape="rect" id="node10" href="$dc/d3a/classGUI.html#aad1347098431debe24d1d888729742b8" title="The main menu bar description." alt="" coords="1028,31,1181,60"/>
+<area shape="rect" id="node5" href="$dc/d3a/classGUI.html#ae63efaa6d38814299c42540a5d4ea00b" title="Render the GUI graphics in the render cycle." alt="" coords="740,5,841,35"/>
+<area shape="rect" id="node6" href="$d2/dda/classRender.html#af30d499dd0f75d71d5f65f6f4bd4e102" title="Remder the next frame." alt="" coords="565,5,692,35"/>
+<area shape="rect" id="node7" href="$d1/d76/classWorkWindow.html#a6a6ee764eea5d1f5a81f7ecce80a0874" title="Render Start!" alt="" coords="316,5,517,35"/>
+<area shape="rect" id="node8" href="$d1/d76/classWorkWindow.html#a3eb2d3857bd1e4888a92aa3e4c49b0b6" title="Open and show the window." alt="" coords="109,5,268,35"/>
+<area shape="rect" id="node9" href="$d1/dc4/TrafficSimulator_8cpp.html#a700a0caa5b70a06d1064e576f9f3cf65" title="Program main function." alt="" coords="5,5,61,35"/>
+</map>

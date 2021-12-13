@@ -1,0 +1,6 @@
+<map id="EventListener::bind" name="EventListener::bind">
+<area shape="rect" id="node1" title="LRSSG alarm 1202 sce to aux." alt="" coords="5,59,160,88"/>
+<area shape="rect" id="node2" href="$d1/d76/classWorkWindow.html#ad743d22a7bedcdecf1582b163074f1ee" title="Getter for the camera controller." alt="" coords="208,5,411,35"/>
+<area shape="rect" id="node3" href="$d1/d76/classWorkWindow.html#a8274949e839e0a5882e00d73ce4197b1" title="Getter for the GUI representer." alt="" coords="224,59,395,88"/>
+<area shape="rect" id="node4" href="$d1/d76/classWorkWindow.html#a483014d9867e692433c1161e049f5acf" title="Getter for the render object." alt="" coords="211,112,407,141"/>
+</map>

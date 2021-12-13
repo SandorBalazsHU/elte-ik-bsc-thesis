@@ -1,0 +1,42 @@
+<map id="WorkWindow::renderPreconfig" name="WorkWindow::renderPreconfig">
+<area shape="rect" id="node1" title="Render variable setting." alt="" coords="5,325,240,355"/>
+<area shape="rect" id="node2" href="$dc/d36/classEventListener.html#a5a33e97a2ac2f0a84f4c0d02bbdf9f8a" title="LRSSG alarm 1202 sce to aux." alt="" coords="291,85,446,115"/>
+<area shape="rect" id="node6" href="$dc/d3a/classGUI.html#a4052bbc52f1420db046e90cf96319f96" title="Bind the gui system to the current working window." alt="" coords="325,245,412,275"/>
+<area shape="rect" id="node11" href="$d2/dda/classRender.html#a146f649814554dafa5999dc2b3f7e62f" title="Render constructor." alt="" coords="313,459,424,488"/>
+<area shape="rect" id="node22" href="$db/d2d/classObjectStorage.html#a87ca0435cb5f2bf8d501e3afcb3fa596" title=" " alt="" coords="288,965,449,995"/>
+<area shape="rect" id="node3" href="$d1/d76/classWorkWindow.html#ad743d22a7bedcdecf1582b163074f1ee" title="Getter for the camera controller." alt="" coords="535,59,737,88"/>
+<area shape="rect" id="node4" href="$d1/d76/classWorkWindow.html#a8274949e839e0a5882e00d73ce4197b1" title="Getter for the GUI representer." alt="" coords="551,112,721,141"/>
+<area shape="rect" id="node5" href="$d1/d76/classWorkWindow.html#a483014d9867e692433c1161e049f5acf" title="Getter for the render object." alt="" coords="538,5,734,35"/>
+<area shape="rect" id="node7" href="$d2/dda/classRender.html#a11891d52761d68679a11c8a9998aab1c" title="Getter for Animator." alt="" coords="553,165,719,195"/>
+<area shape="rect" id="node8" href="$d1/d76/classWorkWindow.html#ab9894e65381a9dff7b3dde269f691130" title="Getter for the event listener." alt="" coords="516,219,756,248"/>
+<area shape="rect" id="node9" href="$d1/d76/classWorkWindow.html#a48d287e770ee80bc48c18900d4bdc841" title="Getter for the object storage." alt="" coords="513,272,759,301"/>
+<area shape="rect" id="node10" href="$d1/d76/classWorkWindow.html#a80a56a6c86fd7560b8cefa3205824194" title="Getter for the SDL Windows object." alt="" coords="535,325,737,355"/>
+<area shape="rect" id="node12" href="$da/d67/classfpsCounter.html#a02e48119b0b5c4de909fb26e495917c1" title=" " alt="" coords="568,539,704,568"/>
+<area shape="rect" id="node14" href="$d3/d50/classMapLoader.html#ae65d0f6d8717fe6873ccfc5dda4105e3" title=" " alt="" coords="565,592,707,621"/>
+<area shape="rect" id="node15" href="$d8/d66/classMapSaver.html#aeb0cea2eb4ac1cea01006d0e877f159e" title=" " alt="" coords="570,645,702,675"/>
+<area shape="rect" id="node16" href="$da/d23/classAnimator.html#a965dd058a1ea8f80a5a4954e034a7e2e" title=" " alt="" coords="575,699,697,728"/>
+<area shape="rect" id="node17" href="$d1/d76/classWorkWindow.html#a53e230328bb53cbc414ab3988e75002e" title="Getter for the 3D Window compiled shader program." alt="" coords="538,752,734,781"/>
+<area shape="rect" id="node18" href="$db/d2d/classObjectStorage.html#af67388c459510c49e6284bc8281b2b29" title=" " alt="" coords="517,805,755,835"/>
+<area shape="rect" id="node19" href="$d2/dda/classRender.html#aae9ec51d1c103782560a467865d2526a" title="Render mode configurator &#45; Multisampling on." alt="" coords="538,379,734,408"/>
+<area shape="rect" id="node20" href="$d2/dda/classRender.html#ab65dd6bdae895a9c7ddabc96a95c7091" title="Set the window icon." alt="" coords="543,432,729,461"/>
+<area shape="rect" id="node21" href="$d2/dda/classRender.html#a69ba2f5701fca6ebe84fc0c5062d5b9b" title="Render mode configurator &#45; Vsync on." alt="" coords="567,485,705,515"/>
+<area shape="rect" id="node13" href="$da/d67/classfpsCounter.html#acca693a136036695b2f2fd1a698fc8d2" title=" " alt="" coords="823,539,1051,568"/>
+<area shape="rect" id="node23" href="$db/d2d/classObjectStorage.html#a254136d03cf482be3be8a8fcda2cfd66" title=" " alt="" coords="501,859,771,888"/>
+<area shape="rect" id="node24" href="$db/d2d/classObjectStorage.html#af4963be037ebd58d003e99886d5b4ff8" title=" " alt="" coords="497,912,775,941"/>
+<area shape="rect" id="node25" href="$db/d2d/classObjectStorage.html#aaea018a9b9d6833d52767e438846e8a8" title=" " alt="" coords="507,965,765,995"/>
+<area shape="rect" id="node35" href="$db/d2d/classObjectStorage.html#afd712e0df3fe9056e357bccb7f4646d3" title=" " alt="" coords="504,1019,768,1048"/>
+<area shape="rect" id="node39" href="$db/d2d/classObjectStorage.html#aebc9c1f0a8bf614e9bd4fece1e3819ee" title=" " alt="" coords="537,1072,735,1101"/>
+<area shape="rect" id="node40" href="$db/d2d/classObjectStorage.html#ab390cfb7628289621f46fc6c34e2873e" title=" " alt="" coords="553,1125,719,1155"/>
+<area shape="rect" id="node26" href="$db/d2d/classObjectStorage.html#a41ea329ba9f683a7a3c4fe3f7a04ecf0" title=" " alt="" coords="833,963,1040,992"/>
+<area shape="rect" id="node27" href="$d2/de5/classObjParser.html#a6b9a38f8ea4a8bc8efed4c67824a1c1f" title=" " alt="" coords="1149,961,1290,991"/>
+<area shape="rect" id="node28" href="$d9/d5e/classMesh.html#aeb7d63b0d2b1d3815e5923068a8c3d8c" title=" " alt="" coords="1433,901,1571,931"/>
+<area shape="rect" id="node29" href="$d2/de5/classObjParser.html#a78b1fde75da2dcb350cc31a63b4419b5" title=" " alt="" coords="1409,955,1595,984"/>
+<area shape="rect" id="node34" href="$d2/de5/classObjParser.html#afad76638a098ee4317c9462e0003d872" title=" " alt="" coords="1388,1008,1616,1037"/>
+<area shape="rect" id="node30" href="$d2/de5/classObjParser.html#a9cb32a916dc41127c45a6fefc99ca18a" title=" " alt="" coords="1664,955,1891,984"/>
+<area shape="rect" id="node33" href="$d2/de5/classObjParser.html#ad772954f2332828fd078575e6e01c35d" title=" " alt="" coords="1697,1008,1857,1037"/>
+<area shape="rect" id="node31" href="$d9/d5e/classMesh.html#a7ec57a2e564e344a2830f94ff22560f7" title=" " alt="" coords="1943,928,2074,957"/>
+<area shape="rect" id="node32" href="$d9/d5e/classMesh.html#af01405ead2d16ac063d94f2853132382" title=" " alt="" coords="1939,981,2079,1011"/>
+<area shape="rect" id="node36" href="$db/d2d/classObjectStorage.html#a2bdeba64e1b3563fe5c6bcc81e4e8407" title=" " alt="" coords="831,1021,1043,1051"/>
+<area shape="rect" id="node37" href="$d5/d38/classTextureObject.html#a241a14dc661863a55e07227563ebdaaa" title=" " alt="" coords="1099,1035,1340,1064"/>
+<area shape="rect" id="node38" href="$d5/dcf/TextureObject_8inl.html#ae36fac9a93240b554c9cfcb9e27430df" title=" " alt="" coords="1432,1061,1572,1091"/>
+</map>

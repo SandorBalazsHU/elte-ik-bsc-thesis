@@ -1,0 +1,9 @@
+<map id="Render::shaderPreDrawingUpdate" name="Render::shaderPreDrawingUpdate">
+<area shape="rect" id="node1" title="Upload the shader datas before rendering an object." alt="" coords="5,59,268,88"/>
+<area shape="rect" id="node2" href="$d1/df0/classCamera.html#aa17e72247f035700c4ca3fc3b5e85fa3" title="The View * Projection matrix used for the camera transformation in the render." alt="" coords="316,32,572,61"/>
+<area shape="rect" id="node3" href="$d5/d1b/classProgramObject.html#a8348ffbd9fea9067c72d62158ce45665" title=" " alt="" coords="337,85,551,115"/>
+<area shape="rect" id="node4" href="$d5/d42/GLconversions_8hpp.html#a34fc358aa28a48ed17728d30d873ee73" title=" " alt="" coords="738,5,829,35"/>
+<area shape="rect" id="node5" href="$d5/d42/GLconversions_8hpp.html#a296832398127addd6f436dedb565aa44" title=" " alt="" coords="715,59,852,88"/>
+<area shape="rect" id="node6" href="$d5/d1b/classProgramObject.html#afcbf4ef2a06c12864e423d6ebd88a934" title=" " alt="" coords="620,112,947,141"/>
+<area shape="rect" id="node7" href="$d5/d42/GLconversions_8hpp.html#a01c827606127623714a296cfb17fb5f0" title=" " alt="" coords="722,165,845,195"/>
+</map>

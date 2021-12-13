@@ -1,0 +1,6 @@
+<map id="WorkWindow::imGUIinit" name="WorkWindow::imGUIinit">
+<area shape="rect" id="node1" title="inGUI GUS system start." alt="" coords="5,32,192,61"/>
+<area shape="rect" id="node2" href="$db/d67/classLogger.html#ade9e0898dc8cefe41ca72fa20f1a1706" title=" " alt="" coords="240,5,353,35"/>
+<area shape="rect" id="node4" href="$dc/d3a/classGUI.html#ab6b1aac93a08b02a19c138d96915e9b1" title="IMgui initialization and bind to the current OpenGL window." alt="" coords="259,59,335,88"/>
+<area shape="rect" id="node3" href="$db/d67/classLogger.html#a9797db48ffb0b05ec9bf89bd323a36c8" title=" " alt="" coords="401,5,597,35"/>
+</map>
