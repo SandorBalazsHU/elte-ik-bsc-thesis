@@ -4,7 +4,7 @@
  * @class WorkingWindow
  * @author Sándor Balázs - AZA6NL
  * @date 2021.11.08.
- * @brief Opengl 3D system initialisation and window open.
+ * @brief OpenGL 3D system initialization and window open.
  * Contact: sandorbalazs9402@gmail.com
 */
 
@@ -24,7 +24,7 @@
 #include "Utilities/ObjParser_OGL3.h"
 
 /**
- * @brief OpenGL 3D Window konstructor.
+ * @brief OpenGL 3D Window constructor.
 */
 WorkWindow::WorkWindow(void) {
 };
@@ -32,12 +32,12 @@ WorkWindow::WorkWindow(void) {
 /**
  * @brief Open and show the window. This run all the preparation function and start the rendering.
  * Possible error codes:
- * 0 - Everithing is fine.
- * 1 - SDL Initialisation error.
+ * 0 - Everything is fine.
+ * 1 - SDL Initialization error.
  * 2 - OpenGL 3D Window creation error.
- * 3 - imGUI GUI system Initialisation error.
+ * 3 - imGUI GUI system Initialization error.
  * 4 - OpenGL Context creation error.
- * 5 - GLEW system initialisation error.
+ * 5 - GLEW system initialization error.
  * 6 - OpenGL starting or version error.
  * 7 - Shader compiling or starting error.
  * @return The starting process status number. 0 is OK Other ID-s mean errors.
@@ -58,14 +58,14 @@ int WorkWindow::open() {
 }
 
 /**
- * @brief SDL system initialisation.
+ * @brief SDL system initialization.
  * @return Status ID. 0 is OK status.
 */
 int WorkWindow::sdlInit() {
 	//Exit Callback
 	atexit(WorkWindow::exitWindow);
 
-	//SDL Init
+	//SDL initialization
 	int SDLstatus = SDL_Init(SDL_INIT_VIDEO);
 	if (SDLstatus == -1) {
 		std::string SDLerror = SDL_GetError();
@@ -76,7 +76,7 @@ int WorkWindow::sdlInit() {
 }
 
 /**
- * @brief OpenGL preconfiguration.
+ * @brief OpenGL pre-configuration.
  * @return Status ID. 0 is OK status.
 */
 int WorkWindow::openGLpreConfig() {
@@ -184,7 +184,7 @@ int WorkWindow::openGLpostConfig() {
 }
 
 /**
- * @brief OpenGL Shader configurationvand compiling.
+ * @brief OpenGL Shader configuration and compiling.
  * @return Status ID. 0 is OK status.
 */
 int WorkWindow::shaderConfig() {
@@ -195,12 +195,12 @@ int WorkWindow::shaderConfig() {
 			{ GL_FRAGMENT_SHADER, "View/Shaders/fragmentShader.frag" }
 			},
 		{
-			{ 0, "vertexInPosition" },	// VAO 0	    --> vs_in_pos
-			{ 1, "vertexInNormal" },	// VAO 1 chanel --> vs_in_normal
-			{ 2, "vertexInTexture" },	// VAO 2 chanel --> vs_in_tex0
+			{ 0, "vertexInPosition" },	// VAO 0	     --> vs_in_pos
+			{ 1, "vertexInNormal" },	// VAO 1 channel --> vs_in_normal
+			{ 2, "vertexInTexture" },	// VAO 2 channel --> vs_in_tex0
 		});
 	} catch (...) {
-		Logger::error("[Shader config ERROR]");
+		Logger::error("[Shader configuration ERROR]");
 		return 7;
 	}
 	return 0;
@@ -230,7 +230,6 @@ int WorkWindow::renderPreconfig() {
  * @return Status ID. 0 is OK status.
 */
 int WorkWindow::renderStart() {
-	//std::cout << SDL_GetCurrentVideoDriver() << std::endl;
 	while (!exit) {
 		if (!objectStorage.isLoaded()) {
 			if (objectStorage.loadingCheck()) objectStorage.finaliseLoading();
@@ -251,7 +250,6 @@ int WorkWindow::renderStart() {
 void WorkWindow::cleanup() {
 	GUI::clean();
 	SDL_GL_DeleteContext(context);
-	//SDL_DestroyWindow(window);
 }
 
 /**

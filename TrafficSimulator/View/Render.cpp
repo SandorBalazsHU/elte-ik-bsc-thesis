@@ -6,8 +6,9 @@
  * @date 2021.11.08.
  * @brief The 3D Scene render class
  * Contact: sandorbalazs9402@gmail.com
- * AX400
 */
+
+//AX400
 
 #include "Render.h"
 #include "WorkWindow.h"
@@ -21,18 +22,6 @@
 #include <iostream>
 #include <sstream>
 #include "../Control/Logger.h"
-
-/**
- * @brief Render constructor.
-*/
-/*Render::Render(void) {
-}*/
-
-/**
-* Render destructor.
-*/
-/*Render::~Render(void) {
-}*/
 
 /**
  * @brief Binding the render to the window.
@@ -90,14 +79,14 @@ void Render::vsyncOff() {
 }
 
 /**
- * @brief Render mode configurator - Wireframe object drawing on.
+ * @brief Render mode configurator - Wire frame object drawing on.
 */
 void  Render::wireframeOn() {
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 }
 
 /**
-* @brief Render mode configurator - Wireframe object drawing off.
+* @brief Render mode configurator - Wire frame object drawing off.
 */
 void  Render::wireframeOff() {
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -133,7 +122,7 @@ void Render::setTexture(Texture2D& texture) {
 }
 
 /**
- * @brief Camera position updating in the shadervariable.
+ * @brief Camera position updating in the shader variable.
 */
 void Render::shaderCameraUpdate() {
 	shader->SetUniform("cameraPosition", camera->getCameraPosition());
@@ -161,7 +150,7 @@ void Render::shaderLightUpdate() {
 }
 
 /**
- * @brief Windowe title text setter.
+ * @brief Window title text setter.
  * @param title The new window title.
 */
 void Render::setWindowTitle(std::string title) {
@@ -210,7 +199,7 @@ GUI* Render::getGui() {
 }
 
 /**
- * @brief Upload the shader datas before rendering an object.
+ * @brief Upload the shader data before rendering an object.
  * @param worldMatrix The world matrix for the shader.
  * @param color The rendering RGBA color.
 */
@@ -230,8 +219,8 @@ void Render::drawMesh(std::unique_ptr<Mesh>& mesh) {
 }
 
 /**
- * @brief Draving a dynamicly generated object.
- * @param vao The dynamicly generated object for drawing.
+ * @brief Drawing a dynamically generated object.
+ * @param VAO The dynamically generated object for drawing.
  * @param trianglesNumber The drawable object triangle number.
 */
 void Render::drawVao(VertexArrayObject& vao, int trianglesNumber) {
@@ -256,7 +245,7 @@ void Render::rendering() {
 }
 
 /**
- * @brief Initialise the scene. Render the first objects.
+ * @brief Initialize the scene. Render the first objects.
 */
 void Render::sceneInit() {
 	std::vector<int>& firstSceneElements = objectStorage->getFirstSceneElements();
@@ -280,7 +269,7 @@ void Render::clear() {
 
 /**
  * @brief Add new renderable object from the preloaded object storage to the scene.
- * @param id New object object storage ID.
+ * @param id New object storage ID.
  * @return The new object render ID.
 */
 int Render::addObject(int id) {
@@ -315,7 +304,7 @@ void Render::deleteRoad(int dynamicRenderID) {
 }
 
 /**
- * @brief Add dynamicly generated road to the scene.
+ * @brief Add dynamically generated road to the scene.
  * /attention The road objects have 4 marker and 2 filler object for dependencies.
  * @return The new road dynamicRenderID.
 */
@@ -362,12 +351,6 @@ void Render::deleteVehicle(size_t renderableVehicleID) {
  * @return The scene object.
 */
 Object3D* Render::getObject(size_t id) {
-	/*if (renderableObjects.size() <= id) {
-		std::cout << "getObject OVERINDEXING " << renderableObjects.size() << "-" << id << std::endl;
-	}
-	else {
-		std::cout << "getObject OK " << renderableObjects.size() << "-" << id << std::endl;
-	}*/
 	return &renderableObjects[id];
 }
 
@@ -385,11 +368,6 @@ size_t Render::getObjectsNumber() {
  * @return The needed object.
 */
 Object3Droad* Render::getDynamicObject(size_t dynamicRenderID) {
-	/*if (renderableRoads.size() <= dynamicRenderID) {
-		std::cout << "getDynamicObject OVERINDEXING " << dynamicRenderID << std::endl;
-	} else {
-		std::cout << "getDynamicObject OK " << renderableRoads.size() << "-" << dynamicRenderID << std::endl;
-	}*/
 	return renderableRoads[dynamicRenderID];
 }
 
@@ -419,7 +397,7 @@ size_t Render::getVehiclesNumber() {
 }
 
 /**
- * @brief Update a dynamicly generated object status by dynamicRenderID.
+ * @brief Update a dynamically generated object status by dynamicRenderID.
  * @param The updatable dynamicRenderID
 */
 void Render::updateDynamicObject(size_t dynamicRenderID) {
@@ -439,7 +417,7 @@ void Render::updateDynamicObject(size_t dynamicRenderID) {
 }
 
 /**
- * @brief Render the hit sphares for each scene objets. (Debug function)
+ * @brief Render the hit spheres for each scene objects. (Debug function)
 */
 void Render::showHitSphere(size_t renderID) {
 	Object3D hitSphere = objectStorage->getObject3D(1);
@@ -457,7 +435,7 @@ void Render::showHitSphere(size_t renderID) {
 }
 
 /**
- * @brief Render the hit sphares for each scene vehicle objets. (Debug function)
+ * @brief Render the hit spheres for each scene vehicle objects. (Debug function)
 */
 void  Render::showVehicleHitSphere(size_t vehicleRenderID) {
 	Object3D hitSphere = objectStorage->getObject3D(1);
@@ -489,7 +467,7 @@ void Render::photoModeOff() {
 }
 
 /**
- * @brief Render the hit sphares for each scene road objets. (Debug function)
+ * @brief Render the hit spheres for each scene road objects. (Debug function)
 */
 void Render::showRoadHitSphere(std::vector<glm::vec3>& roadPoints, float size, glm::vec3 color) {
 	for (size_t i = 0; i < roadPoints.size(); i += 1) {
@@ -505,7 +483,7 @@ void Render::showRoadHitSphere(std::vector<glm::vec3>& roadPoints, float size, g
 }
 
 /**
- * @brief Render the hit sphares for each scene road objets. (Debug function)
+ * @brief Render the hit spheres for each scene road objects. (Debug function)
 */
 void Render::showAllRoadHitSpheres() {
 	for (size_t i = 0; i < renderableRoads.size(); i++) {
@@ -607,7 +585,7 @@ void Render::renderScrean() {
 }
 
 /**
- * @brief Remder the next frame. Use the shaders, update the camera and the gui. Render the objects and the curent scene.
+ * @brief Render the next frame. Use the shader, update the camera and the GUI. Render the objects and the current scene.
 */
 void Render::render() {
 	fpsCounter::start();

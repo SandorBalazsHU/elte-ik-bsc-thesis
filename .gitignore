@@ -291,12 +291,17 @@ TSWLatexianTemp*
 /x64/
 
 #Excel
-/TrafficSimulator/3Dobjects/~$3d_object_library.xlsx
+./TrafficSimulator/3Dobjects/~$3d_object_library.xlsx
 
 #Dependencies
-/dependencies/OCLPack/
-/dependencies/OGLPack/
-/packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.3/
+./dependencies/OCLPack/
+./dependencies/OGLPack/
+./packages/Microsoft.googletest.v140.windesktop.msvcstl.static.rt-dyn.1.8.1.3/
 
 #HTML Doc
-/DoxyGen/html/
+./DoxyGen/html/
+./DoxyGen/elte-ik-bsc-thesis-doc/
+/dependencies/OCLPack
+/dependencies/OGLPack
+/DoxyGen/html
+/DoxyGen/elte-ik-bsc-thesis-doc

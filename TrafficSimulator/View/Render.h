@@ -33,23 +33,13 @@ class GUI;
 class Render {
 public:
 	/**
-	 * @brief Render constructor.
-	*/
-	//Render(void);
-
-	/**
-	* Render destructor.
-	*/
-	//~Render(void);
-
-	/**
 	 * @brief Binding the render to the window.
 	 * @param window The joinable window.
 	*/
 	void bind(WorkWindow* window);
 
 	/**
-	 * @brief Remder the next frame. Use the shaders, update the camera and the gui. Render the objects and the curent scene.
+	 * @brief Render the next frame. Use the shader, update the camera and the GUI. Render the objects and the current scene.
 	*/
 	void render();
 
@@ -85,7 +75,7 @@ public:
 
 	/**
 	 * @brief Add new renderable object from the preloaded object storage to the scene.
-	 * @param id New object object storage ID.
+	 * @param id New object storage ID.
 	 * @return The new object render ID.
 	*/
 	int addObject(int objectStorageID);
@@ -98,7 +88,7 @@ public:
 	void deleteObject(int renderID);
 
 	/**
-	 * @brief Add dynamicly generated road to the scene.
+	 * @brief Add dynamically generated road to the scene.
 	 * /attention The road objects have 4 marker and 2 filler object for dependencies.
 	 * @return The new road dynamicRenderID.
 	*/
@@ -131,7 +121,7 @@ public:
 	void close();
 
 	/**
-	 * @brief Update a dynamicly generated object status by dynamicRenderID.
+	 * @brief Update a dynamically generated object status by dynamicRenderID.
 	 * @param The updatable dynamicRenderID 
 	*/
 	void updateDynamicObject(size_t dynamicRenderID);
@@ -210,17 +200,17 @@ public:
 	void photoModeOff();
 
 	/**
-	 * @brief Active the hit sphare drawing. (DebugFunction)
+	 * @brief Active the hit sphere drawing. (DebugFunction)
 	*/
 	bool hitSphare = false;
 
 	/**
-	 * @brief Active the road hit sphare drawing. (DebugFunction)
+	 * @brief Active the road hit sphere drawing. (DebugFunction)
 	*/
 	bool roadHhitSphare = false;
 
 	/**
-	 * @brief Active the vehicle hit sphare drawing. (DebugFunction)
+	 * @brief Active the vehicle hit sphere drawing. (DebugFunction)
 	*/
 	bool vehicleHitSphare = false;
 
@@ -250,12 +240,12 @@ public:
 	bool showRoadTrack02 = false;
 
 	/**
-	 * @brief Active the wireframe function for the objets. (DebugFunction)
+	 * @brief Active the wire frame function for the objects. (DebugFunction)
 	*/
 	bool objectsWireframe = false;
 
 	/**
-	 * @brief Active the wireframe function for the roads. (DebugFunction)
+	 * @brief Active the wire frame function for the roads. (DebugFunction)
 	*/
 	bool roadWireframe = false;
 	
@@ -325,7 +315,7 @@ public:
 	glm::vec4 specularMaterial = glm::vec4(1.0f, 1.0f, 1.0f, 0.0f);
 
 	/**
-	 * @brief Specular light poewr
+	 * @brief Specular light power
 	*/
 	float specularPower = 32.0f;
 
@@ -337,12 +327,12 @@ private:
 	void shaderLightUpdate();
 
 	/**
-	 * @brief List of the renderable scene objets. (Preloaded meshes)
+	 * @brief List of the renderable scene objects. (Preloaded meshes)
 	*/
 	std::vector<Object3D> renderableObjects;
 
 	/**
-	 * @brief List of the renderable scene roads. (Dynamicly generated shapes)
+	 * @brief List of the renderable scene roads. (Dynamically generated shapes)
 	*/
 	std::vector<Object3Droad*> renderableRoads;
 
@@ -352,7 +342,7 @@ private:
 	std::vector<Object3Dvehicle> renderableVehicles;
 
 	/**
-	 * @brief Flagvariable for the first scene configs. 
+	 * @brief Flag variable for the first scene configurations. 
 	 * /attention Default value is TRUE.
 	*/
 	bool firstScreen = true;
@@ -414,7 +404,7 @@ private:
 	void setTexture(Texture2D& texture);
 
 	/**
-	 * @brief Upload the shader datas before rendering an object.
+	 * @brief Upload the shader data before rendering an object.
 	 * @param worldMatrix The world matrix for the shader.
 	 * @param color The rendering RGBA color.
 	*/
@@ -427,8 +417,8 @@ private:
 	void drawMesh(std::unique_ptr<Mesh>& mesh);
 
 	/**
-	 * @brief Draving a dynamicly generated object.
-	 * @param vao The dynamicly generated object for drawing.
+	 * @brief Drawing a dynamically generated object.
+	 * @param VAO The dynamically generated object for drawing.
 	 * @param trianglesNumber The drawable object triangle number.
 	*/
 	void drawVao(VertexArrayObject& vao, int trianglesNumber);
@@ -439,7 +429,7 @@ private:
 	void rendering();
 
 	/**
-	 * @brief Windowe title text setter.
+	 * @brief Window title text setter.
 	 * @param title The new window title.
 	*/
 	void setWindowTitle(std::string title);
@@ -461,7 +451,7 @@ private:
 	void faceTestOff();
 
 	/**
-	 * @brief Camera position updating in the shadervariable.
+	 * @brief Camera position updating in the shader variable.
 	*/
 	void shaderCameraUpdate();
 
@@ -471,33 +461,33 @@ private:
 	void renderScrean();
 
 	/**
-	 * @brief Initialise the scene. Render the first objects.
+	 * @brief Initialize the scene. Render the first objects.
 	*/
 	void sceneInit();
 
 	/**
-	 * @brief Render mode configurator - Wireframe object drawing on.
+	 * @brief Render mode configurator - Wire frame object drawing on.
 	*/
 	void wireframeOn();
 
 	/**
-	* @brief Render mode configurator - Wireframe object drawing off.
+	* @brief Render mode configurator - Wire frame object drawing off.
 	*/
 	void wireframeOff();
 
 	/**
-	 * @brief Render the hit sphares for each scene objets. (Debug function)
+	 * @brief Render the hit spheres for each scene objects. (Debug function)
 	 * @param renderID The actual object render ID.
 	*/
 	void showHitSphere(size_t renderID);
 
 	/**
-	 * @brief Render the hit sphares for each scene vehicle objets. (Debug function)
+	 * @brief Render the hit spheres for each scene vehicle objects. (Debug function)
 	*/
 	void showVehicleHitSphere(size_t vehicleRenderID);
 
 	/**
-	 * @brief Render the hit sphares for each scene road objets. (Debug function)
+	 * @brief Render the hit spheres for each scene road objects. (Debug function)
 	 * @param roadPoints The drawable points
 	 * @param size the marker size
 	 * @param vec3 the marker colors
@@ -505,7 +495,7 @@ private:
 	void showRoadHitSphere(std::vector<glm::vec3>& roadPoints, float size, glm::vec3 color);
 
 	/**
-	 * @brief Render the hit sphares for each scene road objets. (Debug function)
+	 * @brief Render the hit spheres for each scene road objects. (Debug function)
 	*/
 	void showAllRoadHitSpheres();
 };

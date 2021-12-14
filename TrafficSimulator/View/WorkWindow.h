@@ -4,7 +4,7 @@
  * @class WorkingWindow
  * @author Sándor Balázs - AZA6NL
  * @date 2021.11.08.
- * @brief Opengl 3D system initialisation and window open.
+ * @brief OpenGL 3D system initialization and window open.
  * Contact: sandorbalazs9402@gmail.com
 */
 
@@ -27,7 +27,7 @@ class WorkWindow {
 public:
 
 	/**
-	 * @brief OpenGL 3D Window konstructor.
+	 * @brief OpenGL 3D Window constructor.
 	*/
 	WorkWindow(void);
 
@@ -43,14 +43,14 @@ public:
 	int open();
 
 	/**
-	 * @brief Start the closeing procedure.
+	 * @brief Start the closing procedure.
 	*/
 	void close() {
 		gui.close();
 	};
 
 	/**
-	 * @brief Stop the render and start the closeing procedure.
+	 * @brief Stop the render and start the closing procedure.
 	*/
 	void closeNow() {
 		exit = true;
@@ -114,7 +114,7 @@ public:
 
 	/**
 	 * @brief Getter for the event listener.
-	 * @return Pointer for the current eventlistener.
+	 * @return Pointer for the current event listener.
 	*/
 	EventListener* getEventListener() {
 		return &eventListener;
@@ -138,7 +138,7 @@ private:
 	const int windowDefSizeY = 480;
 
 	/**
-	 * @brief The default window horisontal position.
+	 * @brief The default window horizontal position.
 	*/
 	const int windowDefPosX = 100;
 
@@ -198,13 +198,13 @@ private:
 	bool exit = false;
 
 	/**
-	 * @brief SDL system initialisation.
+	 * @brief SDL system initialization.
 	 * @return Status ID. 0 is OK status. 
 	*/
 	int sdlInit();
 
 	/**
-	 * @brief OpenGL preconfiguration.
+	 * @brief OpenGL pre-configuration.
 	 * @return Status ID. 0 is OK status.
 	*/
 	int openGLpreConfig();
@@ -240,7 +240,7 @@ private:
 	int glewStart();
 
 	/**
-	 * @brief OpenGL Shader configurationvand compiling.
+	 * @brief OpenGL Shader configuration compiling.
 	 * @return Status ID. 0 is OK status.
 	*/
 	int shaderConfig();
