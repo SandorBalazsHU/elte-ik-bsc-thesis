@@ -53,8 +53,8 @@ void GUI::openWindow() {
 		if (ImGui::Button("Open")) {
 			if (windowRender->getObjectsNumber() > 1 || windowRender->getDynamicObjectsNumber() > 0) {
 				ImGui::OpenPopup("Are you sure?");
-			}
-			else {
+			} else {
+				closeAllWindows("openWindowStatus");
 				windowRender->clear();
 				windowRender->getMapLoader()->loadMap(items[selection]);
 				windowRender->getMapSaver()->setLastSave(items[selection]);
@@ -77,6 +77,7 @@ void GUI::openWindow() {
 			ImGui::Text("The loadable file:   %s", items[selection]);
 			ImGui::Separator();
 			if (ImGui::Button("Open")) {
+				closeAllWindows("openWindowStatus");
 				windowRender->clear();
 				windowRender->getMapLoader()->loadMap(items[selection]);
 				windowRender->getMapSaver()->setLastSave(items[selection]);
@@ -233,6 +234,7 @@ void GUI::newMapConfirmWindow() {
 			ImGui::Text("Are you sure you open a new map?");
 			ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "All unsaved changes will be lost.");
 			if (ImGui::Button("New")) {
+				closeAllWindows("newMapConfirmWindowStatus");
 				windowRender->clear();
 				newMapConfirmWindowStatus = false;
 				ImGui::CloseCurrentPopup();
@@ -1092,8 +1094,7 @@ void GUI::finalise() {
 		mapEditorWindow = false;
 		simulationWindow = true;
 		animator->finalize();
-	}
-	else {
+	} else {
 		finalisingErrorWindow = true;
 	}
 }
@@ -1110,22 +1111,6 @@ void GUI::backToEditMode() {
 	selectedEndPoint = -1;
 	selectedRoad = -1;
 	selectedVehicle = -1;
-
-	openWindowStatus = false;
-	saveWindowStatus = false;
-	saveAsWindowStatus = false;
-	ImGuiSettingsWindowStatus = false;
-	newMapConfirmWindowStatus = false;
-	controlsWindowStatus = false;
-	aboutWindowStatus = false;
-	closingCheckerWindowStatus = false;
-	graphicSettingsWindowStatus = false;
-	debugOptionsWindowStatus = false;
-	runningStatisticsWindowStatus = false;
-	pathFinderTestWindowStatus = false;
-	simulationSettingsWindowStatus = false;
-	simulationStatisticsWindowStatus = false;
-	finalisingErrorWindow = false;
 }
 
 /**

@@ -75,17 +75,17 @@ void GUI::mainMenuBar() {
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("Settings")) {
-			if (ImGui::MenuItem("Graphics settings", "CTRL+G", &graphicSettingsWindowStatus)) {}
-			if (ImGui::MenuItem("ImGui settings", "CTRL+I", &ImGuiSettingsWindowStatus)) {}
+			if (ImGui::MenuItem("Graphics settings", "CTRL+G", &graphicSettingsWindowStatus)) { closeAllWindows("graphicSettingsWindowStatus"); }
+			if (ImGui::MenuItem("ImGui settings", "CTRL+I", &ImGuiSettingsWindowStatus)) { closeAllWindows("ImGuiSettingsWindowStatus"); }
 			ImGui::Separator();
-			if (ImGui::MenuItem("Running statistics", "CTRL+R", &runningStatisticsWindowStatus)) {}
-			if (ImGui::MenuItem("Debug options", "CTRL+D", &debugOptionsWindowStatus)) {}
-			if (ImGui::MenuItem("Pathfinder algorithm test.", "CTRL+P", &pathFinderTestWindowStatus, editorLock)) { pathFinderOpenTimeStamp = SDL_GetTicks(); }
+			if (ImGui::MenuItem("Running statistics", "CTRL+R", &runningStatisticsWindowStatus)) { closeAllWindows("runningStatisticsWindowStatus"); }
+			if (ImGui::MenuItem("Debug options", "CTRL+D", &debugOptionsWindowStatus)) { closeAllWindows("debugOptionsWindowStatus"); }
+			if (ImGui::MenuItem("Pathfinder algorithm test.", "CTRL+P", &pathFinderTestWindowStatus, editorLock)) { closeAllWindows("pathFinderTestWindowStatus");  pathFinderOpenTimeStamp = SDL_GetTicks(); }
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("Simulation")) {
 			if (ImGui::MenuItem("Finalizing", "CTRL+Q", false, !editorLock)) { finalise(); }
-			if (ImGui::MenuItem("Edit mode", "CTRL+Q", false, (editorLock && !simulationStart))) { backToEditMode(); }
+			if (ImGui::MenuItem("Edit mode", "CTRL+Q", false, (editorLock && !simulationStart))) { closeAllWindows("");  backToEditMode(); }
 			if (ImGui::MenuItem("START Simulation", "CTRL+Q", false, (!simulationStart && editorLock))) { startSimulation(); }
 			if (!simulationPaused) {
 				if (ImGui::MenuItem("PAUSE Simulation", "CTRL+W", false, (simulationStart && editorLock))) { pauseSimulation(); }
@@ -94,9 +94,9 @@ void GUI::mainMenuBar() {
 			}
 			if (ImGui::MenuItem("STOP Simulation", "CTRL+W", false, (simulationStart && editorLock))) { stopSimulation(); }
 			ImGui::Separator();
-			if (ImGui::MenuItem("Simulation settings", "CTRL+E", &simulationSettingsWindowStatus, editorLock)) {}
+			if (ImGui::MenuItem("Simulation settings", "CTRL+E", &simulationSettingsWindowStatus, editorLock)) { closeAllWindows("simulationSettingsWindowStatus"); }
 			ImGui::Separator();
-			if (ImGui::MenuItem("Simulation statistics", "CTRL+f", &simulationStatisticsWindowStatus, editorLock)) {}
+			if (ImGui::MenuItem("Simulation statistics", "CTRL+f", &simulationStatisticsWindowStatus, editorLock)) { closeAllWindows("simulationStatisticsWindowStatus"); }
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("Help")) {
@@ -211,7 +211,7 @@ void GUI::endpointSelector(Point* point) {
 }
 
 void GUI::draw() {
-	ImGui::ShowTestWindow();
+	if(debugMode) ImGui::ShowTestWindow();
 
 	trafficSimulationWindowFlag |= ImGuiWindowFlags_NoMove;
 	trafficSimulationWindowFlag |= ImGuiWindowFlags_NoResize;
@@ -485,9 +485,33 @@ void GUI::showVehicleInfo(size_t vehicleModelID) {
 	this->selectedVehicle = vehicleModelID;
 }
 
+/**
+ * @brief Reset the selected item info window content.
+*/
 void GUI::resetInfoWindow() {
 	this->selectedStartPoint = -1;
 	this->selectedEndPoint = -1;
 	this->selectedRoad = -1;
 	this->selectedVehicle = -1;
+}
+
+/**
+ * @brief Close all windows.
+*/
+void GUI::closeAllWindows(std::string exeption) {
+	if(exeption != "openWindowStatus") openWindowStatus = false;
+	if(exeption != "saveWindowStatus") saveWindowStatus = false;
+	if(exeption != "saveAsWindowStatus") saveAsWindowStatus = false;
+	if(exeption != "ImGuiSettingsWindowStatus") ImGuiSettingsWindowStatus = false;
+	if(exeption != "newMapConfirmWindowStatus") newMapConfirmWindowStatus = false;
+	if(exeption != "controlsWindowStatus") controlsWindowStatus = false;
+	if(exeption != "aboutWindowStatus") aboutWindowStatus = false;
+	if(exeption != "closingCheckerWindowStatus") closingCheckerWindowStatus = false;
+	if(exeption != "graphicSettingsWindowStatus") graphicSettingsWindowStatus = false;
+	if(exeption != "debugOptionsWindowStatus") debugOptionsWindowStatus = false;
+	if(exeption != "runningStatisticsWindowStatus") runningStatisticsWindowStatus = false;
+	if(exeption != "pathFinderTestWindowStatus") pathFinderTestWindowStatus = false;
+	if(exeption != "simulationSettingsWindowStatus") simulationSettingsWindowStatus = false;
+	if(exeption != "simulationStatisticsWindowStatus") simulationStatisticsWindowStatus = false;
+	if(exeption != "finalisingErrorWindow") finalisingErrorWindow = false;
 }

@@ -16,6 +16,7 @@ class Render;
 class EventListener;
 
 #include <SDL.h>
+#include <string>
 #include "imgui\imgui.h"
 #include "imgui\imgui_impl_sdl_gl3.h"
 #include "Objects/ObjectStorage.h"
@@ -140,6 +141,8 @@ private:
 	size_t selectedVehicle = -1;
 
 	Uint32 pathFinderOpenTimeStamp;
+
+	const bool debugMode = false;
 
 	/**
 	 * @brief Marker for simulation starting.
@@ -327,4 +330,9 @@ private:
 	 * @brief Clear the road colors.
 	*/
 	void clearRoadColor();
+
+	/**
+	 * @brief Close all windows.
+	*/
+	void closeAllWindows(std::string exeption);
 };
