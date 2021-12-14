@@ -173,7 +173,7 @@ void EventListener::keyboardUp(SDL_KeyboardEvent& key) {
 }
 
 /**
- * @brief The mouse move event processor.
+ * @brief The mouse move event processor. (The mouse move direction is set by camera direction.)
  * @param mouse The current mouse event.
 */
 void EventListener::mouseMove(SDL_MouseMotionEvent& mouse) {

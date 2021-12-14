@@ -157,7 +157,7 @@ private:
 	void keyboardUp(SDL_KeyboardEvent&);
 
 	/**
-	 * @brief The mouse move event processor.
+	 * @brief The mouse move event processor. (The keyboard move direction is set by camera direction.)
 	 * @param mouse The current mouse event.
 	*/
 	void mouseMove(SDL_MouseMotionEvent&);

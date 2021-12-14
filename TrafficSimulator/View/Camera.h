@@ -125,6 +125,7 @@ public:
 	/**
 	 * @brief Event handler function for the key down event.
 	 * Store the pressed keys in the pressedKeys set.
+	 * (The keyboard move direction is set by camera direction.)
 	 * @param key keyboard down event.
 	*/
 	void keyboardDown(SDL_KeyboardEvent& key);

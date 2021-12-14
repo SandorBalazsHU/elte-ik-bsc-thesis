@@ -110,7 +110,6 @@ void Camera::sphericalCoordinateUpdate() {
  * @param inclination The spherical coordinates inclination;
 */
 void Camera::sphericalCoordinateShift(float radius, float azimuth, float inclination) {
-	//sphericalCoordinateUpdate();
 	sphericalCameraPosition.x += radius;
 	sphericalCameraPosition.y += inclination;
 	sphericalCameraPosition.z += azimuth;
@@ -146,13 +145,10 @@ void Camera::resize(int width, int height) {
 /**
  * @brief Event handler function for the key down event.
  * Store the pressed keys in the pressedKeys set.
+ * (The keyboard move direction is set by camera direction.)
  * @param key keyboard down event.
 */
 void Camera::keyboardDown(SDL_KeyboardEvent& key) {
-
-	/*sphericalCoordinateUpdate();
-	cameraCoordinateUpdate();*/
-
 	glm::vec2 shift2D(0, 0);
 	pressedKeys.insert(key.keysym.sym);
 
@@ -184,8 +180,6 @@ void Camera::keyboardDown(SDL_KeyboardEvent& key) {
 	cameraPosition += rotatedShift;
 
 	update();
-	/*sphericalCoordinateUpdate();
-	cameraCoordinateUpdate();*/
 }
 
 /**
@@ -204,12 +198,11 @@ void Camera::keyboardUp(SDL_KeyboardEvent& key) {
 void Camera::mouseMove(SDL_MouseMotionEvent& mouse) {
 	if (mouse.state & SDL_BUTTON_LMASK) {
 		sphericalCoordinateShift(0, mouse.xrel / 200.0f, (mouse.yrel / 200.0f) * -1.0f);
-		//Logger::log(std::to_string(sphericalCameraPosition.z));
 	}
 }
 
 /**
-* @brief Event handler function for the mouse wheel event.
+* @brief Event handler function for the mouse wheel event. (Logarithmic mouse wheeling)
 * @param key mouse wheel event.
 */
 void Camera::mouseWheel(SDL_MouseWheelEvent& wheel) {
