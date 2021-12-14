@@ -1,8 +1,14 @@
 /**
-* LRSSG
-* alarm 1202
-* sce to aux
+ * @name Traffic Simulation
+ * @file EventListener.cpp
+ * @class EventListener
+ * @author Sándor Balázs - AZA6NL
+ * @date 2021.12.14.
+ * @brief Event listener implementation.
+ * Contact: sandorbalazs9402@gmail.com
 */
+
+//LRSSG
 
 #include "EventListener.h"
 #include "WorkWindow.h"
@@ -12,12 +18,10 @@
 #include <glm/gtx/transform2.hpp>
 #include <iostream>
 
-/*EventListener::EventListener(void) {
-}
-
-EventListener::~EventListener(void) {
-}*/
-
+/**
+ * @brief Initialize and bind the event listener.
+ * @param currentWindow The current working window for the event listener.
+*/
 void EventListener::bind(WorkWindow* currentWindow) {
 	workingWindow = currentWindow;
 	camera = workingWindow->getCamera();
@@ -25,7 +29,10 @@ void EventListener::bind(WorkWindow* currentWindow) {
 	render = workingWindow->getRender();
 }
 
-//TODO car selection in eventlistener
+/**
+ * @brief Object selector.
+ * @param objectID The selected object ID from the mouse ray picker.
+*/
 void EventListener::select(size_t objectID) {
 	if (!editorLock) {
 		selectedItems.push_back(objectID);
@@ -41,6 +48,9 @@ void EventListener::select(size_t objectID) {
 	}
 }
 
+/**
+ * @brief Object deselect.
+*/
 void EventListener::deselect() {
 	if (editorLock) gui->resetInfoWindow();
 	for (size_t i = 0; i < selectedItems.size(); i++) {
@@ -49,6 +59,9 @@ void EventListener::deselect() {
 	selectedItems.clear();
 }
 
+/**
+ * @brief Road selector from mouse clicking. (Ray picking for road included.)
+*/
 void EventListener::roadSelect() {
 	for (size_t i = 0; i < render->getDynamicObjectsNumber(); i++) {
 		if (render->getDynamicObject(i) != NULL) {
@@ -66,6 +79,9 @@ void EventListener::roadSelect() {
 	}
 }
 
+/**
+ * @brief Road deselect.
+*/
 void EventListener::roadDeselect() {
 	if (editorLock) gui->resetInfoWindow();
 	if(selectedRoads.size() > 0) {
@@ -76,27 +92,36 @@ void EventListener::roadDeselect() {
 	}
 }
 
+/**
+ * @brief Vehicle selector.
+ * @param vehicleID The selected vehicle ID from the mouse ray picker.
+*/
 void EventListener::vehicleSelect(size_t vehicleID) {
 	render->getVehicle(vehicleID)->select();
 	if (editorLock) {
 		deselect();
 		roadDeselect();
 		vehicleDeselect();
-		//gui->showVehicleInfo(render->getVehicle(vehicleID)->getModelID());
 		gui->showVehicleInfo(vehicleID);
 	}
 	this->selectedVehicle = vehicleID;
 }
 
+/**
+ * @brief Vehicle deselect.
+*/
 void EventListener::vehicleDeselect() {
 	if (editorLock) gui->resetInfoWindow();
 	if (this->selectedVehicle != -1) {
 		render->getVehicle(selectedVehicle)->deSelect();
-		//TODO Clear vehicle info in GUI
 		this->selectedVehicle = -1;
 	}
 }
 
+/**
+ * @brief Keyboard down event processor.
+ * @param key The current key event.
+*/
 void EventListener::keyboardDown(SDL_KeyboardEvent& key) {
 	pressedKeys.insert(key.keysym.sym);
 	camera->keyboardDown(key);
@@ -110,6 +135,9 @@ void EventListener::keyboardDown(SDL_KeyboardEvent& key) {
 	}
 }
 
+/**
+ * @brief Delete selected items.
+*/
 void EventListener::deleteSelectedItems() {
 	for (size_t i = 0; i < selectedItems.size(); i++) {
 		render->deleteObject(selectedItems[i]);
@@ -121,6 +149,10 @@ void EventListener::deleteSelectedItems() {
 	selectedRoads.clear();
 }
 
+/**
+ * @brief Keyboard up event processor.
+ * @param key The current key event.
+*/
 void EventListener::keyboardUp(SDL_KeyboardEvent& key) {
 	pressedKeys.erase(key.keysym.sym);
 	camera->keyboardUp(key);
@@ -133,18 +165,6 @@ void EventListener::keyboardUp(SDL_KeyboardEvent& key) {
 		keepSelect = false;
 	}
 	if (key.keysym.sym == SDLK_DELETE && !editorLock) deleteSelectedItems();
-
-
-	//-------------------------------------------------------------------------------------------
-	if (key.keysym.sym == SDLK_PAGEUP) {
-		int shift = -10;
-		for (size_t i = 5; i < 17; i++) {
-			render->getVehicle(render->addVehicle(i,-1))->move(glm::vec3(shift, 0, shift));
-			shift += 3;
-		}
-	}
-	//---------------------------------------------------------------------------------------
-
 	if (key.keysym.sym == SDLK_f && !editorLock) {
 		for (size_t i = 0; i < selectedRoads.size(); i++) {
 			render->getDynamicObject(selectedRoads[i])->setEndpointLock(true);
@@ -152,7 +172,10 @@ void EventListener::keyboardUp(SDL_KeyboardEvent& key) {
 	}
 }
 
-//https://en.wikipedia.org/wiki/Rotation_of_axes
+/**
+ * @brief The mouse move event processor.
+ * @param mouse The current mouse event.
+*/
 void EventListener::mouseMove(SDL_MouseMotionEvent& mouse) {
 	camera->mouseMove(mouse);
 	if ((mouse.state & SDL_BUTTON_RMASK) && !editorLock) {
@@ -187,7 +210,6 @@ void EventListener::mouseMove(SDL_MouseMotionEvent& mouse) {
 
 			render->getObject(selectedItems[i])->move(rotatedShift);
 
-			//std::cout << "SelectedDependency: " << render->getObject(selectedItems[i])->getDependencyID() << std::endl;
 			if (render->getObject(selectedItems[i])->getDependencyID() > -1) {
 				render->updateDynamicObject(render->getObject(selectedItems[i])->getDependencyID());
 			}
@@ -195,12 +217,15 @@ void EventListener::mouseMove(SDL_MouseMotionEvent& mouse) {
 	}
 }
 
+/**
+ * @brief The mouse Down event processor.
+ * @param mouse The current mouse event.
+*/
 void EventListener::mouseDown(SDL_MouseButtonEvent& mouse) {
 	moseButtonPressed.insert(mouse.button);
 	if (mouse.button == SDL_BUTTON_RIGHT) {
 		size_t selectedObjectId = getClickedObjectId(mouse);
 		if (selectedObjectId != -1) {
-			//if (editorLock) deselect();
 			select(selectedObjectId);
 		}
 		size_t selectedVehicleId = getClickedObjectId(mouse, true);
@@ -221,6 +246,10 @@ void EventListener::mouseDown(SDL_MouseButtonEvent& mouse) {
 	}
 }
 
+/**
+ * @brief The mouse up event processor.
+ * @param mouse The current mouse event.
+*/
 void EventListener::mouseUp(SDL_MouseButtonEvent& mouse) {
 	moseButtonPressed.erase(mouse.button);
 	if (mouse.button == SDL_BUTTON_RIGHT && !editorLock) {
@@ -228,6 +257,10 @@ void EventListener::mouseUp(SDL_MouseButtonEvent& mouse) {
 	}
 }
 
+/**
+ * @brief The mouse wheel event processor.
+ * @param mouse The current mouse wheel event.
+*/
 void EventListener::mouseWheel(SDL_MouseWheelEvent& wheel) {
 	if(moseButtonPressed.find(SDL_BUTTON_RIGHT) == moseButtonPressed.end()) camera->mouseWheel(wheel);
 	if (selectedItems.size() > 0 && !editorLock) {
@@ -238,6 +271,10 @@ void EventListener::mouseWheel(SDL_MouseWheelEvent& wheel) {
 	}
 }
 
+/**
+ * @brief The resize event processor.
+ * @param mouse The current window event.
+*/
 void EventListener::resize(SDL_WindowEvent& window) {
 	int with = window.data1;
 	int height = window.data2;
@@ -245,18 +282,30 @@ void EventListener::resize(SDL_WindowEvent& window) {
 	camera->resize(with, height);
 }
 
+/**
+ * @brief Locking the editor events.
+*/
 void EventListener::lockEditor() {
 	this->editorLock = true;
 }
 
+/**
+ * @brief Free the editor events.
+*/
 void EventListener::freeEditor() {
 	this->editorLock = false;
 }
 
+/**
+ * @brief Exit event handler.
+*/
 void EventListener::exit() {
 	workingWindow->close();
 }
 
+/**
+ * @brief The main event processor loop.
+*/
 void EventListener::eventProcessor() {
 	SDL_Event event;
 	while (SDL_PollEvent(&event)) {
