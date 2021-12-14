@@ -1,6 +1,0 @@
-<map id="Graph::rebind" name="Graph::rebind">
-<area shape="rect" id="node1" title=" " alt="" coords="5,59,123,88"/>
-<area shape="rect" id="node2" href="$d2/dda/classRender.html#a112bb5215d1830cc128b143ca311a581" title="Getter for the RenderableRoads." alt="" coords="171,5,380,35"/>
-<area shape="rect" id="node3" href="$d2/dda/classRender.html#ac0679c37e0376133a5c26d3728a3f28c" title="Get scene preloaded object from the scene render storage." alt="" coords="201,59,349,88"/>
-<area shape="rect" id="node4" href="$d8/d1b/classObject3D.html#a81208e358dc0d4e58677075b2b313151" title=" " alt="" coords="188,112,363,141"/>
-</map>

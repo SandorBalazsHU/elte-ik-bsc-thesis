@@ -1,5 +1,0 @@
-<map id="Render::photoModeOff" name="Render::photoModeOff">
-<area shape="rect" id="node1" title="Hide the desk for object photo mode." alt="" coords="5,32,185,61"/>
-<area shape="rect" id="node2" href="$d2/dda/classRender.html#ac0679c37e0376133a5c26d3728a3f28c" title="Get scene preloaded object from the scene render storage." alt="" coords="233,5,381,35"/>
-<area shape="rect" id="node3" href="$d8/d1b/classObject3D.html#aa098b99bf68f8a5fb47368eed75380d5" title=" " alt="" coords="241,59,373,88"/>
-</map>

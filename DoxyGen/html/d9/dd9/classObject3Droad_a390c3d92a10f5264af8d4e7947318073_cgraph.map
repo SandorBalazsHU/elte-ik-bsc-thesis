@@ -1,8 +1,0 @@
-<map id="Object3Droad::select" name="Object3Droad::select">
-<area shape="rect" id="node1" title=" " alt="" coords="5,112,175,141"/>
-<area shape="rect" id="node2" href="$d2/dda/classRender.html#ac0679c37e0376133a5c26d3728a3f28c" title="Get scene preloaded object from the scene render storage." alt="" coords="250,5,398,35"/>
-<area shape="rect" id="node3" href="$d2/dda/classRender.html#acb253ac045386dacf67732604c469d01" title="Return true if the editor locked." alt="" coords="235,59,413,88"/>
-<area shape="rect" id="node4" href="$d8/d1b/classObject3D.html#ab4bcd843aebe3b377738eeb1e5e90c80" title=" " alt="" coords="239,112,409,141"/>
-<area shape="rect" id="node5" href="$d9/dd9/classObject3Droad.html#a54a644703be6a440adf61a7e91828c94" title=" " alt="" coords="223,165,425,195"/>
-<area shape="rect" id="node6" href="$d8/d1b/classObject3D.html#aa098b99bf68f8a5fb47368eed75380d5" title=" " alt="" coords="258,219,390,248"/>
-</map>

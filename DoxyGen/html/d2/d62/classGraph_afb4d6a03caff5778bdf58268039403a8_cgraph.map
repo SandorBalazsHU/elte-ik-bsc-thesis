@@ -1,7 +1,0 @@
-<map id="Graph::initialise" name="Graph::initialise">
-<area shape="rect" id="node1" title=" " alt="" coords="5,85,136,115"/>
-<area shape="rect" id="node2" href="$d2/dda/classRender.html#a112bb5215d1830cc128b143ca311a581" title="Getter for the RenderableRoads." alt="" coords="215,5,425,35"/>
-<area shape="rect" id="node3" href="$d2/dda/classRender.html#a96812a57fba2dc97089021cc23a01baa" title="Getter for the renderableRoads size." alt="" coords="184,59,456,88"/>
-<area shape="rect" id="node4" href="$dc/d4f/classPoint.html#a2e45c045d624d85fb10d923953f3cc88" title="Getter for the point id." alt="" coords="269,112,371,141"/>
-<area shape="rect" id="node5" href="$d9/dd9/classObject3Droad.html#a856af5392c340e1d24a7fbdca3f7e306" title=" " alt="" coords="203,165,437,195"/>
-</map>

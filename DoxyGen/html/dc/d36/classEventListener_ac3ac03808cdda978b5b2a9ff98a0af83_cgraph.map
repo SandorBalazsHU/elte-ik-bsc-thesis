@@ -1,6 +1,0 @@
-<map id="EventListener::getClickedObjectId" name="EventListener::getClickedObjectId">
-<area shape="rect" id="node1" title="Ray tracing mouse picking implementation." alt="" coords="5,59,263,88"/>
-<area shape="rect" id="node2" href="$d1/df0/classCamera.html#a4fafd54232cf9e6ed67b26fd5b63ba12" title="Getter for the camera position." alt="" coords="311,5,533,35"/>
-<area shape="rect" id="node3" href="$d1/df0/classCamera.html#adf09522521723786b9f405c99d6594c7" title="Getter for the projection matrix." alt="" coords="311,59,533,88"/>
-<area shape="rect" id="node4" href="$d1/df0/classCamera.html#a5569ca5967e01d3344fbf6aba36d9820" title="Getter for the view matrix." alt="" coords="329,112,515,141"/>
-</map>

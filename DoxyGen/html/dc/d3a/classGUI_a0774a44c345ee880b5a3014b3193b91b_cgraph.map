@@ -1,5 +1,0 @@
-<map id="GUI::itemList" name="GUI::itemList">
-<area shape="rect" id="node1" title="Item list." alt="" coords="5,5,116,35"/>
-<area shape="rect" id="node2" href="$d2/dda/classRender.html#a4ccbfe15c6075248daf93085b0628b71" title="Add new renderable object from the preloaded object storage to the scene." alt="" coords="164,5,317,35"/>
-<area shape="rect" id="node3" href="$db/d2d/classObjectStorage.html#ab22906dd1d14d3899122e56a57d97a08" title=" " alt="" coords="365,5,584,35"/>
-</map>

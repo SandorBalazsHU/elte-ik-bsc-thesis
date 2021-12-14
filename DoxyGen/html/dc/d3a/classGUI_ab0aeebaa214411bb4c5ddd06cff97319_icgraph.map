@@ -1,7 +1,0 @@
-<map id="GUI::isKeyboardCaptured" name="GUI::isKeyboardCaptured">
-<area shape="rect" id="node1" title="The GUI want to use the keyboard events?" alt="" coords="848,5,1049,35"/>
-<area shape="rect" id="node2" href="$dc/d36/classEventListener.html#a2d305d2053b76fc08b76a76f4d0a35f7" title=" " alt="" coords="565,5,800,35"/>
-<area shape="rect" id="node3" href="$d1/d76/classWorkWindow.html#a6a6ee764eea5d1f5a81f7ecce80a0874" title="Render Start!" alt="" coords="316,5,517,35"/>
-<area shape="rect" id="node4" href="$d1/d76/classWorkWindow.html#a3eb2d3857bd1e4888a92aa3e4c49b0b6" title="Open and show the window." alt="" coords="109,5,268,35"/>
-<area shape="rect" id="node5" href="$d1/dc4/TrafficSimulator_8cpp.html#a700a0caa5b70a06d1064e576f9f3cf65" title="Program main function." alt="" coords="5,5,61,35"/>
-</map>

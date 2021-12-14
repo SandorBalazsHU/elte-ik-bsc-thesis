@@ -1,5 +1,0 @@
-<map id="WorkWindow::~WorkWindow" name="WorkWindow::~WorkWindow">
-<area shape="rect" id="node1" title="OpenGL 3D Window destructor." alt="" coords="5,5,231,35"/>
-<area shape="rect" id="node2" href="$d1/d76/classWorkWindow.html#a8ff63071e5cda61d322758023fb69073" title="Cleanup before closing." alt="" coords="279,5,456,35"/>
-<area shape="rect" id="node3" href="$dc/d3a/classGUI.html#a2ee64e85935b957145bafe2f2f708654" title="Stop the IMgui system." alt="" coords="504,5,597,35"/>
-</map>

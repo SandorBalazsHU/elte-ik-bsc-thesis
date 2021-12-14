@@ -1,5 +1,0 @@
-<map id="GUI::aboutWindow" name="GUI::aboutWindow">
-<area shape="rect" id="node1" title="Window for the about tab." alt="" coords="5,5,156,35"/>
-<area shape="rect" id="node2" href="$db/d2d/classObjectStorage.html#acaec627a0ef8499bc59bcb4078299a3d" title=" " alt="" coords="204,5,408,35"/>
-<area shape="rect" id="node3" href="$db/d2d/classObjectStorage.html#af4963be037ebd58d003e99886d5b4ff8" title=" " alt="" coords="456,5,733,35"/>
-</map>

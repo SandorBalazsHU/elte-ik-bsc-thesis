@@ -1,5 +1,0 @@
-<map id="EventListener::deleteSelectedItems" name="EventListener::deleteSelectedItems">
-<area shape="rect" id="node1" title=" " alt="" coords="5,32,272,61"/>
-<area shape="rect" id="node2" href="$d2/dda/classRender.html#a0206e8f327309b6ba01ce29819df1459" title="Delete a scene object by renderID." alt="" coords="320,5,489,35"/>
-<area shape="rect" id="node3" href="$d2/dda/classRender.html#a2a804549f24da1e0c8b6910a4fdc7b04" title="Delete a scene road object by dynamicRenderID." alt="" coords="323,59,486,88"/>
-</map>

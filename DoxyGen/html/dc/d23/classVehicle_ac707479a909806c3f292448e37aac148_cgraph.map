@@ -1,7 +1,0 @@
-<map id="Vehicle::firstDirectionCheck" name="Vehicle::firstDirectionCheck">
-<area shape="rect" id="node1" title=" " alt="" coords="5,85,220,115"/>
-<area shape="rect" id="node2" href="$d2/d62/classGraph.html#ab2b4254c0e1aacd820a400db1ef7fc65" title=" " alt="" coords="283,5,417,35"/>
-<area shape="rect" id="node3" href="$d8/d8c/classEdge.html#a1e60d436c381fd999e2a26402936ee50" title=" " alt="" coords="269,59,431,88"/>
-<area shape="rect" id="node4" href="$dc/d4f/classPoint.html#a2e45c045d624d85fb10d923953f3cc88" title="Getter for the point id." alt="" coords="299,112,401,141"/>
-<area shape="rect" id="node5" href="$d2/d62/classGraph.html#ac1a8aaab47e491b4598b0a1d5229168e" title=" " alt="" coords="268,165,432,195"/>
-</map>

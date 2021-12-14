@@ -1,6 +1,0 @@
-<map id="Graph::lockRoads" name="Graph::lockRoads">
-<area shape="rect" id="node1" title=" " alt="" coords="5,59,152,88"/>
-<area shape="rect" id="node2" href="$d2/dda/classRender.html#a112bb5215d1830cc128b143ca311a581" title="Getter for the RenderableRoads." alt="" coords="231,5,441,35"/>
-<area shape="rect" id="node3" href="$d2/dda/classRender.html#a96812a57fba2dc97089021cc23a01baa" title="Getter for the renderableRoads size." alt="" coords="200,59,472,88"/>
-<area shape="rect" id="node4" href="$d2/dda/classRender.html#a0a8f62e00ceb8bc5308b9d9806e79baa" title="Update a dynamicly generated object status by dynamicRenderID." alt="" coords="219,112,453,141"/>
-</map>

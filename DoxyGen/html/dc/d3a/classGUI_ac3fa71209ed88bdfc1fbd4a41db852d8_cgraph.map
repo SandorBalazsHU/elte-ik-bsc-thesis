@@ -1,8 +1,0 @@
-<map id="GUI::clearRoadColor" name="GUI::clearRoadColor">
-<area shape="rect" id="node1" title="Clear the road colors." alt="" coords="5,59,172,88"/>
-<area shape="rect" id="node2" href="$d2/dda/classRender.html#a112bb5215d1830cc128b143ca311a581" title="Getter for the RenderableRoads." alt="" coords="251,5,461,35"/>
-<area shape="rect" id="node3" href="$d2/dda/classRender.html#a96812a57fba2dc97089021cc23a01baa" title="Getter for the renderableRoads size." alt="" coords="220,59,492,88"/>
-<area shape="rect" id="node4" href="$d9/dd9/classObject3Droad.html#a00529f0b327310c21651d295faac8732" title=" " alt="" coords="247,112,465,141"/>
-<area shape="rect" id="node5" href="$d2/dda/classRender.html#ac0679c37e0376133a5c26d3728a3f28c" title="Get scene preloaded object from the scene render storage." alt="" coords="559,85,707,115"/>
-<area shape="rect" id="node6" href="$d8/d1b/classObject3D.html#a8b1d7d253153e65dce9bbd07524a2f45" title=" " alt="" coords="540,139,725,168"/>
-</map>

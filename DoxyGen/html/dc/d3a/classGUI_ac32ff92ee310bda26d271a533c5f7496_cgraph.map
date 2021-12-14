@@ -1,8 +1,0 @@
-<map id="GUI::showEndpointInfo" name="GUI::showEndpointInfo">
-<area shape="rect" id="node1" title="Show the selected endpoint info." alt="" coords="5,112,184,141"/>
-<area shape="rect" id="node2" href="$d2/dda/classRender.html#a11891d52761d68679a11c8a9998aab1c" title="Getter for Animator." alt="" coords="232,5,399,35"/>
-<area shape="rect" id="node3" href="$da/d23/classAnimator.html#a39f74c6abaf3b0b243389f14cfc139a0" title=" " alt="" coords="236,59,395,88"/>
-<area shape="rect" id="node4" href="$d2/d62/classGraph.html#a00594d9ef8a3d4d5793bdb3a7d044399" title=" " alt="" coords="250,112,381,141"/>
-<area shape="rect" id="node5" href="$dc/d4f/classPoint.html#a44b839820ed4a901d16fe33d9eac1608" title="Is an endpoint?" alt="" coords="244,165,387,195"/>
-<area shape="rect" id="node6" href="$dc/d4f/classPoint.html#ae41c9ad2d572d47f64f1388e495efdbe" title="Is a start point?" alt="" coords="242,219,389,248"/>
-</map>

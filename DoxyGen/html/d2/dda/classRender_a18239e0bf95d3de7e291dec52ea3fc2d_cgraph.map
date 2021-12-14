@@ -1,5 +1,0 @@
-<map id="Render::deleteObject" name="Render::deleteObject">
-<area shape="rect" id="node1" title="Delete a scene object by renderID." alt="" coords="5,32,175,61"/>
-<area shape="rect" id="node2" href="$d2/dda/classRender.html#a7ef2b1799bc345c09d5668f696ec2f29" title="Refresh and rebind the renderable roads (Dynamic generated object) renderID&#45;s and byndings after modi..." alt="" coords="239,5,409,35"/>
-<area shape="rect" id="node3" href="$d2/dda/classRender.html#a488fc79f6cf4ca99e4ffefdd46244abe" title="Refresh the renderable objects renderID&#45;s after modiflying the renderable objects list." alt="" coords="223,59,425,88"/>
-</map>

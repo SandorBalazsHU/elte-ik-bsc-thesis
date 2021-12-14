@@ -1,8 +1,0 @@
-<map id="Graph::join" name="Graph::join">
-<area shape="rect" id="node1" title=" " alt="" coords="5,112,103,141"/>
-<area shape="rect" id="node2" href="$d2/dda/classRender.html#a112bb5215d1830cc128b143ca311a581" title="Getter for the RenderableRoads." alt="" coords="151,5,360,35"/>
-<area shape="rect" id="node3" href="$d8/d8c/classEdge.html#a1e60d436c381fd999e2a26402936ee50" title=" " alt="" coords="174,59,337,88"/>
-<area shape="rect" id="node4" href="$d8/d8c/classEdge.html#a1a054503d051669070d8dae325dcca49" title=" " alt="" coords="174,112,337,141"/>
-<area shape="rect" id="node5" href="$d8/d1b/classObject3D.html#aa80515b56146b062e55d91c01cbbba02" title=" " alt="" coords="175,165,335,195"/>
-<area shape="rect" id="node6" href="$d2/dda/classRender.html#ac0679c37e0376133a5c26d3728a3f28c" title="Get scene preloaded object from the scene render storage." alt="" coords="181,219,329,248"/>
-</map>

@@ -1,5 +1,0 @@
-<map id="EventListener::resize" name="EventListener::resize">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,172,35"/>
-<area shape="rect" id="node2" href="$d1/df0/classCamera.html#a2cdd7f3750669349666048027d6a9521" title="Camera projectionMatrix update function for the screen resize." alt="" coords="220,5,349,35"/>
-<area shape="rect" id="node3" href="$d1/df0/classCamera.html#a3077ffe755b534d3fa32eb8dc8d05a38" title="Calculate the projection matrix for the camera transformation." alt="" coords="397,5,576,35"/>
-</map>

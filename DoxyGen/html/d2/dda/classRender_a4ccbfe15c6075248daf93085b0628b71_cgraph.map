@@ -1,4 +1,0 @@
-<map id="Render::addObject" name="Render::addObject">
-<area shape="rect" id="node1" title="Add new renderable object from the preloaded object storage to the scene." alt="" coords="5,5,159,35"/>
-<area shape="rect" id="node2" href="$db/d2d/classObjectStorage.html#ab22906dd1d14d3899122e56a57d97a08" title=" " alt="" coords="207,5,425,35"/>
-</map>
