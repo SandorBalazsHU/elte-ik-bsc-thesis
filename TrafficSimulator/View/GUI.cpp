@@ -100,7 +100,7 @@ void GUI::mainMenuBar() {
 			ImGui::EndMenu();
 		}
 		if (ImGui::BeginMenu("Help")) {
-			if (ImGui::MenuItem("Help", "CTRL+H")) {}
+			if (ImGui::MenuItem("Help", "CTRL+H", &helpWindowStatus)) {}
 			if (ImGui::MenuItem("Controls", "CTRL+C", &controlsWindowStatus)) {}
 			ImGui::Separator();
 			if (ImGui::MenuItem("About", "CTRL+K", &aboutWindowStatus)) {}
@@ -124,6 +124,7 @@ void GUI::windowHandler() {
 	if (pathFinderTestWindowStatus) pathFinderTestWindow();
 	if (simulationSettingsWindowStatus) simulationSettingsWindow();
 	if (simulationStatisticsWindowStatus) simulationStatisticsWindow();
+	if (helpWindowStatus) helpWindow();
 	if (ImGuiSettingsWindowStatus) { ImGui::Begin("ImGui Style Editor", &ImGuiSettingsWindowStatus); ImGui::ShowStyleEditor(); ImGui::End(); }
 }
 
@@ -514,4 +515,5 @@ void GUI::closeAllWindows(std::string exeption) {
 	if(exeption != "simulationSettingsWindowStatus") simulationSettingsWindowStatus = false;
 	if(exeption != "simulationStatisticsWindowStatus") simulationStatisticsWindowStatus = false;
 	if(exeption != "finalisingErrorWindow") finalisingErrorWindow = false;
+	if(exeption != "helpWindowStatus") helpWindowStatus = false;
 }

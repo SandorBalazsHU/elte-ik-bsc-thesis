@@ -1148,3 +1148,21 @@ void GUI::clearRoadColor() {
 		}
 	}
 }
+
+/**
+ * @brief Show help window.
+*/
+void GUI::helpWindow() {
+	if (ImGui::Begin("Traffic Simulator Help", &helpWindowStatus, NULL)) {
+		ImGui::Text("Traffic Simulator Help");
+		ImGui::Separator();
+		ImGui::Text("");
+		ImGui::Text("");
+		ImGui::Separator();
+		if (ImGui::Button("Close")) {
+			helpWindowStatus = false;
+			ImGui::CloseCurrentPopup();
+		}
+		ImGui::End();
+	}
+}

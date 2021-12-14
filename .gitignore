@@ -2,14 +2,6 @@
 ./x64/*.*
 ./x86/*.*
 
-##gtest
-./packages/*.*
-packages/
-
-##Dependecies
-./dependencies/*.*
-dependencies/
-
 ##tmp folders
 ./.vs/*.*
 

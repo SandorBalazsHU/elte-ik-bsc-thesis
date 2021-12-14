@@ -132,6 +132,7 @@ private:
 	bool simulationWindow = false;
 	bool simulationSettingsWindowStatus = false;
 	bool simulationStatisticsWindowStatus = false;
+	bool helpWindowStatus = false;
 
 	bool finalisingErrorWindow = false;
 
@@ -335,4 +336,9 @@ private:
 	 * @brief Close all windows.
 	*/
 	void closeAllWindows(std::string exeption);
+
+	/**
+	 * @brief Show help window.
+	*/
+	void helpWindow();
 };
