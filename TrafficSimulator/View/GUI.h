@@ -139,6 +139,8 @@ private:
 	size_t selectedRoad = -1;
 	size_t selectedVehicle = -1;
 
+	Uint32 pathFinderOpenTimeStamp;
+
 	/**
 	 * @brief Marker for simulation starting.
 	*/

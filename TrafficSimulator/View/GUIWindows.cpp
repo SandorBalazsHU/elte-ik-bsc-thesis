@@ -626,9 +626,16 @@ void GUI::pathFinderTestWindow() {
 	//pathFinderTestWindowFlag |= ImGuiWindowFlags_NoMove;
 	pathFinderTestWindowFlag |= ImGuiWindowFlags_NoCollapse;
 	if (ImGui::Begin("Pathfinder algorithm.", &pathFinderTestWindowStatus, pathFinderTestWindowFlag)) {
+		static bool pathfinderIsValidNow = false;
 		static ImGuiTextBuffer logger;
 		std::stringstream log;
 
+		if (pathFinderOpenTimeStamp == SDL_GetTicks()) {
+			logger.clear();
+			clearRoadColor();
+			coloringCounter = path.size() - 1;
+			pathfinderIsValidNow = false;
+		}
 
 		std::vector<size_t> startPoints = animator->getGraph()->getStartPoints();
 		static int selectedStartPoint = 0;
@@ -797,36 +804,48 @@ void GUI::pathFinderTestWindow() {
 
 			logger.append(log.str().c_str());
 			delete dijkstra;
-		}
-		ImGui::SameLine();
-		if (ImGui::Button("Full path")) {
-			for (size_t i = 0; i < path.size(); i++) {
-				if (windowRender->getDynamicObject(path[i]) != NULL) {
-					windowRender->getDynamicObject(path[i])->setRGBcolor(glm::vec3(0.929f, 0.109f, 0.141f));
-				}
-			}
+			pathfinderIsValidNow = true;
 		}
 
-		ImGui::SameLine();
-		if (ImGui::Button("Next step -->")) {
-			if (windowRender->getDynamicObject(path[coloringCounter]) != NULL) {
-				windowRender->getDynamicObject(path[coloringCounter])->setRGBcolor(glm::vec3(0.929f, 0.109f, 0.141f));
+		if (pathfinderIsValidNow) {
+			ImGui::SameLine();
+			if (ImGui::Button("Full path")) {
+				for (size_t i = 0; i < path.size(); i++) {
+					if (windowRender->getDynamicObject(path[i]) != NULL) {
+						windowRender->getDynamicObject(path[i])->setRGBcolor(glm::vec3(0.929f, 0.109f, 0.141f));
+					}
+				}
+				pathfinderIsValidNow = false;
 			}
-			if (coloringCounter < path.size()) coloringCounter++;
+
+			ImGui::SameLine();
+			if (ImGui::Button("Next step -->")) {
+				if (coloringCounter < path.size()) {
+					if (windowRender->getDynamicObject(path[coloringCounter]) != NULL) {
+						windowRender->getDynamicObject(path[coloringCounter])->setRGBcolor(glm::vec3(0.929f, 0.109f, 0.141f));
+					}
+					coloringCounter++;
+					if(coloringCounter >= path.size()) pathfinderIsValidNow = false;
+				} else {
+					pathfinderIsValidNow = false;
+				}
+			}
 		}
 
 		ImGui::SameLine();
 		if (ImGui::Button("Clear")) {
-			for (size_t i = 0; i < windowRender->getDynamicObjectsNumber(); i++) {
-				if (windowRender->getDynamicObject(i) != NULL) {
-					windowRender->getDynamicObject(i)->setRGBcolor(glm::vec3(1, 1, 1));
-				}
-			}
+			logger.clear();
+			clearRoadColor();
 			coloringCounter = path.size() - 1;
+			pathfinderIsValidNow = false;
 		}
 
 		ImGui::SameLine();
 		if (ImGui::Button("Close")) {
+			logger.clear();
+			//clearRoadColor();
+			coloringCounter = path.size() - 1;
+			pathfinderIsValidNow = false;
 			pathFinderTestWindowStatus = false;
 			ImGui::CloseCurrentPopup();
 		}
