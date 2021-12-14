@@ -4,7 +4,7 @@
  * @class EventListener
  * @author Sándor Balázs - AZA6NL
  * @date 2021.11.09.
- * @brief OpenGL 3D system initialization and window open.
+ * @brief Ray mousepicking implementation.
  * Contact: sandorbalazs9402@gmail.com
 */
 
@@ -25,7 +25,7 @@
  * Step 6: Intersect the world mouse vector with all the renderable object's hit spheres.\n
  * Step 7: Depth test.\n
  * @param mouse The current mouse click event.
- * @return The selected item renderid.
+ * @return The selected item render id.
 */
 int EventListener::getClickedObjectId(SDL_MouseButtonEvent& mouse, bool vehicleCheck) {
 	//Step 0: Get the screen size.
@@ -110,6 +110,14 @@ int EventListener::getClickedObjectId(SDL_MouseButtonEvent& mouse, bool vehicleC
 	}
 }
 
+/**
+ * @brief Ray and sphere intersection.
+ * @param ray The ray for the intersection.
+ * @param cameraPosition The camera position for the depth test.
+ * @param hitSphereCenter The sphere center.
+ * @param hitSphereRadius The sphere radius.
+ * @return The sphere and the ray distance.
+*/
 float EventListener::intersection(glm::vec3 ray, glm::vec3 cameraPosition, glm::vec3 hitSphereCenter, float hitSphereRadius) {
 	//Ray and hit sphere center distance calculation.
 	float a = glm::dot(ray, ray);

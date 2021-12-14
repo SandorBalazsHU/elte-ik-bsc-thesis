@@ -6,13 +6,15 @@
  * @date 2021.11.08.
  * @brief GUI Descriptor class.
  * Contact: sandorbalazs9402@gmail.com
- * KSP
 */
+
+// KSP
 
 #include <algorithm>
 #include <vector>
 #include <string>
 #include <sstream>
+#include <math.h>
 #include "GUI.h"
 #include "fpsCounter.h"
 #include "Render.h"
@@ -21,8 +23,10 @@
 #include "../Model/Graph.h"
 #include "../Model/Vehicle.h"
 #include "Animator.h"
-#include <math.h>
 
+/**
+ * @brief Description of the opening window.
+*/
 void GUI::openWindow() {
 	ImGui::SetNextWindowSize(ImVec2(480, 360));
 	ImGui::OpenPopup("Open Map");
@@ -129,6 +133,9 @@ void GUI::openWindow() {
 	}
 }
 
+/**
+ * @brief the save window descriptor.
+*/
 void GUI::saveWindow() {
 	const std::string lastSave = windowRender->getMapSaver()->getLastSave();
 	if (lastSave == windowRender->getMapSaver()->unsavedMarker) {
@@ -150,6 +157,9 @@ void GUI::saveWindow() {
 	}
 }
 
+/**
+ * @brief the save as window descriptor.
+*/
 void GUI::saveAsWindow() {
 	ImGui::OpenPopup("Save map as");
 	if (ImGui::BeginPopupModal("Save map as", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
@@ -208,6 +218,9 @@ void GUI::saveAsWindow() {
 	}
 }
 
+/**
+ * @brief Window for the new map confirmation.
+*/
 void GUI::newMapConfirmWindow() {
 	ImGui::OpenPopup("New map");
 	if (ImGui::BeginPopupModal("New map", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
@@ -257,6 +270,9 @@ void GUI::newMapConfirmWindow() {
 	}
 }
 
+/**
+ * @brief Window for the controls tutorial.
+*/
 void GUI::controlsWindow() {
 	ImGui::OpenPopup("Controls");
 	if (ImGui::BeginPopupModal("Controls", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
@@ -269,6 +285,9 @@ void GUI::controlsWindow() {
 	}
 }
 
+/**
+ * @brief Window for the about tab.
+*/
 void GUI::aboutWindow() {
 	ImGui::OpenPopup("About");
 	if (ImGui::BeginPopupModal("About", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
@@ -554,12 +573,6 @@ void GUI::debugOptionsWindow() {
 	ImGui::Checkbox("Show Roads Wire frame", &windowRender->roadWireframe);
 	ImGui::Text("");
 
-	/*ImGui::Text("");
-	ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "---");
-	ImGui::Separator();
-	ImGui::Text("---");
-	ImGui::SameLine();*/
-
 	ImGui::Text("");
 	ImGui::Separator();
 	if (ImGui::Button("Close")) {
@@ -625,7 +638,6 @@ void GUI::runningStatisticsWindow() {
  * @brief Pathfinder test window.
 */
 void GUI::pathFinderTestWindow() {
-	//pathFinderTestWindowFlag |= ImGuiWindowFlags_NoMove;
 	pathFinderTestWindowFlag |= ImGuiWindowFlags_NoCollapse;
 	if (ImGui::Begin("Pathfinder algorithm.", &pathFinderTestWindowStatus, pathFinderTestWindowFlag)) {
 		static bool pathfinderIsValidNow = false;
@@ -660,7 +672,6 @@ void GUI::pathFinderTestWindow() {
 		ImGui::PushItemWidth(50);
 		ImGui::Combo("Endpoint", &selectedEndPoint, endpoints.c_str());
 		ImGui::SameLine();
-		//std::cout << selectedStartPoint  << "   " << selectedEndPoint << std::endl;
 
 		if (ImGui::Button("RUN Pathfinder algorithm.")) {
 			logger.clear();
@@ -717,21 +728,12 @@ void GUI::pathFinderTestWindow() {
 			//Generate graph.
 			Graph* graph = animator->getGraph();
 
+			//Get start and endpoints
 			size_t startPoint = startPoints[selectedStartPoint];
 			size_t endPoint = endPoints[selectedEndPoint];
 
-			/*/Get start point from the graph.
-			std::vector<size_t> startPoints = graph->getStartPoints();
-			size_t startPoint = 0;
-			if (startPoints.size() != 0) startPoint = startPoints[0];*/
-
 			//Run Dijkstra.
 			Dijkstra* dijkstra = graph->generateDijkstra(startPoint);
-
-			/*/Get endpoint
-			std::vector<size_t> endpoints = graph->getEndPoints();
-			size_t endpoint = windowRender->getDynamicObjectsNumber();
-			if(endpoints.size() != 0) endpoint = endpoints[0];*/
 
 			//Get path
 			path = graph->getPath(dijkstra, endPoint);
@@ -744,7 +746,7 @@ void GUI::pathFinderTestWindow() {
 			}
 			log << std::endl;
 
-			//Gaph points log.
+			//Graph points log.
 			log << "Points:" << std::endl << "-------------------------------------------------------------------------" << std::endl;
 			for (size_t i = 0; i < graph->getPointsNumber(); i++) {
 				if (!graph->getPoint(i)->isErased()) {
@@ -786,7 +788,7 @@ void GUI::pathFinderTestWindow() {
 			}
 			log << std::endl;
 
-			//Log dijkstra result
+			//Log Dijkstra result
 			log << "Calculated path array:" << std::endl << "-------------------------------------------------------------------------" << std::endl;
 			for (size_t i = 0; i < dijkstra->from.size(); i++) {
 				log << i << " ";
@@ -845,7 +847,6 @@ void GUI::pathFinderTestWindow() {
 		ImGui::SameLine();
 		if (ImGui::Button("Close")) {
 			logger.clear();
-			//clearRoadColor();
 			coloringCounter = path.size() - 1;
 			pathfinderIsValidNow = false;
 			pathFinderTestWindowStatus = false;
@@ -897,9 +898,7 @@ void GUI::simulationStatisticsWindow() {
 		ImGui::Separator();
 		ImGui::Text("");
 
-		//fpsGraph();
-		//ImGui::Separator();
-
+		//All cost plot.
 		std::map<int, std::vector<int>> allCost;
 		std::vector<size_t> endPoints = animator->getGraph()->getEndPoints();
 		for (size_t i = 0; i < endPoints.size(); i++) {
@@ -933,8 +932,7 @@ void GUI::simulationStatisticsWindow() {
 		}
 		ImGui::Text("");
 
-		//------------------------------------------------------------------
-
+		//All hops plot.
 		std::map<int, std::vector<int>> hops;
 		for (size_t i = 0; i < endPoints.size(); i++) {
 			hops.insert(std::pair<int, std::vector<int>>(endPoints[i], std::vector<int>()));
@@ -1084,7 +1082,7 @@ void GUI::simulationStatisticsWindow() {
 }
 
 /**
- * @brief Finalise the map.
+ * @brief Finalize the map.
 */
 void GUI::finalise() {
 	animator->finalize();

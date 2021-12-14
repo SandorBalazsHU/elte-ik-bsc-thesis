@@ -6,10 +6,10 @@
  * @date 2021.11.08.
  * @brief GUI Descriptor class.
  * Contact: sandorbalazs9402@gmail.com
- * KSP
- * alarm 1202
- * sce to aux
 */
+
+// sce to aux
+// alarm 1202
 
 #include "GUI.h"
 #include "WorkWindow.h"
@@ -20,14 +20,25 @@
 #include "../Model/Vehicle.h"
 #include <sstream>
 
+/**
+ * @brief The GUI constructor
+*/
 GUI::GUI(void) {
 
 }
 
+/**
+ * @brief The GUI destructor
+*/
 GUI::~GUI(void) {
 
 }
 
+/**
+ * @brief IMgui initialization and bind to the current OpenGL window.
+ * @param window The current OpenGL window for the GUI.
+ * @return The success or the error codes.
+*/
 bool GUI::init(SDL_Window* window) {
 	ImGuiStyle& style = ImGui::GetStyle();
 	style.AntiAliasedLines = true;
@@ -37,10 +48,17 @@ bool GUI::init(SDL_Window* window) {
 	return ImGui_ImplSdlGL3_Init(window);
 }
 
+/**
+ * @brief Stop the IMgui system.
+*/
 void GUI::clean() {
 	ImGui_ImplSdlGL3_Shutdown();
 }
 
+/**
+ * @brief Bind the GUI system to the current working window.
+ * @param currentWindow The current working window.
+*/
 void GUI::bind(WorkWindow* currentWindow) {
 	workingWindow = currentWindow;
 	window = currentWindow->getWindow();
@@ -50,18 +68,33 @@ void GUI::bind(WorkWindow* currentWindow) {
 	animator = windowRender->getAnimator();
 }
 
+/**
+ * @brief GUI event listener.
+ * @param event SDL Window events.
+*/
 void GUI::eventHandler(SDL_Event* event) {
 	ImGui_ImplSdlGL3_ProcessEvent(event);
 }
 
+/**
+ * @brief The GUI want to use the keyboard events?
+ * @return True if the GUI want to use the keyboard events.
+*/
 bool GUI::isKeyboardCaptured() {
 	return ImGui::GetIO().WantCaptureMouse;
 }
 
+/**
+ * @brief The GUI want to use the mouse events?
+ * @return True if the GUI want to use the mouse events.
+*/
 bool GUI::isMouseCaptured() {
 	return ImGui::GetIO().WantCaptureKeyboard;
 }
 
+/**
+ * @brief The main menu bar description.
+*/
 void GUI::mainMenuBar() {
 	if (ImGui::BeginMainMenuBar())
 	{
@@ -110,6 +143,9 @@ void GUI::mainMenuBar() {
 	}
 }
 
+/**
+ * @brief The widows opening and closing system.
+*/
 void GUI::windowHandler() {
 	if (openWindowStatus) openWindow();
 	if (saveWindowStatus) saveWindow();
@@ -128,6 +164,9 @@ void GUI::windowHandler() {
 	if (ImGuiSettingsWindowStatus) { ImGui::Begin("ImGui Style Editor", &ImGuiSettingsWindowStatus); ImGui::ShowStyleEditor(); ImGui::End(); }
 }
 
+/**
+ * @brief The FPS graph.
+*/
 void GUI::fpsGraph() {
 	static int graphTop = 150;
 	std::ostringstream ss;
@@ -140,6 +179,9 @@ void GUI::fpsGraph() {
 	ImGui::InputInt("Graph top limit", &graphTop);
 }
 
+/**
+ * @brief Item list.
+*/
 void GUI::itemList() {
 	int i = 0;
 	std::map<int, Object3D>::iterator it = objectStorage->object3Ds.begin();
@@ -151,9 +193,7 @@ void GUI::itemList() {
 			} else {
 				size = ImVec2(100, 100);
 			}
-		//std::cout << it->first << std::endl;
 		if (it->second.getType() == "object") {
-		//if (true) {
 			if (ImGui::ImageButton((void*)(intptr_t)it->second.getIcon(), size)) {
 				int renderableObjectID = windowRender->addObject(it->first);
 			}
@@ -183,7 +223,6 @@ void GUI::carList(Point* point) {
 				selected = false;
 			}
 			if (ImGui::ImageButton((void*)(intptr_t)it->second.getIcon(), ImVec2(100, 100), ImVec2(0, 0), ImVec2(1, 1), -1, color)) {
-				//int renderableObjectID = windowRender->addVehicle(it->first);
 				if (selected) {
 					point->startConfiguration[i] = -1;
 				} else {
@@ -197,8 +236,8 @@ void GUI::carList(Point* point) {
 }
 
 /**
- * @brief Endpoint selector generator for startpoint properties.
- * @param startPointID The current startpoint.
+ * @brief Endpoint selector generator for start point properties.
+ * @param startPointID The current start point.
 */
 void GUI::endpointSelector(Point* point) {
 	std::vector<size_t> endpoints = animator->getGraph()->getEndPoints();
@@ -211,6 +250,9 @@ void GUI::endpointSelector(Point* point) {
 	}
 }
 
+/**
+ * @brief The main GUI function. Set the GUI structure.
+*/
 void GUI::draw() {
 	if(debugMode) ImGui::ShowTestWindow();
 
@@ -386,7 +428,6 @@ void GUI::draw() {
 				ImGui::Text("All vehicles:.........%i", this->animator->getGraph()->getEdge(this->selectedRoad)->getAllVehicleCount());
 				ImGui::Text("");
 				ImGui::Separator();
-				//this->windowRender->getDynamicObject(renderID)->setRGBcolor(glm::vec3(1, 1, 0));
 			}
 
 			if (this->selectedVehicle != -1) {
@@ -408,27 +449,14 @@ void GUI::draw() {
 				ImGui::Text("");
 				ImGui::Separator();
 			}
-
-			/*if (this->selectedStartPoint != -1) carList();
-			if(this->selectedEndPoint !=-1) ImGui::Text("selectedEndPoint");
-			if(this->selectedRoad !=-1) ImGui::Text("selectedRoad");
-			if(this->selectedVehicle !=-1) ImGui::Text("selectedVehicle");
-
-			if (this->selectedStartPoint == -1) ImGui::Text("-1 selectedEndPoint");
-			if (this->selectedEndPoint == -1) ImGui::Text("-1 selectedEndPoint");
-			if (this->selectedRoad == -1) ImGui::Text("-1 selectedRoad");
-			if (this->selectedVehicle == -1) ImGui::Text("-1 selectedVehicle");*/
-
-			/*ImGui::Text("selectedStartPoint: %i", selectedStartPoint);
-			ImGui::Text("selectedEndPoint:   %i", selectedEndPoint);
-			ImGui::Text("selectedRoad:       %i", selectedRoad);
-			ImGui::Text("selectedVehicle:    %i", selectedVehicle);*/
-
 		}
 		ImGui::End();
 	}
 }
 
+/**
+ * @brief Render the GUI graphics in the render cycle.
+*/
 void GUI::render() {
 	ImGui_ImplSdlGL3_NewFrame(window);
 	draw();
@@ -444,7 +472,7 @@ void GUI::close() {
 }
 
 /**
- * @brief Show a help when howered.
+ * @brief Show a help when hovered.
  * @param desc The help text.
 */
 void GUI::showHelpMarker(const char* desc) {
@@ -465,9 +493,6 @@ void GUI::showHelpMarker(const char* desc) {
 void GUI::showEndpointInfo(size_t pointModelID) {
 	if (this->windowRender->getAnimator()->getGraph()->getPoint(pointModelID)->isStartPoint()) this->selectedStartPoint = pointModelID;
 	if (this->windowRender->getAnimator()->getGraph()->getPoint(pointModelID)->isEndPoint()) this->selectedEndPoint = pointModelID;
-	//selectedStartPoint = pointModelID;
-	//selectedEndPoint = pointModelID;
-	//std::cout << pointModelID << std::endl;
 }
 
 /**
@@ -479,7 +504,7 @@ void GUI::showRoadInfo(size_t edgeModelID) {
 }
 
 /**
- * @brief Show the selected vehicle datas.
+ * @brief Show the selected vehicle data.
  * @param vehicleModelID The selected vehicle. (Model object!)
 */
 void GUI::showVehicleInfo(size_t vehicleModelID) {

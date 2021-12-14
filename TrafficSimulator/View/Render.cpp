@@ -8,7 +8,7 @@
  * Contact: sandorbalazs9402@gmail.com
 */
 
-//AX400
+// AX400
 
 #include "Render.h"
 #include "WorkWindow.h"

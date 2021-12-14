@@ -6,9 +6,9 @@
  * @date 2021.11.08.
  * @brief GUI Descriptor class.
  * Contact: sandorbalazs9402@gmail.com
- * KSP
- * Flanker-C
 */
+
+// Flanker-C
 
 #pragma once
 class WorkWindow;
@@ -49,7 +49,7 @@ public:
 	static void clean();
 
 	/**
-	 * @brief Bind the gui system to the current working window.
+	 * @brief Bind the GUI system to the current working window.
 	 * @param currentWindow The current working window.
 	*/
 	void bind(WorkWindow* currentWindow);
@@ -100,7 +100,7 @@ public:
 	void showRoadInfo(size_t edgeModelID);
 
 	/**
-	 * @brief Show the selected vehicle datas.
+	 * @brief Show the selected vehicle data.
 	 * @param vehicleModelID The selected vehicle. (Model object!)
 	*/
 	void showVehicleInfo(size_t vehicleModelID);
@@ -111,11 +111,15 @@ public:
 	void resetInfoWindow();
 
 private:
+
+	//Window configurators
 	ImGuiWindowFlags trafficSimulationWindowFlag = 0;
 	ImGuiWindowFlags mapEditorWindowFlag = 0;
 	ImGuiWindowFlags pathFinderTestWindowFlag = 0;
 	ImGuiWindowFlags simulationWindowFlag = 0;
 	ImGuiWindowFlags graphicSettingsWindowFlag = 0;
+
+	//Window open flags.
 	bool openWindowStatus = false;
 	bool saveWindowStatus = false;
 	bool saveAsWindowStatus = false;
@@ -134,15 +138,15 @@ private:
 	bool simulationStatisticsWindowStatus = false;
 	bool helpWindowStatus = false;
 
-	bool finalisingErrorWindow = false;
-
+	//Selection handlers
 	size_t selectedStartPoint = -1;
 	size_t selectedEndPoint = -1;
 	size_t selectedRoad = -1;
 	size_t selectedVehicle = -1;
-
 	Uint32 pathFinderOpenTimeStamp;
 
+	//Mode flags
+	bool finalisingErrorWindow = false;
 	const bool debugMode = false;
 
 	/**
@@ -281,14 +285,14 @@ private:
 	void pathFinderTestWindow();
 
 	/**
-	 * @brief Show a help when howered.
+	 * @brief Show a help when hovered.
 	 * @param desc The help text.
 	*/
 	void showHelpMarker(const char* desc);
 
 	/**
-	 * @brief Endpoint selector generator for startpoint properties.
-	 * @param startPointID The current startpoint.
+	 * @brief Endpoint selector generator for start point properties.
+	 * @param startPointID The current start point.
 	*/
 	void endpointSelector(Point* point);
 
@@ -298,7 +302,7 @@ private:
 	void simulationSettingsWindow();
 
 	/**
-	 * @brief Finalise the map.
+	 * @brief Finalize the map.
 	*/
 	void finalise();
 
