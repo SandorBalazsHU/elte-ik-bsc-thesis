@@ -108,10 +108,10 @@ public:
 private:
 	const std::string defaultTexture = "default.png";
 	const std::string defaultObject = "sphere_mark.obj";
-	const std::string configFile = ".\\3Dobjects\\3d_object_library.csv";
-	const std::string textureFolder = ".\\3Dobjects\\textures\\";
-	const std::string miniatureFolder = "miniatures\\";
-	const std::string modelFolder = ".\\3Dobjects\\models\\";
+	const std::string configFile = "3Dobjects/3d_object_library.csv";
+	const std::string textureFolder = "3Dobjects/textures/";
+	const std::string miniatureFolder = "miniatures/";
+	const std::string modelFolder = "3Dobjects/models/";
 
 	bool loaded = false;
 	int loadingState = 0;

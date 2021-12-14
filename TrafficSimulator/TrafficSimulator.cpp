@@ -1,6 +1,6 @@
 /**
  * @name Traffic Simulation
- * @file Camera.cpp
+ * @file TrafficSimulator.cpp
  * @class TrafficSimulator
  * @author Sándor Balázs - AZA6NL
  * @date 2021.11.08.
@@ -8,21 +8,9 @@
  * Contact: sandorbalazs9402@gmail.com
 */
 
-//#include <windows.h>
 #include <iostream>
 #include "View/WorkWindow.h"
 #include "Control/Logger.h"
-
-/*#ifdef __cplusplus
-extern "C" {
-#endif
-
-    __declspec(dllexport) DWORD NvOptimusEnablement = 1;
-    __declspec(dllexport) int AmdPowerXpressRequestHighPerformance = 1;
-
-#ifdef __cplusplus
-}
-#endif*/
 
 /**
  * @brief Program main function.

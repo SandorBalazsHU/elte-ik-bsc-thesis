@@ -33,7 +33,7 @@ void GUI::openWindow() {
 		ImGui::Separator();
 
 		std::vector<std::string> fileList = windowRender->getMapLoader()->listFiles();
-		int itemNumber = fileList.size();
+		size_t itemNumber = fileList.size();
 
 		const char* items[500];
 
@@ -46,7 +46,7 @@ void GUI::openWindow() {
 		static int selection = 0;
 		ImGui::PushItemWidth(-1);
 		ImGui::PushID(0);
-		ImGui::ListBox("", &selection, items, itemNumber, 15);
+		ImGui::ListBox("", &selection, items, (int) itemNumber, 15);
 		ImGui::PopID();
 
 
@@ -365,7 +365,7 @@ void GUI::graphicSettingsWindow() {
 		static int fpsLimit = 60;
 		ImGui::InputInt("FPS Limit", &fpsLimit);
 		ImGui::SameLine(); showHelpMarker("WUT?");
-		fpsCounter::setFpsLimit(fpsLimit);
+		fpsCounter::setFpsLimit((float) fpsLimit);
 
 		ImGui::Text("");
 		static bool vSyncIsOn = true;

@@ -245,6 +245,9 @@
     <ClInclude Include="Model\Vehicle.h">
       <Filter>Source Files\Model</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="View\Utilities\ProgramObject.inl">
@@ -279,5 +282,15 @@
     <Text Include="BUGS.txt">
       <Filter>Documentation</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TrafficSimulator.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="3Dobjects\textures\app_logo_icon.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

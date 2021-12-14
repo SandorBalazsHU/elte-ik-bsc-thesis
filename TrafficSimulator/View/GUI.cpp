@@ -285,11 +285,11 @@ void GUI::draw() {
 			ImGui::Separator();
 			ImGui::Text("");
 
-			if (ImGui::ImageButton((void*)(intptr_t)objectStorage->getTexture("miniatures\\road_mini.png"), ImVec2(42, 42))) {
+			if (ImGui::ImageButton((void*)(intptr_t)objectStorage->getTexture("miniatures/road_mini.png"), ImVec2(42, 42))) {
 				int newRoadID = windowRender->addRoad();
 			}
 			ImGui::SameLine();
-			if (ImGui::ImageButton((void*)(intptr_t)objectStorage->getTexture("miniatures\\delete_mini.png"), ImVec2(42, 42))) {
+			if (ImGui::ImageButton((void*)(intptr_t)objectStorage->getTexture("miniatures/delete_mini.png"), ImVec2(42, 42))) {
 				workingWindow->getEventListener()->deleteSelectedItems();
 			}
 			itemList();
@@ -304,7 +304,7 @@ void GUI::draw() {
 			if (selectedStartPoint == -1 && selectedEndPoint == -1 && selectedRoad == -1 && selectedVehicle == -1) {
 				ImGui::Separator();
 				ImGui::Text("        "); ImGui::SameLine();
-				ImGui::Image((void*)(intptr_t)objectStorage->getTexture("miniatures\\desk_square_mini.png"), ImVec2(100, 100));
+				ImGui::Image((void*)(intptr_t)objectStorage->getTexture("miniatures/desk_square_mini.png"), ImVec2(100, 100));
 				ImGui::Separator();
 				ImGui::Text("");
 				ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "Select the start points \nfor configuration.");
@@ -326,7 +326,7 @@ void GUI::draw() {
 
 			if (this->selectedEndPoint != -1) {
 				ImGui::Separator();
-				ImGui::Image((void*)(intptr_t)objectStorage->getTexture("miniatures\\stop_sign_mini.png"), ImVec2(50, 50));
+				ImGui::Image((void*)(intptr_t)objectStorage->getTexture("miniatures/stop_sign_mini.png"), ImVec2(50, 50));
 				ImGui::SameLine();
 				ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "\nSelected endpoint ID: %i.", animator->getGraph()->getPoint(this->selectedEndPoint)->getID());
 				ImGui::Separator();
@@ -340,7 +340,7 @@ void GUI::draw() {
 			if (this->selectedStartPoint != -1) {
 				Point* point = animator->getGraph()->getPointByID(animator->getGraph()->getPoint(this->selectedStartPoint)->getID());
 				ImGui::Separator();
-				ImGui::Image((void*)(intptr_t)objectStorage->getTexture("miniatures\\start_sign_mini.png"), ImVec2(50, 50));
+				ImGui::Image((void*)(intptr_t)objectStorage->getTexture("miniatures/start_sign_mini.png"), ImVec2(50, 50));
 				ImGui::SameLine();
 				ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "\nThe selected \nstartpoint: %i.", point->getID());
 				ImGui::Separator();
@@ -371,7 +371,7 @@ void GUI::draw() {
 				ImGui::Separator();
 				ImGui::Text("");
 				ImGui::Text("   "); ImGui::SameLine();
-				ImGui::Image((void*)(intptr_t)objectStorage->getTexture("miniatures\\road_mini.png"), ImVec2(50, 50));
+				ImGui::Image((void*)(intptr_t)objectStorage->getTexture("miniatures/road_mini.png"), ImVec2(50, 50));
 				ImGui::SameLine();
 				size_t renderID = this->animator->getGraph()->getEdge(this->selectedRoad)->getRoad3DiD();
 				ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "Selected road \nrender ID: %i.\nSelected road \nmodel ID:  %i.", renderID, this->selectedRoad);

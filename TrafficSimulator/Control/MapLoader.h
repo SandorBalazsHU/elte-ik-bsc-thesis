@@ -15,7 +15,7 @@ public:
 	int deleteSave(std::string fileName);
 private:
 	const std::string fileType = ".csv";
-	std::string saveFolder = "Saves\\";
+	std::string saveFolder = "Saves/";
 	Render* render = NULL;
 	std::vector<std::vector<std::string>> parsedCSV;
 	void readCSV(std::string fileName);
