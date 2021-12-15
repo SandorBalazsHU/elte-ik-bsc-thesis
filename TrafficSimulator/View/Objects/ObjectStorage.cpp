@@ -159,7 +159,9 @@ std::thread ObjectStorage::loadTextureParallel(std::string fileName) {
         });
 }
 
-//Bind loaded textures.
+/**
+ * @brief Bind loaded textures.
+*/
 void ObjectStorage::bindTextures() {
     std::map<std::string, Texture2D>::iterator it;
     for (it = textures.begin(); it != textures.end(); it++) {
@@ -189,7 +191,9 @@ std::thread ObjectStorage::loadObjectParallel(std::string fileName) {
         });
 }
 
-//Bind a loaded object.
+/**
+ * @brief Bind a loaded object.
+*/
 void ObjectStorage::bindObjects() {
     std::map<std::string, std::unique_ptr<Mesh>>::iterator it;
     for (it = objects.begin(); it != objects.end(); it++) {

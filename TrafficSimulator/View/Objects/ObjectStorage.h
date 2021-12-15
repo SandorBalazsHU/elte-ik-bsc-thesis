@@ -142,55 +142,159 @@ public:
 	std::map<int, Object3Dvehicle> object3Dvehicles;
 
 private:
+
+	/**
+	 * @brief The default texture. (Use if the needed is not available because some reason.)
+	*/
 	const std::string defaultTexture = "default.png";
+
+	/**
+	 * @brief The default 3d Object. (Use if the needed is not available because some reason.)
+	*/
 	const std::string defaultObject = "sphere_mark.obj";
+
+	/**
+	 * @brief The configuration CSV file path.
+	*/
 	const std::string configFile = "3Dobjects/3d_object_library.csv";
+
+	/**
+	 * @brief The texture storage folder path.
+	*/
 	const std::string textureFolder = "3Dobjects/textures/";
+
+	/**
+	 * @brief The miniatures storage folder path.
+	*/
 	const std::string miniatureFolder = "miniatures/";
+
+	/**
+	 * @brief The 3D Objects storage folder path.
+	*/
 	const std::string modelFolder = "3Dobjects/models/";
 
+	/**
+	 * @brief Loading finish flag.
+	*/
 	bool loaded = false;
+
+	/**
+	 * @brief The current loading state.
+	*/
 	int loadingState = 0;
+
+	/**
+	 * @brief The maximum of the loading state.
+	*/
 	int loadingStateMax = 0;
 
-
-	SDL_Surface* windowIcon;
-
+	/**
+	 * @brief The loaded, parsed configuration CSV file.
+	*/
 	std::vector<std::vector<std::string>> parsedCSV;
 
-	void readCSV();
-
+	/**
+	 * @brief Mutex for the parallel texture loading thread safety.
+	*/
 	std::mutex texturesMutex;
 
-	std::map<std::string, Texture2D> textures;
-
-	void loadTexture(std::string fileName);
-
-	bool isThisTextureLoaded(std::string textureName);
-
-	std::thread loadTextureParallel(std::string fileName);
-
-	void bindTextures();
-
+	/**
+	 * @brief Mutex for the parallel 3D Object loading thread safety.
+	*/
 	std::mutex objectsMutex;
 
+	/**
+	 * @brief The texture objects storage. All texture is loaded to the memory only once and all object use these.
+	*/
+	std::map<std::string, Texture2D> textures;
+
+	/**
+	 * @brief The 3D Objects storage. All 3D Objet is loaded to the memory only once and all object use these.
+	*/
 	std::map<std::string, std::unique_ptr<Mesh>> objects;
 
-	void loadObject(std::string fileName);
+	/**
+	 * @brief The current used window icon.
+	*/
+	SDL_Surface* windowIcon;
 
-	bool isThisObjectLoaded(std::string objectName);
-
-	std::thread loadObjectParallel(std::string fileName);
-
-	void bindObjects();
-
+	/**
+	 * @brief The loading threads storage.
+	*/
 	std::vector<std::thread> threads;
 
+	/**
+	 * @brief The thread safe thread counter.
+	*/
 	SDL_atomic_t atomicThreadCounter;
 
+	/**
+	 * @brief List of the first scene elements.
+	*/
 	std::vector<int> firstSceneElements;
 
+	/**
+	 * @brief The storage of the dynamically generated objects.
+	*/
 	std::map<std::string, VertexArrayObject> generatedObjects;
 
+	/**
+	 * @brief Read, process and store the configuration CSV file.
+	*/
+	void readCSV();
+
+	/**
+	 * @brief Start load a texture in parallel thread safe.
+	 * @param fileName The loadable texture name.
+	*/
+	void loadTexture(std::string fileName);
+
+	/**
+	 * @brief Thread loading checker.
+	 * @param textureName The loadable texture.
+	 * @return True if the loadable texture is loaded.
+	*/
+	bool isThisTextureLoaded(std::string textureName);
+
+	/**
+	 * @brief Load a texture in new thread.
+	 * @param fileName The loadable texture name.
+	 * @return The new thread.
+	*/
+	std::thread loadTextureParallel(std::string fileName);
+
+	/**
+	 * @brief Bind loaded textures.
+	*/
+	void bindTextures();
+
+	/**
+	 * @brief Start load a 3D Object in parallel thread safe.
+	 * @param fileName The loadable 3D Object name.
+	*/
+	void loadObject(std::string fileName);
+
+	/**
+	 * @brief Thread loading checker.
+	 * @param textureName The loadable 3D Object.
+	 * @return True if the loadable 3D Object is loaded.
+	*/
+	bool isThisObjectLoaded(std::string objectName);
+
+	/**
+	 * @brief Load a 3D Object in a new thread.
+	 * @param fileName The loadable 3D Object name.
+	*/
+	std::thread loadObjectParallel(std::string fileName);
+
+	/**
+	 * @brief Bind a loaded object.
+	*/
+	void bindObjects();
+
+	/**
+	 * @brief Create and store the renderable 3D object data.
+	 * @param csvID The processable row ID of the CSV configuration file.
+	*/
 	void store(int csvID);
 };
