@@ -234,7 +234,7 @@ private:
 	std::vector<int> firstSceneElements;
 
 	/**
-	 * @brief The storage of the dynamically generated objects.
+	 * @brief The storage of the dynamically generated objects. NOT USED.
 	*/
 	std::map<std::string, VertexArrayObject> generatedObjects;
 
