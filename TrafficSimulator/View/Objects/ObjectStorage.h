@@ -1,108 +1,144 @@
+/**
+ * @name Traffic Simulation
+ * @file ObjectStorage.h
+ * @class ObjectStorage
+ * @author Sándor Balázs - AZA6NL
+ * @date 2021.12.15.
+ * @brief Load and store the 3D Models and Textures and create the render objects.
+ * Contact: sandorbalazs9402@gmail.com
+*/
+
 #pragma once
+
 #include <vector>
 #include <map>
 #include <mutex>
 #include <thread>
+#include <SDL.h>
+#include "../../Control/Logger.h"
 #include "../Utilities/ObjParser_OGL3.h"
 #include "../Utilities/TextureObject.h"
 #include "../Utilities/Mesh_OGL3.h"
 #include "../Utilities/VertexArrayObject.h"
 #include "Object3D.h"
 #include "Object3Dvehicle.h"
-#include <SDL.h>
 
+/**
+ * @brief Load and store the 3D Models and Textures and create the render objects.
+*/
 class ObjectStorage {
 public:
+
+	/**
+	 * @brief Constructor, empty.
+	 * @param  Empty.
+	*/
 	ObjectStorage(void);
+
+	/**
+	 * @brief Destructor, empty.
+	 * @param Empty.
+	*/
 	~ObjectStorage(void);
+
+	/**
+	 * @brief Load the CSV configuration file and load the Objects and the textures parallel by the CSV configuration file.
+	*/
 	void load();
-	SDL_Surface* getWindowIcon() {
-		return windowIcon;
-	}
 
-	Texture2D& getTexture(std::string textureName) {
-		if (isThisTextureLoaded(textureName)) {
-			return textures[textureName];
-		} else {
-			return textures[defaultTexture];
-		}
-	}
+	/**
+	 * @brief Getter for the window icon.
+	 * @return The current window icon.
+	*/
+	SDL_Surface* getWindowIcon();
 
-	std::unique_ptr<Mesh>& getMesh(std::string meshName) {
-		if (isThisObjectLoaded(meshName)) {
-			return objects[meshName];
-		}
-		else {
-			return objects[defaultObject];
-		}
-	}
+	/**
+	 * @brief Getter for the textures.
+	 * @param textureName The needed texture name.
+	 * @return The needed texture.
+	*/
+	Texture2D& getTexture(std::string textureName);
 
-	bool isLoaded() {
-		return loaded;
-	}
+	/**
+	 * @brief Getter for the Meshes.
+	 * @param textureName The needed Mesh name.
+	 * @return The needed Mesh.
+	*/
+	std::unique_ptr<Mesh>& getMesh(std::string meshName);
 
+	/**
+	 * @brief Loading finish checker.
+	 * @return Return true if the loading is finished.
+	*/
+	bool isLoaded();
+
+	/**
+	 * @brief Check all the loader threads. Return true if all loader threads finished.
+	 * @return True if all loader threads finished.
+	*/
 	bool loadingCheck();
 
+	/**
+	 * @brief Join all loading threads, bind the objects and textures.
+	*/
 	void finaliseLoading();
 
-	int getLoadingState() {
-		return loadingState;
-	}
+	/**
+	 * @brief Getter for the current state of the loading procedure.
+	 * @return The loading state of the loading procedure.
+	*/
+	int getLoadingState();
 
-	int getLoadingStateMax() {
-		return loadingStateMax;
-	}
+	/**
+	 * @brief Getter for the maximum of the loading state for detect the loading finish.
+	 * @return The maximum of the loading state.
+	*/
+	int getLoadingStateMax();
 
-	//TODO error handling
-	Object3D getObject3D(int object3Did) {
-		auto object3D = object3Ds.find(object3Did);
-		if (object3D == object3Ds.end()) {
-			std::cout << "AJJJAJJJ!" << std::endl;
-		} else {
+	/**
+	 * @brief Create a new copy of the needed 3D object. If it not found give the first.
+	 * @param object3Did The needed 3D Object ID.
+	 * @return The copy of the needed 3D Object.
+	*/
+	Object3D getObject3D(int object3Did);
 
-		}
-		return object3D->second.copy();
-	}
+	/**
+	 * @brief Create a new copy of the needed 3D object and set its render id too. If it not found give the first.
+	 * @param object3Did The needed 3D Object ID.
+	 * @param renderID The needed 3D copy new render ID.
+	 * @return The copy of the needed 3D Object.
+	*/
+	Object3D getObject3D(int object3Did, int renderID);
 
-	//TODO error handling
-	Object3D getObject3D(int object3Did, int renderID) {
-		auto object3D = object3Ds.find(object3Did);
-		if (object3D == object3Ds.end()) {
-			std::cout << "AJJJAJJJ!" << std::endl;
-		} else {
+	/**
+	 * @brief Create a new copy of the needed 3D vehicle object. If it not found give the first (5).
+	 * @param object3Did The needed 3D vehicle Object ID.
+	 * @return The copy of the needed 3D vehicle Object.
+	*/
+	Object3Dvehicle getObject3Dvehicle(int object3Did);
 
-		}
-		return object3D->second.copy(renderID);
-	}
+	/**
+	 * @brief Create a new copy of the needed 3D vehicle object and set its render id too. If it not found give the first (5).
+	 * @param object3Did The needed 3D vehicle Object ID.
+	 * @param renderID The needed 3D copy new render ID.
+	 * @return The copy of the needed 3D vehicle Object.
+	*/
+	Object3Dvehicle getObject3Dvehicle(int object3Did, int renderID);
 
-	//TODO error handling
-	Object3Dvehicle getObject3Dvehicle(int object3Did) {
-		auto object3Dvehicle = object3Dvehicles.find(object3Did);
-		if (object3Dvehicle == object3Dvehicles.end()) {
-			std::cout << "AJJJAJJJ!" << std::endl;
-		} else {
+	/**
+	 * @brief Get the first scene elements list.
+	 * @return The first scene elements list.
+	*/
+	std::vector<int>& getFirstSceneElements();
 
-		}
-		return object3Dvehicle->second.copy();
-	}
-
-	//TODO error handling
-	Object3Dvehicle getObject3Dvehicle(int object3Did, int renderID) {
-		auto object3Dvehicle = object3Dvehicles.find(object3Did);
-		if (object3Dvehicle == object3Dvehicles.end()) {
-			std::cout << "AJJJAJJJ!" << std::endl;
-		} else {
-
-		}
-		return object3Dvehicle->second.copy(renderID);
-	}
-
-	std::vector<int>& getFirstSceneElements() {
-		return firstSceneElements;
-	}
-
+	/**
+	 * @brief The original 3D objects storage with the original configurations.
+	*/
 	std::map<int, Object3D> object3Ds;
 
+	/**
+	 * @brief The original 3D vehicle objects storage with the original configurations.
+	*/
 	std::map<int, Object3Dvehicle> object3Dvehicles;
 
 private:
@@ -125,25 +161,34 @@ private:
 	void readCSV();
 
 	std::mutex texturesMutex;
+
 	std::map<std::string, Texture2D> textures;
+
 	void loadTexture(std::string fileName);
+
 	bool isThisTextureLoaded(std::string textureName);
+
 	std::thread loadTextureParallel(std::string fileName);
+
 	void bindTextures();
 
 	std::mutex objectsMutex;
+
 	std::map<std::string, std::unique_ptr<Mesh>> objects;
+
 	void loadObject(std::string fileName);
+
 	bool isThisObjectLoaded(std::string objectName);
+
 	std::thread loadObjectParallel(std::string fileName);
+
 	void bindObjects();
 
 	std::vector<std::thread> threads;
+
 	SDL_atomic_t atomicThreadCounter;
 
 	std::vector<int> firstSceneElements;
-
-	//std::map<int, Object3D> object3Ds;
 
 	std::map<std::string, VertexArrayObject> generatedObjects;
 
