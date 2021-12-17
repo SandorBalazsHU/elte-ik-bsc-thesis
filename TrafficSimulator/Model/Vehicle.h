@@ -3,6 +3,7 @@
 #include "Graph.h"
 #include "Dijkstra.h"
 #include "../View/Render.h"
+#include "../View/Animator.h"
 #include <vector>
 #include <SDL.h>
 
@@ -15,8 +16,12 @@ public:
 	bool isFinished();
 	void erase();
 	bool isDeleted();
+	bool isBlocked();
+	void unblock();
 	static bool repath;
+	static bool collisionPrevention;
 	static int vehicleWeight;
+	static int collisionCheckDistance;
 
 	size_t destinationID = 0;
 	size_t startID = 0;
@@ -36,14 +41,18 @@ private:
 	bool finished = false;
 	bool deleted = false;
 
+	bool nextRoadIsBlocked = false;
+
 	Graph* graph;
 	Render* render;
 	Dijkstra* dijkstra;
+	Animator* animator;
 	std::vector<size_t> path;
 
 	void nextStep();
-	void directionCheck();
+	char directionCheck();
 	void checkFinish();
 	void switchToNextRoad();
 	void firstDirectionCheck();
+	bool collisionTest(int checkDistance, size_t localCurrentRoad, size_t localCurrentPointOnTheRoad, char direction, char track);
 };

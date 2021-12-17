@@ -604,3 +604,24 @@ void Render::render() {
 	setWindowIcon(objectStorage->getWindowIcon());
 	fpsCounter::stop();
 }
+
+/**
+ * @brief Setter to full screen window mode.
+*/
+void setToFullScrean() {
+
+}
+
+/**
+ * @brief Setter for windowed screen mode.
+*/
+void setToWindowed() {
+
+}
+
+/**
+ * @brief Setter for borderless window mode.
+*/
+void setToBorderless() {
+
+}

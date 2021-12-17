@@ -12,6 +12,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <stdlib.h>
 #include <GL/glew.h>
 #include <SDL.h>
 #include <SDL_opengl.h>
@@ -165,6 +166,27 @@ int WorkWindow::openGLpostConfig() {
 	glGetIntegerv(GL_MAJOR_VERSION, &glVersion[0]);
 	glGetIntegerv(GL_MINOR_VERSION, &glVersion[1]);
 	Logger::log("[OpenGL running] Version: " + std::to_string(glVersion[0]) + "." + std::to_string(glVersion[1]));
+	const GLubyte* vendor = glGetString(GL_VENDOR);
+	const GLubyte* renderer = glGetString(GL_RENDERER);
+	std::stringstream stringStream;
+	stringStream << "[OpenGL running] GPU Vendor: " << vendor << std::endl;
+	stringStream << "[OpenGL running] GPU Model: " << renderer;
+	Logger::log(stringStream.str());
+
+	SDL_DisplayMode current;
+
+	// Get current display mode of all displays.
+	for (int i = 0; i < SDL_GetNumVideoDisplays(); ++i) {
+
+		int should_be_zero = SDL_GetCurrentDisplayMode(i, &current);
+		std::stringstream stringStream;
+		if (should_be_zero == 0) stringStream << "Display mode:" << i << ".Display " << current.w << "x" << current.h << "dpx @ " << current.refresh_rate << "hz";
+		Logger::log(stringStream.str());
+
+	}
+
+
+	//SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 
 	if (glVersion[0] == -1 && glVersion[1] == -1) {
 		cleanup();

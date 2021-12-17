@@ -2,6 +2,8 @@
 #include "Vehicle.h"
 #include "../View/Objects/Object3Dvehicle.h"
 
+//NEVER FADE AWAY!
+
 bool Vehicle::repath = true;
 int Vehicle::vehicleWeight = 100;
 
@@ -18,6 +20,7 @@ Vehicle::Vehicle(Graph* graph, Render* render, size_t startID, size_t destinatio
 	this->graph->getEdge(this->render->getDynamicObject(this->currentRoad)->modelID)->addVehicle(this->vehicleWeight, repath);
 	this->firstDirectionCheck();
 	this->startTime = SDL_GetTicks();
+	this->animator = this->render->getAnimator();
 }
 
 size_t Vehicle::getID() {
@@ -59,55 +62,122 @@ void Vehicle::firstDirectionCheck() {
 	if (this->direction == 'b') this->currentPointOnTheRoad = this->standardRoadLenght - 1;
 }
 
-void Vehicle::directionCheck() {
+char Vehicle::directionCheck() {
 	if (currentEdgeOnThePath + 1 != path.size()) {
 		if (this->direction == 'a') {
 			size_t currentEndpoint = this->graph->getEdge(this->render->getDynamicObject(this->path[currentEdgeOnThePath])->modelID)->getEndpointB();
 			size_t nextStartPoint = this->graph->getEdge(this->render->getDynamicObject(this->path[currentEdgeOnThePath + 1])->modelID)->getEndpointA();
 			if (currentEndpoint != nextStartPoint) {
-				this->direction = 'b';
-				this->track = '2';
+				return 'b';
 			}
 		} else {
 			size_t currentEndpoint = this->graph->getEdge(this->render->getDynamicObject(this->path[currentEdgeOnThePath])->modelID)->getEndpointA();
 			size_t nextStartPoint = this->graph->getEdge(this->render->getDynamicObject(this->path[currentEdgeOnThePath + 1])->modelID)->getEndpointB();
 			if (currentEndpoint != nextStartPoint) {
-				this->direction = 'a';
-				this->track = '1';
+				return 'a';
 			}
 		}
 	}
+	return this->direction;
 }
 
 void Vehicle::nextStep() {
-	if (this->direction == 'a') {
-		//2???
-		if (this->currentPointOnTheRoad < this->standardRoadLenght - 2) {
-			currentPointOnTheRoad++;
+	//todo add collisionPrevention
+	if (!collisionPrevention) nextRoadIsBlocked = false;
+	if (!nextRoadIsBlocked) {
+		if (this->direction == 'a') {
+			if (this->currentPointOnTheRoad < this->standardRoadLenght - 2) {
+				if (!this->collisionTest(this->collisionCheckDistance, this->currentRoad, this->currentPointOnTheRoad, this->direction, this->track)) this->currentPointOnTheRoad++;
+			} else {
+				this->switchToNextRoad();
+			}
 		} else {
-			switchToNextRoad();
+			if (this->currentPointOnTheRoad > 2) {
+				if (!this->collisionTest(this->collisionCheckDistance, this->currentRoad, this->currentPointOnTheRoad, this->direction, this->track)) this->currentPointOnTheRoad--;
+			} else {
+				this->switchToNextRoad();
+			}
 		}
+		this->checkFinish();
 	} else {
-		if (this->currentPointOnTheRoad > 1) {
-			currentPointOnTheRoad--;
-		}else{
-			switchToNextRoad();
+		this->switchToNextRoad();
+	}
+}
+
+/* int shift = 0;
+std::cout << render->getVehicle(i)->getTextureID() << std::endl;
+if (render->getVehicle(i)->getTextureID() == "bus.obj") shift = checkDistance + this->busDistance;*/
+
+bool Vehicle::collisionPrevention = true;
+
+int Vehicle::collisionCheckDistance = 25;
+
+bool Vehicle::collisionTest(int checkDistance, size_t localCurrentRoad, size_t localCurrentPointOnTheRoad, char direction, char track) {
+	if (collisionPrevention) {
+		if (direction == 'a') {
+			for (size_t i = 0; i < render->getVehiclesNumber(); i++) {
+				if (!render->getVehicle(i)->isDeleted()) {
+					for (size_t j = 2; j <= checkDistance; j++) {
+						if (localCurrentPointOnTheRoad + j < standardRoadLenght) {
+							if (track == '1') {
+								if (render->getVehicle(i)->getPosition() == render->getDynamicObject(localCurrentRoad)->trackOne[localCurrentPointOnTheRoad + j]) return true;
+							} else {
+								if (render->getVehicle(i)->getPosition() == render->getDynamicObject(localCurrentRoad)->trackTwo[localCurrentPointOnTheRoad + j]) return true;
+							}
+						}
+					}
+				}
+			}
+		} else {	
+			for (size_t i = 0; i < render->getVehiclesNumber(); i++) {
+				if (!render->getVehicle(i)->isDeleted()) {
+					for (size_t j = 2; j <= checkDistance; j++) {
+						if (localCurrentPointOnTheRoad - j >= 0) {
+							if (track == '1') {
+								if (render->getVehicle(i)->getPosition() == render->getDynamicObject(localCurrentRoad)->trackOne[localCurrentPointOnTheRoad - j]) return true;
+							} else {
+								if (render->getVehicle(i)->getPosition() == render->getDynamicObject(localCurrentRoad)->trackTwo[localCurrentPointOnTheRoad - j]) return true;
+							}
+						}
+					}
+				}
+			}
 		}
 	}
-	checkFinish();
+	return false;
 }
 
 void Vehicle::switchToNextRoad() {
-	directionCheck();
-	this->currentEdgeOnThePath++;
-	this->hopCounter++;
-	this->allCost += this->graph->getEdge(this->render->getDynamicObject(this->currentRoad)->modelID)->getCoast();
-	this->graph->getEdge(this->render->getDynamicObject(this->currentRoad)->modelID)->removeVehicle(this->vehicleWeight, repath);
-	if (this->currentEdgeOnThePath < path.size()) {
-		if (this->direction == 'a') this->currentPointOnTheRoad = 0;
-		if (this->direction == 'b') this->currentPointOnTheRoad = this->standardRoadLenght-1;
-		this->currentRoad = this->path[currentEdgeOnThePath];
-		this->graph->getEdge(this->render->getDynamicObject(this->currentRoad)->modelID)->addVehicle(this->vehicleWeight, repath);
+
+	char localDirection = directionCheck();
+	char localTreck;
+	if (localDirection == 'a') localTreck = '1';
+	if(localDirection == 'b') localTreck = '2';
+	//ÚT VÉGE?????????????????????????????
+	if (!nextRoadIsBlocked && collisionPrevention) {
+		if (this->currentEdgeOnThePath + 1 < path.size()) {
+			size_t firstPlaceOnTheRoad = 1;
+			if (localDirection == 'b') firstPlaceOnTheRoad = this->standardRoadLenght - 2;
+			if (this->collisionTest(this->collisionCheckDistance+5, this->path[this->currentEdgeOnThePath + 1], firstPlaceOnTheRoad, localDirection, localTreck)) this->nextRoadIsBlocked = true;
+		} else {
+			this->nextRoadIsBlocked = false;
+		}
+	}
+
+	if (!this->nextRoadIsBlocked) {
+		this->direction = localDirection;
+		this->track = localTreck;
+
+		this->currentEdgeOnThePath++;
+		this->hopCounter++;
+		this->allCost += this->graph->getEdge(this->render->getDynamicObject(this->currentRoad)->modelID)->getCoast();
+		this->graph->getEdge(this->render->getDynamicObject(this->currentRoad)->modelID)->removeVehicle(this->vehicleWeight, repath);
+		if (this->currentEdgeOnThePath < path.size()) {
+			if (this->direction == 'a') this->currentPointOnTheRoad = 0;
+			if (this->direction == 'b') this->currentPointOnTheRoad = this->standardRoadLenght - 1;
+			this->currentRoad = this->path[currentEdgeOnThePath];
+			this->graph->getEdge(this->render->getDynamicObject(this->currentRoad)->modelID)->addVehicle(this->vehicleWeight, repath);
+		}
 	}
 }
 
@@ -130,4 +200,12 @@ void Vehicle::erase() {
 
 bool Vehicle::isDeleted() {
 	return this->deleted;
+}
+
+bool Vehicle::isBlocked() {
+	return nextRoadIsBlocked;
+}
+
+void Vehicle::unblock() {
+	this->nextRoadIsBlocked = false;
 }

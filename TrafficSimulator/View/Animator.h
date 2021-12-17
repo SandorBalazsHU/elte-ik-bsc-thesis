@@ -19,6 +19,7 @@ class Vehicle;
 #include<vector>
 #include<set>
 #include<SDL.h>
+#include <set>
 #include "../Model/Graph.h"
 
 /**
@@ -169,6 +170,11 @@ private:
 	std::vector<size_t> endPoints;
 
 	/**
+	 * @brief List of the current stopped vehicles.
+	*/
+	std::set<size_t> stuckVehicles;
+
+	/**
 	 * @brief The started vehicle counter for the secvential starting.
 	*/
 	size_t startedVehiclesIndex = 0;
@@ -207,4 +213,15 @@ private:
 	 * @brief Reset the statistic counters.
 	*/
 	void resetStats();
+
+	/**
+	 * @brief Update the stuck vehicles list.;
+	*/
+	void updateStuckVehicleList();
+
+	/**
+	 * @brief Check the start road to collisions.
+	 * @return Return true if the start road is not free.
+	*/
+	bool startCollisionDetection();
 };

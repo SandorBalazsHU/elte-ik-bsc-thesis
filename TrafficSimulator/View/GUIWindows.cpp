@@ -873,6 +873,12 @@ void GUI::simulationSettingsWindow() {
 		ImGui::Text("");
 		ImGui::Checkbox("Smart pathfinder", &Vehicle::repath);
 		ImGui::Text("");
+		ImGui::Checkbox("Vehicle collision prevention", &Vehicle::collisionPrevention);
+		ImGui::Text("");
+		ImGui::SliderInt("Vehicle distance", &Vehicle::collisionCheckDistance, 0, 50);
+		ImGui::Text("");
+		ImGui::Separator();
+		ImGui::Text("");
 		ImGui::SliderInt("Vehicle weight", &Vehicle::vehicleWeight, 0, 500);
 		ImGui::Text("");
 		ImGui::SliderInt("Animation frequency", &Animator::updateFrequency, 0, 80);

@@ -275,6 +275,21 @@ public:
 	void clearVehicles();
 
 	/**
+	 * @brief Setter to full screen window mode.
+	*/
+	void setToFullScrean();
+
+	/**
+	 * @brief Setter for windowed screen mode.
+	*/
+	void setToWindowed();
+
+	/**
+	 * @brief Setter for borderless window mode.
+	*/
+	void setToBorderless();
+
+	/**
 	 * @brief The current light position, if the light position is fixed.
 	*/
 	glm::vec3 lightPosition = glm::vec3(55, 55, 55);
@@ -318,6 +333,11 @@ public:
 	 * @brief Specular light power
 	*/
 	float specularPower = 32.0f;
+	
+	/**
+	 * @brief Flag for the full screan mode.
+	*/
+	bool isFullScrean = false;
 
 private:
 

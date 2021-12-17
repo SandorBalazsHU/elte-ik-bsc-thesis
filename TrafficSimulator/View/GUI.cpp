@@ -437,6 +437,15 @@ void GUI::draw() {
 				ImGui::Image((void*)(intptr_t)this->windowRender->getVehicle(renderID)->getIcon(), ImVec2(100, 100));
 				ImGui::SameLine();
 				ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "\n\nSelected vehicle \nrender ID: %i.\nSelected vehicle \nmodel ID: %i.", renderID, modelID);
+				if (animator->getVehicleModel(modelID)->isBlocked()) {
+					ImGui::Text("");
+					ImGui::Text("Vehicle is blocked \nby another vehicle!");
+					ImGui::SameLine();
+					if (ImGui::Button("FREE")) {
+						animator->getVehicleModel(modelID)->unblock();
+					}
+					ImGui::Text("");
+				}
 				ImGui::Text("Vehicle statistics:");
 				ImGui::Separator();
 				ImGui::Text("Start point:............%i", animator->getVehicleModel(modelID)->startID);

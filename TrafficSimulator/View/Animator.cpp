@@ -66,6 +66,24 @@ void Animator::update() {
 				vehicles[i].update();
 			}
 		}
+		if (Vehicle::collisionPrevention) {
+			updateStuckVehicleList();
+			if (!stuckVehicles.empty()) {
+				size_t minID = *stuckVehicles.begin();
+				this->vehicles[minID].unblock();
+				stuckVehicles.erase(minID);
+			}
+			if (!stuckVehicles.empty()) {
+				size_t randomID = getRandomNumber(0, stuckVehicles.size() - 1);
+				auto it = stuckVehicles.begin();
+				for (int i = 0; i < randomID; i++) {
+					it++;
+				}
+				size_t minID = *it;
+				this->vehicles[minID].unblock();
+				stuckVehicles.erase(minID);
+			}
+		}
 	}
 	deleteFinishedVehicles();
 }
@@ -208,8 +226,10 @@ int Animator::getRandomNumber(int min, int max) {
 void Animator::autoAdder() {
 	Point* point = graph->getPointByID(startPoints[startedVehiclesIndex]);
 	if (point->startableVehicles > 0) {
-		addVehicle(startPoints[startedVehiclesIndex], false);
-		point->startableVehicles -= 1;
+		if (!startCollisionDetection()) {
+			addVehicle(startPoints[startedVehiclesIndex], false);
+			point->startableVehicles -= 1;
+		}
 	}
 	startedVehiclesIndex++;
 	if (startedVehiclesIndex == this->startPoints.size()) startedVehiclesIndex = 0;
@@ -257,4 +277,46 @@ Vehicle* Animator::getVehicleModel(size_t modelID) {
 */
 size_t Animator::getVehicleModelSize() {
 	return this->vehicles.size();
+}
+
+/**
+ * @brief Update the stuck vehicles list.;
+*/
+void Animator::updateStuckVehicleList() {
+	for (size_t i = 0; i < vehicles.size(); i++) {
+		if (!this->vehicles[i].isDeleted()) {
+			if (this->vehicles[i].isBlocked()) this->stuckVehicles.insert(i);
+		}
+	}
+}
+
+/**
+ * @brief Check the start road to collisions.
+ * @return Return true if the start road is not free.
+*/
+bool Animator::startCollisionDetection() {
+	if (Vehicle::collisionPrevention) {
+		char direction = graph->getPointByID(startPoints[startedVehiclesIndex])->getSide();
+		size_t currentRoadID = graph->getEdgeByID(graph->getPointByID(startPoints[startedVehiclesIndex])->getEdge())->getRoad3DiD();
+
+		if (direction == 'a') {
+			for (size_t i = 0; i < render->getVehiclesNumber(); i++) {
+				if (!render->getVehicle(i)->isDeleted()) {
+					for (size_t j = 2; j <= Vehicle::collisionCheckDistance; j++) {
+						if (render->getVehicle(i)->getPosition() == render->getDynamicObject(currentRoadID)->trackOne[j]) return true;
+					}
+				}
+			}
+		}
+		else {
+			for (size_t i = 0; i < render->getVehiclesNumber(); i++) {
+				if (!render->getVehicle(i)->isDeleted()) {
+					for (size_t j = 2; j <= Vehicle::collisionCheckDistance; j++) {
+						if (render->getVehicle(i)->getPosition() == render->getDynamicObject(currentRoadID)->trackTwo[100 - j]) return true;
+					}
+				}
+			}
+		}
+	}
+	return false;
 }
