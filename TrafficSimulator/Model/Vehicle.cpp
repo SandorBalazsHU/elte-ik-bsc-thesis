@@ -1,12 +1,36 @@
+/**
+ * @name Traffic Simulation
+ * @file Vehicle.cpp
+ * @class Vehicle
+ * @author Sándor Balázs - AZA6NL
+ * @date 2021.11.08.
+ * @brief Vehicle model representation.
+ * Contact: sandorbalazs9402@gmail.com
+*/
+
 #include <SDL.h>
 #include "Vehicle.h"
 #include "../View/Objects/Object3Dvehicle.h"
 
-//NEVER FADE AWAY!
-
+/**
+ * @brief The rapath function flag.
+*/
 bool Vehicle::repath = true;
+
+/**
+ * @brief The default vehicle weight.
+*/
 int Vehicle::vehicleWeight = 100;
 
+/**
+ * @brief Constructor for the Vehicle.
+ * @param graph The current graph.
+ * @param render The pointer for the render.
+ * @param startID The startpoint ID.
+ * @param destinationID The destination endpoint.
+ * @param object3DiD The 3D render ID.
+ * @param ID The current ID.
+*/
 Vehicle::Vehicle(Graph* graph, Render* render, size_t startID, size_t destinationID, size_t object3DiD, size_t ID) {
 	this->graph = graph;
 	this->render = render;
@@ -27,14 +51,25 @@ Vehicle::Vehicle(Graph* graph, Render* render, size_t startID, size_t destinatio
 	this->animator = this->render->getAnimator();
 }
 
+/**
+ * @brief Getter for the Vehicle ID.
+ * @return vehicle ID.
+*/
 size_t Vehicle::getID() {
 	return this->ID;
 }
 
+/**
+ * @brief Getter for the render ID.
+ * @return The render ID.
+*/
 size_t Vehicle::getObject3DiD() {
 	return this->object3DiD;
 }
 
+/**
+ * @brief Update the Vehicle status.
+*/
 void Vehicle::update() {
 	Object3Dvehicle* vehicle = render->getVehicle(this->object3DiD);
 	nextStep();
@@ -54,6 +89,9 @@ void Vehicle::update() {
 	}
 }
 
+/**
+ * @brief Calculate the first start direction and track.
+*/
 void Vehicle::firstDirectionCheck() {
 	size_t firstEdgeEndpointA = this->graph->getPointByID(this->graph->getEdge(this->render->getDynamicObject(this->path[currentEdgeOnThePath])->modelID)->getEndpointA())->getID();
 	if (this->startID ==  firstEdgeEndpointA) {
@@ -66,6 +104,9 @@ void Vehicle::firstDirectionCheck() {
 	if (this->direction == 'b') this->currentPointOnTheRoad = this->standardRoadLenght - 1;
 }
 
+/**
+ * @brief Check the vehicle direction and track.
+*/
 char Vehicle::directionCheck() {
 	if (currentEdgeOnThePath + 1 != path.size()) {
 		if (this->direction == 'a') {
@@ -85,8 +126,10 @@ char Vehicle::directionCheck() {
 	return this->direction;
 }
 
+/**
+ * @brief Step to the next point.
+*/
 void Vehicle::nextStep() {
-	//todo add collisionPrevention
 	if (!collisionPrevention) nextRoadIsBlocked = false;
 	if (!nextRoadIsBlocked) {
 		if (this->direction == 'a') {
@@ -108,14 +151,19 @@ void Vehicle::nextStep() {
 	}
 }
 
-/* int shift = 0;
-std::cout << render->getVehicle(i)->getTextureID() << std::endl;
-if (render->getVehicle(i)->getTextureID() == "bus.obj") shift = checkDistance + this->busDistance;*/
-
+/**
+ * @brief The collision prevention flag.
+*/
 bool Vehicle::collisionPrevention = true;
 
+/**
+ * @brief  The collision prevention distance.
+*/
 int Vehicle::collisionCheckDistance = 15;
 
+/**
+ * @brief Check the road collision.
+*/
 bool Vehicle::collisionTest(int checkDistance, size_t localCurrentRoad, size_t localCurrentPointOnTheRoad, char direction, char track) {
 	if (collisionPrevention) {
 		if (direction == 'a') {
@@ -151,13 +199,16 @@ bool Vehicle::collisionTest(int checkDistance, size_t localCurrentRoad, size_t l
 	return false;
 }
 
+/**
+ * @brief Check the next road.
+*/
 void Vehicle::switchToNextRoad() {
 
 	char localDirection = directionCheck();
 	char localTreck;
 	if (localDirection == 'a') localTreck = '1';
 	if(localDirection == 'b') localTreck = '2';
-	//ÚT VÉGE?????????????????????????????
+
 	if (!nextRoadIsBlocked && collisionPrevention) {
 		if (this->currentEdgeOnThePath + 1 < path.size()) {
 			size_t firstPlaceOnTheRoad = 1;
@@ -185,6 +236,9 @@ void Vehicle::switchToNextRoad() {
 	}
 }
 
+/**
+ * @brief Check the path finishing.
+*/
 void Vehicle::checkFinish() {
 	if (this->currentEdgeOnThePath >= path.size()) {
 		this->finished = true;
@@ -192,24 +246,42 @@ void Vehicle::checkFinish() {
 	}
 }
 
+/**
+ * @brief Getter for the finish flag.
+ * @return
+*/
 bool Vehicle::isFinished() {
 	return this->finished;
 }
 
+/**
+ * @brief Set the vehicle deleted.
+*/
 void Vehicle::erase() {
 	this->deleted = true;
 	delete dijkstra;
 	graph->getPointByID(this->destinationID)->receivedVehicles++;
 }
 
+/**
+ * @brief Getter for the deleted flag.
+ * @return The deleted flag.
+*/
 bool Vehicle::isDeleted() {
 	return this->deleted;
 }
 
+/**
+ * @brief Getter for the blocked flag.
+ * @return The blocked flag.
+*/
 bool Vehicle::isBlocked() {
 	return nextRoadIsBlocked;
 }
 
+/**
+ * @brief Unblock the vehicle.
+*/
 void Vehicle::unblock() {
 	this->nextRoadIsBlocked = false;
 }
