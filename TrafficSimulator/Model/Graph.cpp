@@ -18,11 +18,17 @@
 #include <vector>
 #include <set>
 
+/**
+ * @brief Graph constructor.
+ * @param render Pointer to the current render.
+*/
 Graph::Graph(Render* render) {
 	this->render = render;
 }
 
-//TODO Máshol nem érdemes már korábban törölni õket?
+/**
+ * @brief Graph destructor.
+*/
 Graph::~Graph() {
 	for (size_t i = 0; i < points.size(); i++)	{
 		delete points[i];
@@ -32,14 +38,28 @@ Graph::~Graph() {
 	}
 }
 
+/**
+ * @brief Getter for the edge count.
+ * @return The edge count.
+*/
 size_t Graph::getEdgesNumber() {
 	return this->edges.size();
 }
 
+/**
+ * @brief Getter for the edges by vector id.
+ * @param edge The needed edge vector ID.
+ * @return The needed edge.
+*/
 Edge* Graph::getEdge(size_t edge) {
 	return this->edges[edge];
 }
 
+/**
+ * @brief Getter for the edges by real ID.
+ * @param edge The needed edge real ID.
+ * @return The needed edge.
+*/
 Edge* Graph::getEdgeByID(size_t edge) {
 	for (size_t i = 0; i < this->edges.size(); i++) {
 		if (this->edges[i]->getID() == edge) return this->edges[i];
@@ -47,15 +67,28 @@ Edge* Graph::getEdgeByID(size_t edge) {
 	return NULL;
 }
 
+/**
+ * @brief Getter for the points count.
+ * @return The points count.
+*/
 size_t Graph::getPointsNumber() {
 	return this->points.size();
 }
 
+/**
+ * @brief Getter for the points by vector id.
+ * @param edge The needed point vector ID.
+ * @return The needed point.
+*/
 Point* Graph::getPoint(size_t point) {
 	return this->points[point];
 }
 
-
+/**
+ * @brief Getter for the points by real id.
+ * @param edge The needed point real ID.
+ * @return The needed point.
+*/
 Point* Graph::getPointByID(size_t point) {
 	for (size_t i = 0; i < this->points.size(); i++) {
 		if (this->points[i]->getID() == point  && !this->points[i]->isErased()) return this->points[i];
@@ -63,17 +96,29 @@ Point* Graph::getPointByID(size_t point) {
 	return NULL;
 }
 
+/**
+ * @brief Delete a point.
+ * @param point The deletable point.
+*/
 void Graph::deletePoint(size_t point) {
 	points[point]->erase();
 }
 
+/**
+ * @brief Generate the graph by the renderable roads.
+*/
 void Graph::generateGraph() {
 	lockRoads();
-	initialise();
+	initialize();
 	join();
 	rebind();
 }
 
+/**
+ * @brief Generate Adjacency matrix from the graph and the Dijkstra object.
+ * @param startPoint The start point in the graph.
+ * @return The generated Dijkstra object.
+*/
 Dijkstra* Graph::generateDijkstra(size_t startPoint) {
 	Dijkstra* dijkstra = new Dijkstra(this->pointCount, startPoint);
 	for (size_t i = 0; i < this->edges.size(); i++) {
@@ -83,6 +128,12 @@ Dijkstra* Graph::generateDijkstra(size_t startPoint) {
 	return dijkstra;
 }
 
+/**
+ * @brief Generate path matrix from the Dijkstra object results.
+ * @param Dijkstra The Dijkstra object.
+ * @param target The target point.
+ * @return The path.
+*/
 std::vector<size_t> Graph::getPath(Dijkstra* dijkstra, size_t target) {
 	std::vector<size_t> path;
 	size_t index = target;
@@ -124,19 +175,9 @@ std::vector<size_t> Graph::getPath(Dijkstra* dijkstra, size_t target) {
 	return realPath;
 }
 
-/*std::vector<size_t> Graph::getPath(Dijkstra* dijkstra, size_t target) {
-	std::vector<size_t> path;
-	size_t index = target;
-	size_t value = -1;
-	do {
-		for (size_t j = 0; j < this->edges.size(); j++) {
-			if (this->edges[j]->match(index, dijkstra->from[index])) path.push_back(this->edges[j]->getRoad3DiD());
-		}
-		if (index == value) break;
-	} while ((index = dijkstra->from[index]) != dijkstra->getStartNode());
-	return path;
-}*/
-
+/**
+ * @brief Lock the roads.
+*/
 void Graph::lockRoads() {
 	for (size_t i = 0; i < render->getDynamicObjectsNumber(); i++) {
 		if (render->getDynamicObject(i) != NULL) {
@@ -145,7 +186,10 @@ void Graph::lockRoads() {
 	}
 }
 
-void Graph::initialise() {
+/**
+ * @brief initialize the graph.
+*/
+void Graph::initialize() {
 	size_t j = 0;
 	for (size_t i = 0; i < render->getDynamicObjectsNumber(); i++) {
 		Edge* newEdge;
@@ -164,6 +208,9 @@ void Graph::initialise() {
 	}
 }
 
+/**
+ * @brief Join the multiple points.
+*/
 void Graph::join() {
 	for (size_t i = 0; i < edges.size(); i++) {
 		if (render->getDynamicObject(i) != NULL) {
@@ -201,6 +248,9 @@ void Graph::join() {
 	}
 }
 
+/**
+ * @brief Rebind the real ID-s.
+*/
 void Graph::rebind() {
 	size_t j = 0;
 	for (size_t i = 0; i < points.size(); i++) {
@@ -219,6 +269,10 @@ void Graph::rebind() {
 	}
 }
 
+/**
+ * @brief Getter for the start point list.
+ * @return The startpoint list.
+*/
 std::vector<size_t> Graph::getStartPoints() {
 	std::vector<size_t> startPoints;
 	for (size_t i = 0; i < points.size(); i++) {
@@ -229,6 +283,10 @@ std::vector<size_t> Graph::getStartPoints() {
 	return startPoints;
 }
 
+/**
+ * @brief Getter for the end point list.
+ * @return The endpoint list.
+*/
 std::vector<size_t> Graph::getEndPoints() {
 	std::vector<size_t> endPoints;
 	for (size_t i = 0; i < points.size(); i++) {

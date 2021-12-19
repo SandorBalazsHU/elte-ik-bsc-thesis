@@ -38,8 +38,6 @@ Point::~Point(void) {
 * @brief Join this point to an other.
 * @param The joinable point.
 */
-
-//TODO Törlés miatti KIVÉTEL. lOGIKAI TÖRLÉS?
 void Point::join(Point* point) {
 	if (this->id != point->getID()) {
 		std::set<size_t> pointEdges = point->getEdges();
