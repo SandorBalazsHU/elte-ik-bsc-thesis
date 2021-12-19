@@ -10,7 +10,6 @@ out vec3 fragmentPosition;
 out vec3 fragmentNormal;
 out vec2 fragmentTexture;
 
-
 //Shader parameters
 uniform mat4 worldMatrix;
 uniform mat4 worldInverseTransposeMatrix;
