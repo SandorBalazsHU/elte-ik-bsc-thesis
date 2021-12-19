@@ -110,7 +110,7 @@ if (render->getVehicle(i)->getTextureID() == "bus.obj") shift = checkDistance + 
 
 bool Vehicle::collisionPrevention = true;
 
-int Vehicle::collisionCheckDistance = 25;
+int Vehicle::collisionCheckDistance = 15;
 
 bool Vehicle::collisionTest(int checkDistance, size_t localCurrentRoad, size_t localCurrentPointOnTheRoad, char direction, char track) {
 	if (collisionPrevention) {

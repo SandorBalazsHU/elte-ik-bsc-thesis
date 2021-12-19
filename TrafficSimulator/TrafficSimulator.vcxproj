@@ -152,6 +152,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Control\ConfigLoader.cpp" />
+    <ClCompile Include="Control\ConfigSaver.cpp" />
     <ClCompile Include="Control\Logger.cpp" />
     <ClCompile Include="Control\MapLoader.cpp" />
     <ClCompile Include="Control\MapSaver.cpp" />
@@ -187,6 +189,8 @@
     <ClCompile Include="View\WorkWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Control\ConfigLoader.h" />
+    <ClInclude Include="Control\ConfigSaver.h" />
     <ClInclude Include="Control\Logger.h" />
     <ClInclude Include="Control\MapLoader.h" />
     <ClInclude Include="Control\MapSaver.h" />

@@ -277,7 +277,7 @@ public:
 	/**
 	 * @brief Setter to full screen window mode.
 	*/
-	void setToFullScrean();
+	void setToFullScreen();
 
 	/**
 	 * @brief Setter for windowed screen mode.
@@ -285,7 +285,7 @@ public:
 	void setToWindowed();
 
 	/**
-	 * @brief Setter for borderless window mode.
+	 * @brief Setter for borderless screen mode.
 	*/
 	void setToBorderless();
 
@@ -333,11 +333,6 @@ public:
 	 * @brief Specular light power
 	*/
 	float specularPower = 32.0f;
-	
-	/**
-	 * @brief Flag for the full screan mode.
-	*/
-	bool isFullScrean = false;
 
 private:
 

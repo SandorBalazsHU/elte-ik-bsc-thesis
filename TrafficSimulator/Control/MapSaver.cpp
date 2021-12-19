@@ -67,9 +67,13 @@ void MapSaver::saveMap(std::string fileName) {
 			size_t* trackBalls = render->getDynamicObject(i)->getTrackBalls();
 			for (size_t j = 0; j < 4; j++) {
 				glm::vec3 position = render->getObject(trackBalls[j])->getPosition();
-				saveFile << position.x << ";" << position.y << ";" << position.z << ";";
+				if (j < 3) {
+					saveFile << position.x << ";" << position.y << ";" << position.z << ";";
+				} else {
+					saveFile << position.x << ";" << position.y << ";" << position.z;
+				}
 			}
-			saveFile << ";" << std::endl;
+			saveFile << std::endl;
 		}
 	}
 

@@ -163,30 +163,28 @@ int WorkWindow::openGLpostConfig() {
 
 	//Check OpenGL version
 	int glVersion[2] = { -1, -1 };
+
 	glGetIntegerv(GL_MAJOR_VERSION, &glVersion[0]);
 	glGetIntegerv(GL_MINOR_VERSION, &glVersion[1]);
 	Logger::log("[OpenGL running] Version: " + std::to_string(glVersion[0]) + "." + std::to_string(glVersion[1]));
+
 	const GLubyte* vendor = glGetString(GL_VENDOR);
 	const GLubyte* renderer = glGetString(GL_RENDERER);
 	std::stringstream stringStream;
-	stringStream << "[OpenGL running] GPU Vendor: " << vendor << std::endl;
+	stringStream << "[OpenGL running] GPU Vendor: " << vendor;
+	Logger::log(stringStream.str());
+	stringStream.clear();
 	stringStream << "[OpenGL running] GPU Model: " << renderer;
 	Logger::log(stringStream.str());
 
 	SDL_DisplayMode current;
 
-	// Get current display mode of all displays.
 	for (int i = 0; i < SDL_GetNumVideoDisplays(); ++i) {
-
 		int should_be_zero = SDL_GetCurrentDisplayMode(i, &current);
 		std::stringstream stringStream;
-		if (should_be_zero == 0) stringStream << "Display mode:" << i << ".Display " << current.w << "x" << current.h << "dpx @ " << current.refresh_rate << "hz";
+		if (should_be_zero == 0) stringStream << "Display mode: " << i << ". Display " << current.w << "x" << current.h << "dpx @ " << current.refresh_rate << "hz";
 		Logger::log(stringStream.str());
-
 	}
-
-
-	//SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 
 	if (glVersion[0] == -1 && glVersion[1] == -1) {
 		cleanup();
@@ -242,6 +240,8 @@ void WorkWindow::clearScreen() {
 int WorkWindow::renderPreconfig() {
 	eventListener.bind(this);
 	render.bind(this);
+	configLoader.bind(&render);
+	configLoader.loadConfig();
 	gui.bind(this);
 	objectStorage.load();
 	return 0;
@@ -286,4 +286,82 @@ WorkWindow::~WorkWindow(void) {
 */
 void WorkWindow::exitWindow() {
 	SDL_Quit();
+}
+
+/**
+ * @brief Start the closing procedure.
+*/
+void WorkWindow::close() {
+	gui.close();
+};
+
+/**
+ * @brief Stop the render and start the closing procedure.
+*/
+void WorkWindow::closeNow() {
+	exit = true;
+};
+
+/**
+ * @brief Getter for the camera controller.
+ * @return pointer for the camera controller.
+*/
+Camera* WorkWindow::getCamera() {
+	return &camera;
+};
+
+/**
+ * @brief Getter for the 3D Window compiled shader program.
+ * @return The OpõenGL 3D Shader.
+*/
+ProgramObject* WorkWindow::getShader() {
+	return &shader;
+}
+
+/**
+ * @brief Getter for the SDL Windows object.
+ * @return The SDL OpenGL window object.
+*/
+SDL_Window* WorkWindow::getWindow() {
+	return window;
+}
+
+/**
+ * @brief Getter for the window title.
+ * @return The window title.
+*/
+std::string WorkWindow::getWindowTitle() {
+	return windowTitle;
+}
+
+/**
+ * @brief Getter for the GUI representer.
+ * @return Pointer to the GUI controller class.
+*/
+GUI* WorkWindow::getGUI() {
+	return &gui;
+}
+
+/**
+ * @brief Getter for the object storage.
+ * @return Pointer to the object storage.
+*/
+ObjectStorage* WorkWindow::getObjectStorage() {
+	return &objectStorage;
+}
+
+/**
+ * @brief Getter for the render object.
+ * @return Pointer to the current render.
+*/
+Render* WorkWindow::getRender() {
+	return &render;
+}
+
+/**
+ * @brief Getter for the event listener.
+ * @return Pointer for the current event listener.
+*/
+EventListener* WorkWindow::getEventListener() {
+	return &eventListener;
 }

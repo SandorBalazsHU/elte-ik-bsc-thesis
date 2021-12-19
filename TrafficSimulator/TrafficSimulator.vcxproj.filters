@@ -138,6 +138,12 @@
     <ClCompile Include="Model\Vehicle.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
+    <ClCompile Include="Control\ConfigLoader.cpp">
+      <Filter>Source Files\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="Control\ConfigSaver.cpp">
+      <Filter>Source Files\Control</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="View\WorkWindow.h">
@@ -247,6 +253,12 @@
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Control\ConfigLoader.h">
+      <Filter>Source Files\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Control\ConfigSaver.h">
+      <Filter>Source Files\Control</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

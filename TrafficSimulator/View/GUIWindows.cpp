@@ -20,6 +20,7 @@
 #include "Render.h"
 #include "WorkWindow.h"
 #include "../Control/Logger.h"
+#include "../Control/ConfigSaver.h"
 #include "../Model/Graph.h"
 #include "../Model/Vehicle.h"
 #include "Animator.h"
@@ -368,10 +369,59 @@ void GUI::graphicSettingsWindow() {
 
 		ImGui::Text("");
 		fpsGraph();
+		std::stringstream log;
+
+		const GLubyte* vendor = glGetString(GL_VENDOR);
+		log << "GPU Vendor: " << vendor << std::endl;
+		const GLubyte* renderer = glGetString(GL_RENDERER);
+		log << "GPU Model:  " << renderer << std::endl;
+		log << "Current displays: " << std::endl;
+		SDL_DisplayMode current;
+		// Get current display mode of all displays.
+		for (int i = 0; i < SDL_GetNumVideoDisplays(); ++i) {
+			int should_be_zero = SDL_GetCurrentDisplayMode(i, &current);
+			if (should_be_zero == 0) log << i << ". Display " << current.w << "x" << current.h << "dpx @ " << current.refresh_rate << "hz" << std::endl;
+		}
+		ImGui::Separator();
+
+		ImGui::Text("");
+		ImGui::Text("Hardware info:");
+		ImGui::Text(log.str().c_str());
 
 		ImGui::Text("");
 		ImGui::Text("Graphic settings:");
 		ImGui::Separator();
+		ImGui::Text("");
+
+		ImGui::Text("Window mode:"); ImGui::SameLine();
+		static bool setWindowModeNow = false;
+		ImGui::Checkbox("Set it now", &setWindowModeNow);
+		if (!setWindowModeNow) {
+			ConfigSaver configSaver;
+			static bool configurationSaved = false;
+			if (ImGui::Button("Windowed")) {
+				configSaver.setProperty("displayMode", "windowed");
+				configurationSaved = true;
+			}
+			ImGui::SameLine();
+			if (ImGui::Button("Borderless")) {
+				configSaver.setProperty("displayMode", "borderless");
+				configurationSaved = true;
+			}
+			ImGui::SameLine();
+			if (ImGui::Button("Fullscreen")) {
+				configSaver.setProperty("displayMode", "fullscreen");
+				configurationSaved = true;
+			}
+			if (configurationSaved) ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "Configuration saved! \nYou must restart the application.");
+		}
+
+		if (setWindowModeNow) {
+			ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "WARNING! \nImmediately window mode change \nwithout restart may be dangerous.");
+			if (ImGui::Button("Windowed")) windowRender->setToWindowed(); ImGui::SameLine();
+			if (ImGui::Button("Borderless")) windowRender->setToBorderless(); ImGui::SameLine();
+			if (ImGui::Button("Fullscreen")) windowRender->setToFullScreen();
+		}
 		ImGui::Text("");
 
 		static bool fpsLimiterIsOn = false;

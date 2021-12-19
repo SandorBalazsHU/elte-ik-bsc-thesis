@@ -19,6 +19,7 @@
 #include "Utilities/TextureObject.h"
 #include "Utilities/Mesh_OGL3.h"
 #include "Objects/ObjectStorage.h"
+#include "../Control/ConfigLoader.h"
 
 /**
  * @brief The OpenGL 3D window implementation
@@ -45,80 +46,60 @@ public:
 	/**
 	 * @brief Start the closing procedure.
 	*/
-	void close() {
-		gui.close();
-	};
+	void close();
 
 	/**
 	 * @brief Stop the render and start the closing procedure.
 	*/
-	void closeNow() {
-		exit = true;
-	};
+	void closeNow();
 
 	/**
 	 * @brief Getter for the camera controller.
 	 * @return pointer for the camera controller.
 	*/
-	Camera* getCamera() {
-		return &camera;
-	};
+	Camera* getCamera();
 
 	/**
 	 * @brief Getter for the 3D Window compiled shader program.
 	 * @return The OpõenGL 3D Shader.
 	*/
-	ProgramObject* getShader() {
-		return &shader;
-	}
+	ProgramObject* getShader();
 
 	/**
 	 * @brief Getter for the SDL Windows object.
 	 * @return The SDL OpenGL window object.
 	*/
-	SDL_Window* getWindow() {
-		return window;
-	}
+	SDL_Window* getWindow();
 
 	/**
 	 * @brief Getter for the window title.
 	 * @return The window title.
 	*/
-	std::string getWindowTitle() {
-		return windowTitle;
-	}
+	std::string getWindowTitle();
 
 	/**
 	 * @brief Getter for the GUI representer.
 	 * @return Pointer to the GUI controller class.
 	*/
-	GUI* getGUI() {
-		return &gui;
-	}
+	GUI* getGUI();
 
 	/**
 	 * @brief Getter for the object storage.
 	 * @return Pointer to the object storage.
 	*/
-	ObjectStorage* getObjectStorage() {
-		return &objectStorage;
-	}
+	ObjectStorage* getObjectStorage();
 
 	/**
 	 * @brief Getter for the render object.
 	 * @return Pointer to the current render.
 	*/
-	Render* getRender() {
-		return &render;
-	}
+	Render* getRender();
 
 	/**
 	 * @brief Getter for the event listener.
 	 * @return Pointer for the current event listener.
 	*/
-	EventListener* getEventListener() {
-		return &eventListener;
-	}
+	EventListener* getEventListener();
 
 private:
 
@@ -181,6 +162,11 @@ private:
 	 * @brief The render object.
 	*/
 	Render			render;
+
+	/**
+	 * @brief Configuration file loader
+	*/
+	ConfigLoader configLoader;
 
 	/**
 	 * @brief The GUI controller object.
@@ -271,4 +257,12 @@ private:
 	 * @brief Windows close callback function.
 	*/
 	static void exitWindow();
+
+	/**
+	 * @brief The current window mode.
+	 * 0 - Windowed
+	 * 1 - Borderless
+	 * 2 - Full screen
+	*/
+	int displayMode = 0;
 };

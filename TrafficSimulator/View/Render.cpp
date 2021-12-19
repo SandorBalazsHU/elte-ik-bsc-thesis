@@ -608,20 +608,20 @@ void Render::render() {
 /**
  * @brief Setter to full screen window mode.
 */
-void setToFullScrean() {
-
+void Render::setToFullScreen() {
+	SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
 }
 
 /**
  * @brief Setter for windowed screen mode.
 */
-void setToWindowed() {
-
+void Render::setToWindowed() {
+	SDL_SetWindowFullscreen(window, 0);
 }
 
 /**
- * @brief Setter for borderless window mode.
+ * @brief Setter for borderless screen mode.
 */
-void setToBorderless() {
-
+void Render::setToBorderless() {
+	SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 }
