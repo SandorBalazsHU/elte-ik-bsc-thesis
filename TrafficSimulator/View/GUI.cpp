@@ -160,7 +160,8 @@ void GUI::windowHandler() {
 	if (pathFinderTestWindowStatus) pathFinderTestWindow();
 	if (simulationSettingsWindowStatus) simulationSettingsWindow();
 	if (simulationStatisticsWindowStatus) simulationStatisticsWindow();
-	if (helpWindowStatus) helpWindow();
+	if (simulationStatisticsWindowStatus) simulationStatisticsWindow();
+	if (finaliseWarningWindowStatus) finaliseWarningWindow();
 	if (ImGuiSettingsWindowStatus) { ImGui::Begin("ImGui Style Editor", &ImGuiSettingsWindowStatus); ImGui::ShowStyleEditor(); ImGui::End(); }
 }
 
@@ -500,8 +501,10 @@ void GUI::showHelpMarker(const char* desc) {
  * @param pointModelID The selected point. (Model object!)
 */
 void GUI::showEndpointInfo(size_t pointModelID) {
-	if (this->windowRender->getAnimator()->getGraph()->getPoint(pointModelID)->isStartPoint()) this->selectedStartPoint = pointModelID;
-	if (this->windowRender->getAnimator()->getGraph()->getPoint(pointModelID)->isEndPoint()) this->selectedEndPoint = pointModelID;
+	if (pointModelID != -1) {
+		if (this->windowRender->getAnimator()->getGraph()->getPoint(pointModelID)->isStartPoint()) this->selectedStartPoint = pointModelID;
+		if (this->windowRender->getAnimator()->getGraph()->getPoint(pointModelID)->isEndPoint()) this->selectedEndPoint = pointModelID;
+	}
 }
 
 /**
@@ -509,7 +512,9 @@ void GUI::showEndpointInfo(size_t pointModelID) {
  * @param edgeModelID The selected edge. (Model object!)
 */
 void GUI::showRoadInfo(size_t edgeModelID) {
-	this->selectedRoad = edgeModelID;
+	if (edgeModelID != -1) {
+		this->selectedRoad = edgeModelID;
+	}
 }
 
 /**
@@ -517,7 +522,9 @@ void GUI::showRoadInfo(size_t edgeModelID) {
  * @param vehicleModelID The selected vehicle. (Model object!)
 */
 void GUI::showVehicleInfo(size_t vehicleModelID) {
-	this->selectedVehicle = vehicleModelID;
+	if (vehicleModelID != -1) {
+		this->selectedVehicle = vehicleModelID;
+	}
 }
 
 /**

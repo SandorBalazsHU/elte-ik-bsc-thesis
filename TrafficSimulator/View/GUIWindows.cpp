@@ -845,7 +845,11 @@ void GUI::pathFinderTestWindow() {
 			}
 			log << std::endl;
 			for (size_t i = 0; i < dijkstra->from.size(); i++) {
-				log << dijkstra->from[i] << " ";
+				if (dijkstra->from[i] != -1) {
+					log << dijkstra->from[i] << " ";
+				} else {
+					log << "x" << " ";
+				}
 			}
 			log << std::endl << std::endl;
 
@@ -854,6 +858,7 @@ void GUI::pathFinderTestWindow() {
 			for (size_t i = 0; i < path.size(); i++) {
 				log << path[i] << " ";
 			}
+			if(path.size() == 0) log << "NO PATH!";
 			log << std::endl;
 
 			logger.append(log.str().c_str());
@@ -1151,6 +1156,36 @@ void GUI::finalise() {
 	} else {
 		finalisingErrorWindow = true;
 	}
+
+	for (auto const& startPoint : animator->separatedEndPoints) {
+		if (startPoint.second.size() != 0) {
+			finaliseWarningWindowStatus = true;
+			break;
+		}
+	}
+}
+
+/**
+ * @brief Show the finalizing warning window.
+*/
+void GUI::finaliseWarningWindow() {
+	if (ImGui::Begin("WARNING! Unreachable endpoints!", &finaliseWarningWindowStatus, NULL)) {
+		ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "WARNING! \nThe map contains unreachable endpoints!");
+		ImGui::Separator();
+		ImGui::Text("");
+		for (auto const& startPoint : animator->separatedEndPoints) {
+			for (auto x : startPoint.second) {
+				ImGui::Text("The endpoint %i is inaccessible from startpoint %i.", x, startPoint.first);
+			}
+		}
+		ImGui::Text("");
+		ImGui::Separator();
+		if (ImGui::Button("Close")) {
+			finaliseWarningWindowStatus = false;
+			ImGui::CloseCurrentPopup();
+		}
+		ImGui::End();
+	}
 }
 
 /**
@@ -1211,7 +1246,16 @@ void GUI::helpWindow() {
 		ImGui::Text("Traffic Simulator Help");
 		ImGui::Separator();
 		ImGui::Text("");
+		ImGui::Text("To the full documentation see: \nhttps://github.com/SandorBalazsHU/elte-ik-bsc-thesis/tree/master/thesis");
 		ImGui::Text("");
+		ImGui::Text("A common usecase:");
+		ImGui::Text("");
+		ImGui::Text("1.) Open a map with File/open option, or edit a map:");
+		ImGui::Text("    - For the edit controlls see: Help/Controls");
+		ImGui::Text("    - Add roads, move and connect the roads together.");
+		ImGui::Text("    - Add minimum one start and endpoint and stick thees to the roads endpoints.");
+
+
 		ImGui::Separator();
 		if (ImGui::Button("Close")) {
 			helpWindowStatus = false;

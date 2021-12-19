@@ -19,7 +19,6 @@ class Vehicle;
 #include<vector>
 #include<set>
 #include<SDL.h>
-#include <set>
 #include "../Model/Graph.h"
 
 /**
@@ -96,6 +95,21 @@ public:
 	 * @return The generated graph
 	*/
 	Graph* getGraph();
+
+	/**
+	 * @brief Getter for the current startpoints from the graph.
+	*/
+	std::vector<size_t> getStartPoints();
+
+	/**
+	 * @brief Getter for the current endpoint from the graph.
+	*/
+	std::vector<size_t> getEndPoints();
+
+	/**
+	 * @brief The separated endpoints.
+	*/
+	std::map<size_t,std::set<size_t>> separatedEndPoints;
 
 	/**
 	 * @brief Delete all abstract vehicle.
@@ -224,4 +238,9 @@ private:
 	 * @return Return true if the start road is not free.
 	*/
 	bool startCollisionDetection();
+
+	/**
+	 * @brief List the separated endpoints.
+	*/
+	void checkSeparatedEndpoints();
 };

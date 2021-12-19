@@ -137,6 +137,7 @@ private:
 	bool simulationSettingsWindowStatus = false;
 	bool simulationStatisticsWindowStatus = false;
 	bool helpWindowStatus = false;
+	bool finaliseWarningWindowStatus = false;
 
 	//Selection handlers
 	size_t selectedStartPoint = -1;
@@ -223,7 +224,7 @@ private:
 	 * @brief Description of the opening window.
 	*/
 	void openWindow();
-	
+
 	/**
 	 * @brief the save window descriptor.
 	*/
@@ -280,7 +281,7 @@ private:
 	void runningStatisticsWindow();
 
 	/**
-	 * @brief Pathfinder test window. 
+	 * @brief Pathfinder test window.
 	*/
 	void pathFinderTestWindow();
 
@@ -330,7 +331,7 @@ private:
 	 * @brief Window for SimulationStatistics.
 	*/
 	void simulationStatisticsWindow();
-	
+
 	/**
 	 * @brief Clear the road colors.
 	*/
@@ -345,4 +346,9 @@ private:
 	 * @brief Show help window.
 	*/
 	void helpWindow();
+
+	/**
+	 * @brief Show the finalizing warning window.
+	*/
+	void finaliseWarningWindow();
 };

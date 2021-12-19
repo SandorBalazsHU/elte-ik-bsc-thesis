@@ -16,9 +16,13 @@ Vehicle::Vehicle(Graph* graph, Render* render, size_t startID, size_t destinatio
 	this->destinationID = destinationID;
 	this->dijkstra = this->graph->generateDijkstra(startID);
 	this->path = this->graph->getPath(this->dijkstra, this->destinationID);
-	this->currentRoad = this->path[currentEdgeOnThePath];
-	this->graph->getEdge(this->render->getDynamicObject(this->currentRoad)->modelID)->addVehicle(this->vehicleWeight, repath);
-	this->firstDirectionCheck();
+	if (this->path.size() > 0) {
+		this->currentRoad = this->path[currentEdgeOnThePath];
+		this->graph->getEdge(this->render->getDynamicObject(this->currentRoad)->modelID)->addVehicle(this->vehicleWeight, repath);
+		this->firstDirectionCheck();
+	} else {
+		this->erase();
+	}
 	this->startTime = SDL_GetTicks();
 	this->animator = this->render->getAnimator();
 }

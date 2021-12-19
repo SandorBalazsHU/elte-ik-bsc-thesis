@@ -13,6 +13,8 @@
 
 #include <stdlib.h>
 #include <time.h>
+#include<vector>
+#include<set>
 #include "Animator.h"
 #include "Render.h"
 #include "WorkWindow.h"
@@ -141,6 +143,23 @@ void Animator::finalize() {
 			point->endpointsList.push_back(true);
 		}
 	}
+	checkSeparatedEndpoints();
+}
+
+void Animator::checkSeparatedEndpoints() {
+	separatedEndPoints.clear();
+	for (size_t i = 0; i < this->startPoints.size(); i++) {
+		Dijkstra* dijkstra = this->graph->generateDijkstra(startPoints[i]);
+		std::set<size_t> setOfseparatedEndPoints;
+		for (size_t j = 0; j < this->endPoints.size(); j++) {
+			std::vector<size_t> path = this->graph->getPath(dijkstra, this->endPoints[j]);
+			if (path.size() == 0) { 
+				setOfseparatedEndPoints.insert(this->endPoints[j]);
+			}
+		}
+		separatedEndPoints.insert(std::pair<size_t, std::set<size_t>>(startPoints[i], setOfseparatedEndPoints));
+		delete dijkstra;
+	}
 }
 
 /**
@@ -189,17 +208,18 @@ void  Animator::resetStats() {
 */
 void Animator::addVehicle(size_t startPoint, bool singleVehicle) {
 	if (render->isEditorLoced()) {
-			Point* point = graph->getPointByID(startPoint);
+		Point* point = graph->getPointByID(startPoint);
+		std::vector<size_t> activeEndpoints = point->activeEndpoints();
+		size_t endPoint = this->endPoints[activeEndpoints[getRandomNumber(0, activeEndpoints.size() - 1)]];
 
+		if (separatedEndPoints[startPoint].find(endPoint) == separatedEndPoints[startPoint].end()) {
 			std::vector<size_t> activeVehicles = point->activeVehicles();
 			size_t newVehicleID = render->addVehicle(activeVehicles[getRandomNumber(0, activeVehicles.size() - 1)], this->vehicles.size());
 			size_t id = this->vehicles.size();
+			this->vehicles.push_back(Vehicle(this->graph, this->render, startPoint, endPoint, newVehicleID, id));
+			this->vehicles[this->vehicles.size() - 1].update();
+		}
 
-			std::vector<size_t> activeEndpoints = point->activeEndpoints();
-			size_t endPoint = this->endPoints[activeEndpoints[getRandomNumber(0, activeEndpoints.size() - 1)]];
-		
-		this->vehicles.push_back(Vehicle(this->graph, this->render, startPoint, endPoint, newVehicleID, id));
-		this->vehicles[this->vehicles.size() - 1].update();
 		if(singleVehicle) this->softRunning = true;
 	}
 }
@@ -319,4 +339,19 @@ bool Animator::startCollisionDetection() {
 		}
 	}
 	return false;
+}
+
+
+/**
+ * @brief Getter for the current startpoints from the graph.
+*/
+std::vector<size_t> Animator::getStartPoints() {
+	return this->startPoints;
+}
+
+/**
+ * @brief Getter for the current endpoint from the graph.
+*/
+std::vector<size_t> Animator::getEndPoints() {
+	return this->endPoints;
 }

@@ -5,7 +5,7 @@
 #include "Logger.h"
 
 void Logger::startFileLogging() {
-	const bool logToFile = false;
+	const bool logToFile = true;
 	if (logToFile) {
 		freopen("Log/simulation.log", "w", stdout);
 		freopen("Log/error.log", "w", stderr);
