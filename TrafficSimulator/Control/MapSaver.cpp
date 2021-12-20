@@ -1,45 +1,89 @@
+/**
+ * @name Traffic Simulation
+ * @file MapSaver.h
+ * @class MapSaver
+ * @author Sándor Balázs - AZA6NL
+ * @date 2021.11.08.
+ * @brief Map saver mechanism.
+ * Contact: sandorbalazs9402@gmail.com
+*/
+
 #include <iostream>
 #include <fstream>
-
 #include "MapSaver.h"
+#include "Logger.h"
 #include "../View/Render.h"
 #include "../View/Objects/Object3D.h"
-#include "Logger.h"
 
+/**
+ * @brief Map saver constructor.
+ * @param  Empty.
+*/
 MapSaver::MapSaver(void) {
 
 }
 
+/**
+ * @brief Map saver destructor.
+ * @param  Empty.
+*/
 MapSaver::~MapSaver(void) {
 
 }
 
+/**
+ * @brief Bind the map saver to the render.
+ * @param render Pointer to the current render.
+*/
 void MapSaver::bind(Render* render) {
 	this->render = render;
 }
 
+/**
+ * @brief Reset.
+*/
 void MapSaver::reset() {
 	currentSave = unsavedMarker;
 	lastSaveTime = unsavedMarker;
 }
 
+/**
+ * @brief Get the last save name.
+ * @return The last save name.
+*/
 std::string MapSaver::getLastSave() {
 	return currentSave;
 }
 
+/**
+ * @brief Set the last save name.
+ * @param The last save name.
+*/
 void MapSaver::setLastSave(std::string loadedMap) {
 	currentSave = loadedMap;
 	setLastSaveTime();
 }
 
+/**
+ * @brief Get the last save time.
+ * @return The last save time.
+*/
 std::string MapSaver::getLastSaveTime() {
 	return lastSaveTime;
 }
 
+/**
+ * @brief Set the last save time.
+ * @param The last save time.
+*/
 void MapSaver::setLastSaveTime() {
 	lastSaveTime = Logger::currentDateTime();
 }
 
+/**
+ * @brief Save the map to the file.
+ * @param fileName The save file name.
+*/
 void MapSaver::saveMap(std::string fileName) {
 	currentSave = fileName;
 	setLastSaveTime();
