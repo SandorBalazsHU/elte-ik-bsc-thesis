@@ -1,3 +1,13 @@
+/**
+ * @name Traffic Simulation
+ * @file MapLoader.cpp
+ * @class MapLoader
+ * @author Sándor Balázs - AZA6NL
+ * @date 2021.11.08.
+ * @brief Map loader implementation.
+ * Contact: sandorbalazs9402@gmail.com
+*/
+
 #include <sstream>
 #include <fstream>
 #include <string>
@@ -6,18 +16,18 @@
 #include "MapLoader.h"
 #include "../View/Render.h"
 
-/*MapLoader::MapLoader(void) {
-
-}
-
-MapLoader::~MapLoader(void) {
-
-}*/
-
+/**
+ * @brief Bind map loader to the render.
+ * @param render Pointer for the current render.
+*/
 void MapLoader::bind(Render* render) {
 	this->render = render;
 }
 
+/**
+ * @brief Read the CSV file to the memory.
+ * @param fileName The readable file name.
+*/
 void MapLoader::readCSV(std::string fileName) {
     parsedCSV.clear();
     std::ifstream file(fileName);
@@ -36,6 +46,10 @@ void MapLoader::readCSV(std::string fileName) {
     file.close();
 }
 
+/**
+ * @brief Load a map from CSV file.
+ * @param fileName The loadable map name.
+*/
 void MapLoader::loadMap(std::string fileName) {
     readCSV(this->saveFolder + fileName + fileType);
     for (size_t i = 0; i < parsedCSV.size(); i++) {
@@ -62,6 +76,10 @@ void MapLoader::loadMap(std::string fileName) {
     }
 }
 
+/**
+ * @brief List of the exist maps in the saves folder.
+ * @return List of the exist maps.
+*/
 std::vector<std::string> MapLoader::listFiles() {
     std::vector<std::string> fileList;
     for (std::filesystem::directory_entry entry : std::filesystem::directory_iterator(saveFolder)) {
@@ -71,6 +89,11 @@ std::vector<std::string> MapLoader::listFiles() {
     return fileList;
 }
 
+/**
+ * @brief Delete a saved map.
+ * @param fileName The deletable map.
+ * @return The success code of the deleting.
+*/
 int MapLoader::deleteSave(std::string fileName) {
     try {
         if (std::filesystem::remove(saveFolder + fileName + fileType))
