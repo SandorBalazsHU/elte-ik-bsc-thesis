@@ -1,3 +1,13 @@
+/**
+ * @name Traffic Simulation
+ * @file ConfigSaver.h
+ * @class ConfigSaver
+ * @author Sándor Balázs - AZA6NL
+ * @date 2021.11.08.
+ * @brief Configuration Saver class
+ * Contact: sandorbalazs9402@gmail.com
+*/
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
