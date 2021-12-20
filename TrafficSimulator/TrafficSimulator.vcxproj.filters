@@ -291,9 +291,6 @@
     <Text Include="TODO.txt">
       <Filter>Documentation</Filter>
     </Text>
-    <Text Include="BUGS.txt">
-      <Filter>Documentation</Filter>
-    </Text>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TrafficSimulator.rc">

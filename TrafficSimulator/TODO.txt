@@ -1,11 +1,7 @@
+Ismert és javított hibák, ötletek Magyar nyelvû jegyzéke.
+
 BUG:
-- jÁRMÛ KIJELÖLÉS NEM MINDIG MÛKÖDIK.
-- TODO Új és megnyitás esetén törölni a jármû tárat mindkét helyen.
-- A stop és a pause funkciók
-- Az autók is álljanak meg stop vagy pause esetén.
-- Mi van ha nincs kiválasztva autó vagy uticél
-- Végpont kijelölés törlés után
-- Gyprsabb bill mozfás
+- Nincs jelenleg ismert :-) 
 
 Javaslatok:
 - //Javasolt endpoint is deleted, marker is deleted hozzáadása ami törli a hibás út függõségeket.
@@ -21,12 +17,25 @@ Javaslatok:
 - this
 - REAL OBJECT AND DYN COUNTS! Még hasznos lehet a renderban.
 - Pathfinder bolodbiztossá tétele
+- Gyprsabb bill mozfás
 
 Ötletek:
 - logaritmikus mozgatás
 - 4-es asztal kiemelése globális változóba
 
 Elkészült ötletek:
++ doxygen autodoc
++ gtes
++ text separating for translation
++ basic render engin
++ paralel object loader
++ raypicking
++ map editor
++ road editor
++ road car animation
++ road to graph
++ path finder
++ simulation
 + Jobb klikk görgõ forgatás.
 + Törlés gomb hozzáadása
 + Tereptárgy törlés
@@ -77,7 +86,14 @@ Elkészült ötletek:
 + A pathfinder-t ne lehessen elindítani min 1 kijelölt cél és start nélkül. A szimulációt se.
 + Save as után elszáll pointer hibával. GUI 227
 + Stop esetén statisztikék törlése.
-+ sELECTED CUCCOK TÖRLÉSE A gui-BAN ÚJ NYITÁSA VAGY ILYENEK ESETÉN!
++ SELECTED CUCCOK TÖRLÉSE A gui-BAN ÚJ NYITÁSA VAGY ILYENEK ESETÉN!
++ jÁRMÛ KIJELÖLÉS NEM MINDIG MÛKÖDIK.
++ TODO Új és megnyitás esetén törölni a jármû tárat mindkét helyen.
++ A stop és a pause funkciók
++ Az autók is álljanak meg stop vagy pause esetén.
++ Mi van ha nincs kiválasztva autó vagy uticél
++ Végpont kijelölés törlés után
+
 
 Elvetett ötletek:
 x sorszám fügetlenítés. A cím legyen az elsõdleges kulcs.
@@ -92,7 +108,7 @@ x katalógusfájlba téma kategória oszlop beillesztése
 Ha lesz rá idõ:
 * Kattintás gyorsítás.
 
-Autó animáció:
+Autó animáció folyamata:
 +	Az animátor gráfot generál.
 	Az animátor végigmegy a start pontokon és a beállításai szerinti autókat hozáadja a renderhez rejtve. 
 	Minden autának átadja a gráf pointert és random célt ad hozzá, paraméterezi.

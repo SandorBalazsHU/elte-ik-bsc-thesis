@@ -558,3 +558,10 @@ void GUI::closeAllWindows(std::string exeption) {
 	if(exeption != "finalisingErrorWindow") finalisingErrorWindow = false;
 	if(exeption != "helpWindowStatus") helpWindowStatus = false;
 }
+
+/**
+ * @brief QuickSave function.
+*/
+void GUI::quickSave() {
+	this->saveWindowStatus = true;
+}

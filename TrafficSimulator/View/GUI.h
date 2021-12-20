@@ -110,6 +110,11 @@ public:
 	*/
 	void resetInfoWindow();
 
+	/**
+	 * @brief QuickSave function.
+	*/
+	void quickSave();
+
 private:
 
 	//Window configurators

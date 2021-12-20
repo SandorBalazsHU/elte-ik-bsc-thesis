@@ -170,6 +170,10 @@ void EventListener::keyboardUp(SDL_KeyboardEvent& key) {
 			render->getDynamicObject(selectedRoads[i])->setEndpointLock(true);
 		}
 	}
+	if (key.keysym.sym == SDLK_F5 && !editorLock) {
+		gui->quickSave();
+	}
+
 }
 
 /**
