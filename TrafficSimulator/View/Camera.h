@@ -168,7 +168,7 @@ protected:
 	/**
 	 * @brief The looked point movement speed.
 	*/
-	float lookedPointMovementSpeed = 0.5f;
+	float lookedPointMovementSpeed = 1.0f;
 
 	/**
 	 * @brief The default angle.
