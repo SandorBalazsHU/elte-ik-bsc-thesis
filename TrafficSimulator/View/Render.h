@@ -334,6 +334,11 @@ public:
 	*/
 	float specularPower = 32.0f;
 
+	/**
+	 * @brief The current version number.
+	*/
+	static const char* version;
+
 private:
 
 	/**

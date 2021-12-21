@@ -293,7 +293,7 @@ void GUI::aboutWindow() {
 	ImGui::OpenPopup("About");
 	if (ImGui::BeginPopupModal("About", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
 		ImGui::Text("");
-		ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "                  Traffic Simulation.");
+		ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.0f, 1.0f), "              Traffic Simulation - %s.", Render::version);
 		ImGui::Text("");
 		ImGui::Separator();
 		ImGui::Text("");

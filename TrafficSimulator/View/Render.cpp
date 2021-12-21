@@ -24,6 +24,11 @@
 #include "../Control/Logger.h"
 
 /**
+ * @brief The current version number.
+*/
+const char* Render::version = "v1.3";
+
+/**
  * @brief Binding the render to the window.
  * @param window The joinable window.
 */
@@ -155,7 +160,7 @@ void Render::shaderLightUpdate() {
 */
 void Render::setWindowTitle(std::string title) {
 	std::stringstream window_title;
-	window_title << title << "  -  " << fpsCounter::getAverageFPS() << " fps";
+	window_title << title << "  -  " << Render::version << "  -  " << fpsCounter::getAverageFPS() << " fps";
 	SDL_SetWindowTitle(window, window_title.str().c_str());
 }
 
