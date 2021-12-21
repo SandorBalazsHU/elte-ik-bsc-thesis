@@ -8,6 +8,9 @@ Id;Name;Type;Main object;Icon;Base texture;light texture;break texture;right tex
 -1;Bundus;texture;bundus.png;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;0
 -1;ELTE;texture;elte.png;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;0
 -1;Controls;texture;controls.png;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;0
+-1;Help 01;texture;help_01.png;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;0
+-1;Help 02;texture;help_02.png;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;0
+-1;Help 03;texture;help_03.png;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;*;0
 1;Mark sphere;mark;sphere_mark.obj;sphere_mark_mini.png;white.png;*;*;*;*;0.0;0.0;20.0;0.8;0.8;0.8;0.0;0;1;0;0.0;0.0;0.0;0.8;0.0;0.0;0.0;1.1;1.0;1.0;1.0;1.0;0
 2;Road circle;mark;road_circle.obj;*;road_circle.png;*;*;*;*;0.0;0.0;0.0;1.0;1.0;1.0;0.0;0;1;0;0.0;0.0;0.0;0.1;0.0;0.0;0.0;2.0;1.0;1.0;1.0;1.0;0
 3;Round desk;desk;desk_round.obj;desk_round_mini.png;desk_round.png;*;*;*;*;0.0;-0.1;0.0;3.0;3.0;3.0;0.0;0;1;0;0.0;0.0;0.0;3.0;0.0;0.0;0.0;1.0;1.0;1.0;1.0;1.0;0
