@@ -173,9 +173,9 @@ int WorkWindow::openGLpostConfig() {
 	std::stringstream stringStream;
 	stringStream << "[OpenGL running] GPU Vendor: " << vendor;
 	Logger::log(stringStream.str());
-	stringStream.clear();
-	stringStream << "[OpenGL running] GPU Model: " << renderer;
-	Logger::log(stringStream.str());
+	std::stringstream stringStream2;
+	stringStream2 << "[OpenGL running] GPU Model: " << renderer;
+	Logger::log(stringStream2.str());
 
 	SDL_DisplayMode current;
 
