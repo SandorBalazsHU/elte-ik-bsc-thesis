@@ -355,7 +355,7 @@ void GUI::draw() {
 				ImGui::Text("");
 				ImGui::Separator();
 				ImGui::Text("");
-				ImGui::Text("You can select and observe \nthe startpoints, endpoints, \nthe roads and the vehicles \n with right click anytime.");
+				ImGui::Text("You can select and observe \nthe startpoints, endpoints, \nthe roads and the vehicles \nwith right click anytime.");
 				ImGui::Text("");
 				ImGui::Separator();
 				ImGui::Text("");
