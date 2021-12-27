@@ -123,6 +123,7 @@ private:
 	ImGuiWindowFlags pathFinderTestWindowFlag = 0;
 	ImGuiWindowFlags simulationWindowFlag = 0;
 	ImGuiWindowFlags graphicSettingsWindowFlag = 0;
+	ImGuiWindowFlags simulationStatisticsWindowFlag = 0;
 
 	//Window open flags.
 	bool openWindowStatus = false;

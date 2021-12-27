@@ -954,7 +954,8 @@ void GUI::simulationSettingsWindow() {
  * @brief Window for SimulationStatistics.
 */
 void GUI::simulationStatisticsWindow() {
-	if (ImGui::Begin("Simulation Statistics", NULL, NULL)) {
+	simulationStatisticsWindowFlag |= ImGuiWindowFlags_NoCollapse;
+	if (ImGui::Begin("Simulation Statistics", &simulationStatisticsWindowStatus, simulationStatisticsWindowFlag)) {
 		ImGui::Text("Simulation Statistics");
 		ImGui::Separator();
 		ImGui::Text("");

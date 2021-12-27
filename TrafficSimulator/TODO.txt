@@ -1,6 +1,10 @@
 Ismert és javított hibák, ötletek Magyar nyelvû jegyzéke.
 
 BUG:
++ Duplán megjelenõ szimulációs startisztika
+- Forgatás a controlsba
+- Új térképek beszúrása, dekorálása.
+- tesztek
 - Nincs jelenleg ismert :-) 
 
 Javaslatok:
@@ -27,7 +31,7 @@ Elkészült ötletek:
 + doxygen autodoc
 + gtes
 + text separating for translation
-+ basic render engin
++ basic render engine
 + paralel object loader
 + raypicking
 + map editor

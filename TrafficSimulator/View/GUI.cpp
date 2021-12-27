@@ -160,7 +160,6 @@ void GUI::windowHandler() {
 	if (pathFinderTestWindowStatus) pathFinderTestWindow();
 	if (simulationSettingsWindowStatus) simulationSettingsWindow();
 	if (simulationStatisticsWindowStatus) simulationStatisticsWindow();
-	if (simulationStatisticsWindowStatus) simulationStatisticsWindow();
 	if (finaliseWarningWindowStatus) finaliseWarningWindow();
 	if (helpWindowStatus) helpWindow();
 	if (ImGuiSettingsWindowStatus) { ImGui::Begin("ImGui Style Editor", &ImGuiSettingsWindowStatus); ImGui::ShowStyleEditor(); ImGui::End(); }
