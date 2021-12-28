@@ -123,10 +123,6 @@ namespace TrafficSimulatorTest {
 
 		//\test TESTCASE 4: Spherical coordinates are updated to zero?
 		EXPECT_FALSE(camera.sphericalCameraPositionTEST() == glm::vec3(0.0f));
-		
-		//std::cout << "cameraPos: " << camera.cameraPositionTEST().x << "," << camera.cameraPositionTEST().y << "," << camera.cameraPositionTEST().z << std::endl;
-		//std::cout << "cameradEFPos: " << camera.defaultCameraPositionTEST().x << "," << camera.defaultCameraPositionTEST().y << "," << camera.defaultCameraPositionTEST().z << std::endl;
-		//std::cout <<  "sphPos: " << camera.sphericalCameraPositionTEST().x << ","  << camera.sphericalCameraPositionTEST().y << "," << camera.sphericalCameraPositionTEST().z << std::endl;
 	}
 
 	/**
@@ -309,107 +305,6 @@ namespace TrafficSimulatorTest {
 		//\test TESTCASE 4: The new projection matrix is correct?
 		EXPECT_TRUE(camera.projectionMatrixTEST() == glm::perspective(camera.angleTEST(), newAspect, camera.zNearTEST(), camera.zFarTEST()));
 	}
-
-	/**
-	 * @brief Testing keyboardDown.
-	 * \test TESTCASE 1:
-	 * @param CameraTest The test class.
-	 * @param keyboardDownTest the test name.
-	*/
-	TEST_F(CameraTest, keyboardDownTest) {
-		int key = SDLK_w;
-		SDL_KeyboardEvent testKey;
-		testKey.keysym.sym = key;
-
-		float s = camera.lookedPointMovementSpeedTEST();
-		float previouseLookedPoint = camera.lookedPointTEST().x;
-		float previousecameraPosition = camera.cameraPositionTEST().x;
-
-		camera.keyboardDown(testKey);
-
-		EXPECT_TRUE(*camera.pressedKeysTEST().find(key) == key);
-
-		EXPECT_FALSE(previouseLookedPoint == camera.lookedPointTEST().x);
-		EXPECT_FALSE(previousecameraPosition == camera.cameraPositionTEST().x);
-
-		EXPECT_TRUE(previouseLookedPoint + s == camera.lookedPointTEST().x);
-		EXPECT_TRUE(previousecameraPosition + s == camera.cameraPositionTEST().x);
-
-		camera.keyboardUp(testKey);
-
-
-
-		key = SDLK_s;
-		testKey.keysym.sym = key;
-
-		s = camera.lookedPointMovementSpeedTEST();
-		previouseLookedPoint = camera.lookedPointTEST().x;
-		previousecameraPosition = camera.cameraPositionTEST().x;
-
-		camera.keyboardDown(testKey);
-
-		EXPECT_TRUE(*camera.pressedKeysTEST().find(key) == key);
-
-		EXPECT_FALSE(previouseLookedPoint == camera.lookedPointTEST().x);
-		EXPECT_FALSE(previousecameraPosition == camera.cameraPositionTEST().x);
-
-		EXPECT_TRUE(previouseLookedPoint - s == camera.lookedPointTEST().x);
-		EXPECT_TRUE(previousecameraPosition - s == camera.cameraPositionTEST().x);
-
-		camera.keyboardUp(testKey);
-
-
-
-
-		key = SDLK_a;
-		testKey.keysym.sym = key;
-
-		s = camera.lookedPointMovementSpeedTEST();
-		previouseLookedPoint = camera.lookedPointTEST().z;
-		previousecameraPosition = camera.cameraPositionTEST().z;
-
-		camera.keyboardDown(testKey);
-
-		EXPECT_TRUE(*camera.pressedKeysTEST().find(key) == key);
-
-		EXPECT_FALSE(previouseLookedPoint == camera.lookedPointTEST().z);
-		EXPECT_FALSE(previousecameraPosition == camera.cameraPositionTEST().z);
-
-		EXPECT_TRUE(previouseLookedPoint + s == camera.lookedPointTEST().z);
-		EXPECT_TRUE(previousecameraPosition + s == camera.cameraPositionTEST().z);
-
-		camera.keyboardUp(testKey);
-
-
-
-
-
-
-
-		key = SDLK_d;
-		testKey.keysym.sym = key;
-
-		s = camera.lookedPointMovementSpeedTEST();
-		previouseLookedPoint = camera.lookedPointTEST().z;
-		previousecameraPosition = camera.cameraPositionTEST().z;
-
-		camera.keyboardDown(testKey);
-
-		EXPECT_TRUE(*camera.pressedKeysTEST().find(key) == key);
-
-		EXPECT_FALSE(previouseLookedPoint == camera.lookedPointTEST().z);
-		EXPECT_FALSE(previousecameraPosition == camera.cameraPositionTEST().z);
-
-		EXPECT_TRUE(previouseLookedPoint - s == camera.lookedPointTEST().z);
-		EXPECT_TRUE(previousecameraPosition - s == camera.cameraPositionTEST().z);
-
-		camera.keyboardUp(testKey);
-	}
-
-
-
-
-
 
 	/**
 	 * @brief Testing setLookedPoint.
