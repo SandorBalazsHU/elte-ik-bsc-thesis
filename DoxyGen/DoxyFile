@@ -2025,7 +2025,7 @@ LATEX_EMOJI_DIRECTORY  =
 # readers/editors.
 # The default value is: NO.
 
-GENERATE_RTF           = NO
+GENERATE_RTF           = YES
 
 # The RTF_OUTPUT tag is used to specify where the RTF docs will be put. If a
 # relative path is entered the value of OUTPUT_DIRECTORY will be put in front of
@@ -2471,7 +2471,7 @@ UML_LIMIT_NUM_FIELDS   = 50
 # The default value is: NO.
 # This tag requires that the tag UML_LOOK is set to YES.
 
-DOT_UML_DETAILS        = NO
+DOT_UML_DETAILS        = YES
 
 # The DOT_WRAP_THRESHOLD tag can be used to set the maximum number of characters
 # to display on a single line. If the actual line length exceeds this threshold
